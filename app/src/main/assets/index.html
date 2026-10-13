@@ -2962,12 +2962,15 @@
       </div>
 
       <div class="panel stack" id="settingsUpdatePanel">
-        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
           <div>
             <h3 style="margin-bottom:2px" data-i18n="settings_update_title">App Updates</h3>
-            <p class="muted small"><span data-i18n="settings_update_current">Current version:</span> <strong id="currentAppVersionLabel">v1.0.0</strong></p>
+            <p class="muted small"><span data-i18n="settings_update_current">Current version:</span> <strong id="currentAppVersionLabel">v1.0.1</strong></p>
           </div>
-          <button id="checkAppUpdateBtn" class="act-btn primary small" type="button" style="white-space:nowrap"><span data-i18n="settings_update_btn">🔍 Check for Updates</span></button>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button id="viewChangelogBtn" class="act-btn small" type="button" title="View changelog"><span data-i18n="settings_view_changelog">📜 What's New</span></button>
+            <button id="checkAppUpdateBtn" class="act-btn primary small" type="button" style="white-space:nowrap"><span data-i18n="settings_update_btn">🔍 Check for Updates</span></button>
+          </div>
         </div>
         <span id="updateSettingsStatusMsg" class="tiny muted"></span>
       </div>
@@ -3894,6 +3897,30 @@
     </div>
   </div>
 
+  <!-- What's New / Post-Update Changelog Modal -->
+  <div id="appChangelogModal" class="confirm-modal-overlay">
+    <div class="confirm-modal-box stack" style="max-width:420px;text-align:left;max-height:85vh;display:flex;flex-direction:column">
+      <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid var(--color-border)">
+        <div style="display:flex;align-items:center;gap:8px">
+          <span style="font-size:24px">✨</span>
+          <div>
+            <h3 id="changelogModalTitle" style="margin:0;font-size:16px" data-i18n="changelog_modal_title">What's New in Keto Planner</h3>
+            <span id="changelogModalSub" class="tiny muted">Release notes</span>
+          </div>
+        </div>
+        <button id="changelogModalCloseBtn" class="x-btn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div id="changelogModalList" class="stack" style="overflow-y:auto;padding:10px 0;gap:10px;flex:1;max-height:55vh">
+        <!-- Version cards injected dynamically -->
+      </div>
+
+      <div class="confirm-modal-actions" style="margin-top:6px;border-top:1px solid var(--color-border);padding-top:8px">
+        <button id="changelogGotItBtn" class="act-btn primary" type="button" style="width:100%" data-i18n="changelog_btn_got_it">🎉 Super, am înțeles!</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Undo Toast -->
   <div id="undoToast" class="undo-toast">
     <span id="undoToastText" data-i18n="undo_toast_text">Item deleted</span>
@@ -4700,6 +4727,9 @@ const I18N = {
     update_btn_install: "📥 Download & Install",
     update_toast_latest: "✅ Keto Planner is up to date!",
     update_toast_checking: "🔍 Checking for updates...",
+    settings_view_changelog: "📜 What's New",
+    changelog_modal_title: "What's New in Keto Planner",
+    changelog_btn_got_it: "🎉 Got it, Awesome!",
   },
 
   ro: {
@@ -5131,6 +5161,9 @@ const I18N = {
     update_btn_install: "📥 Descarcă și Instalează",
     update_toast_latest: "✅ Aplicația Keto Planner este la zi!",
     update_toast_checking: "🔍 Se caută actualizări...",
+    settings_view_changelog: "📜 Ce este nou",
+    changelog_modal_title: "Ce este nou în Keto Planner",
+    changelog_btn_got_it: "🎉 Super, am înțeles!",
   }
 };
 
@@ -13593,6 +13626,142 @@ const CUP_DENSITY = {
       showAppToast(isRo ? `⚠️ Eroare descărcare: ${errMsg}` : `⚠️ Download error: ${errMsg}`);
     };
 
+    /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
+    const APP_CHANGELOG = [
+      {
+        version: '1.0.2',
+        date: '14 Oct 2026',
+        items: {
+          ro: [
+            '✨ Pop-up automat „Ce este nou” afișat o singură dată după fiecare actualizare',
+            '📜 Istoric cumulat al modificărilor (dacă ai sărit peste 2-3 actualizări, le vezi pe toate într-un singur ecran)',
+            '🔍 Buton dedicat „Ce este nou” adăugat în ecranul de Setări'
+          ],
+          en: [
+            '✨ Automatic "What\'s New" pop-up displayed once after every update',
+            '📜 Multi-version cumulative changelog if you skipped across several updates',
+            '🔍 Dedicated "What\'s New" button added to the Settings screen'
+          ]
+        }
+      },
+      {
+        version: '1.0.1',
+        date: '14 Oct 2026',
+        items: {
+          ro: [
+            '🟢 Punct de sincronizare permanent verde în antet când ești conectat la o gospodărie',
+            '⚡ Remediere completă a sintaxei JavaScript la pornire (stabilitate ridicată)',
+            '🔄 Sistem automat in-app de verificare și descărcare a noilor versiuni'
+          ],
+          en: [
+            '🟢 Cloud sync dot stays permanently bright green when connected to a household',
+            '⚡ Complete JavaScript startup syntax fix and stability improvements',
+            '🔄 Automatic in-app update checking and package installation system'
+          ]
+        }
+      },
+      {
+        version: '1.0.0',
+        date: '14 Oct 2026',
+        items: {
+          ro: [
+            '🚀 Lansare publică oficială Keto Planner',
+            '📱 Modul nativ Android pentru descărcare și instalare actualizări fără cablu',
+            '👥 Sincronizare live în timp real a meselor și stocului cu familia / partenerul'
+          ],
+          en: [
+            '🚀 Official public release of Keto Planner',
+            '📱 Native Android package installation integration',
+            '👥 Real-time household meal plan and stock synchronization'
+          ]
+        }
+      }
+    ];
+
+    function showChangelogModal(fromVer = null, toVer = null) {
+      const modal = document.getElementById('appChangelogModal');
+      const listEl = document.getElementById('changelogModalList');
+      const subEl = document.getElementById('changelogModalSub');
+      const isRo = ((settings && settings.lang) === 'ro');
+      const currentVer = toVer || getLocalAppVersion();
+
+      if (!listEl) return;
+      listEl.innerHTML = '';
+
+      // If fromVer is passed (e.g. user jumped 3 updates: 1.0.0 -> 1.0.3),
+      // we filter and show ALL versions between fromVer and currentVer!
+      let relevantEntries = APP_CHANGELOG;
+      if (fromVer) {
+        relevantEntries = APP_CHANGELOG.filter(e => {
+          return compareSemver(e.version, fromVer) > 0 && compareSemver(e.version, currentVer) <= 0;
+        });
+        if (subEl) {
+          subEl.textContent = isRo
+            ? `Actualizat de la v${fromVer.replace(/^v/i, '')} la v${currentVer.replace(/^v/i, '')}`
+            : `Updated from v${fromVer.replace(/^v/i, '')} to v${currentVer.replace(/^v/i, '')}`;
+        }
+      } else {
+        if (subEl) {
+          subEl.textContent = isRo
+            ? `Versiunea curentă: v${currentVer.replace(/^v/i, '')}`
+            : `Current version: v${currentVer.replace(/^v/i, '')}`;
+        }
+      }
+
+      if (!relevantEntries.length) {
+        relevantEntries = [APP_CHANGELOG[0]];
+      }
+
+      relevantEntries.forEach(entry => {
+        const card = document.createElement('div');
+        card.style.cssText = 'background:var(--color-surface-2);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:10px 12px;margin-bottom:8px';
+
+        const header = document.createElement('div');
+        header.style.cssText = 'display:flex;align-items:center;justify-content:space-between;margin-bottom:6px';
+        header.innerHTML = `<strong style="color:var(--color-primary);font-size:14px">v${entry.version}</strong><span class="tiny muted">${entry.date}</span>`;
+        card.appendChild(header);
+
+        const itemsList = document.createElement('ul');
+        itemsList.style.cssText = 'margin:0 0 0 16px;padding:0;display:grid;gap:4px;font-size:12.5px;line-height:1.45';
+        const items = (isRo ? entry.items.ro : entry.items.en) || entry.items.en || [];
+        items.forEach(it => {
+          const li = document.createElement('li');
+          li.textContent = it;
+          itemsList.appendChild(li);
+        });
+        card.appendChild(itemsList);
+        listEl.appendChild(card);
+      });
+
+      if (modal) modal.classList.add('show');
+    }
+
+    function closeChangelogModal() {
+      const modal = document.getElementById('appChangelogModal');
+      if (modal) modal.classList.remove('show');
+      // Mark current version as seen so it will NOT pop up again until a new update is installed
+      const currentVer = getLocalAppVersion();
+      localStorage.setItem('keto_last_seen_version', currentVer);
+    }
+
+    function checkPostUpdateChangelog() {
+      const currentVer = getLocalAppVersion();
+      const lastSeenVer = localStorage.getItem('keto_last_seen_version');
+
+      if (!lastSeenVer) {
+        // Initial boot / fresh install: record baseline version without pop-up
+        localStorage.setItem('keto_last_seen_version', currentVer);
+        return;
+      }
+
+      if (compareSemver(currentVer, lastSeenVer) > 0) {
+        // The user just updated! Show changelog for all missed versions
+        setTimeout(() => {
+          showChangelogModal(lastSeenVer, currentVer);
+        }, 1200);
+      }
+    }
+
     /* KITCHEN PREP TIMERS */
     let kitchenTimerInterval = null;
     let kitchenTimerTargetTime = null;
@@ -14645,6 +14814,13 @@ const CUP_DENSITY = {
       document.getElementById('updateModalCloseBtn')?.addEventListener('click', closeUpdateModal);
       const appVerLbl = document.getElementById('currentAppVersionLabel');
       if (appVerLbl) appVerLbl.textContent = 'v' + getLocalAppVersion().replace(/^v/i, '');
+
+      // Changelog / What's New Wiring
+      document.getElementById('viewChangelogBtn')?.addEventListener('click', () => showChangelogModal(null));
+      document.getElementById('changelogGotItBtn')?.addEventListener('click', closeChangelogModal);
+      document.getElementById('changelogModalCloseBtn')?.addEventListener('click', closeChangelogModal);
+      checkPostUpdateChangelog();
+
       setTimeout(() => checkForUpdates(false), 2500);
     });
 
