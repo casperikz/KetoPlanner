@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "298323350581",
+    "project_id": "com-example-ketoplanner-ce533",
+    "storage_bucket": "com-example-ketoplanner-ce533.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:298323350581:android:e547ca36f30a635d370d7c",
+        "android_client_info": {
+          "package_name": "com.example.ketoplanner"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDpDVlG-_NwFtiSuxJt5PhjeK_16-F7yd0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

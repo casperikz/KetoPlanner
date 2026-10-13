@@ -1,0 +1,19 @@
+{
+    "name": "Keto Meal Planner",
+    "short_name": "Keto Planner",
+    "description": "Lazy keto weekly planner, recipes, builder, macros, stock and shopping list.",
+    "start_url": "./index.html",
+    "scope": "./",
+    "display": "standalone",
+    "orientation": "portrait-primary",
+    "background_color": "#f7f6f2",
+    "theme_color": "#01696f",
+    "icons": [
+        {
+            "src": "icon.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "any maskable"
+        }
+    ]
+}
