@@ -140,7 +140,7 @@ Write-Host "-> Committing and pushing changes to GitHub..." -ForegroundColor Cya
 Push-Location $RepoDir
 try {
     & $GitExe add -A
-    & $GitExe commit -m "Release v$newVersion: $Notes"
+    & $GitExe commit -m "Release v${newVersion}: $Notes"
     
     # Push with authenticated remote url
     $remoteAuthUrl = "https://${token}@github.com/casperikz/KetoPlanner.git"
