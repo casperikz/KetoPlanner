@@ -8705,12 +8705,34 @@ const CUP_DENSITY = {
       const codeDisplay = document.getElementById('syncCurrentCodeDisplay');
       const homeSubtitle = document.getElementById('homeSyncSubtitle');
 
-      if (pill) {
-        pill.className = 'cloud-pill ' + (state || '');
-      }
-      if (label) label.textContent = text || (currentHouseholdCode ? currentHouseholdCode : 'Local');
+      const isConnected = !!currentHouseholdCode;
+      const effectiveState = (state !== undefined && state !== null && state !== '') 
+        ? state 
+        : (isConnected ? 'connected' : '');
 
-      if (currentHouseholdCode) {
+      if (pill) {
+        pill.className = 'cloud-pill ' + (effectiveState ? effectiveState : '');
+      }
+      if (dot) {
+        if (effectiveState === 'connected') {
+          dot.style.background = 'var(--color-success)';
+          dot.style.boxShadow = '0 0 6px var(--color-success)';
+        } else if (effectiveState === 'syncing') {
+          dot.style.background = 'var(--color-warning)';
+          dot.style.boxShadow = '0 0 6px var(--color-warning)';
+        } else if (effectiveState === 'error') {
+          dot.style.background = 'var(--color-danger)';
+          dot.style.boxShadow = '0 0 6px var(--color-danger)';
+        } else {
+          dot.style.background = 'var(--color-text-faint)';
+          dot.style.boxShadow = 'none';
+        }
+      }
+      if (label) {
+        label.textContent = text || (isConnected ? currentHouseholdCode : 'Local');
+      }
+
+      if (isConnected) {
         if (badge) {
           badge.className = 'sync-badge live';
           badge.textContent = '🟢 Live Synced (' + currentHouseholdCode + ')';
@@ -8849,7 +8871,13 @@ const CUP_DENSITY = {
     function subscribeToHousehold(code) {
       if (!code) return;
       if (!fbDb) initFirebase();
-      if (!fbDb) return;
+      if (!fbDb) {
+        setTimeout(() => {
+          if (!fbDb) initFirebase();
+          if (fbDb && code === currentHouseholdCode) subscribeToHousehold(code);
+        }, 600);
+        return;
+      }
       if (fbUnsubscribe) { fbUnsubscribe(); fbUnsubscribe = null; }
 
       updateSyncUI('syncing', 'Syncing...');
@@ -8939,9 +8967,9 @@ const CUP_DENSITY = {
           renderStock();
           renderShoppingPage();
           buildSettings();
-          updateSyncUI('connected', code);
           // Silent background sync without echo push or toast spam
         }
+        updateSyncUI('connected', code);
       }, (err) => {
         console.warn('Firestore snapshot error:', err);
         updateSyncUI('error', 'Sync Err');
@@ -14312,6 +14340,7 @@ const CUP_DENSITY = {
         } else {
           currentHouseholdCode = code;
           localStorage.setItem('ketoSync.householdCode', currentHouseholdCode);
+          updateSyncUI();
           showSyncToast('🚀 Household set: ' + code);
         }
       });
