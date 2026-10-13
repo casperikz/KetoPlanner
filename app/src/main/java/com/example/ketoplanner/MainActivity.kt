@@ -261,6 +261,35 @@ class MainActivity : ComponentActivity() {
         super.onDestroy()
     }
 
+    fun installDownloadedApk(apkFile: File) {
+        try {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                if (!packageManager.canRequestPackageInstalls()) {
+                    val intent = Intent(android.provider.Settings.ACTION_MANAGE_UNKNOWN_APP_SOURCES).apply {
+                        data = Uri.parse("package:$packageName")
+                    }
+                    startActivity(intent)
+                    Toast.makeText(this, "Activează 'Permite din această sursă', apoi apasă din nou pe actualizare", Toast.LENGTH_LONG).show()
+                    return
+                }
+            }
+
+            val apkUri: Uri = FileProvider.getUriForFile(
+                this,
+                "${applicationContext.packageName}.fileprovider",
+                apkFile
+            )
+            val installIntent = Intent(Intent.ACTION_VIEW).apply {
+                setDataAndType(apkUri, "application/vnd.android.package-archive")
+                addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+            }
+            startActivity(installIntent)
+        } catch (e: Exception) {
+            Toast.makeText(this, "Eroare la deschiderea instalatorului: ${e.message}", Toast.LENGTH_LONG).show()
+        }
+    }
+
     class AndroidBridge(
         private val activity: Activity,
         private val webView: WebView,
@@ -478,6 +507,108 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+
+        @JavascriptInterface
+        fun getAppVersion(): String {
+            return try {
+                val pInfo = activity.packageManager.getPackageInfo(activity.packageName, 0)
+                pInfo.versionName ?: "1.0.0"
+            } catch (e: Exception) {
+                "1.0.0"
+            }
+        }
+
+        @JavascriptInterface
+        fun getAppVersionCode(): Int {
+            return try {
+                val pInfo = activity.packageManager.getPackageInfo(activity.packageName, 0)
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.P) {
+                    pInfo.longVersionCode.toInt()
+                } else {
+                    @Suppress("DEPRECATION")
+                    pInfo.versionCode
+                }
+            } catch (e: Exception) {
+                1
+            }
+        }
+
+        @JavascriptInterface
+        fun downloadAndInstallApk(apkUrl: String) {
+            activity.runOnUiThread {
+                Toast.makeText(activity, "Descărcare actualizare în curs...", Toast.LENGTH_SHORT).show()
+            }
+            Thread {
+                var conn: HttpURLConnection? = null
+                try {
+                    var currentUrl = apkUrl
+                    var redirects = 0
+                    while (redirects < 6) {
+                        val url = URL(currentUrl)
+                        conn = url.openConnection() as HttpURLConnection
+                        conn.instanceFollowRedirects = true
+                        conn.connectTimeout = 15000
+                        conn.readTimeout = 40000
+                        conn.setRequestProperty("User-Agent", "Mozilla/5.0 (Android; Mobile)")
+                        val respCode = conn.responseCode
+                        if (respCode in 301..308) {
+                            val newLoc = conn.getHeaderField("Location")
+                            if (!newLoc.isNullOrEmpty()) {
+                                currentUrl = if (newLoc.startsWith("http")) newLoc else URL(url, newLoc).toString()
+                                conn.disconnect()
+                                redirects++
+                                continue
+                            }
+                        }
+                        break
+                    }
+
+                    val contentLength = conn?.contentLength?.toLong() ?: -1L
+                    val updateDir = File(activity.cacheDir, "apk_updates")
+                    if (!updateDir.exists()) updateDir.mkdirs()
+                    val apkFile = File(updateDir, "KetoPlanner_update.apk")
+                    if (apkFile.exists()) apkFile.delete()
+
+                    val inputStream = conn?.inputStream ?: throw Exception("Nu s-a putut deschide fluxul de descărcare")
+                    inputStream.use { input ->
+                        apkFile.outputStream().use { output ->
+                            val buffer = ByteArray(8192)
+                            var bytesRead: Int
+                            var totalRead = 0L
+                            var lastPercent = -1
+                            while (input.read(buffer).also { bytesRead = it } != -1) {
+                                output.write(buffer, 0, bytesRead)
+                                totalRead += bytesRead
+                                if (contentLength > 0) {
+                                    val percent = ((totalRead * 100) / contentLength).toInt()
+                                    if (percent != lastPercent) {
+                                        lastPercent = percent
+                                        activity.runOnUiThread {
+                                            webView.evaluateJavascript("if (typeof onApkDownloadProgress === 'function') onApkDownloadProgress($percent);", null)
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    activity.runOnUiThread {
+                        webView.evaluateJavascript("if (typeof onApkDownloadComplete === 'function') onApkDownloadComplete();", null)
+                        if (activity is MainActivity) {
+                            activity.installDownloadedApk(apkFile)
+                        }
+                    }
+                } catch (e: Exception) {
+                    val errMsg = (e.message ?: "Eroare descărcare").replace("\"", "\\\"").replace("\n", " ")
+                    activity.runOnUiThread {
+                        webView.evaluateJavascript("if (typeof onApkDownloadError === 'function') onApkDownloadError(\"$errMsg\");", null)
+                        Toast.makeText(activity, "Eroare descărcare: $errMsg", Toast.LENGTH_LONG).show()
+                    }
+                } finally {
+                    conn?.disconnect()
+                }
+            }.start()
         }
     }
 }
