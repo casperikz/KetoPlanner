@@ -2605,6 +2605,7 @@
             <label class="small"><input type="checkbox" id="filterMain" checked> <span data-i18n="recipes_filter_main">Main Course</span></label>
             <label class="small"><input type="checkbox" id="filterSnack" checked> <span data-i18n="recipes_filter_snack">Snack/Dessert</span></label>
             <label class="small"><input type="checkbox" id="filterSide" checked> <span data-i18n="recipes_filter_side">Sides & Balancers</span></label>
+            <label class="small" style="font-weight:600"><input type="checkbox" id="filterNoDairy"> <span data-i18n="recipes_filter_no_dairy">🥛🚫 No Dairy</span></label>
           </div>
 
           <details class="more-filters">
@@ -3970,6 +3971,16 @@
         </div>
         <button id="pantryCloseBtn" class="x-btn" type="button">✕</button>
       </div>
+
+      <!-- Suggest Meals Filters Toolbar (No Dairy) -->
+      <div class="pantry-filter-bar" style="padding:10px 16px;background:var(--color-surface-offset);border-bottom:1px solid var(--color-border);display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+        <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-size:var(--text-sm);font-weight:600;user-select:none;color:var(--color-text)">
+          <input type="checkbox" id="suggestNoDairyFilter" style="width:18px;height:18px;accent-color:var(--color-primary);cursor:pointer">
+          <span data-i18n="pantry_no_dairy_label">🥛🚫 No dairy (Zero milk, cream, yogurt, cheese)</span>
+        </label>
+        <span id="suggestDairyStatus" class="tiny muted" style="font-weight:600"></span>
+      </div>
+
       <div class="pantry-dialog-body" id="pantrySuggestList"></div>
     </div>
   </div>
@@ -4429,6 +4440,7 @@ const I18N = {
     recipes_filter_lunch: "Lunch/Dinner",
     recipes_filter_snack: "Snack",
     recipes_filter_side: "Fat Balancer / Side",
+    recipes_filter_no_dairy: "🥛🚫 No Dairy",
     recipes_cuisine_all: "🌍 Cuisine: All (41)",
     recipes_cuisine_search_ph: "Search cuisine...",
     recipes_cuisine_all_btn: "All",
@@ -4687,6 +4699,9 @@ const I18N = {
     sync_db_step_master: "To edit the entire macronutrient database directly from Firebase:",
     pantry_suggest_title: "💡 Recipes You Can Cook From Stock",
     pantry_suggest_sub: "Ranked by ingredients you currently have on hand",
+    pantry_no_dairy_label: "🥛🚫 No dairy (Zero milk, cream, yogurt, cheese)",
+    pantry_dairy_only: "🥛🚫 Dairy-Free Only",
+    pantry_no_recipes_df: "No dairy-free recipes match your current stock. Try unchecking the filter or adding items to Stock!",
     barcode_modal_title: "📷 Barcode Product Lookup",
     barcode_modal_sub: "Powered by OpenFoodFacts API",
     barcode_enter_or_scan: "Enter or Scan Barcode:",
@@ -4867,6 +4882,7 @@ const I18N = {
     recipes_filter_lunch: "Pranz/Cina",
     recipes_filter_snack: "Gustare",
     recipes_filter_side: "Garnitura / Grasimi",
+    recipes_filter_no_dairy: "🥛🚫 Fără lactate",
     recipes_cuisine_all: "🌍 Bucătărie: Toate (41)",
     recipes_cuisine_search_ph: "Caută bucătărie...",
     recipes_cuisine_all_btn: "Toate",
@@ -5125,6 +5141,9 @@ const I18N = {
     sync_db_step_master: "Pentru a edita întreaga bază de macronutrienți direct din Firebase:",
     pantry_suggest_title: "💡 Rețete pe Care le Poți Găti din Stoc",
     pantry_suggest_sub: "Ordonate după ingredientele disponibile pe stoc",
+    pantry_no_dairy_label: "🥛🚫 Fără lactate (Zero lapte, smântână, iaurt, brânzeturi)",
+    pantry_dairy_only: "🥛🚫 Doar fără lactate",
+    pantry_no_recipes_df: "Nicio rețetă fără lactate nu se potrivește cu stocul curent. Debifează filtrul sau adaugă ingrediente în stoc!",
     barcode_modal_title: "📷 Căutare Produs după Cod de Bare",
     barcode_modal_sub: "Oferit de OpenFoodFacts API",
     barcode_enter_or_scan: "Introdu sau Scanează Codul de Bare:",
@@ -8330,6 +8349,57 @@ const CUP_DENSITY = {
       return 'Other';
     }
 
+    /* Dairy Detection Engine (Zero Milk, Cream, Yogurt, Cheeses, Butter) */
+    const NON_DAIRY_PLANT_TERMS = [
+      'coconut milk', 'lapte de cocos',
+      'almond milk', 'lapte de migdale',
+      'soy milk', 'lapte de soia',
+      'oat milk', 'lapte de ovaz', 'lapte de ovăz',
+      'cashew milk', 'lapte de caju',
+      'hemp milk', 'lapte de canepa', 'lapte de cânepă',
+      'rice milk', 'lapte de orez',
+      'coconut cream', 'crema de cocos', 'cremă de cocos', 'smantana de cocos', 'smântână de cocos',
+      'coconut yogurt', 'iaurt de cocos',
+      'almond yogurt', 'iaurt de migdale',
+      'soy yogurt', 'iaurt de soia',
+      'peanut butter', 'unt de arahide',
+      'almond butter', 'unt de migdale',
+      'coconut butter', 'unt de cocos',
+      'cocoa butter', 'unt de cacao',
+      'cashew butter', 'unt de caju',
+      'shea butter', 'unt de shea',
+      'butternut squash', 'dovleac butternut', 'butternut',
+      'dairy-free', 'vegan cheese', 'branza vegana', 'brânză vegană'
+    ];
+
+    const DAIRY_REGEX = /\b(milk|lapte|buttermilk|butter|unt|ghee|cream|heavy cream|sour cream|cooking cream|whipped cream|smantana|smântână|frisca|frișcă|yogurt|yoghurt|iaurt|skyr|labneh|ayran|kefir|cheese|cheeses|branza|brânză|branzeturi|brânzeturi|cheddar|mozzarella|parmesan|parmigiano|parmezan|grana padano|pecorino|feta|telemea|ricotta|mascarpone|cascaval|cașcaval|burduf|urda|urdă|halloumi|paneer|gouda|edam|emmental|gruyere|provolone|havarti|blue cheese|gorgonzola|roquefort|stilton|brie|camembert|manchego|quark|whey|zer|casein|cazeina|cazeină)\b/i;
+
+    function isDairyIngredient(ingredientStr) {
+      if (!ingredientStr) return false;
+      let s = String(ingredientStr).toLowerCase().trim();
+
+      for (let i = 0; i < NON_DAIRY_PLANT_TERMS.length; i++) {
+        const term = NON_DAIRY_PLANT_TERMS[i];
+        if (s.indexOf(term) !== -1) {
+          s = s.split(term).join(' ');
+        }
+      }
+
+      return DAIRY_REGEX.test(s);
+    }
+
+    function isRecipeDairyFree(r) {
+      if (!r) return false;
+      const ings = r.ingredients || [];
+      if (!ings.length) return true;
+      for (let i = 0; i < ings.length; i++) {
+        if (isDairyIngredient(ings[i])) {
+          return false;
+        }
+      }
+      return true;
+    }
+
     /* Custom Recipes & Ingredients & Overrides */
     let customRecipes = Array.isArray(SAVED.customRecipes) ? SAVED.customRecipes : [];
     let customIngredients = (SAVED.customIngredients && typeof SAVED.customIngredients === 'object') ? SAVED.customIngredients : {};
@@ -11421,6 +11491,10 @@ const CUP_DENSITY = {
         if (!r.cuisine || !selectedCuisines.has(r.cuisine)) return false;
       }
 
+      // No Dairy Filter
+      const showNoDairy = document.getElementById('filterNoDairy')?.checked || false;
+      if (showNoDairy && !isRecipeDairyFree(r)) return false;
+
       const stats = recipeRatioStats(r);
       if (activeRatioFilter === 'std_keto' && !stats.isStdKeto) return false;
       if (activeRatioFilter === 'keto_2to1' && !stats.is2to1) return false;
@@ -11452,17 +11526,21 @@ const CUP_DENSITY = {
       const topContainer = document.getElementById('recipeDetailContainer');
       if (topContainer) topContainer.classList.add('hidden');
 
+      const isRo = ((settings && settings.lang) === 'ro');
+
       wrap.innerHTML = sorted.map(r => {
         const rt = ratingOf(r);
         const stats = recipeRatioStats(r);
         const isExpanded = (r.id === activeRecipeId);
         const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
+        const isDf = isRecipeDairyFree(r);
+        const dfBadge = isDf ? `<span class="df-badge" title="${isRo ? 'Fără lactate' : 'Dairy-Free'}" style="font-size:10px;font-weight:700;color:#2e7d32;background:rgba(46,125,50,0.13);padding:1px 5px;border-radius:4px;margin-left:5px">🥛🚫 ${isRo ? 'Fără lactate' : 'No dairy'}</span>` : '';
         return `
           <div class="recipe-card-wrap ${isExpanded ? 'expanded' : ''}" data-card-rid="${r.id}">
             <button class="recipe-btn ${isExpanded ? 'active' : ''}" data-rid="${r.id}" type="button">
               <img class="recipe-thumb" src="${recipeImage(r)}" alt="" loading="lazy">
               <span class="recipe-meta">
-                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
+                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${dfBadge}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
                 <div class="tiny muted">${escapeHtml(r.meal)} • ${r.kcal} kcal • P ${r.protein}g • F ${r.fat}g • NC ${r.netCarbs}g • ⏱ ${fmtTime(timeOf(r).total)}</div>
               </span>
               <span class="recipe-chevron">▼</span>
@@ -11537,9 +11615,11 @@ const CUP_DENSITY = {
       const safeImg = (r.image && /^(data:image\/|https?:\/\/)/i.test(r.image)) ? r.image : '';
       const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
       const cuisineName = r.cuisine ? (isRo && typeof WORLD_CUISINES !== 'undefined' ? (WORLD_CUISINES.find(c => c.id === r.cuisine)?.nameRo || r.cuisine) : r.cuisine) : '';
+      const isDf = isRecipeDairyFree(r);
+      const dfBadge = isDf ? `<span class="df-badge" title="${isRo ? 'Fără lactate' : 'Dairy-Free'}" style="font-size:11px;font-weight:700;color:#2e7d32;background:rgba(46,125,50,0.13);padding:2px 7px;border-radius:4px;margin-left:6px;display:inline-block;vertical-align:middle">🥛🚫 ${isRo ? 'Fără lactate' : 'No dairy'}</span>` : '';
       return `
         ${safeImg ? `<img src="${safeImg}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:10px" alt="${escapeHtml(r.name)}">` : ''}
-        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${stats.badge}</h3>
+        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${dfBadge}${stats.badge}</h3>
         <p class="muted tiny">${cuisineName ? `${flag ? flag + ' ' : ''}${escapeHtml(cuisineName)} • ` : ''}${escapeHtml(r.meal)} • ${escapeHtml(r.portion)} • <a href="${recipeLink(r)}" target="_blank">${isRo ? 'Caută online ↗' : 'Search online ↗'}</a></p>
         <div class="macro-chips-row" style="margin:10px 0">
           <div class="macro-stat-pill"><span>${isRo ? 'Calorii' : 'Calories'}</span><strong>${r.kcal}</strong></div>
@@ -13643,7 +13723,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.3';
+    const FALLBACK_APP_VERSION = '1.0.4';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -13805,6 +13885,26 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.0.4',
+        date: '14 Oct 2026',
+        items: {
+          ro: [
+            '🥛🚫 Filtru nou „Fără lactate” (No dairy) în Sugestii Meniuri (Suggest Meals)',
+            '🧀 Excludere completă a lactatelor: zero lapte, smântână, iaurt, unt, ghee, zer și brânzeturi',
+            '🥑 Recunoaștere inteligentă pentru produse vegetale (lapte/unt/smântână de cocos, migdale, arahide sunt permise)',
+            '🏷️ Etichetă distinctivă „🥛🚫 Fără lactate” afișată pe rețetele conforme și în detalii',
+            '🔍 Filtru „Fără lactate” adăugat și în biblioteca generală de Rețete'
+          ],
+          en: [
+            '🥛🚫 New "No dairy" filter in Suggest Meals with persistent preference',
+            '🧀 100% strict dairy exclusion: zero milk, cream, sour cream, yogurt, butter, ghee, whey, or cheeses',
+            '🥑 Smart plant-based whitelist (coconut milk/cream/butter, almond milk/butter, peanut butter are allowed)',
+            '🏷️ Distinctive "🥛🚫 No dairy" badge displayed on all compliant recipes and details',
+            '🔍 "No dairy" filter also added to Recipe Library filter options'
+          ]
+        }
+      },
       {
         version: '1.0.3',
         date: '14 Oct 2026',
@@ -14035,15 +14135,31 @@ const CUP_DENSITY = {
     }
 
     /* SMART PANTRY SUGGESTIONS */
-    function openPantrySuggestions() {
+    function renderPantrySuggestionsList() {
       const modal = document.getElementById('pantrySuggestModal');
       const list = document.getElementById('pantrySuggestList');
+      const statusEl = document.getElementById('suggestDairyStatus');
+      const noDairyCb = document.getElementById('suggestNoDairyFilter');
       if (!modal || !list) return;
+
+      const isRo = ((settings && settings.lang) === 'ro');
+      const noDairy = noDairyCb ? noDairyCb.checked : false;
+
+      if (statusEl) {
+        statusEl.textContent = noDairy 
+          ? (isRo ? '🥛🚫 Doar fără lactate' : '🥛🚫 Dairy-free only') 
+          : '';
+        statusEl.style.color = noDairy ? 'var(--color-primary, #01696f)' : '';
+      }
 
       const allStockItems = [...(stock.pantry || []), ...(stock.fridge || []), ...(stock.freezer || [])];
       const availableItems = new Set(allStockItems.filter(i => i && i.have).map(i => normStockKey(i.name)));
 
-      const allRecs = allRecipes();
+      let allRecs = allRecipes();
+      if (noDairy) {
+        allRecs = allRecs.filter(isRecipeDairyFree);
+      }
+
       const ranked = [];
 
       allRecs.forEach(rec => {
@@ -14076,27 +14192,40 @@ const CUP_DENSITY = {
       ranked.sort((a, b) => b.matchPct - a.matchPct || a.missingIngs.length - b.missingIngs.length);
 
       if (!ranked.length) {
-        list.innerHTML = '<div class="muted small" style="text-align:center;padding:24px">No recipes found. Try adding items to your Stock list!</div>';
+        const emptyMsg = noDairy
+          ? (isRo ? 'Nicio rețetă fără lactate nu se potrivește cu stocul curent. Debifează filtrul sau adaugă ingrediente în stoc!' : 'No dairy-free recipes match your current stock. Try unchecking the filter or adding more items to Stock!')
+          : (isRo ? 'Nu au fost găsite rețete. Încearcă să adaugi ingrediente în lista de Stoc!' : 'No recipes found. Try adding items to your Stock list!');
+        list.innerHTML = `<div class="muted small" style="text-align:center;padding:24px">${emptyMsg}</div>`;
       } else {
-        list.innerHTML = ranked.slice(0, 20).map(item => {
+        list.innerHTML = ranked.slice(0, 25).map(item => {
           const r = item.recipe;
           const isFull = item.matchPct === 100;
           const tagClass = isFull ? 'ready' : (item.missingIngs.length <= 2 ? 'missing' : 'low');
-          const tagText = isFull ? '✓ 100% Ready' : `Missing ${item.missingIngs.length} item${item.missingIngs.length > 1 ? 's' : ''}`;
+          const tagText = isFull 
+            ? (isRo ? '✓ 100% Gata' : '✓ 100% Ready') 
+            : (isRo ? `Lipsesc ${item.missingIngs.length} ingrediente` : `Missing ${item.missingIngs.length} item${item.missingIngs.length > 1 ? 's' : ''}`);
+
+          const isDf = isRecipeDairyFree(r);
+          const dfTag = isDf 
+            ? `<span style="background:rgba(46,125,50,0.12);color:#2e7d32;font-size:10px;font-weight:700;padding:2px 6px;border-radius:var(--radius-sm);margin-left:6px;display:inline-flex;align-items:center;gap:2px">🥛🚫 ${isRo ? 'Fără lactate' : 'No dairy'}</span>` 
+            : '';
+          const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
 
           return `
             <div class="pantry-card">
-              <div style="display:flex;justify-content:space-between;align-items:flex-start">
-                <div style="font-weight:700;font-size:var(--text-sm)">${escapeHtml(r.name)}</div>
+              <div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px">
+                <div style="font-weight:700;font-size:var(--text-sm)">
+                  ${flag ? `<span style="margin-right:4px">${flag}</span>` : ''}${escapeHtml(r.name)}${dfTag}
+                </div>
                 <span class="pantry-match-tag ${tagClass}">${tagText}</span>
               </div>
               <div class="tiny muted" style="margin-top:2px">
                 ${r.kcal} kcal • P ${r.protein}g • F ${r.fat}g • NC ${r.netCarbs}g (${escapeHtml(r.meal)})
               </div>
-              ${item.missingIngs.length ? `<div class="tiny" style="color:var(--color-warning);margin-top:4px">Missing: ${escapeHtml(item.missingIngs.slice(0, 3).join(', '))}${item.missingIngs.length > 3 ? '...' : ''}</div>` : ''}
+              ${item.missingIngs.length ? `<div class="tiny" style="color:var(--color-warning);margin-top:4px">${isRo ? 'Lipsesc:' : 'Missing:'} ${escapeHtml(item.missingIngs.slice(0, 3).join(', '))}${item.missingIngs.length > 3 ? '...' : ''}</div>` : ''}
               <div style="display:flex;gap:6px;margin-top:8px">
-                <button class="act-btn small primary pantry-add-plan" data-rec-id="${r.id}" type="button">+ Add to Planner</button>
-                ${item.missingIngs.length ? `<button class="act-btn small pantry-add-shop" data-rec-id="${r.id}" type="button">+ Missing to Shopping</button>` : ''}
+                <button class="act-btn small primary pantry-add-plan" data-rec-id="${r.id}" type="button">${isRo ? '+ Adaugă în Plan' : '+ Add to Planner'}</button>
+                ${item.missingIngs.length ? `<button class="act-btn small pantry-add-shop" data-rec-id="${r.id}" type="button">${isRo ? '+ Lipsă în Cumpărături' : '+ Missing to Shopping'}</button>` : ''}
               </div>
             </div>
           `;
@@ -14115,7 +14244,7 @@ const CUP_DENSITY = {
           afterPlannerChange();
           modal.classList.add('hidden');
           document.body.classList.remove('modal-open');
-          showAppToast(`Added ${r.name} to ${day} (${slot})!`);
+          showAppToast(isRo ? `Adăugat ${r.name} în ${day} (${slot})!` : `Added ${r.name} to ${day} (${slot})!`);
         });
       });
 
@@ -14130,14 +14259,36 @@ const CUP_DENSITY = {
             });
             renderShopping();
             saveState();
-            btn.textContent = '✓ Added to Shopping';
+            btn.textContent = isRo ? '✓ Adăugat' : '✓ Added';
             btn.disabled = true;
             btn.style.opacity = '0.7';
-            showAppToast(`🛒 Added ${entry.missingIngs.length} missing item(s) to Shopping List!`);
+            showAppToast(isRo ? `🛒 Adăugat ${entry.missingIngs.length} produs(e) în Cumpărături!` : `🛒 Added ${entry.missingIngs.length} missing item(s) to Shopping List!`);
           }
         });
       });
+    }
 
+    let suggestNoDairyFilterWired = false;
+    function openPantrySuggestions() {
+      const modal = document.getElementById('pantrySuggestModal');
+      if (!modal) return;
+
+      const noDairyCb = document.getElementById('suggestNoDairyFilter');
+      if (noDairyCb) {
+        const savedPref = localStorage.getItem('keto_suggest_no_dairy');
+        if (savedPref !== null) {
+          noDairyCb.checked = (savedPref === 'true');
+        }
+        if (!suggestNoDairyFilterWired) {
+          noDairyCb.addEventListener('change', () => {
+            localStorage.setItem('keto_suggest_no_dairy', noDairyCb.checked ? 'true' : 'false');
+            renderPantrySuggestionsList();
+          });
+          suggestNoDairyFilterWired = true;
+        }
+      }
+
+      renderPantrySuggestionsList();
       document.body.classList.add('modal-open');
       modal.classList.remove('hidden');
     }
@@ -14571,7 +14722,7 @@ const CUP_DENSITY = {
       // Initialize Cuisine Filter
       initCuisineFilterEvents();
 
-      ['recipeSearch', 'filterBreakfast', 'filterMain', 'filterSnack', 'filterSide', 'fProtein', 'fCarbs', 'fInclude', 'fExclude'].forEach(id => {
+      ['recipeSearch', 'filterBreakfast', 'filterMain', 'filterSnack', 'filterSide', 'filterNoDairy', 'fProtein', 'fCarbs', 'fInclude', 'fExclude'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener(el.type === 'search' || el.type === 'range' ? 'input' : 'change', () => {
           if (id === 'fProtein') document.getElementById('fProteinV').textContent = el.value + ' g';
@@ -14584,6 +14735,8 @@ const CUP_DENSITY = {
         document.getElementById('fCarbs').value = 30;
         document.getElementById('fInclude').value = '';
         document.getElementById('fExclude').value = '';
+        const fNoDairy = document.getElementById('filterNoDairy');
+        if (fNoDairy) fNoDairy.checked = false;
         selectedCuisines.clear();
         updateCuisineFilterButtonLabel();
         renderCuisineOptions();
