@@ -257,6 +257,10 @@
       box-sizing: border-box;
       overflow-x: hidden;
     }
+    section[data-tab="learn"] .panel {
+      overflow: visible;
+      overflow-x: visible;
+    }
     .stack { display: grid; gap: var(--space-4); min-width: 0; max-width: 100%; }
     .main-content {
       padding: var(--space-4);
@@ -264,7 +268,7 @@
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
-      overflow-x: hidden;
+      overflow-x: clip;
     }
     section[data-tab="fasting"] {
       width: 100%;
@@ -1924,13 +1928,20 @@
       display: flex;
       gap: 6px;
       overflow-x: auto;
-      padding-bottom: 8px;
+      white-space: nowrap;
+      padding: 10px 14px;
       -webkit-overflow-scrolling: touch;
       position: sticky;
       top: 56px;
-      z-index: 10;
-      background: var(--color-bg);
-      padding-top: 4px;
+      z-index: 95;
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.07);
+      margin: -16px -16px 16px -16px;
+      scrollbar-width: none;
+    }
+    .learn-nav-pills::-webkit-scrollbar {
+      display: none;
     }
     .learn-chapter-card {
       background: var(--color-surface);
@@ -1939,6 +1950,7 @@
       padding: 16px;
       margin-bottom: 16px;
       box-shadow: var(--shadow-sm);
+      scroll-margin-top: 120px;
     }
     .learn-chapter-header {
       display: flex;
@@ -2571,6 +2583,23 @@
         <!-- Filters -->
         <div class="stack" style="gap:var(--space-2)">
           <input id="recipeSearch" class="search" type="search" placeholder="Search recipes, ingredients or tags..." data-i18n-ph="recipes_search_ph">
+
+          <!-- Cuisine Multi-Select Dropdown Filter -->
+          <div class="cuisine-filter-container" id="cuisineFilterContainer" style="position:relative;margin:2px 0">
+            <button id="cuisineFilterToggleBtn" class="act-btn" type="button" style="width:100%;display:flex;align-items:center;justify-content:space-between;background:var(--color-surface);border:1px solid var(--color-border);padding:8px 12px;border-radius:var(--radius-md);font-size:var(--text-sm);font-weight:600;color:var(--color-text)">
+              <span id="cuisineFilterLabel" data-i18n="recipes_cuisine_all">🌍 Cuisine: All (41)</span>
+              <span id="cuisineFilterChevron" style="font-size:11px;transition:transform 0.2s">▼</span>
+            </button>
+            <div id="cuisineDropdownPanel" class="cuisine-dropdown-panel" style="position:absolute;top:calc(100% + 4px);left:0;right:0;max-height:300px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);box-shadow:0 10px 25px rgba(0,0,0,0.22);z-index:99;display:none;flex-direction:column;overflow:hidden">
+              <div style="padding:8px;border-bottom:1px solid var(--color-border);display:flex;gap:6px;align-items:center;background:var(--color-surface-offset)">
+                <input type="search" id="cuisineSearchInput" placeholder="Search cuisine..." data-i18n-ph="recipes_cuisine_search_ph" style="flex:1;padding:6px 10px;font-size:12px;border-radius:var(--radius-sm);border:1px solid var(--color-border);background:var(--color-surface);color:inherit">
+                <button type="button" id="cuisineSelectAllBtn" class="act-btn small" style="padding:4px 8px;font-size:11px" data-i18n="recipes_cuisine_all_btn">All</button>
+                <button type="button" id="cuisineClearBtn" class="act-btn small" style="padding:4px 8px;font-size:11px" data-i18n="recipes_cuisine_clear_btn">Clear</button>
+              </div>
+              <div id="cuisineOptionsList" style="overflow-y:auto;padding:6px 8px;max-height:230px;display:flex;flex-direction:column;gap:3px">
+              </div>
+            </div>
+          </div>
           <div class="filters">
             <label class="small"><input type="checkbox" id="filterBreakfast" checked> <span data-i18n="recipes_filter_breakfast">Breakfast</span></label>
             <label class="small"><input type="checkbox" id="filterMain" checked> <span data-i18n="recipes_filter_main">Main Course</span></label>
@@ -4156,16 +4185,17 @@
     </div>
   </div>
 
+  <script src="recipes-data.js"></script>
   <script>
-const RECIPES = [{ "id": "b1", "name": "Egg omelet with cottage cheese, mushrooms, and peppers", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 39, "fat": 29, "netCarbs": 11, "batch": "1-2 days fridge", "freezer": "Egg dishes are less ideal frozen. Make fresh or 2-day batch.", "ingredients": ["2 eggs", "150 g cottage cheese", "115 g mushrooms", "75 g bell pepper", "25 g telemea/feta", "8 g butter", "2 g salt", "1 g pepper", "2 g paprika"], "method": "Saute mushrooms and bell pepper in butter. Add beaten eggs, set gently. Fold in cottage cheese and crumbled telemea at the end. Cook until just set so it reheats without turning rubbery." }, { "id": "b2", "name": "Greek yogurt bowl with whey, walnuts, and berries", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 47, "fat": 22, "netCarbs": 19, "batch": "Assemble fresh in 3 minutes", "freezer": "Not freezer-friendly once assembled. Keep components separate.", "ingredients": ["235 g Greek yogurt 2-5%", "25 g whey", "16 g walnuts", "65 g berries", "8 g chia seeds", "1 g cinnamon"], "method": "Mix yogurt with whey until smooth. Top with walnuts, chia, berries, and cinnamon. For office use, keep berries separate until serving." }, { "id": "b3", "name": "Nixe mackerel breakfast plate with eggs and protein bread", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 47, "fat": 26, "netCarbs": 10, "batch": "Fresh plate, 5 minutes", "freezer": "Not relevant; use can on demand.", "ingredients": ["1 can Nixe mackerel in tomato sauce (170 g)", "2 eggs", "2 slices protein bread", "50 g cucumber", "half lemon", "1 g black pepper"], "method": "Boil or fry the eggs. Plate with drained mackerel, protein bread, cucumber, and lemon. Good when you want omega-3 with minimal prep." }, { "id": "b4", "name": "Skyr, cottage cheese, and peanut butter protein bowl", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 52, "fat": 19, "netCarbs": 17, "batch": "Assemble fresh", "freezer": "Not freezer-friendly once mixed.", "ingredients": ["255 g skyr", "170 g cottage cheese", "17 g peanut butter", "8 g flaxseed", "1 g cinnamon", "sweetener optional"], "method": "Mix all ingredients in a bowl. Adjust sweetness only if needed. This is the easiest high-protein breakfast in the library." }, { "id": "l1", "name": "Chicken Caesar salad, batch-friendly", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 52, "fat": 32, "netCarbs": 3, "batch": "4 servings, 3-4 days fridge", "freezer": "Freeze chicken only; keep veg and dressing separate.", "ingredients": ["140 g cooked chicken breast per serving", "55 g romaine/lettuce", "20 g parmesan", "30 g mayonnaise", "5 g mustard", "half lemon", "4 g garlic", "cucumber optional"], "method": "Sous-vide or roast chicken, chill, and portion. Store lettuce dry, chicken separate, dressing in small containers. Toss right before eating to keep texture." }, { "id": "l2", "name": "Asian beef and cabbage stir-fry", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 34, "fat": 36, "netCarbs": 13, "batch": "6 servings, 4 days fridge", "freezer": "Freezes well portioned in bags. Reheat gently.", "ingredients": ["165 g beef mince 10-15%", "205 g cabbage", "35 g onion", "5 g garlic", "12 g soy sauce", "10 g ginger", "4 g sesame oil", "chili flakes optional"], "method": "Brown beef mince hard for flavor. Saute onion and garlic first, then add cabbage and cook until still slightly crisp. Finish with soy, ginger, and a little sesame oil." }, { "id": "l3", "name": "Chicken curry with cauliflower and spinach", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 39, "fat": 36, "netCarbs": 11, "batch": "6 servings, 4 days fridge", "freezer": "Excellent freezer meal. Portion in bags.", "ingredients": ["115 g chicken thigh or breast", "115 g cauliflower florets", "35 g spinach", "25 g onion", "3 g garlic", "6 g curry powder/paste", "85 ml coconut milk or cooking cream", "6 g oil"], "method": "Saute onion and garlic until sweet, bloom curry, add chicken, then cauliflower. Simmer with coconut milk or cream until thick. Fold in spinach at the end." }, { "id": "l4", "name": "Turkey meatballs in creamy tomato sauce", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 45, "fat": 32, "netCarbs": 12, "batch": "6 servings, 4 days fridge", "freezer": "Very freezer-friendly. Sauce protects texture.", "ingredients": ["150 g turkey mince", "1 egg", "19 g parmesan", "125 g tomato passata", "25 g onion", "4 g garlic", "35 ml cooking cream", "6 g olive oil", "2 g oregano"], "method": "Mix turkey mince with egg and parmesan, form meatballs, and bake or air-fry. Build sauce by sauteing onion and garlic, then add passata and cream. Simmer meatballs in sauce." }, { "id": "l5", "name": "Salmon with broccoli and lemon-dill yogurt", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 43, "fat": 32, "netCarbs": 10, "batch": "4 servings, 2-3 days fridge", "freezer": "Freeze cooked salmon if needed, but best fresh or within 2 days.", "ingredients": ["160 g salmon", "200 g broccoli", "50 g Greek yogurt", "3 g dill", "half lemon", "8 g olive oil", "2 g salt", "1 g pepper"], "method": "Cook salmon sous-vide then sear, or air-fry directly. Steam or air-fry broccoli. Mix yogurt with dill and lemon for a cold sauce." }, { "id": "l6", "name": "Duck breast with red cabbage and feta salad", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 36, "fat": 36, "netCarbs": 9, "batch": "4 servings, 3 days fridge", "freezer": "Freeze duck separately; salad fresh.", "ingredients": ["155 g duck breast", "125 g red cabbage", "50 g cucumber", "35 g feta", "8 g olive oil", "10 g vinegar", "5 g mustard"], "method": "Sous-vide duck breast and sear skin hard. Slice thin over crunchy cabbage salad with feta. Dress just before eating." }, { "id": "l7", "name": "Cheeseburger bowl with beef, salad, and sauce", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 524, "protein": 30, "fat": 43, "netCarbs": 4, "batch": "4-6 servings, 4 days fridge", "freezer": "Freeze cooked beef, assemble fresh veg.", "ingredients": ["125 g beef mince", "40 g lettuce", "20 g pickles", "40 g tomato", "25 g cheddar", "15 g red onion", "13 g mayonnaise", "5 g mustard"], "method": "Brown beef mince well. Cool and portion. Assemble with lettuce, tomato, pickles, cheddar, and a controlled amount of onion to keep carbs reasonable." }, { "id": "l8", "name": "Creamy chicken mushroom stew", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 57, "fat": 29, "netCarbs": 8, "batch": "6 servings, 4 days fridge", "freezer": "Excellent freezer meal.", "ingredients": ["190 g chicken thigh or breast", "95 g mushrooms", "40 g onion", "6 g garlic", "30 ml sour cream or cream", "9 g butter", "5 g parsley"], "method": "Brown chicken and mushrooms separately for better flavor. Saute onion and garlic, then combine with cream. Keep simmer gentle so dairy stays smooth." }, { "id": "l9", "name": "Eggplant beef moussaka, low-carb", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 36, "fat": 34, "netCarbs": 15, "batch": "6 servings, 4 days fridge", "freezer": "Freezes well.", "ingredients": ["120 g eggplant", "120 g beef mince", "25 g onion", "4 g garlic", "120 g tomato sauce", "35 g mozzarella", "35 g Greek yogurt or bechamel-style topping"], "method": "Roast eggplant slices first so they do not go watery. Cook mince with onion, garlic, and tomato. Layer and bake until set." }, { "id": "l10", "name": "Shrimp coconut curry", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 48, "fat": 31, "netCarbs": 12, "batch": "4 servings, 2 days fridge", "freezer": "Shrimp can toughen; better fresh or short fridge hold.", "ingredients": ["175 g shrimp", "50 g bell pepper", "50 g spinach", "30 g onion", "5 g garlic", "8 g curry paste/powder", "120 ml coconut milk"], "method": "Cook onion and garlic first, bloom curry, then simmer sauce briefly. Add shrimp only at the end and cook until just opaque." }, { "id": "s1", "name": "Skyr protein cup", "meal": "Snack", "portion": "1 serving", "kcal": 408, "protein": 62, "fat": 10, "netCarbs": 17, "batch": "Fresh", "freezer": "No", "ingredients": ["320 g skyr", "30 g whey", "15 g almonds"], "method": "Stir and eat cold." }, { "id": "s3", "name": "Cottage cheese cucumber bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 46, "fat": 17, "netCarbs": 14, "batch": "2 days fridge", "freezer": "No", "ingredients": ["415 g cottage cheese", "100 g cucumber", "3 g dill", "2 g salt", "1 g pepper"], "method": "Mix and keep chilled." }, { "id": "s4", "name": "Whey shake + almonds", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 49, "fat": 22, "netCarbs": 8, "batch": "Fresh", "freezer": "No", "ingredients": ["50 g whey", "35 g almonds", "170 ml water or milk alternative"], "method": "Shake whey with water; eat almonds on the side." }, { "id": "s5", "name": "Gelatelli high-protein ice cream bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 25, "fat": 33, "netCarbs": 4, "batch": "Fresh", "freezer": "No", "ingredients": ["110 g mozzarella", "55 g tomato", "9 g olive oil", "2 g basil or oregano"], "method": "Slice and plate." }
+const RECIPES_BASE = [{ "id": "b1", "name": "Egg omelet with cottage cheese, mushrooms, and peppers", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 39, "fat": 29, "netCarbs": 11, "batch": "1-2 days fridge", "freezer": "Egg dishes are less ideal frozen. Make fresh or 2-day batch.", "ingredients": ["2 eggs", "150 g cottage cheese", "115 g mushrooms", "75 g bell pepper", "25 g telemea", "8 g butter", "2 g salt", "1 g pepper", "2 g paprika"], "method": "Saute mushrooms and bell pepper in butter. Add beaten eggs, set gently. Fold in cottage cheese and crumbled telemea at the end. Cook until just set so it reheats without turning rubbery." }, { "id": "b2", "name": "Greek yogurt bowl with whey, walnuts, and berries", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 47, "fat": 22, "netCarbs": 19, "batch": "Assemble fresh in 3 minutes", "freezer": "Not freezer-friendly once assembled. Keep components separate.", "ingredients": ["235 g greek yogurt 10%", "25 g whey", "16 g walnuts", "65 g berries", "8 g chia seeds", "1 g cinnamon"], "method": "Mix yogurt with whey until smooth. Top with walnuts, chia, berries, and cinnamon. For office use, keep berries separate until serving." }, { "id": "b3", "name": "Nixe mackerel breakfast plate with eggs and protein bread", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 47, "fat": 26, "netCarbs": 10, "batch": "Fresh plate, 5 minutes", "freezer": "Not relevant; use can on demand.", "ingredients": ["1 can Nixe mackerel in tomato sauce (170 g)", "2 eggs", "2 slices protein bread", "50 g cucumber", "half lemon", "1 g black pepper"], "method": "Boil or fry the eggs. Plate with drained mackerel, protein bread, cucumber, and lemon. Good when you want omega-3 with minimal prep." }, { "id": "b4", "name": "Skyr, cottage cheese, and peanut butter protein bowl", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 52, "fat": 19, "netCarbs": 17, "batch": "Assemble fresh", "freezer": "Not freezer-friendly once mixed.", "ingredients": ["255 g skyr", "170 g cottage cheese", "17 g peanut butter", "8 g flaxseed", "1 g cinnamon", "sweetener optional"], "method": "Mix all ingredients in a bowl. Adjust sweetness only if needed. This is the easiest high-protein breakfast in the library." }, { "id": "l1", "name": "Chicken Caesar salad, batch-friendly", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 52, "fat": 32, "netCarbs": 3, "batch": "4 servings, 3-4 days fridge", "freezer": "Freeze chicken only; keep veg and dressing separate.", "ingredients": ["140 g chicken breast", "55 g lettuce", "20 g parmesan", "30 g mayonnaise", "5 g mustard", "half lemon", "4 g garlic", "cucumber optional"], "method": "Sous-vide or roast chicken, chill, and portion. Store lettuce dry, chicken separate, dressing in small containers. Toss right before eating to keep texture." }, { "id": "l2", "name": "Asian beef and cabbage stir-fry", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 34, "fat": 36, "netCarbs": 13, "batch": "6 servings, 4 days fridge", "freezer": "Freezes well portioned in bags. Reheat gently.", "ingredients": ["165 g beef mince", "205 g cabbage", "35 g onion", "5 g garlic", "12 g soy sauce", "10 g ginger", "4 g sesame oil", "chili flakes optional"], "method": "Brown beef mince hard for flavor. Saute onion and garlic first, then add cabbage and cook until still slightly crisp. Finish with soy, ginger, and a little sesame oil." }, { "id": "l3", "name": "Chicken curry with cauliflower and spinach", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 39, "fat": 36, "netCarbs": 11, "batch": "6 servings, 4 days fridge", "freezer": "Excellent freezer meal. Portion in bags.", "ingredients": ["115 g chicken thigh", "115 g cauliflower florets", "35 g spinach", "25 g onion", "3 g garlic", "6 g curry paste", "85 ml coconut milk", "6 g oil"], "method": "Saute onion and garlic until sweet, bloom curry, add chicken, then cauliflower. Simmer with coconut milk or cream until thick. Fold in spinach at the end." }, { "id": "l4", "name": "Turkey meatballs in creamy tomato sauce", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 45, "fat": 32, "netCarbs": 12, "batch": "6 servings, 4 days fridge", "freezer": "Very freezer-friendly. Sauce protects texture.", "ingredients": ["150 g turkey mince", "1 egg", "19 g parmesan", "125 g tomato passata", "25 g onion", "4 g garlic", "35 ml cooking cream", "6 g olive oil", "2 g oregano"], "method": "Mix turkey mince with egg and parmesan, form meatballs, and bake or air-fry. Build sauce by sauteing onion and garlic, then add passata and cream. Simmer meatballs in sauce." }, { "id": "l5", "name": "Salmon with broccoli and lemon-dill yogurt", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 43, "fat": 32, "netCarbs": 10, "batch": "4 servings, 2-3 days fridge", "freezer": "Freeze cooked salmon if needed, but best fresh or within 2 days.", "ingredients": ["160 g salmon", "200 g broccoli", "50 g Greek yogurt", "3 g dill", "half lemon", "8 g olive oil", "2 g salt", "1 g pepper"], "method": "Cook salmon sous-vide then sear, or air-fry directly. Steam or air-fry broccoli. Mix yogurt with dill and lemon for a cold sauce." }, { "id": "l6", "name": "Duck breast with red cabbage and feta salad", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 521, "protein": 36, "fat": 36, "netCarbs": 9, "batch": "4 servings, 3 days fridge", "freezer": "Freeze duck separately; salad fresh.", "ingredients": ["155 g duck breast", "125 g red cabbage", "50 g cucumber", "35 g feta", "8 g olive oil", "10 g vinegar", "5 g mustard"], "method": "Sous-vide duck breast and sear skin hard. Slice thin over crunchy cabbage salad with feta. Dress just before eating." }, { "id": "l7", "name": "Cheeseburger bowl with beef, salad, and sauce", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 524, "protein": 30, "fat": 43, "netCarbs": 4, "batch": "4-6 servings, 4 days fridge", "freezer": "Freeze cooked beef, assemble fresh veg.", "ingredients": ["125 g beef mince", "40 g lettuce", "20 g pickles", "40 g tomato", "25 g cheddar", "15 g red onion", "13 g mayonnaise", "5 g mustard"], "method": "Brown beef mince well. Cool and portion. Assemble with lettuce, tomato, pickles, cheddar, and a controlled amount of onion to keep carbs reasonable." }, { "id": "l8", "name": "Creamy chicken mushroom stew", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 57, "fat": 29, "netCarbs": 8, "batch": "6 servings, 4 days fridge", "freezer": "Excellent freezer meal.", "ingredients": ["190 g chicken thigh", "95 g mushrooms", "40 g onion", "6 g garlic", "30 ml sour cream 30%", "9 g butter", "5 g parsley"], "method": "Brown chicken and mushrooms separately for better flavor. Saute onion and garlic, then combine with cream. Keep simmer gentle so dairy stays smooth." }, { "id": "l9", "name": "Eggplant beef moussaka, low-carb", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 36, "fat": 34, "netCarbs": 15, "batch": "6 servings, 4 days fridge", "freezer": "Freezes well.", "ingredients": ["120 g eggplant", "120 g beef mince", "25 g onion", "4 g garlic", "120 g tomato sauce", "35 g mozzarella", "35 g greek yogurt 10%"], "method": "Roast eggplant slices first so they do not go watery. Cook mince with onion, garlic, and tomato. Layer and bake until set." }, { "id": "l10", "name": "Shrimp coconut curry", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 48, "fat": 31, "netCarbs": 12, "batch": "4 servings, 2 days fridge", "freezer": "Shrimp can toughen; better fresh or short fridge hold.", "ingredients": ["175 g shrimp", "50 g bell pepper", "50 g spinach", "30 g onion", "5 g garlic", "8 g curry paste", "120 ml coconut milk"], "method": "Cook onion and garlic first, bloom curry, then simmer sauce briefly. Add shrimp only at the end and cook until just opaque." }, { "id": "s1", "name": "Skyr protein cup", "meal": "Snack", "portion": "1 serving", "kcal": 408, "protein": 62, "fat": 10, "netCarbs": 17, "batch": "Fresh", "freezer": "No", "ingredients": ["320 g skyr", "30 g whey", "15 g almonds"], "method": "Stir and eat cold." }, { "id": "s3", "name": "Cottage cheese cucumber bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 46, "fat": 17, "netCarbs": 14, "batch": "2 days fridge", "freezer": "No", "ingredients": ["415 g cottage cheese", "100 g cucumber", "3 g dill", "2 g salt", "1 g pepper"], "method": "Mix and keep chilled." }, { "id": "s4", "name": "Whey shake + almonds", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 49, "fat": 22, "netCarbs": 8, "batch": "Fresh", "freezer": "No", "ingredients": ["50 g whey", "35 g almonds", "170 ml almond milk"], "method": "Shake whey with water; eat almonds on the side." }, { "id": "s5", "name": "Gelatelli high-protein ice cream bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 25, "fat": 33, "netCarbs": 4, "batch": "Fresh", "freezer": "No", "ingredients": ["110 g mozzarella", "55 g tomato", "9 g olive oil", "2 g oregano"], "method": "Slice and plate." }
 
 
-      , { "id": "b5", "name": "Greek yogurt parfait with berries and nuts", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 32, "fat": 28, "netCarbs": 17, "batch": "Assemble fresh", "freezer": "Not freezer-friendly once layered.", "ingredients": ["240 g greek yogurt 2%", "50 g berries", "25 g walnuts", "25 g chia seeds", "sweetener optional"], "method": "Layer yogurt, berries, and nuts in a jar. Keep nuts separate until serving if batching." }
+      , { "id": "b5", "name": "Greek yogurt parfait with berries and nuts", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 32, "fat": 28, "netCarbs": 17, "batch": "Assemble fresh", "freezer": "Not freezer-friendly once layered.", "ingredients": ["240 g greek yogurt 10%", "50 g berries", "25 g walnuts", "25 g chia seeds", "sweetener optional"], "method": "Layer yogurt, berries, and nuts in a jar. Keep nuts separate until serving if batching." }
       , { "id": "b6", "name": "Protein pancakes with cottage cheese and eggs", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 44, "fat": 29, "netCarbs": 8, "batch": "2 days fridge; reheat in pan or air fryer", "freezer": "Can be frozen with parchment between pancakes.", "ingredients": ["2 eggs", "120 g cottage cheese", "18 g protein powder", "18 g almond flour", "6 g butter"], "method": "Blend ingredients to a thick batter and cook small pancakes in butter over medium heat." }
       , { "id": "b7", "name": "Chia pudding with skyr and peanut butter", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 40, "fat": 22, "netCarbs": 19, "batch": "Up to 3 days fridge", "freezer": "Not recommended.", "ingredients": ["260 g skyr", "25 g chia seeds", "25 g peanut butter", "50 g berries", "sweetener optional"], "method": "Mix skyr with chia and sweetener, rest overnight, then swirl in peanut butter and top with berries." }
       , { "id": "b8", "name": "Savory cottage cheese breakfast bowl", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 35, "fat": 28, "netCarbs": 14, "batch": "1-2 days fridge", "freezer": "Not freezer-friendly.", "ingredients": ["310 g cottage cheese", "95 g cucumber", "95 g tomato", "15 g olive oil", "1 g pepper"], "method": "Mix cottage cheese with chopped cucumber and tomato, finish with olive oil and pepper." }
       , { "id": "d1", "name": "High-protein chocolate mousse with skyr", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 57, "fat": 15, "netCarbs": 14, "batch": "2 days fridge", "freezer": "Texture changes if frozen.", "ingredients": ["210 g skyr", "16 g cocoa powder", "30 g whey", "20 g peanut butter", "sweetener optional"], "method": "Whisk all ingredients until smooth and airy, then chill before serving." }
-      , { "id": "d2", "name": "Ricotta lemon dessert bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 26, "fat": 28, "netCarbs": 13, "batch": "2 days fridge", "freezer": "Not ideal.", "ingredients": ["185 g ricotta or cottage cheese", "5 g lemon zest", "10 g sweetener", "50 g berries", "25 g almonds"], "method": "Mix cheese with zest and sweetener, top with berries and almonds." }
+      , { "id": "d2", "name": "Ricotta lemon dessert bowl", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 26, "fat": 28, "netCarbs": 13, "batch": "2 days fridge", "freezer": "Not ideal.", "ingredients": ["185 g ricotta", "5 g lemon zest", "10 g sweetener", "50 g berries", "25 g almonds"], "method": "Mix cheese with zest and sweetener, top with berries and almonds." }
       , { "id": "d3", "name": "Baked cottage cheese cake squares", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 34, "fat": 27, "netCarbs": 8, "batch": "4 days fridge", "freezer": "Can be frozen in portions.", "ingredients": ["145 g cottage cheese", "2 eggs", "20 g almond flour", "10 g sweetener", "2 g vanilla"], "method": "Blend ingredients, bake in a small tray until set, then cut into squares." }
       , { "id": "l11", "name": "Spicy beef chili without beans", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 520, "protein": 35, "fat": 36, "netCarbs": 13, "batch": "6 servings, 4 days fridge", "freezer": "Freezes very well.", "ingredients": ["180 g beef mince", "180 g tomato passata", "35 g onion", "5 g garlic", "3 g chili powder", "2 g paprika"], "method": "Brown beef hard, then simmer with onion, garlic, passata, and spices until thick." }
       , { "id": "l12", "name": "Greek-style turkey bowl with feta and olives", "meal": "Lunch/Dinner", "portion": "1 serving", "kcal": 529, "protein": 58, "fat": 29, "netCarbs": 6, "batch": "4-6 servings, 4 days fridge", "freezer": "Freeze turkey separately; assemble veg fresh.", "ingredients": ["240 g turkey mince", "60 g lettuce", "60 g cucumber", "60 g tomato", "40 g feta", "30 g olives"], "method": "Cook turkey mince with simple spices, then serve over crunchy salad with feta and olives." }, { "id": "sHPbar", "name": "Lidl high-protein bar (50% protein)", "meal": "Snack", "portion": "1 bar (~50 g)", "kcal": 190, "protein": 25, "fat": 6, "netCarbs": 14, "batch": "Shelf-stable; keep a few in your bag or desk.", "freezer": "Not needed.", "ingredients": ["1 Lidl 50% protein bar (any flavour)"], "method": "Open wrapper and eat. Use mainly on gym days to keep daily carbs in check." }, { "id": "sSkyrWalnut", "name": "Milbona skyr cup with walnuts", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 45, "fat": 19, "netCarbs": 17, "batch": "2 days fridge if kept covered.", "freezer": "Not recommended.", "ingredients": ["375 g Milbona skyr natural", "30 g walnuts", "sweetener optional", "cinnamon optional"], "method": "Stir skyr with optional sweetener and cinnamon. Top with chopped walnuts right before eating so they stay crunchy." }, { "id": "dCupcake", "name": "Mini protein cupcakes (cottage cheese + whey)", "meal": "Snack", "portion": "1 serving", "kcal": 420, "protein": 41, "fat": 24, "netCarbs": 8, "batch": "Up to 4 days fridge in a sealed container.", "freezer": "Freeze individually and reheat in air fryer or oven.", "ingredients": ["130 g cottage cheese", "2 eggs", "16 g whey protein (vanilla or neutral)", "20 g almond flour", "sweetener to taste", "2 g vanilla extract", "optional: lemon zest"], "method": "Blend all ingredients to a smooth batter. Portion into a silicone muffin tray and bake until set and lightly golden. Cool completely before storing or freezing." },
@@ -4174,7 +4204,7 @@ const RECIPES = [{ "id": "b1", "name": "Egg omelet with cottage cheese, mushroom
     { "id": "r3", "name": "Cheese and mushroom omelette", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 32, "fat": 37, "netCarbs": 3, "maxServings": 1, "batch": "Cook fresh.", "freezer": "Not ideal frozen.", "ingredients": ["3 eggs", "60 g mushrooms", "40 g cheddar", "10 g butter", "5 g chives", "2 g salt"], "method": "Saute mushrooms in butter, add beaten eggs, top with cheese, and fold when just set." },
     { "id": "r4", "name": "Scrambled eggs with smoked salmon", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 29, "fat": 39, "netCarbs": 2, "maxServings": 2, "batch": "Cook fresh.", "freezer": "Not suitable.", "ingredients": ["3 eggs", "55 g smoked salmon", "19 g butter", "14 ml cream", "5 g chives", "1 g black pepper"], "method": "Soft-scramble the eggs in butter with a splash of cream, then fold through smoked salmon and chives off the heat." },
     { "id": "r5", "name": "Keto chia pudding with coconut milk", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 7, "fat": 44, "netCarbs": 8, "maxServings": 4, "batch": "4 jars, up to 4 days fridge.", "freezer": "Not recommended.", "ingredients": ["25 g chia seeds", "155 ml coconut milk", "15 g berries", "sweetener to taste", "2 g vanilla"], "method": "Stir chia into coconut milk with vanilla and sweetener, chill overnight, then top with berries." },
-    { "id": "r6", "name": "Greek yogurt with walnuts and blueberries", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 29, "fat": 31, "netCarbs": 19, "maxServings": 1, "batch": "Assemble fresh.", "freezer": "Not freezer-friendly.", "ingredients": ["270 g full-fat Greek yogurt", "25 g walnuts", "55 g blueberries", "1 g cinnamon"], "method": "Spoon yogurt into a bowl and top with walnuts, blueberries, and a dusting of cinnamon." },
+    { "id": "r6", "name": "Greek yogurt with walnuts and blueberries", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 29, "fat": 31, "netCarbs": 19, "maxServings": 1, "batch": "Assemble fresh.", "freezer": "Not freezer-friendly.", "ingredients": ["270 g greek yogurt 10%", "25 g walnuts", "55 g blueberries", "1 g cinnamon"], "method": "Spoon yogurt into a bowl and top with walnuts, blueberries, and a dusting of cinnamon." },
     { "id": "r7", "name": "Baked avocado with egg", "meal": "Breakfast", "portion": "1 serving", "kcal": 463, "protein": 21, "fat": 39, "netCarbs": 4, "maxServings": 2, "batch": "Best fresh.", "freezer": "Not suitable.", "ingredients": ["1 avocado", "2 eggs", "20 g cheddar", "2 g salt", "1 g pepper", "1 g chili flakes"], "method": "Halve and pit the avocado, scoop a little out, crack an egg into each half, top with cheese, and bake at 200C until set." },
     { "id": "r8", "name": "Keto almond flour pancakes", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 19, "fat": 41, "netCarbs": 6, "maxServings": 4, "batch": "2 days fridge.", "freezer": "Freeze with parchment between pancakes.", "ingredients": ["45 g almond flour", "1 egg", "17 g cream cheese", "3 g baking powder", "9 g butter", "10 g sweetener"], "method": "Blend almond flour, eggs, cream cheese, sweetener, and baking powder, then cook small pancakes in butter." },
     { "id": "r9", "name": "Cream cheese pancakes", "meal": "Breakfast", "portion": "1 serving", "kcal": 470, "protein": 17, "fat": 44, "netCarbs": 4, "maxServings": 2, "batch": "Cook fresh.", "freezer": "Freeze and reheat in a pan.", "ingredients": ["2 eggs", "60 g cream cheese", "10 g sweetener", "1 g cinnamon", "15 g butter"], "method": "Blend eggs and cream cheese smooth, then cook thin pancakes in butter over medium heat." },
@@ -4293,6 +4323,11 @@ const RECIPES = [{ "id": "b1", "name": "Egg omelet with cottage cheese, mushroom
     , { "id": "vol5", "name": "Fluffy cloud white spinach and feta omelette", "meal": "Breakfast", "portion": "1 large plate (~350g)", "kcal": 190, "protein": 26, "fat": 7, "netCarbs": 3, "tags": ["volume-cheat"], "ingredients": ["4 egg whites", "1 egg", "80 g spinach", "25 g feta", "5 g butter", "1 g salt"], "method": "Whip egg whites to soft peaks, fold in whole egg and salt. Cook in buttered pan with wilted spinach and feta until puffed like a soufflé. A giant plate of food with 26g protein under 200 calories." }
   ];
 
+  const RECIPES = [
+    ...RECIPES_BASE,
+    ...(typeof RECIPES_DATA !== 'undefined' ? RECIPES_DATA : [])
+  ];
+
 /* ============================================================
    KETO PLANNER - MULTI-LANGUAGE I18N SYSTEM (EN / RO)
    ============================================================ */
@@ -4394,6 +4429,10 @@ const I18N = {
     recipes_filter_lunch: "Lunch/Dinner",
     recipes_filter_snack: "Snack",
     recipes_filter_side: "Fat Balancer / Side",
+    recipes_cuisine_all: "🌍 Cuisine: All (41)",
+    recipes_cuisine_search_ph: "Search cuisine...",
+    recipes_cuisine_all_btn: "All",
+    recipes_cuisine_clear_btn: "Clear",
     recipes_empty: "No recipes found matching your filter.",
     recipes_view_recipe: "View Recipe",
     recipes_add_to_plan: "Add to Day",
@@ -4828,6 +4867,10 @@ const I18N = {
     recipes_filter_lunch: "Pranz/Cina",
     recipes_filter_snack: "Gustare",
     recipes_filter_side: "Garnitura / Grasimi",
+    recipes_cuisine_all: "🌍 Bucătărie: Toate (41)",
+    recipes_cuisine_search_ph: "Caută bucătărie...",
+    recipes_cuisine_all_btn: "Toate",
+    recipes_cuisine_clear_btn: "Șterge",
     recipes_empty: "Nu au fost gasite retete conform filtrului.",
     recipes_view_recipe: "Vezi Reteta",
     recipes_add_to_plan: "Adauga in Plan",
@@ -5167,7 +5210,7 @@ const I18N = {
   }
 };
 
-const RECIPES_RO = {
+const RECIPES_RO_BASE = {
     "b1":  {
                "id":  "b1",
                "name":  "Omleta cu branza cottage, ciuperci si ardei",
@@ -7632,6 +7675,8 @@ const RECIPES_RO = {
              }
 };
 
+const RECIPES_RO = Object.assign({}, RECIPES_RO_BASE, (typeof RECIPES_RO_DATA !== 'undefined' ? RECIPES_RO_DATA : {}));
+
 const EN_TO_RO_ING = {
     "vanilla":  "esenta de vanilie",
     "chili flakes optional":  "fulgi de chili optional",
@@ -8135,54 +8180,57 @@ let settings = Object.assign({}, DEFAULT_SETTINGS, SAVED.settings || {});
 
 const DEFAULT_N = {
       "chicken breast": [165, 31, 3.6, 0], "chicken": [175, 30, 5, 0], "chicken thigh": [209, 26, 11, 0],
-      "chicken thigh or breast": [185, 28, 8, 0], "cooked chicken breast per serving": [165, 31, 3.6, 0],
-      "turkey mince": [150, 21, 7, 0], "beef mince": [250, 18, 20, 0], "beef mince 10-15%": [240, 18, 19, 0],
+      "turkey mince": [150, 21, 7, 0], "beef mince": [250, 18, 20, 0],
       "beef strips": [217, 26, 12, 0], "beef": [250, 18, 20, 0], "steak": [220, 27, 12, 0], "ribeye steak": [250, 24, 17, 0],
       "lean beef": [180, 21, 10, 0], "pork strips": [240, 27, 14, 0], "pork mince": [260, 17, 21, 0], "pork shoulder": [270, 18, 22, 0],
       "sausages": [300, 13, 27, 1], "sausage meat": [300, 13, 27, 1], "salmon": [208, 20, 13, 0], "salmon fillet": [208, 20, 13, 0],
       "smoked salmon": [180, 18, 11, 0], "cod": [82, 18, 0.7, 0], "shrimp": [99, 24, 0.3, 0], "mackerel": [205, 19, 14, 0],
       "smoked mackerel": [300, 19, 25, 0], "duck breast": [200, 19, 13, 0], "ham": [145, 21, 6, 1], "bacon": [400, 12, 38, 1],
       "pepperoni": [500, 20, 44, 1], "salami": [410, 22, 35, 1], "lamb": [294, 25, 21, 0], "pork": [242, 27, 14, 0], "tuna": [116, 26, 1, 0],
-      "cottage cheese": [98, 11, 4, 3], "skyr": [63, 11, 0.2, 4], "greek yogurt": [90, 9, 5, 4], "greek yogurt 2%": [73, 10, 2, 4],
-      "Greek yogurt 2-5%": [85, 10, 3, 4], "full-fat Greek yogurt": [97, 9, 5, 4],
-      "Milbona skyr natural": [63, 11, 0.2, 4], "ricotta": [174, 11, 13, 3], "ricotta or cottage cheese": [135, 11, 8, 3],
+      "cottage cheese": [98, 11, 4, 3], "skyr": [63, 11, 0.2, 4], "greek yogurt 10%": [120, 9, 10, 3.5], "greek yogurt": [120, 9, 10, 3.5],
+      "Milbona skyr natural": [63, 11, 0.2, 4], "ricotta": [174, 11, 13, 3],
       "whey": [400, 80, 7, 8], "whey protein": [400, 80, 7, 8], "whey protein (vanilla or neutral)": [400, 80, 7, 8], "protein powder": [400, 80, 7, 8],
       "cheddar": [400, 25, 33, 1], "mozzarella": [300, 22, 22, 2], "parmesan": [392, 36, 26, 3], "feta": [265, 14, 21, 4],
-      "telemea/feta": [250, 14, 20, 1], "telemea": [250, 14, 20, 1], "goat cheese": [364, 22, 30, 0], "Swiss cheese": [380, 27, 28, 5], "blue cheese": [353, 21, 29, 2],
-      "cream cheese": [342, 6, 34, 4], "cheese": [400, 25, 33, 1],
+      "telemea": [250, 17, 20, 1], "goat cheese": [364, 22, 30, 0], "Swiss cheese": [380, 27, 28, 5], "blue cheese": [353, 21, 29, 2],
+      "cream cheese": [342, 6, 34, 4], "cheese": [400, 25, 33, 1], "mascarpone": [415, 4.5, 42, 3.2],
+      "cașcaval": [330, 25, 26, 1], "burduf cheese": [340, 22, 28, 0.5], "urda": [136, 18, 4, 3],
       "olive oil": [884, 0, 100, 0], "oil": [884, 0, 100, 0], "sesame oil": [884, 0, 100, 0], "butter": [717, 0.9, 81, 0.1],
-      "coconut oil": [862, 0, 100, 0], "coconut butter": [660, 6, 65, 8], "mayonnaise": [680, 1, 75, 1], "cream": [195, 3, 19, 4],
-      "heavy cream": [340, 2, 36, 3], "cooking cream": [195, 3, 19, 4], "sour cream": [198, 2, 19, 4], "sour cream or cream": [198, 2, 19, 4],
-      "coconut milk": [230, 2, 24, 3], "coconut milk or cooking cream": [210, 2, 22, 3], "almond milk": [15, 0.5, 1.2, 0.3], "water or milk alternative": [10, 0.3, 0.8, 0.2],
+      "unt 82%": [743, 0.7, 82, 0.7], "ghee": [890, 0, 99.5, 0], "duck fat": [898, 0, 100, 0], "lard": [900, 0, 100, 0],
+      "coconut oil": [862, 0, 100, 0], "coconut butter": [660, 6, 65, 8], "mayonnaise": [680, 1, 75, 1], "cream": [335, 2.2, 35, 2.8],
+      "cream 35%": [335, 2.2, 35, 2.8], "heavy cream": [340, 2.8, 36, 2.7], "cooking cream": [195, 3, 19, 4],
+      "sour cream": [290, 2.4, 30, 2.8], "sour cream 30%": [290, 2.4, 30, 2.8],
+      "coconut milk": [230, 2, 24, 3], "almond milk": [15, 0.5, 1.2, 0.3],
       "almonds": [579, 21, 50, 10], "walnuts": [654, 15, 65, 7], "pecans": [691, 9, 72, 4], "macadamias": [718, 8, 76, 5],
       "flaked almonds": [579, 21, 50, 10], "almond butter": [614, 21, 56, 10], "peanut butter": [588, 25, 50, 8], "almond flour": [580, 21, 50, 10],
-      "coconut flour": [400, 18, 14, 20], "chia seeds": [486, 17, 31, 8], "flaxseed": [534, 18, 42, 2], "pumpkin seeds": [559, 30, 49, 5],
+      "coconut flour": [400, 18, 14, 20], "lupin flour": [320, 40, 9, 12], "chia seeds": [486, 17, 31, 8], "flaxseed": [534, 18, 42, 2],
+      "pumpkin seeds": [559, 30, 49, 5], "psyllium husk": [190, 1.5, 0.5, 5], "xanthan gum": [0, 0, 0, 0],
       "coconut flakes": [660, 7, 64, 7], "desiccated coconut": [660, 7, 64, 7],
       "spinach": [23, 3, 0.4, 1.4], "mushrooms": [22, 3, 0.3, 2], "broccoli": [34, 3, 0.4, 4], "cauliflower": [25, 2, 0.3, 3],
       "cauliflower rice": [25, 2, 0.3, 3], "cauliflower florets": [25, 2, 0.3, 3], "cabbage": [25, 1.3, 0.1, 3], "red cabbage": [31, 1.4, 0.2, 5],
-      "asparagus": [20, 2.2, 0.1, 2], "green beans": [31, 1.8, 0.1, 4], "bell pepper": [31, 1, 0.3, 4], "bell peppers": [31, 1, 0.3, 4],
-      "zucchini": [17, 1.2, 0.3, 2], "cucumber": [15, 0.7, 0.1, 2], "cucumber and pepper sticks": [20, 1, 0.2, 3], "tomato": [18, 0.9, 0.2, 3],
-      "cherry tomato": [18, 0.9, 0.2, 3], "tomato passata": [30, 1.5, 0.2, 5], "tomato sauce": [30, 1.5, 0.2, 5], "sun-dried tomato": [200, 4, 1, 12],
-      "lettuce": [15, 1.2, 0.2, 1.5], "romaine lettuce": [17, 1.2, 0.3, 1.5], "romaine/lettuce": [16, 1.2, 0.2, 1.5], "onion": [40, 1.1, 0.1, 8],
-      "red onion": [40, 1.1, 0.1, 8], "spring onion": [32, 1.8, 0.2, 4], "carrot": [41, 0.9, 0.2, 7], "bok choy": [13, 1.5, 0.2, 1],
-      "eggplant": [25, 1, 0.2, 3], "olives": [115, 0.8, 11, 0], "pickles": [12, 0.5, 0.2, 2], "celery": [16, 0.7, 0.2, 1.4],
+      "sauerkraut": [19, 0.9, 0.1, 1.8], "asparagus": [20, 2.2, 0.1, 2], "green beans": [31, 1.8, 0.1, 4], "bell pepper": [31, 1, 0.3, 4],
+      "bell peppers": [31, 1, 0.3, 4], "zucchini": [17, 1.2, 0.3, 2], "cucumber": [15, 0.7, 0.1, 2], "cucumber and pepper sticks": [20, 1, 0.2, 3],
+      "tomato": [18, 0.9, 0.2, 3], "cherry tomato": [18, 0.9, 0.2, 3], "tomato passata": [30, 1.5, 0.2, 5], "tomato sauce": [30, 1.5, 0.2, 5],
+      "sun-dried tomato": [200, 4, 1, 12], "lettuce": [15, 1.2, 0.2, 1.5], "romaine lettuce": [17, 1.2, 0.3, 1.5],
+      "onion": [40, 1.1, 0.1, 8], "red onion": [40, 1.1, 0.1, 8], "spring onion": [32, 1.8, 0.2, 4], "carrot": [41, 0.9, 0.2, 7],
+      "bok choy": [13, 1.5, 0.2, 1], "eggplant": [25, 1, 0.2, 3], "olives": [115, 0.8, 11, 0], "pickles": [12, 0.5, 0.2, 2], "celery": [16, 0.7, 0.2, 1.4],
       "berries": [50, 1, 0.5, 9], "blueberries": [57, 0.7, 0.3, 12], "raspberries": [52, 1.2, 0.6, 5], "strawberries": [32, 0.7, 0.3, 6], "mixed berries": [50, 1, 0.5, 8],
       "cocoa powder": [230, 20, 14, 10], "dark chocolate": [600, 8, 50, 14], "85% dark chocolate": [600, 8, 50, 14], "sugar-free chocolate chips": [400, 3, 30, 5],
       "soy sauce": [60, 8, 0, 5], "fish sauce": [35, 5, 0, 4], "mustard": [66, 4, 4, 4], "Caesar dressing": [430, 2, 45, 3],
       "ranch": [430, 1, 45, 5], "buffalo sauce": [60, 1, 4, 4], "tzatziki": [90, 3, 7, 3], "horseradish cream": [150, 2, 12, 8],
-      "balsamic": [88, 0.5, 0, 17], "vinegar": [20, 0, 0, 1], "curry paste": [150, 3, 10, 10], "curry powder/paste": [330, 13, 14, 25],
-      "curry paste/powder": [330, 13, 14, 25], "garlic": [149, 6, 0.5, 30], "ginger": [80, 1.8, 0.8, 16],
-      "protein bread": [200, 20, 7, 10], "almond bread": [250, 10, 20, 5], "ice": [0, 0, 0, 0], "burger sauce": [500, 1, 50, 5],
-      "pork rinds": [540, 61, 31, 0], "Greek yogurt or bechamel-style topping": [90, 9, 5, 4],
+      "balsamic": [88, 0.5, 0, 17], "vinegar": [20, 0, 0, 1], "curry paste": [150, 3, 10, 10], "garlic": [149, 6, 0.5, 30], "ginger": [80, 1.8, 0.8, 16],
+      "protein bread": [200, 20, 7, 10], "keto bread": [195, 22, 7, 3.5], "almond bread": [250, 10, 20, 5],
+      "keto pasta": [280, 30, 10, 5], "shirataki noodles": [9, 0.2, 0, 0.2], "konjac noodles": [9, 0.2, 0, 0.2],
+      "keto panko": [520, 55, 30, 1], "pork rinds": [540, 61, 31, 0], "tahini": [595, 17, 54, 4],
+      "ice": [0, 0, 0, 0], "burger sauce": [500, 1, 50, 5], "erythritol": [0, 0, 0, 0], "sweetener": [0, 0, 0, 0],
       "salt": [0, 0, 0, 0], "sea salt": [0, 0, 0, 0], "pepper": [0, 0, 0, 0], "black pepper": [0, 0, 0, 0], "cinnamon": [0, 0, 0, 0],
       "paprika": [0, 0, 0, 0], "cumin": [0, 0, 0, 0], "chili powder": [0, 0, 0, 0], "chili flakes": [0, 0, 0, 0], "chili": [0, 0, 0, 0],
       "garlic powder": [0, 0, 0, 0], "turmeric": [0, 0, 0, 0], "coriander": [0, 0, 0, 0], "oregano": [0, 0, 0, 0], "thyme": [0, 0, 0, 0],
       "rosemary": [0, 0, 0, 0], "sage": [0, 0, 0, 0], "basil": [0, 0, 0, 0], "parsley": [0, 0, 0, 0], "dill": [0, 0, 0, 0], "mint": [0, 0, 0, 0],
       "cilantro": [0, 0, 0, 0], "chives": [0, 0, 0, 0], "baking powder": [0, 0, 0, 0], "vanilla": [0, 0, 0, 0], "vanilla extract": [0, 0, 0, 0],
-      "sweetener": [0, 0, 0, 0], "lemon zest": [0, 0, 0, 0], "orange zest": [0, 0, 0, 0], "lemon": [0, 0, 0, 1], "lime": [0, 0, 0, 1],
-      "basil or oregano": [0, 0, 0, 0], "herbs": [0, 0, 0, 0],
-      "kale": [49, 4.3, 0.9, 5], "trout": [148, 21, 7, 0], "rainbow trout": [148, 21, 7, 0], "sardines": [208, 25, 11, 0], "swiss chard": [19, 1.8, 0.2, 2.1], "arugula": [25, 2.6, 0.7, 2.1],
-      "gelatin": [335, 85, 0.1, 0], "shirataki noodles": [9, 0.2, 0, 0.2], "capers": [23, 2.4, 0.9, 1.7], "tarragon": [0, 0, 0, 0], "pork belly": [518, 9.3, 53, 0]
+      "lemon zest": [0, 0, 0, 0], "orange zest": [0, 0, 0, 0], "lemon": [0, 0, 0, 1], "lime": [0, 0, 0, 1], "herbs": [0, 0, 0, 0],
+      "kale": [49, 4.3, 0.9, 5], "trout": [148, 21, 7, 0], "rainbow trout": [148, 21, 7, 0], "sardines": [208, 25, 11, 0],
+      "swiss chard": [19, 1.8, 0.2, 2.1], "arugula": [25, 2.6, 0.7, 2.1], "gelatin": [335, 85, 0.1, 0], "capers": [23, 2.4, 0.9, 1.7],
+      "tarragon": [0, 0, 0, 0], "pork belly": [518, 9.3, 53, 0], "smoked kaiser": [350, 16, 32, 0.5], "mici meat": [270, 16, 23, 1]
     };
     const DEFAULT_COUNT = {
       "eggs": { g: 50, key: "_egg" }, "egg": { g: 50, key: "_egg" }, "large eggs": { g: 50, key: "_egg" }, "egg white": { g: 33, key: "_eggwhite" }, "egg whites": { g: 33, key: "_eggwhite" },
@@ -11209,6 +11257,122 @@ const CUP_DENSITY = {
 
     /* RECIPES LIBRARY */
     let activeRatioFilter = 'all';
+    let selectedCuisines = new Set();
+
+    function updateCuisineFilterButtonLabel() {
+      const lbl = document.getElementById('cuisineFilterLabel');
+      if (!lbl) return;
+      const isRo = ((settings && settings.lang) === 'ro');
+      const total = typeof WORLD_CUISINES !== 'undefined' ? WORLD_CUISINES.length : 41;
+      if (selectedCuisines.size === 0) {
+        lbl.textContent = isRo ? `🌍 Bucătărie: Toate (${total})` : `🌍 Cuisine: All (${total})`;
+      } else if (selectedCuisines.size === 1) {
+        const singleId = Array.from(selectedCuisines)[0];
+        const found = (typeof WORLD_CUISINES !== 'undefined') ? WORLD_CUISINES.find(c => c.id === singleId) : null;
+        const name = found ? (isRo ? found.nameRo : found.nameEn) : singleId;
+        const flag = found ? found.flag + ' ' : '';
+        lbl.textContent = `🌍 ${flag}${name}`;
+      } else {
+        const flags = Array.from(selectedCuisines).slice(0, 3).map(id => {
+          const found = (typeof WORLD_CUISINES !== 'undefined') ? WORLD_CUISINES.find(c => c.id === id) : null;
+          return found ? found.flag : '';
+        }).filter(Boolean).join(' ');
+        lbl.textContent = isRo 
+          ? `🌍 ${selectedCuisines.size} bucătării (${flags})` 
+          : `🌍 ${selectedCuisines.size} cuisines (${flags})`;
+      }
+    }
+
+    function renderCuisineOptions() {
+      const list = document.getElementById('cuisineOptionsList');
+      if (!list || typeof WORLD_CUISINES === 'undefined') return;
+      const isRo = ((settings && settings.lang) === 'ro');
+      const searchVal = (document.getElementById('cuisineSearchInput')?.value || '').trim().toLowerCase();
+
+      list.innerHTML = WORLD_CUISINES.map(c => {
+        const name = isRo ? c.nameRo : c.nameEn;
+        if (searchVal && !name.toLowerCase().includes(searchVal) && !c.id.toLowerCase().includes(searchVal)) {
+          return '';
+        }
+        const isChecked = selectedCuisines.has(c.id);
+        return `
+          <label class="cuisine-option-row" style="display:flex;align-items:center;gap:8px;padding:6px 8px;border-radius:var(--radius-sm);cursor:pointer;font-size:var(--text-xs);user-select:none;background:${isChecked ? 'var(--color-surface-offset)' : 'transparent'}">
+            <input type="checkbox" class="cuisine-checkbox" data-cuisine-id="${c.id}" ${isChecked ? 'checked' : ''} style="width:16px;height:16px;accent-color:var(--color-primary)">
+            <span style="font-size:16px;line-height:1">${c.flag}</span>
+            <span style="flex:1;font-weight:${isChecked ? '700' : '400'}">${escapeHtml(name)}</span>
+          </label>
+        `;
+      }).join('');
+
+      list.querySelectorAll('.cuisine-checkbox').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const cid = cb.dataset.cuisineId;
+          if (cb.checked) {
+            selectedCuisines.add(cid);
+          } else {
+            selectedCuisines.delete(cid);
+          }
+          updateCuisineFilterButtonLabel();
+          renderCuisineOptions();
+          buildRecipeList();
+        });
+      });
+    }
+
+    function initCuisineFilterEvents() {
+      const toggleBtn = document.getElementById('cuisineFilterToggleBtn');
+      const panel = document.getElementById('cuisineDropdownPanel');
+      const chevron = document.getElementById('cuisineFilterChevron');
+      const searchInp = document.getElementById('cuisineSearchInput');
+      const allBtn = document.getElementById('cuisineSelectAllBtn');
+      const clearBtn = document.getElementById('cuisineClearBtn');
+
+      if (!toggleBtn || !panel) return;
+
+      toggleBtn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const isOpen = panel.style.display === 'flex';
+        if (isOpen) {
+          panel.style.display = 'none';
+          if (chevron) chevron.style.transform = 'rotate(0deg)';
+        } else {
+          panel.style.display = 'flex';
+          if (chevron) chevron.style.transform = 'rotate(180deg)';
+          renderCuisineOptions();
+          searchInp?.focus();
+        }
+      });
+
+      document.addEventListener('click', (e) => {
+        if (!document.getElementById('cuisineFilterContainer')?.contains(e.target)) {
+          if (panel.style.display === 'flex') {
+            panel.style.display = 'none';
+            if (chevron) chevron.style.transform = 'rotate(0deg)';
+          }
+        }
+      });
+
+      searchInp?.addEventListener('input', () => {
+        renderCuisineOptions();
+      });
+
+      allBtn?.addEventListener('click', () => {
+        selectedCuisines.clear();
+        updateCuisineFilterButtonLabel();
+        renderCuisineOptions();
+        buildRecipeList();
+      });
+
+      clearBtn?.addEventListener('click', () => {
+        selectedCuisines.clear();
+        updateCuisineFilterButtonLabel();
+        renderCuisineOptions();
+        buildRecipeList();
+      });
+
+      renderCuisineOptions();
+      updateCuisineFilterButtonLabel();
+    }
 
     function recipeRatioStats(r) {
       const fat = r.fat || 0;
@@ -11252,6 +11416,11 @@ const CUP_DENSITY = {
       if (bucket === 'snack' && !showSnack) return false;
       if (bucket === 'side' && !showSide) return false;
 
+      // Cuisine multi-select filter
+      if (selectedCuisines && selectedCuisines.size > 0) {
+        if (!r.cuisine || !selectedCuisines.has(r.cuisine)) return false;
+      }
+
       const stats = recipeRatioStats(r);
       if (activeRatioFilter === 'std_keto' && !stats.isStdKeto) return false;
       if (activeRatioFilter === 'keto_2to1' && !stats.is2to1) return false;
@@ -11259,7 +11428,7 @@ const CUP_DENSITY = {
       if (activeRatioFilter === 'fat_balancer' && !stats.isFatBalancer) return false;
       if (activeRatioFilter === 'volume_cheat' && !stats.isVolumeCheat) return false;
 
-      const hay = (r.name + ' ' + (r.ingredients || []).join(' ') + ' ' + (r.tags || []).join(' ')).toLowerCase();
+      const hay = (r.name + ' ' + (r.ingredients || []).join(' ') + ' ' + (r.tags || []).join(' ') + ' ' + (r.cuisine || '')).toLowerCase();
       if (q && !hay.includes(q)) return false;
       const minP = parseFloat(document.getElementById('fProtein')?.value || 0) || 0;
       if (r.protein < minP) return false;
@@ -11287,12 +11456,13 @@ const CUP_DENSITY = {
         const rt = ratingOf(r);
         const stats = recipeRatioStats(r);
         const isExpanded = (r.id === activeRecipeId);
+        const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
         return `
           <div class="recipe-card-wrap ${isExpanded ? 'expanded' : ''}" data-card-rid="${r.id}">
             <button class="recipe-btn ${isExpanded ? 'active' : ''}" data-rid="${r.id}" type="button">
               <img class="recipe-thumb" src="${recipeImage(r)}" alt="" loading="lazy">
               <span class="recipe-meta">
-                <strong>${escapeHtml(r.name)}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
+                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
                 <div class="tiny muted">${escapeHtml(r.meal)} • ${r.kcal} kcal • P ${r.protein}g • F ${r.fat}g • NC ${r.netCarbs}g • ⏱ ${fmtTime(timeOf(r).total)}</div>
               </span>
               <span class="recipe-chevron">▼</span>
@@ -11365,10 +11535,12 @@ const CUP_DENSITY = {
       const stats = recipeRatioStats(r);
       const isRo = ((settings && settings.lang) === 'ro');
       const safeImg = (r.image && /^(data:image\/|https?:\/\/)/i.test(r.image)) ? r.image : '';
+      const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
+      const cuisineName = r.cuisine ? (isRo && typeof WORLD_CUISINES !== 'undefined' ? (WORLD_CUISINES.find(c => c.id === r.cuisine)?.nameRo || r.cuisine) : r.cuisine) : '';
       return `
         ${safeImg ? `<img src="${safeImg}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:10px" alt="${escapeHtml(r.name)}">` : ''}
-        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${escapeHtml(r.name)}${stats.badge}</h3>
-        <p class="muted tiny">${escapeHtml(r.meal)} • ${escapeHtml(r.portion)} • <a href="${recipeLink(r)}" target="_blank">${isRo ? 'Caută online ↗' : 'Search online ↗'}</a></p>
+        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${stats.badge}</h3>
+        <p class="muted tiny">${cuisineName ? `${flag ? flag + ' ' : ''}${escapeHtml(cuisineName)} • ` : ''}${escapeHtml(r.meal)} • ${escapeHtml(r.portion)} • <a href="${recipeLink(r)}" target="_blank">${isRo ? 'Caută online ↗' : 'Search online ↗'}</a></p>
         <div class="macro-chips-row" style="margin:10px 0">
           <div class="macro-stat-pill"><span>${isRo ? 'Calorii' : 'Calories'}</span><strong>${r.kcal}</strong></div>
           <div class="macro-stat-pill"><span>${isRo ? 'Grăsimi' : 'Fat'}</span><strong>${r.fat}g</strong> <span class="tiny muted">(${stats.fatPct}%)</span></div>
@@ -12847,10 +13019,13 @@ const CUP_DENSITY = {
       // Quick chapter jumps
       document.querySelectorAll('[data-jump]').forEach(btn => {
         btn.addEventListener('click', () => {
+          document.querySelectorAll('#learnNavPills .chip-btn').forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
           const targetId = btn.dataset.jump;
           const target = document.getElementById(targetId);
           if (target) {
             target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            btn.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
           }
         });
       });
@@ -12975,6 +13150,8 @@ const CUP_DENSITY = {
       if (typeof buildPlannerDayPills === 'function') buildPlannerDayPills();
       if (typeof buildCustom === 'function') buildCustom();
       if (typeof buildRecipeList === 'function') buildRecipeList();
+      if (typeof updateCuisineFilterButtonLabel === 'function') updateCuisineFilterButtonLabel();
+      if (typeof renderCuisineOptions === 'function') renderCuisineOptions();
       if (typeof renderStock === 'function') renderStock();
       if (typeof renderShoppingPage === 'function') renderShoppingPage();
       if (typeof renderMacros === 'function') renderMacros();
@@ -13466,7 +13643,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.0';
+    const FALLBACK_APP_VERSION = '1.0.3';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -13628,6 +13805,28 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.0.3',
+        date: '14 Oct 2026',
+        items: {
+          ro: [
+            '🌍 215+ Rețete autentice din 41 de bucătării internaționale și românești',
+            '🇷🇴 Colecție bogată de preparate românești adaptate keto (sarmale, mici, tochitură, ciorbă rădăuțeană, papanași, cozonac, mămăligă keto)',
+            '🔽 Filtru nou multi-select după Bucătărie (selectează simultan mai multe bucătării)',
+            '🚩 Steaguri naționale afișate pe fiecare rețetă și în detalii',
+            '📌 Bară de navigare fixată (sticky) în ghidul „Learning about Keto” la defilare',
+            '🧹 Bază de date și rețete curățate de ingrediente compuse și duplicate'
+          ],
+          en: [
+            '🌍 215+ Authentic keto recipes across 41 international & Romanian cuisines',
+            '🇷🇴 Rich Romanian cuisine collection adapted for keto (sarmale, mici, tochitură, ciorbă rădăuțeană, papanași, cozonac, lupin keto mămăligă)',
+            '🔽 New multi-select Cuisine dropdown filter (filter by single or multiple cuisines)',
+            '🚩 Country flags displayed on recipe cards and expanded details',
+            '📌 Pinned sticky chapter navigation in the Learn guide when scrolling',
+            '🧹 Database and recipe library cleaned of duplicate/compound ingredients'
+          ]
+        }
+      },
       {
         version: '1.0.2',
         date: '14 Oct 2026',
@@ -14369,6 +14568,9 @@ const CUP_DENSITY = {
         });
       });
 
+      // Initialize Cuisine Filter
+      initCuisineFilterEvents();
+
       ['recipeSearch', 'filterBreakfast', 'filterMain', 'filterSnack', 'filterSide', 'fProtein', 'fCarbs', 'fInclude', 'fExclude'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.addEventListener(el.type === 'search' || el.type === 'range' ? 'input' : 'change', () => {
@@ -14382,6 +14584,9 @@ const CUP_DENSITY = {
         document.getElementById('fCarbs').value = 30;
         document.getElementById('fInclude').value = '';
         document.getElementById('fExclude').value = '';
+        selectedCuisines.clear();
+        updateCuisineFilterButtonLabel();
+        renderCuisineOptions();
         buildRecipeList();
       });
 
