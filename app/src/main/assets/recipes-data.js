@@ -1,4 +1,4 @@
-﻿// recipes-data.js
+// recipes-data.js
 // 41 World Cuisines Keto Recipe Library for Keto Planner
 // High-fat, low-carb (<5% net carbs), authentic international & Romanian recipes
 
@@ -88,7 +88,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well. Reheat gently.",
     ingredients: ["200 g chicken thigh (bone-in)", "80 g tomato passata", "35 g olives", "15 ml olive oil", "50 g mushrooms", "4 g garlic", "2 g rosemary", "2 g oregano", "1 g salt"],
-    method: "Brown skin-on chicken thighs in extra virgin olive oil until crisp. Sauté sliced mushrooms and minced garlic in pan drippings. Return chicken, add tomato passata, kalamata olives, rosemary, and oregano. Simmer covered for 25 minutes until chicken is tender."
+    method: "Brown skin-on chicken thighs in extra virgin olive oil until crisp. Saute sliced mushrooms and minced garlic in pan drippings. Return chicken, add tomato passata, kalamata olives, rosemary, and oregano. Simmer covered for 25 minutes until chicken is tender."
   },
   {
     id: "it_m2",
@@ -120,7 +120,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["200 g beef shank", "160 g cauliflower rice", "20 g butter", "15 ml olive oil", "4 g garlic", "5 g parsley", "1 lemon", "30 ml heavy cream", "15 g parmesan", "1 g salt"],
-    method: "Slow braise beef shank or beef until fork tender. In a separate skillet, sauté cauliflower rice in butter and olive oil with a pinch of saffron. Stir in cream and parmesan until thick and creamy. Top beef with fresh gremolata (lemon zest, minced garlic, and fresh parsley)."
+    method: "Slow braise beef shank or beef until fork tender. In a separate skillet, saute cauliflower rice in butter and olive oil with a pinch of saffron. Stir in cream and parmesan until thick and creamy. Top beef with fresh gremolata (lemon zest, minced garlic, and fresh parsley)."
   },
   {
     id: "it_d1",
@@ -228,7 +228,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "pe_b1",
-    name: "Chicharrón de Chancho with Sunny-Side Eggs and Avocado",
+    name: "Chicharron de Chancho with Sunny-Side Eggs and Avocado",
     cuisine: "Peruvian",
     flag: "🇵🇪",
     meal: "Breakfast",
@@ -244,7 +244,7 @@ const RECIPES_DATA = [
   },
   {
     id: "pe_m1",
-    name: "Lomo Saltado Keto with Sautéed Peppers and Cauliflower Rice",
+    name: "Lomo Saltado Keto with Sauteed Peppers and Cauliflower Rice",
     cuisine: "Peruvian",
     flag: "🇵🇪",
     meal: "Lunch/Dinner",
@@ -260,7 +260,7 @@ const RECIPES_DATA = [
   },
   {
     id: "pe_m2",
-    name: "Ají de Gallina (Peruvian Creamy Spiced Chicken)",
+    name: "Aji de Gallina (Peruvian Creamy Spiced Chicken)",
     cuisine: "Peruvian",
     flag: "🇵🇪",
     meal: "Lunch/Dinner",
@@ -272,7 +272,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
     ingredients: ["180 g chicken breast", "40 ml heavy cream", "20 g parmesan", "15 g walnuts", "15 g almond flour", "15 ml olive oil", "3 g garlic", "2 g turmeric", "1 g chili flakes", "1 egg"],
-    method: "Poach chicken breast and shred fine. Sauté garlic and yellow chili/turmeric in olive oil. Blend walnuts, almond flour, heavy cream, and parmesan into a rich paste. Simmer sauce with chicken broth and fold in shredded chicken until thick and velvety. Garnish with a hard-boiled egg."
+    method: "Poach chicken breast and shred fine. Saute garlic and yellow chili/turmeric in olive oil. Blend walnuts, almond flour, heavy cream, and parmesan into a rich paste. Simmer sauce with chicken broth and fold in shredded chicken until thick and velvety. Garnish with a hard-boiled egg."
   },
   {
     id: "pe_m3",
@@ -312,7 +312,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "pt_b1",
-    name: "Ovos Mexidos com Chouriço e Salsa (Portuguese Sausage Scramble)",
+    name: "Ovos Mexidos com Chourico e Salsa (Portuguese Sausage Scramble)",
     cuisine: "Portuguese",
     flag: "🇵🇹",
     meal: "Breakfast",
@@ -324,7 +324,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "50 g sausages", "15 ml olive oil", "15 g butter", "5 g parsley", "1 g black pepper"],
-    method: "Slice Portuguese chouriço or cured pork sausage and fry gently in olive oil until the fragrant paprika-tinted oil releases. Add beaten eggs and butter, scrambling gently on low heat until soft and velvety. Fold in chopped fresh flat-leaf parsley."
+    method: "Slice Portuguese chourico or cured pork sausage and fry gently in olive oil until the fragrant paprika-tinted oil releases. Add beaten eggs and butter, scrambling gently on low heat until soft and velvety. Fold in chopped fresh flat-leaf parsley."
   },
   {
     id: "pt_m1",
@@ -340,7 +340,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["180 g cod", "160 g cauliflower florets", "60 ml heavy cream", "30 g onion", "25 g parmesan", "15 g butter", "10 ml olive oil", "3 g garlic", "1 g nutmeg"],
-    method: "Simmer cod gently in water, drain, and flake. Sauté sliced onions and garlic in olive oil and butter until sweet and caramelized. Steam cauliflower florets until tender. Fold cod, cauliflower, and onions into warm heavy cream seasoned with fresh grated nutmeg. Transfer to baking dish, top with parmesan, and broil until bubbling golden."
+    method: "Simmer cod gently in water, drain, and flake. Saute sliced onions and garlic in olive oil and butter until sweet and caramelized. Steam cauliflower florets until tender. Fold cod, cauliflower, and onions into warm heavy cream seasoned with fresh grated nutmeg. Transfer to baking dish, top with parmesan, and broil until bubbling golden."
   },
   {
     id: "pt_m2",
@@ -360,7 +360,7 @@ const RECIPES_DATA = [
   },
   {
     id: "pt_m3",
-    name: "Carne de Porco à Alentejana Keto with Garlic Butter Sauce",
+    name: "Carne de Porco a Alentejana Keto with Garlic Butter Sauce",
     cuisine: "Portuguese",
     flag: "🇵🇹",
     meal: "Lunch/Dinner",
@@ -372,11 +372,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze cooked pork cubes.",
     ingredients: ["180 g pork shoulder", "80 g shrimp", "15 g butter", "15 ml olive oil", "4 g garlic", "2 g paprika", "5 g cilantro", "1 lemon", "1 g salt"],
-    method: "Marinate pork cubes in garlic, paprika, white wine vinegar, and salt. Sauté in olive oil until golden brown and cooked through. Add shrimp and butter, cooking for 3 minutes until shrimp are pink and succulent. Finish with chopped fresh cilantro and lemon wedges."
+    method: "Marinate pork cubes in garlic, paprika, white wine vinegar, and salt. Saute in olive oil until golden brown and cooked through. Add shrimp and butter, cooking for 3 minutes until shrimp are pink and succulent. Finish with chopped fresh cilantro and lemon wedges."
   },
   {
     id: "pt_d1",
-    name: "Pastéis de Nata Custard Tart (Almond Crust Portuguese Tart)",
+    name: "Pasteis de Nata Custard Tart (Almond Crust Portuguese Tart)",
     cuisine: "Portuguese",
     flag: "🇵🇹",
     meal: "Snack",
@@ -396,7 +396,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "es_b1",
-    name: "Tortilla Española Keto with Zucchini and Caramelized Onion",
+    name: "Tortilla Espanola Keto with Zucchini and Caramelized Onion",
     cuisine: "Spanish",
     flag: "🇪🇸",
     meal: "Breakfast",
@@ -428,7 +428,7 @@ const RECIPES_DATA = [
   },
   {
     id: "es_m2",
-    name: "Pollo al Chilindrón with Jamón Serrano and Red Peppers",
+    name: "Pollo al Chilindron with Jamon Serrano and Red Peppers",
     cuisine: "Spanish",
     flag: "🇪🇸",
     meal: "Lunch/Dinner",
@@ -439,12 +439,12 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh (bone-in)", "30 g jamÃ³n serrano", "80 g bell pepper", "70 g tomato passata", "15 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
-    method: "Sear chicken thighs in olive oil until skin is crisp and browned. Remove chicken and sauté diced jamón serrano or ham with sliced red bell peppers, onion, and garlic. Stir in tomato passata and rosemary. Return chicken, cover, and braise on low heat for 25 minutes until tender and rich."
+    ingredients: ["200 g chicken thigh (bone-in)", "30 g jamon serrano", "80 g bell pepper", "70 g tomato passata", "15 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
+    method: "Sear chicken thighs in olive oil until skin is crisp and browned. Remove chicken and saute diced jamon serrano or ham with sliced red bell peppers, onion, and garlic. Stir in tomato passata and rosemary. Return chicken, cover, and braise on low heat for 25 minutes until tender and rich."
   },
   {
     id: "es_m3",
-    name: "Albóndigas en Salsa Española (Spanish Meatballs in Saffron Broth)",
+    name: "Albondigas en Salsa Espanola (Spanish Meatballs in Saffron Broth)",
     cuisine: "Spanish",
     flag: "🇪🇸",
     meal: "Lunch/Dinner",
@@ -456,7 +456,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["120 g ground beef 80/20", "60 g ground pork", "1 egg", "15 g almond flour", "15 ml olive oil", "50 g tomato passata", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
-    method: "Mix beef and pork mince with egg, almond flour, parsley, and garlic. Form meatballs and brown in olive oil. Sauté finely diced onion in the pan, deglaze with tomato passata and bone broth (with optional pinch of saffron). Simmer meatballs in the rich sauce for 15 minutes."
+    method: "Mix beef and pork mince with egg, almond flour, parsley, and garlic. Form meatballs and brown in olive oil. Saute finely diced onion in the pan, deglaze with tomato passata and bone broth (with optional pinch of saffron). Simmer meatballs in the rich sauce for 15 minutes."
   },
   {
     id: "es_d1",
@@ -576,7 +576,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "60 g tomato", "50 g bell pepper", "20 g butter", "30 g telemea", "1 g chili flakes", "1 g salt", "1 g oregano"],
-    method: "Melt butter in a skillet and sauté finely chopped green peppers until tender. Add peeled grated tomatoes and simmer until sweet and thickened. Pour in beaten eggs, pulling gently from the sides with a spatula to keep eggs soft and creamy. Scatter with crumbled white cheese and Turkish pul biber chili flakes."
+    method: "Melt butter in a skillet and saute finely chopped green peppers until tender. Add peeled grated tomatoes and simmer until sweet and thickened. Pour in beaten eggs, pulling gently from the sides with a spatula to keep eggs soft and creamy. Scatter with crumbled white cheese and Turkish pul biber chili flakes."
   },
   {
     id: "tr_m1",
@@ -596,7 +596,7 @@ const RECIPES_DATA = [
   },
   {
     id: "tr_m2",
-    name: "Karnıyarık (Turkish Eggplants Stuffed with Spiced Minced Beef)",
+    name: "Karniyarik (Turkish Eggplants Stuffed with Spiced Minced Beef)",
     cuisine: "Turkish",
     flag: "🇹🇷",
     meal: "Lunch/Dinner",
@@ -608,11 +608,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["150 g eggplant", "140 g ground beef 80/20", "60 g tomato passata", "20 ml olive oil", "30 g onion", "4 g garlic", "1 g cumin", "5 g parsley", "1 g salt"],
-    method: "Slit eggplant down the center, brush generously with olive oil, and roast at 200°C for 25 minutes until tender. Sauté beef mince with onion, garlic, tomato passata, cumin, and parsley. Stuff the center of the roasted eggplants with the hot spiced beef and bake for 15 minutes."
+    method: "Slit eggplant down the center, brush generously with olive oil, and roast at 200°C for 25 minutes until tender. Saute beef mince with onion, garlic, tomato passata, cumin, and parsley. Stuff the center of the roasted eggplants with the hot spiced beef and bake for 15 minutes."
   },
   {
     id: "tr_m3",
-    name: "Tavuk Şiş (Turkish Yogurt-Marinated Chicken Skewers)",
+    name: "Tavuk Sis (Turkish Yogurt-Marinated Chicken Skewers)",
     cuisine: "Turkish",
     flag: "🇹🇷",
     meal: "Lunch/Dinner",
@@ -628,7 +628,7 @@ const RECIPES_DATA = [
   },
   {
     id: "tr_d1",
-    name: "Keto Fıstıklı Revani (Almond Semolina-Style Cake with Pistachios)",
+    name: "Keto Fistikli Revani (Almond Semolina-Style Cake with Pistachios)",
     cuisine: "Turkish",
     flag: "🇹🇷",
     meal: "Snack",
@@ -676,7 +676,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked chicken only.",
     ingredients: ["200 g chicken breast", "25 g peanut butter", "50 g bell pepper", "15 ml sesame oil", "12 ml soy sauce", "5 ml vinegar", "5 g garlic", "5 g ginger", "10 g erythritol", "2 g chili flakes"],
-    method: "Dice chicken breast and sear in sesame oil until golden. Sauté garlic, ginger, dried chilies, and bell peppers in wok. Deglaze with tamari soy sauce, Chinese black vinegar, erythritol, and a spoonful of natural peanut butter. Toss chicken back in until glossy and coated."
+    method: "Dice chicken breast and sear in sesame oil until golden. Saute garlic, ginger, dried chilies, and bell peppers in wok. Deglaze with tamari soy sauce, Chinese black vinegar, erythritol, and a spoonful of natural peanut butter. Toss chicken back in until glossy and coated."
   },
   {
     id: "cn_m2",
@@ -708,7 +708,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
     ingredients: ["180 g beef flank steak strips", "170 g broccoli", "15 ml sesame oil", "15 ml soy sauce", "6 g garlic", "6 g ginger", "5 g spring onion", "1 g black pepper"],
-    method: "Sear seasoned beef strips in smoking hot wok with sesame oil for 2 minutes and set aside. Steam broccoli florets until bright green. Sauté minced garlic and ginger in wok, add tamari soy sauce and a splash of bone broth. Return beef and broccoli, tossing quickly until coated."
+    method: "Sear seasoned beef strips in smoking hot wok with sesame oil for 2 minutes and set aside. Steam broccoli florets until bright green. Saute minced garlic and ginger in wok, add tamari soy sauce and a splash of bone broth. Return beef and broccoli, tossing quickly until coated."
   },
   {
     id: "cn_d1",
@@ -732,7 +732,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "fr_b1",
-    name: "Omelette Française Baveuse aux Fines Herbes et Beurre",
+    name: "Omelette Francaise Baveuse aux Fines Herbes et Beurre",
     cuisine: "French",
     flag: "🇫🇷",
     meal: "Breakfast",
@@ -744,7 +744,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 5 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "25 g butter", "35 g cheese", "3 g chives", "2 g parsley", "1 g tarragon", "1 g sea salt"],
-    method: "Vigorously beat eggs with sea salt. Melt generous French butter in a non-stick pan over medium heat. Pour in eggs, shaking pan and stirring rapidly with a fork. When bottom sets with a soft creamy center (baveuse), scatter fines herbes and grated Gruyère, roll into a classic torpedo cylinder, and gloss with cold butter."
+    method: "Vigorously beat eggs with sea salt. Melt generous French butter in a non-stick pan over medium heat. Pour in eggs, shaking pan and stirring rapidly with a fork. When bottom sets with a soft creamy center (baveuse), scatter fines herbes and grated Gruyere, roll into a classic torpedo cylinder, and gloss with cold butter."
   },
   {
     id: "fr_m1",
@@ -760,7 +760,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["200 g chicken thigh (bone-in)", "40 g bacon", "70 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "1 g salt"],
-    method: "Crisp diced bacon in a Dutch oven and remove. Brown chicken thighs in the bacon fat. Sauté mushrooms, pearl onions, and garlic. Pour in dry red wine reduction and rich chicken stock with fresh thyme. Return chicken and bacon, simmering covered for 30 minutes until deeply savory."
+    method: "Crisp diced bacon in a Dutch oven and remove. Brown chicken thighs in the bacon fat. Saute mushrooms, pearl onions, and garlic. Pour in dry red wine reduction and rich chicken stock with fresh thyme. Return chicken and bacon, simmering covered for 30 minutes until deeply savory."
   },
   {
     id: "fr_m2",
@@ -776,7 +776,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g beef chuck roast", "35 g bacon", "60 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "2 g rosemary", "1 g salt"],
-    method: "Sear beef cubes in rendered bacon fat until deep dark crust forms. Sauté mushrooms, garlic, and onions. Combine with rich beef bone broth and dry red wine reduction with thyme and rosemary. Simmer on low heat for 2.5 hours until beef melts on the fork."
+    method: "Sear beef cubes in rendered bacon fat until deep dark crust forms. Saute mushrooms, garlic, and onions. Combine with rich beef bone broth and dry red wine reduction with thyme and rosemary. Simmer on low heat for 2.5 hours until beef melts on the fork."
   },
   {
     id: "fr_m3",
@@ -792,11 +792,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked duck legs.",
     ingredients: ["180 g duck breast", "120 g green beans", "20 g duck fat", "4 g garlic", "2 g thyme", "1 g sea salt", "1 g black pepper"],
-    method: "Sear cured duck leg or duck breast slowly skin-side down in duck fat until skin is paper-thin and shattering crisp. Sauté tender green beans in remaining duck fat with minced garlic, sea salt, and thyme."
+    method: "Sear cured duck leg or duck breast slowly skin-side down in duck fat until skin is paper-thin and shattering crisp. Saute tender green beans in remaining duck fat with minced garlic, sea salt, and thyme."
   },
   {
     id: "fr_d1",
-    name: "Crème Brûlée Tradițională Keto with Vanilla Bean",
+    name: "Creme Brulee Tradițională Keto with Vanilla Bean",
     cuisine: "French",
     flag: "🇫🇷",
     meal: "Snack",
@@ -828,7 +828,7 @@ const RECIPES_DATA = [
     batch: "3 days fridge",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "15 ml coconut oil", "15 ml olive oil", "60 g tomato", "30 g onion", "4 g garlic", "2 g chili flakes", "1 g salt"],
-    method: "Hard-boil and peel eggs. Fry in hot coconut oil until outer skin is blistered and golden. Blend tomatoes, shallots, garlic, and chilies into a sambal paste. Sauté paste in oil until fragrant, and toss eggs in the glossy spicy sauce."
+    method: "Hard-boil and peel eggs. Fry in hot coconut oil until outer skin is blistered and golden. Blend tomatoes, shallots, garlic, and chilies into a sambal paste. Saute paste in oil until fragrant, and toss eggs in the glossy spicy sauce."
   },
   {
     id: "id_m1",
@@ -916,7 +916,7 @@ const RECIPES_DATA = [
   },
   {
     id: "mx_m1",
-    name: "Carnitas Michoacán (Crispy Citrus Slow-Braised Pork)",
+    name: "Carnitas Michoacan (Crispy Citrus Slow-Braised Pork)",
     cuisine: "Mexican",
     flag: "🇲🇽",
     meal: "Lunch/Dinner",
@@ -996,7 +996,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well baked.",
     ingredients: ["3 eggs", "90 g cottage cheese", "50 g telemea", "40 g sour cream 30%", "15 g butter", "15 g almond flour", "1 g salt"],
-    method: "Whisk eggs with sour cream 30%, crumbled Serbian white cheese or telemea, cottage cheese, melted butter, and almond flour. Pour into a greased baking dish and bake at 180°C for 30 minutes until puffed like a golden soufflé. Serve warm."
+    method: "Whisk eggs with sour cream 30%, crumbled Serbian white cheese or telemea, cottage cheese, melted butter, and almond flour. Pour into a greased baking dish and bake at 180°C for 30 minutes until puffed like a golden souffle. Serve warm."
   },
   {
     id: "rs_m1",
@@ -1016,7 +1016,7 @@ const RECIPES_DATA = [
   },
   {
     id: "rs_m2",
-    name: "Ćevapi with Homemade Clotted Kajmak Cream and Onions",
+    name: "Cevapi with Homemade Clotted Kajmak Cream and Onions",
     cuisine: "Serbian",
     flag: "🇷🇸",
     meal: "Lunch/Dinner",
@@ -1028,11 +1028,11 @@ const RECIPES_DATA = [
     batch: "5 servings, 4 days fridge",
     freezer: "Freeze raw shaped rolls.",
     ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "40 g sour cream 30%", "30 g butter", "25 g red onion", "4 g garlic", "1 g salt", "1 g black pepper"],
-    method: "Mix beef and lamb mince with minced garlic, salt, and black pepper. Roll into finger-sized sausages (ćevapi) and chill for 1 hour. Grill on hot cast iron until browned all over. Whip room temperature butter with sour cream 30% and a pinch of salt to make authentic homemade kajmak cream. Serve hot with diced red onion."
+    method: "Mix beef and lamb mince with minced garlic, salt, and black pepper. Roll into finger-sized sausages (cevapi) and chill for 1 hour. Grill on hot cast iron until browned all over. Whip room temperature butter with sour cream 30% and a pinch of salt to make authentic homemade kajmak cream. Serve hot with diced red onion."
   },
   {
     id: "rs_m3",
-    name: "Karađorđeva Šnicla with Kajmak Filling and Pork Panko Crust",
+    name: "Karadordeva Snicla with Kajmak Filling and Pork Panko Crust",
     cuisine: "Serbian",
     flag: "🇷🇸",
     meal: "Lunch/Dinner",
@@ -1080,7 +1080,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "20 g ghee", "40 g onion", "40 g tomato", "4 g ginger", "3 g garlic", "2 g turmeric", "2 g cumin", "5 g cilantro", "1 g chili"],
-    method: "Heat golden ghee in a skillet. Sauté finely chopped onions, minced ginger, garlic, and green chilies until fragrant. Add tomatoes, turmeric, and cumin, cooking until oil separates. Pour in beaten eggs and scramble softly over medium heat. Garnish with fresh cilantro."
+    method: "Heat golden ghee in a skillet. Saute finely chopped onions, minced ginger, garlic, and green chilies until fragrant. Add tomatoes, turmeric, and cumin, cooking until oil separates. Pour in beaten eggs and scramble softly over medium heat. Garnish with fresh cilantro."
   },
   {
     id: "in_m1",
@@ -1112,7 +1112,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
     ingredients: ["130 g cheese", "140 g spinach", "40 ml heavy cream", "20 g ghee", "30 g onion", "4 g garlic", "4 g ginger", "2 g cumin", "2 g garam masala"],
-    method: "Blanch spinach in boiling water for 1 minute, plunge into ice water, and purée smooth. Pan-fry cubed paneer or firm cheese in ghee until golden. Sauté cumin seeds, onions, garlic, and ginger in the remaining ghee. Stir in spinach purée and heavy cream. Fold in warm paneer cubes and simmer 3 minutes."
+    method: "Blanch spinach in boiling water for 1 minute, plunge into ice water, and puree smooth. Pan-fry cubed paneer or firm cheese in ghee until golden. Saute cumin seeds, onions, garlic, and ginger in the remaining ghee. Stir in spinach puree and heavy cream. Fold in warm paneer cubes and simmer 3 minutes."
   },
   {
     id: "in_m3",
@@ -1128,7 +1128,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g lamb shoulder", "60 g greek yogurt 10%", "20 g ghee", "5 g ginger", "4 g garlic", "2 g paprika", "2 g cumin", "2 g garam masala", "1 g salt"],
-    method: "Brown lamb pieces in ghee over high heat. Sauté grated ginger and garlic. Whisk Greek yogurt 10% with Kashmiri paprika, ground fennel, cumin, and garam masala. Lower heat and stir yogurt mixture into lamb spoon by spoon so it doesn't split. Simmer covered on low heat for 1.5 hours until lamb melts in your mouth."
+    method: "Brown lamb pieces in ghee over high heat. Saute grated ginger and garlic. Whisk Greek yogurt 10% with Kashmiri paprika, ground fennel, cumin, and garam masala. Lower heat and stir yogurt mixture into lamb spoon by spoon so it doesn't split. Simmer covered on low heat for 1.5 hours until lamb melts in your mouth."
   },
   {
     id: "in_d1",
@@ -1144,7 +1144,7 @@ const RECIPES_DATA = [
     batch: "4 jars, 4 days fridge",
     freezer: "Do not freeze.",
     ingredients: ["120 g cauliflower rice", "80 ml coconut milk", "50 ml heavy cream", "15 g flaked almonds", "15 g erythritol", "2 g cardamom", "10 g butter"],
-    method: "Sauté cauliflower rice in butter for 3 minutes to remove raw taste. Pour in rich coconut milk and heavy cream with ground green cardamom and erythritol. Simmer on low heat for 12 minutes until cauliflower is tender and pudding is thick and aromatic. Chill and garnish with toasted flaked almonds."
+    method: "Saute cauliflower rice in butter for 3 minutes to remove raw taste. Pour in rich coconut milk and heavy cream with ground green cardamom and erythritol. Simmer on low heat for 12 minutes until cauliflower is tender and pudding is thick and aromatic. Chill and garnish with toasted flaked almonds."
   },
 
   /* ============================================================
@@ -1212,7 +1212,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["140 g pork mince", "100 g cabbage", "80 g cauliflower rice", "60 g tomato passata", "30 ml sour cream 30%", "30 g onion", "4 g garlic", "15 g butter", "1 g marjoram"],
-    method: "Blanch whole green cabbage leaves until pliable. Mix pork mince with grated cauliflower rice, sautéed onions, garlic, egg, marjoram, and salt. Roll meat tightly in cabbage leaves. Place in a baking dish, pour over tomato passata whisked with sour cream 30% and broth, and bake covered at 180°C for 50 minutes."
+    method: "Blanch whole green cabbage leaves until pliable. Mix pork mince with grated cauliflower rice, sauteed onions, garlic, egg, marjoram, and salt. Roll meat tightly in cabbage leaves. Place in a baking dish, pour over tomato passata whisked with sour cream 30% and broth, and bake covered at 180°C for 50 minutes."
   },
   {
     id: "pl_d1",
@@ -1228,7 +1228,7 @@ const RECIPES_DATA = [
     batch: "8 slices, 5 days fridge",
     freezer: "Freezes well.",
     ingredients: ["110 g cottage cheese", "40 g mascarpone", "2 eggs", "20 g butter", "20 g erythritol", "1 lemon zest", "2 g vanilla extract"],
-    method: "Blend cottage cheese or Polish twaróg with mascarpone, egg yolks, melted butter, erythritol, fresh lemon zest, and vanilla until silky smooth. Whip egg whites to stiff peaks and gently fold into cheese batter. Bake in a water bath at 160°C for 45 minutes until set. Chill overnight before slicing."
+    method: "Blend cottage cheese or Polish twarog with mascarpone, egg yolks, melted butter, erythritol, fresh lemon zest, and vanilla until silky smooth. Whip egg whites to stiff peaks and gently fold into cheese batter. Bake in a water bath at 160°C for 45 minutes until set. Chill overnight before slicing."
   },
 
   /* ============================================================
@@ -1236,7 +1236,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "vn_b1",
-    name: "Trứng Chiên (Vietnamese Scallion and Mushroom Omelette)",
+    name: "Trung Chien (Vietnamese Scallion and Mushroom Omelette)",
     cuisine: "Vietnamese",
     flag: "🇻🇳",
     meal: "Breakfast",
@@ -1248,7 +1248,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "40 g mushrooms", "15 g spring onion", "20 ml olive oil", "10 ml fish sauce", "5 g garlic", "1 g black pepper"],
-    method: "Finely chop mushrooms, garlic, and spring onions. Whisk eggs with premium fish sauce and lots of cracked black pepper. Sauté mushrooms and garlic in olive oil, pour beaten eggs over, and cook until fluffy and golden underneath. Fold and serve."
+    method: "Finely chop mushrooms, garlic, and spring onions. Whisk eggs with premium fish sauce and lots of cracked black pepper. Saute mushrooms and garlic in olive oil, pour beaten eggs over, and cook until fluffy and golden underneath. Fold and serve."
   },
   {
     id: "vn_m1",
@@ -1268,7 +1268,7 @@ const RECIPES_DATA = [
   },
   {
     id: "vn_m2",
-    name: "Thịt Kho Tàu Keto (Caramelized Pork Belly with Hard-Boiled Eggs)",
+    name: "Thit Kho Tau Keto (Caramelized Pork Belly with Hard-Boiled Eggs)",
     cuisine: "Vietnamese",
     flag: "🇻🇳",
     meal: "Lunch/Dinner",
@@ -1300,7 +1300,7 @@ const RECIPES_DATA = [
   },
   {
     id: "vn_d1",
-    name: "Chè Bơ Keto (Vietnamese Avocado Coconut Cream Pudding)",
+    name: "Che Bo Keto (Vietnamese Avocado Coconut Cream Pudding)",
     cuisine: "Vietnamese",
     flag: "🇻🇳",
     meal: "Snack",
@@ -1380,7 +1380,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["140 g pork shoulder", "50 g bacon", "40 g sausages", "120 g spinach", "15 g lard", "4 g garlic", "30 g onion", "1 g black pepper"],
-    method: "Slow braise pork shoulder chunks, smoked bacon, and sliced spicy sausage in lard with garlic, bay leaves, and rich broth until fork tender. In a separate pan, sauté shredded collard greens or spinach in garlic and bacon drippings. Serve meats surrounded by savory garlic greens."
+    method: "Slow braise pork shoulder chunks, smoked bacon, and sliced spicy sausage in lard with garlic, bay leaves, and rich broth until fork tender. In a separate pan, saute shredded collard greens or spinach in garlic and bacon drippings. Serve meats surrounded by savory garlic greens."
   },
   {
     id: "br_d1",
@@ -1404,7 +1404,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "hr_b1",
-    name: "Kajgana s Pršutom i Paškim Sirom (Dalmatian Prosciutto Scramble)",
+    name: "Kajgana s Prsutom i Paskim Sirom (Dalmatian Prosciutto Scramble)",
     cuisine: "Croatian",
     flag: "🇭🇷",
     meal: "Breakfast",
@@ -1448,11 +1448,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze cooked fish stew.",
     ingredients: ["150 g cod", "80 g shrimp", "70 g tomato passata", "20 ml olive oil", "10 ml vinegar", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
-    method: "Sauté onions and garlic in olive oil until soft. Add tomato passata, red wine vinegar, and fish broth. Bring to a simmer without stirring (swirl the pot to prevent breaking the fish). Add white fish fillets and peeled shrimp. Simmer gently for 15 minutes. Finish with copious fresh parsley."
+    method: "Saute onions and garlic in olive oil until soft. Add tomato passata, red wine vinegar, and fish broth. Bring to a simmer without stirring (swirl the pot to prevent breaking the fish). Add white fish fillets and peeled shrimp. Simmer gently for 15 minutes. Finish with copious fresh parsley."
   },
   {
     id: "hr_m3",
-    name: "Zagrebački Odrezak (Croatian Stuffed Schnitzel with Ham and Cheese)",
+    name: "Zagrebacki Odrezak (Croatian Stuffed Schnitzel with Ham and Cheese)",
     cuisine: "Croatian",
     flag: "🇭🇷",
     meal: "Lunch/Dinner",
@@ -1468,7 +1468,7 @@ const RECIPES_DATA = [
   },
   {
     id: "hr_d1",
-    name: "Rožata Dalmată Keto (Dubrovnik Caramel Custard Pudding)",
+    name: "Rozata Dalmată Keto (Dubrovnik Caramel Custard Pudding)",
     cuisine: "Croatian",
     flag: "🇭🇷",
     meal: "Snack",
@@ -1532,7 +1532,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked chicken.",
     ingredients: ["200 g chicken thigh (bone-in)", "50 g mozzarella", "100 g cabbage", "15 ml sesame oil", "15 ml soy sauce", "5 g garlic", "5 g ginger", "10 g erythritol", "2 g chili flakes", "15 g spring onion"],
-    method: "Marinate chicken thigh pieces in tamari soy sauce, chili flakes, minced garlic, ginger, erythritol, and sesame oil. Sauté chicken and shredded cabbage in a cast iron skillet until chicken is cooked through and cabbage is tender. Push chicken to the sides, create a center trench, fill with shredded mozzarella, cover until cheese is bubbling, and dip chicken directly into cheese."
+    method: "Marinate chicken thigh pieces in tamari soy sauce, chili flakes, minced garlic, ginger, erythritol, and sesame oil. Saute chicken and shredded cabbage in a cast iron skillet until chicken is cooked through and cabbage is tender. Push chicken to the sides, create a center trench, fill with shredded mozzarella, cover until cheese is bubbling, and dip chicken directly into cheese."
   },
   {
     id: "kr_m3",
@@ -1584,7 +1584,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "60 g greek yogurt 10%", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g oregano", "1 g salt"],
-    method: "Sauté diced bell peppers and garlic in extra virgin olive oil. Stir in tomato passata, ground cumin, and sea salt. Make small wells and crack in whole eggs. Cover and simmer on low heat for 5 minutes until egg whites are set but yolks remain runny. Serve with dollops of strained Greek yogurt 10% (labneh) and za'atar."
+    method: "Saute diced bell peppers and garlic in extra virgin olive oil. Stir in tomato passata, ground cumin, and sea salt. Make small wells and crack in whole eggs. Cover and simmer on low heat for 5 minutes until egg whites are set but yolks remain runny. Serve with dollops of strained Greek yogurt 10% (labneh) and za'atar."
   },
   {
     id: "lb_m1",
@@ -1632,7 +1632,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g beef mince", "25 g walnuts", "20 g almond flour", "20 g ghee", "30 g onion", "4 g garlic", "2 g cumin", "1 g cinnamon", "1 g salt"],
-    method: "Make base dough by pulsing 100g lean beef with almond flour, finely grated onion, allspice, and salt until smooth. Sauté remaining 80g beef mince with crushed walnuts or pine nuts, diced onion, and cinnamon in golden ghee. Press half the dough into baking dish, layer spiced meat filling in the center, cover with remaining dough, score diamond patterns, and bake at 190°C for 25 minutes."
+    method: "Make base dough by pulsing 100g lean beef with almond flour, finely grated onion, allspice, and salt until smooth. Saute remaining 80g beef mince with crushed walnuts or pine nuts, diced onion, and cinnamon in golden ghee. Press half the dough into baking dish, layer spiced meat filling in the center, cover with remaining dough, score diamond patterns, and bake at 190°C for 25 minutes."
   },
   {
     id: "lb_d1",
@@ -1684,7 +1684,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["200 g chicken thigh (bone-in)", "80 g tomato passata", "15 ml olive oil", "15 g butter", "30 g onion", "6 g garlic", "10 g cilantro", "5 g basil", "2 g paprika", "1 g salt"],
-    method: "Dry-sear chicken thigh pieces in a hot skillet until skin is golden. Remove and sauté onions and garlic in butter. Return chicken, add tomato passata, paprika, and a splash of broth. Simmer covered for 25 minutes. Right off the heat, fold in heaps of fresh cilantro, purple basil, and minced garlic."
+    method: "Dry-sear chicken thigh pieces in a hot skillet until skin is golden. Remove and saute onions and garlic in butter. Return chicken, add tomato passata, paprika, and a splash of broth. Simmer covered for 25 minutes. Right off the heat, fold in heaps of fresh cilantro, purple basil, and minced garlic."
   },
   {
     id: "ge_m2",
@@ -1732,7 +1732,7 @@ const RECIPES_DATA = [
     batch: "4 jars, 4 days fridge",
     freezer: "Do not freeze.",
     ingredients: ["70 ml heavy cream", "40 g mascarpone", "25 g walnuts", "30 g berries", "15 g erythritol", "1 g cinnamon"],
-    method: "Whip heavy cream and mascarpone with erythritol and a pinch of cinnamon until velvety thick. Toast walnuts and crush finely. Simmer blackberries with erythritol until soft and purée into coulis. Layer whipped mascarpone cream with crushed toasted walnuts and tart blackberry coulis in glass jars."
+    method: "Whip heavy cream and mascarpone with erythritol and a pinch of cinnamon until velvety thick. Toast walnuts and crush finely. Simmer blackberries with erythritol until soft and puree into coulis. Layer whipped mascarpone cream with crushed toasted walnuts and tart blackberry coulis in glass jars."
   },
 
   /* ============================================================
@@ -1740,7 +1740,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "hu_b1",
-    name: "Rántotta with Spicy Csabai Sausage and Sautéed Onions",
+    name: "Rantotta with Spicy Csabai Sausage and Sauteed Onions",
     cuisine: "Hungarian",
     flag: "🇭🇺",
     meal: "Breakfast",
@@ -1752,11 +1752,11 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "50 g sausages", "15 g lard", "30 g onion", "2 g paprika", "1 g salt", "1 g black pepper"],
-    method: "Slice spicy Hungarian paprika sausage and fry in hot lard until crisp and oils release. Sauté diced onions in the paprika fat until soft. Pour in beaten eggs with sweet Hungarian paprika and sea salt. Scramble softly over low heat until set."
+    method: "Slice spicy Hungarian paprika sausage and fry in hot lard until crisp and oils release. Saute diced onions in the paprika fat until soft. Pour in beaten eggs with sweet Hungarian paprika and sea salt. Scramble softly over low heat until set."
   },
   {
     id: "hu_m1",
-    name: "Gulyás Tradițional Unguresc Keto with Beef Shank and Caraway",
+    name: "Gulyas Tradițional Unguresc Keto with Beef Shank and Caraway",
     cuisine: "Hungarian",
     flag: "🇭🇺",
     meal: "Lunch/Dinner",
@@ -1784,11 +1784,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["200 g chicken thigh (bone-in)", "60 g sour cream 30%", "140 g cauliflower florets", "15 g lard", "30 g onion", "4 g garlic", "6 g paprika", "15 g butter", "1 g salt"],
-    method: "Brown chicken thighs in lard. Sauté onions and garlic in pan drippings. Stir in sweet paprika and chicken broth, return chicken, and simmer covered for 25 minutes. Temper sour cream 30% with a ladle of hot broth and stir into the stew off the heat until velvety smooth. Serve with buttered steamed cauliflower florets."
+    method: "Brown chicken thighs in lard. Saute onions and garlic in pan drippings. Stir in sweet paprika and chicken broth, return chicken, and simmer covered for 25 minutes. Temper sour cream 30% with a ladle of hot broth and stir into the stew off the heat until velvety smooth. Serve with buttered steamed cauliflower florets."
   },
   {
     id: "hu_m3",
-    name: "Töltött Káposzta (Hungarian Stuffed Sauerkraut with Smoked Ham)",
+    name: "Toltott Kaposzta (Hungarian Stuffed Sauerkraut with Smoked Ham)",
     cuisine: "Hungarian",
     flag: "🇭🇺",
     meal: "Lunch/Dinner",
@@ -1804,7 +1804,7 @@ const RECIPES_DATA = [
   },
   {
     id: "hu_d1",
-    name: "Keto Somlói Galuska (Hungarian Walnut and Dark Chocolate Sponge)",
+    name: "Keto Somloi Galuska (Hungarian Walnut and Dark Chocolate Sponge)",
     cuisine: "Hungarian",
     flag: "🇭🇺",
     meal: "Snack",
@@ -1840,7 +1840,7 @@ const RECIPES_DATA = [
   },
   {
     id: "co_m1",
-    name: "Bandeja Paisa Keto with Crispy Chicharrón, Steak and Avocado",
+    name: "Bandeja Paisa Keto with Crispy Chicharron, Steak and Avocado",
     cuisine: "Colombian",
     flag: "🇨🇴",
     meal: "Lunch/Dinner",
@@ -1852,11 +1852,11 @@ const RECIPES_DATA = [
     batch: "Cook fresh or 3 days fridge",
     freezer: "Not suitable.",
     ingredients: ["120 g steak", "60 g pork belly", "1 egg", "half avocado", "35 g sausages", "15 g lard", "1 g cumin", "1 g salt", "1 lime"],
-    method: "Score pork belly skin and fry in lard until crispy chicharrón crackles. Season flank steak with cumin and sear on hot grill alongside Colombian chorizo sausage. Fry an egg sunny-side-up in pan drippings. Plate steak, chicharrón, sausage, fried egg, and ripe avocado with fresh lime wedges."
+    method: "Score pork belly skin and fry in lard until crispy chicharron crackles. Season flank steak with cumin and sear on hot grill alongside Colombian chorizo sausage. Fry an egg sunny-side-up in pan drippings. Plate steak, chicharron, sausage, fried egg, and ripe avocado with fresh lime wedges."
   },
   {
     id: "co_m2",
-    name: "Ajiaco Santafereño Keto with Shredded Chicken and Capers",
+    name: "Ajiaco Santafereno Keto with Shredded Chicken and Capers",
     cuisine: "Colombian",
     flag: "🇨🇴",
     meal: "Lunch/Dinner",
@@ -1884,7 +1884,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["190 g steak", "70 g tomato passata", "15 ml olive oil", "15 g butter", "35 g onion", "4 g garlic", "2 g cumin", "5 g cilantro", "1 g salt"],
-    method: "Slow braise flank steak in seasoned broth for 2 hours until fork-tender. Make Colombian hogao sauce by sautéing onions, garlic, and cumin in butter and olive oil, then simmering with tomato passata. Pour hot hogao sauce over sliced flank steak and broil 5 minutes until bubbling."
+    method: "Slow braise flank steak in seasoned broth for 2 hours until fork-tender. Make Colombian hogao sauce by sauteing onions, garlic, and cumin in butter and olive oil, then simmering with tomato passata. Pour hot hogao sauce over sliced flank steak and broil 5 minutes until bubbling."
   },
   {
     id: "co_d1",
@@ -1936,7 +1936,7 @@ const RECIPES_DATA = [
     batch: "2 servings, 2 days fridge",
     freezer: "Not suitable.",
     ingredients: ["200 g konjac noodles", "160 g shrimp", "1 egg", "20 g peanut butter", "15 ml fish sauce", "15 ml coconut oil", "10 g erythritol", "4 g garlic", "1 lime", "5 g spring onion"],
-    method: "Rinse konjac shirataki noodles and dry-fry in a hot skillet. Heat coconut oil, sauté minced garlic and prawns until pink, and push to the side. Scramble in egg. Whisk fish sauce, lime juice, erythritol, and natural peanut butter into a Pad Thai sauce. Toss noodles in sauce with prawns, egg, and spring onions until hot and glossy."
+    method: "Rinse konjac shirataki noodles and dry-fry in a hot skillet. Heat coconut oil, saute minced garlic and prawns until pink, and push to the side. Scramble in egg. Whisk fish sauce, lime juice, erythritol, and natural peanut butter into a Pad Thai sauce. Toss noodles in sauce with prawns, egg, and spring onions until hot and glossy."
   },
   {
     id: "th_m2",
@@ -1952,7 +1952,7 @@ const RECIPES_DATA = [
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze broth base without shrimp.",
     ingredients: ["190 g shrimp", "110 ml coconut milk", "60 g mushrooms", "15 ml fish sauce", "15 ml coconut oil", "6 g ginger", "4 g garlic", "1 lime", "2 g chili flakes", "5 g cilantro"],
-    method: "Sauté ginger, garlic, crushed lemongrass, and red chili paste in coconut oil until fragrant. Pour in rich bone broth and coconut milk, simmering with sliced mushrooms for 8 minutes. Add peeled prawns and cook for 3 minutes until just pink. Remove from heat and stir in fish sauce, fresh lime juice, and cilantro."
+    method: "Saute ginger, garlic, crushed lemongrass, and red chili paste in coconut oil until fragrant. Pour in rich bone broth and coconut milk, simmering with sliced mushrooms for 8 minutes. Add peeled prawns and cook for 3 minutes until just pink. Remove from heat and stir in fish sauce, fresh lime juice, and cilantro."
   },
   {
     id: "th_m3",
@@ -2076,7 +2076,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "de_b1",
-    name: "Bauernfrühstück (German Farmer's Skillet Scramble with Bacon and Sausage)",
+    name: "Bauernfruhstuck (German Farmer's Skillet Scramble with Bacon and Sausage)",
     cuisine: "German",
     flag: "🇩🇪",
     meal: "Breakfast",
@@ -2088,7 +2088,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "40 g bacon", "40 g sausages", "15 g butter", "25 g onion", "2 g marjoram", "1 g sea salt", "1 g black pepper"],
-    method: "Dice German speck bacon and bratwurst sausage, frying in butter until crispy and browned. Sauté onions and marjoram in the drippings. Pour in beaten eggs with sea salt and cracked pepper. Scramble gently until eggs are soft and set, then fold and serve hot."
+    method: "Dice German speck bacon and bratwurst sausage, frying in butter until crispy and browned. Saute onions and marjoram in the drippings. Pour in beaten eggs with sea salt and cracked pepper. Scramble gently until eggs are soft and set, then fold and serve hot."
   },
   {
     id: "de_m1",
@@ -2120,7 +2120,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["160 g sausages", "160 g sauerkraut", "25 g butter", "25 g onion", "15 g mustard", "2 g cumin", "1 g black pepper"],
-    method: "Pan-sear coarse German bratwurst sausages in butter until golden brown and sizzling on all sides. In the same pan, sauté diced onions, add drained sauerkraut, caraway seeds, and black pepper. Simmer sauerkraut covered for 15 minutes until sweet and tender. Serve with German mustard."
+    method: "Pan-sear coarse German bratwurst sausages in butter until golden brown and sizzling on all sides. In the same pan, saute diced onions, add drained sauerkraut, caraway seeds, and black pepper. Simmer sauerkraut covered for 15 minutes until sweet and tender. Serve with German mustard."
   },
   {
     id: "de_m3",
@@ -2136,11 +2136,11 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g beef", "140 g red cabbage", "20 ml vinegar", "20 g butter", "15 g lard", "10 g erythritol", "1 g cloves", "1 g cinnamon", "1 g salt"],
-    method: "Marinate beef chuck in red wine vinegar with cloves, peppercorns, and bay leaf. Sear beef in lard, then slow-braise with the marinade and rich broth for 2.5 hours until fork-tender. Sauté shredded red cabbage in butter with vinegar, erythritol, and cinnamon for 20 minutes until tender."
+    method: "Marinate beef chuck in red wine vinegar with cloves, peppercorns, and bay leaf. Sear beef in lard, then slow-braise with the marinade and rich broth for 2.5 hours until fork-tender. Saute shredded red cabbage in butter with vinegar, erythritol, and cinnamon for 20 minutes until tender."
   },
   {
     id: "de_d1",
-    name: "Keto Schwarzwälder Kirschtorte (Black Forest Whipped Cream Sponge)",
+    name: "Keto Schwarzwalder Kirschtorte (Black Forest Whipped Cream Sponge)",
     cuisine: "German",
     flag: "🇩🇪",
     meal: "Snack",
@@ -2203,7 +2203,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze cooked portions.",
-    ingredients: ["180 g beef flank steak", "50 g mozzarella", "30 g jamÃ³n serrano", "60 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 g salt"],
+    ingredients: ["180 g beef flank steak", "50 g mozzarella", "30 g jamon serrano", "60 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 g salt"],
     method: "Pound flank steak thin and sear on a hot grill or pan for 2 minutes on one side. Flip over, spread tomato passata with garlic and oregano across the meat, lay slices of ham, and cover with thick mozzarella slices. Cover pan with a lid or place under a broiler until cheese is completely melted and bubbly."
   },
   {
@@ -2260,7 +2260,7 @@ const RECIPES_DATA = [
   },
   {
     id: "ru_m1",
-    name: "Beef Stroganoff with Sautéed Mushrooms and Sour Cream 30%",
+    name: "Beef Stroganoff with Sauteed Mushrooms and Sour Cream 30%",
     cuisine: "Russian",
     flag: "🇷🇺",
     meal: "Lunch/Dinner",
@@ -2272,7 +2272,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze beef and sauce; assemble fresh.",
     ingredients: ["180 g beef sirloin strips", "80 g mushrooms", "60 g sour cream 30%", "20 g butter", "30 g onion", "4 g garlic", "10 g mustard", "5 g parsley", "1 g salt"],
-    method: "Sear seasoned beef tenderloin strips in hot butter for 2 minutes and set aside. Sauté sliced mushrooms and onions in pan drippings until caramelized. Add minced garlic and Dijon mustard. Lower heat, fold in rich sour cream 30% and beef juices. Return beef strips, warm through gently without boiling, and finish with fresh parsley."
+    method: "Sear seasoned beef tenderloin strips in hot butter for 2 minutes and set aside. Saute sliced mushrooms and onions in pan drippings until caramelized. Add minced garlic and Dijon mustard. Lower heat, fold in rich sour cream 30% and beef juices. Return beef strips, warm through gently without boiling, and finish with fresh parsley."
   },
   {
     id: "ru_m2",
@@ -2304,11 +2304,11 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["170 g beef brisket", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "15 g butter", "30 g onion", "4 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
-    method: "Simmer beef chuck in water with bay leaf and black peppercorns until tender. Sauté onions, garlic, and tomato passata in butter with red wine vinegar. Add shredded fresh green cabbage to the beef broth along with the sautéed tomato mixture. Simmer for 20 minutes until cabbage is soft. Serve piping hot with chopped fresh dill and a huge dollop of sour cream 30%."
+    method: "Simmer beef chuck in water with bay leaf and black peppercorns until tender. Saute onions, garlic, and tomato passata in butter with red wine vinegar. Add shredded fresh green cabbage to the beef broth along with the sauteed tomato mixture. Simmer for 20 minutes until cabbage is soft. Serve piping hot with chopped fresh dill and a huge dollop of sour cream 30%."
   },
   {
     id: "ru_d1",
-    name: "Keto Ptichye Moloko (Russian Bird's Milk Marshmallow Soufflé)",
+    name: "Keto Ptichye Moloko (Russian Bird's Milk Marshmallow Souffle)",
     cuisine: "Russian",
     flag: "🇷🇺",
     meal: "Snack",
@@ -2388,7 +2388,7 @@ const RECIPES_DATA = [
     batch: "Broth 4 days; assemble fresh",
     freezer: "Freeze laksa broth.",
     ingredients: ["200 g konjac noodles", "160 g shrimp", "1 egg", "110 ml coconut milk", "15 ml coconut oil", "15 g curry paste", "12 ml fish sauce", "5 g cilantro", "1 lime"],
-    method: "Rinse konjac noodles and boil 2 minutes. Sauté Malaysian laksa curry paste in coconut oil until fragrant. Pour in rich bone broth and coconut milk, simmering for 10 minutes. Add peeled prawns and cook until tender and pink. Ladle hot coconut soup over noodles and top with a halved hard-boiled egg, lime, and fresh cilantro."
+    method: "Rinse konjac noodles and boil 2 minutes. Saute Malaysian laksa curry paste in coconut oil until fragrant. Pour in rich bone broth and coconut milk, simmering for 10 minutes. Add peeled prawns and cook until tender and pink. Ladle hot coconut soup over noodles and top with a halved hard-boiled egg, lime, and fresh cilantro."
   },
   {
     id: "my_d1",
@@ -2740,7 +2740,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "cl_b1",
-    name: "Huevos Revueltos con Tomate y Merkén Ahumado",
+    name: "Huevos Revueltos con Tomate y Merken Ahumado",
     cuisine: "Chilean",
     flag: "🇨🇱",
     meal: "Breakfast",
@@ -2752,7 +2752,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "60 g tomato", "20 ml olive oil", "15 g butter", "25 g onion", "2 g chili flakes", "1 g sea salt"],
-    method: "Sauté diced sweet onions and ripe tomatoes in olive oil and butter until soft and juicy. Season with smoky Chilean Merkén or smoked paprika and chili flakes. Pour in beaten eggs and scramble gently over low heat until soft and velvety. Serve warm."
+    method: "Saute diced sweet onions and ripe tomatoes in olive oil and butter until soft and juicy. Season with smoky Chilean Merken or smoked paprika and chili flakes. Pour in beaten eggs and scramble gently over low heat until soft and velvety. Serve warm."
   },
   {
     id: "cl_m1",
@@ -2768,7 +2768,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["150 g ground beef 80/20", "60 g chicken", "1 egg", "160 g cauliflower florets", "30 ml heavy cream", "25 g olives", "20 g butter", "30 g onion", "2 g cumin", "1 g salt"],
-    method: "Sauté beef mince with onions, cumin, oregano, and salt to create traditional Chilean pino filling. Place in a baking dish with cooked shredded chicken, hard-boiled egg quarters, and black olives. Puree steamed cauliflower with butter and heavy cream into a rich thick mash. Spread over beef, dust with erythritol, and bake at 200°C for 25 minutes until golden brown."
+    method: "Saute beef mince with onions, cumin, oregano, and salt to create traditional Chilean pino filling. Place in a baking dish with cooked shredded chicken, hard-boiled egg quarters, and black olives. Puree steamed cauliflower with butter and heavy cream into a rich thick mash. Spread over beef, dust with erythritol, and bake at 200°C for 25 minutes until golden brown."
   },
   {
     id: "cl_m2",
@@ -2784,11 +2784,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes well.",
     ingredients: ["160 g cod", "70 g shrimp", "40 ml heavy cream", "60 g tomato passata", "20 ml olive oil", "30 g bell pepper", "30 g onion", "4 g garlic", "5 g cilantro", "1 lemon"],
-    method: "Sauté bell peppers, onions, and garlic in olive oil. Stir in tomato passata and rich fish broth. Simmer white fish fillets and shrimp in the broth for 10 minutes. Swirl in heavy cream, remove from heat, and finish with fresh lemon juice and chopped cilantro."
+    method: "Saute bell peppers, onions, and garlic in olive oil. Stir in tomato passata and rich fish broth. Simmer white fish fillets and shrimp in the broth for 10 minutes. Swirl in heavy cream, remove from heat, and finish with fresh lemon juice and chopped cilantro."
   },
   {
     id: "cl_m3",
-    name: "Costillar de Cerdo al Merkén (Chilean Spiced Roasted Pork Ribs)",
+    name: "Costillar de Cerdo al Merken (Chilean Spiced Roasted Pork Ribs)",
     cuisine: "Chilean",
     flag: "🇨🇱",
     meal: "Lunch/Dinner",
@@ -2800,7 +2800,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["190 g pork shoulder", "20 ml vinegar", "20 ml olive oil", "6 g garlic", "2 g cumin", "2 g oregano", "2 g chili flakes", "2 g sea salt"],
-    method: "Make a paste with red wine vinegar, olive oil, crushed garlic cloves, Chilean Merkén or smoked chili, ground cumin, oregano, and coarse sea salt. Rub generously over pork ribs or pork shoulder. Roast at 160°C for 2 hours until tender, then broil for 5 minutes until sizzling and crusty."
+    method: "Make a paste with red wine vinegar, olive oil, crushed garlic cloves, Chilean Merken or smoked chili, ground cumin, oregano, and coarse sea salt. Rub generously over pork ribs or pork shoulder. Roast at 160°C for 2 hours until tender, then broil for 5 minutes until sizzling and crusty."
   },
   {
     id: "cl_d1",
@@ -2824,7 +2824,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "cz_b1",
-    name: "Míchaná Vejce s Párkem (Czech Soft Egg Scramble with Sausages)",
+    name: "Michana Vejce s Parkem (Czech Soft Egg Scramble with Sausages)",
     cuisine: "Czech",
     flag: "🇨🇿",
     meal: "Breakfast",
@@ -2840,7 +2840,7 @@ const RECIPES_DATA = [
   },
   {
     id: "cz_m1",
-    name: "Svíčková na Smetaně Keto with Root Cream Sauce and Cranberries",
+    name: "Svickova na Smetane Keto with Root Cream Sauce and Cranberries",
     cuisine: "Czech",
     flag: "🇨🇿",
     meal: "Lunch/Dinner",
@@ -2856,7 +2856,7 @@ const RECIPES_DATA = [
   },
   {
     id: "cz_m2",
-    name: "Vepřo Knedlo Zelo Keto (Roast Pork Neck with Braised Sauerkraut)",
+    name: "Vepro Knedlo Zelo Keto (Roast Pork Neck with Braised Sauerkraut)",
     cuisine: "Czech",
     flag: "🇨🇿",
     meal: "Lunch/Dinner",
@@ -2868,11 +2868,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["190 g pork shoulder", "150 g sauerkraut", "20 g lard", "25 g onion", "4 g garlic", "3 g cumin", "1 g salt", "1 g black pepper"],
-    method: "Rub pork neck with crushed garlic, whole caraway seeds, and sea salt. Roast at 160°C for 2 hours, basting with pan drippings until tender and deeply browned. In another pan, sauté onions in lard, add rinsed sauerkraut, caraway seeds, and braise for 20 minutes until sweet and tender. Serve together."
+    method: "Rub pork neck with crushed garlic, whole caraway seeds, and sea salt. Roast at 160°C for 2 hours, basting with pan drippings until tender and deeply browned. In another pan, saute onions in lard, add rinsed sauerkraut, caraway seeds, and braise for 20 minutes until sweet and tender. Serve together."
   },
   {
     id: "cz_m3",
-    name: "Hovězí Guláš Ceh (Czech Beef Goulash with Paprika and Marjoram)",
+    name: "Hovezi Gulas Ceh (Czech Beef Goulash with Paprika and Marjoram)",
     cuisine: "Czech",
     flag: "🇨🇿",
     meal: "Lunch/Dinner",
@@ -2888,7 +2888,7 @@ const RECIPES_DATA = [
   },
   {
     id: "cz_d1",
-    name: "Keto Bábovka (Czech Marble Bundt Cake with Cocoa and Almond)",
+    name: "Keto Babovka (Czech Marble Bundt Cake with Cocoa and Almond)",
     cuisine: "Czech",
     flag: "🇨🇿",
     meal: "Snack",
@@ -2936,7 +2936,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["150 g ground beef 80/20", "1 egg", "60 ml heavy cream", "20 g almond flour", "15 g butter", "30 g onion", "4 g garlic", "6 g curry paste", "2 g turmeric", "1 g salt"],
-    method: "Sauté onions, garlic, curry powder, and turmeric in butter. Add beef mince and brown. Stir in almond flour and a splash of vinegar. Transfer spiced beef to a baking dish and press flat with bay leaves on top. Whisk egg with heavy cream and salt, pour over beef, and bake at 180°C for 25 minutes until custard is puffed and golden."
+    method: "Saute onions, garlic, curry powder, and turmeric in butter. Add beef mince and brown. Stir in almond flour and a splash of vinegar. Transfer spiced beef to a baking dish and press flat with bay leaves on top. Whisk egg with heavy cream and salt, pour over beef, and bake at 180°C for 25 minutes until custard is puffed and golden."
   },
   {
     id: "za_m2",
@@ -2952,7 +2952,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw boerewors spirals.",
     ingredients: ["170 g sausages", "60 g bell pepper", "60 g cabbage", "40 g tomato passata", "15 ml olive oil", "4 g garlic", "4 g ginger", "2 g curry paste", "1 g chili flakes"],
-    method: "Grill thick spiced beef and coriander boerewors sausage over coals or hot skillet until sizzling and browned. In another pan, sauté garlic, ginger, and curry powder in olive oil. Add grated bell peppers, shredded cabbage, and tomato passata. Simmer chakalaka relish for 10 minutes and serve alongside hot sausage."
+    method: "Grill thick spiced beef and coriander boerewors sausage over coals or hot skillet until sizzling and browned. In another pan, saute garlic, ginger, and curry powder in olive oil. Add grated bell peppers, shredded cabbage, and tomato passata. Simmer chakalaka relish for 10 minutes and serve alongside hot sausage."
   },
   {
     id: "za_m3",
@@ -3020,7 +3020,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g pork shoulder", "15 g lard", "50 g bell pepper", "50 g mushrooms", "50 g tomato passata", "35 g onion", "4 g garlic", "2 g savory (chubritsa)", "2 g paprika", "1 g salt"],
-    method: "Sear pork shoulder cubes in hot lard until browned. Sauté sliced mushrooms, onions, bell peppers, and garlic. Stir in tomato passata, Bulgarian chubritsa (summer savory), paprika, and broth. Transfer to an earthenware pot, cover tightly, and bake at 170°C for 1.5 hours until thick and tender."
+    method: "Sear pork shoulder cubes in hot lard until browned. Saute sliced mushrooms, onions, bell peppers, and garlic. Stir in tomato passata, Bulgarian chubritsa (summer savory), paprika, and broth. Transfer to an earthenware pot, cover tightly, and bake at 170°C for 1.5 hours until thick and tender."
   },
   {
     id: "bg_m2",
@@ -3052,7 +3052,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["150 g ground pork", "160 g zucchini", "60 g greek yogurt 10%", "1 egg", "50 g tomato passata", "20 g butter", "30 g onion", "4 g garlic", "2 g savory (chubritsa)", "1 g salt"],
-    method: "Dice zucchini into small cubes (replacing potatoes). Sauté pork mince with onions, garlic, tomato passata, chubritsa, and salt. Mix with diced zucchini and place in a baking dish with a splash of broth. Bake 25 minutes. Whisk Greek yogurt 10% with egg and pinch of salt, pour over top, and bake 15 minutes until golden crust sets."
+    method: "Dice zucchini into small cubes (replacing potatoes). Saute pork mince with onions, garlic, tomato passata, chubritsa, and salt. Mix with diced zucchini and place in a baking dish with a splash of broth. Bake 25 minutes. Whisk Greek yogurt 10% with egg and pinch of salt, pour over top, and bake 15 minutes until golden crust sets."
   },
   {
     id: "bg_d1",
@@ -3088,7 +3088,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "40 g telemea", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g coriander", "1 g chili flakes", "1 g salt"],
-    method: "Sauté minced garlic and diced peppers in olive oil until golden. Stir in cumin, ground coriander, and tomato passata. Crack eggs into bubbling sauce, cover, and simmer for 5 minutes until whites set and yolks remain soft. Top with crumbled white Egyptian cheese or telemea and fresh parsley."
+    method: "Saute minced garlic and diced peppers in olive oil until golden. Stir in cumin, ground coriander, and tomato passata. Crack eggs into bubbling sauce, cover, and simmer for 5 minutes until whites set and yolks remain soft. Top with crumbled white Egyptian cheese or telemea and fresh parsley."
   },
   {
     id: "eg_m1",
@@ -3172,7 +3172,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
     ingredients: ["3 eggs", "25 g butter", "40 g tomato", "25 g onion", "4 g garlic", "2 g paprika", "1 g ginger", "1 g cardamom", "1 g chili flakes", "1 g salt"],
-    method: "Make Ethiopian niter kibbeh spiced butter by melting butter with cardamom, ginger, and garlic. Sauté diced onions and tomatoes in the spiced butter until sweet. Add berbere spice or paprika-chili mix. Pour in beaten eggs and scramble softly over medium heat until tender."
+    method: "Make Ethiopian niter kibbeh spiced butter by melting butter with cardamom, ginger, and garlic. Saute diced onions and tomatoes in the spiced butter until sweet. Add berbere spice or paprika-chili mix. Pour in beaten eggs and scramble softly over medium heat until tender."
   },
   {
     id: "et_m1",
@@ -3192,7 +3192,7 @@ const RECIPES_DATA = [
   },
   {
     id: "et_m2",
-    name: "Sega Tibs (Ethiopian Sautéed Beef with Rosemary and Jalapeño)",
+    name: "Sega Tibs (Ethiopian Sauteed Beef with Rosemary and Jalapeno)",
     cuisine: "Ethiopian",
     flag: "🇪🇹",
     meal: "Lunch/Dinner",
@@ -3204,7 +3204,7 @@ const RECIPES_DATA = [
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw marinated beef.",
     ingredients: ["190 g beef sirloin strips", "25 g butter", "15 ml olive oil", "40 g onion", "4 g garlic", "6 g ginger", "2 g rosemary", "1 g chili flakes", "1 g sea salt"],
-    method: "Cut tender beef into cubes. Heat spiced butter and olive oil in a heavy skillet until very hot. Add beef cubes and sear quickly on high heat. Add sliced onions, minced garlic, ginger, fresh rosemary sprigs, and jalapeño pepper rings. Sauté vigorously for 3 minutes until fragrant and serve sizzling hot."
+    method: "Cut tender beef into cubes. Heat spiced butter and olive oil in a heavy skillet until very hot. Add beef cubes and sear quickly on high heat. Add sliced onions, minced garlic, ginger, fresh rosemary sprigs, and jalapeno pepper rings. Saute vigorously for 3 minutes until fragrant and serve sizzling hot."
   },
   {
     id: "et_m3",
@@ -3220,7 +3220,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["180 g spinach", "35 g bacon", "30 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "4 g ginger", "2 g cardamom", "1 g salt"],
-    method: "Finely chop collard greens or spinach. Sauté onions, garlic, and ginger in spiced cardamom butter and olive oil with crispy bacon bits. Add greens and a splash of broth. Simmer covered on low heat for 25 minutes until greens are meltingly tender, aromatic, and rich."
+    method: "Finely chop collard greens or spinach. Saute onions, garlic, and ginger in spiced cardamom butter and olive oil with crispy bacon bits. Add greens and a splash of broth. Simmer covered on low heat for 25 minutes until greens are meltingly tender, aromatic, and rich."
   },
   {
     id: "et_d1",
@@ -3272,7 +3272,7 @@ const RECIPES_DATA = [
     batch: "6 slices, 4 days fridge",
     freezer: "Freezes well in slices.",
     ingredients: ["140 g ground beef 80/20", "3 eggs", "50 g cheese", "20 g butter", "20 g parsley", "30 g onion", "4 g garlic", "2 g turmeric", "2 g cumin", "1 g salt"],
-    method: "Sauté beef mince with onions, garlic, turmeric, and cumin in butter until cooked through. Chop a large bunch of fresh parsley. Whisk eggs with grated cheese, parsley, and warm seasoned beef. Pour into a greased baking dish and bake at 180°C for 25 minutes until puffed and set like a savory cake."
+    method: "Saute beef mince with onions, garlic, turmeric, and cumin in butter until cooked through. Chop a large bunch of fresh parsley. Whisk eggs with grated cheese, parsley, and warm seasoned beef. Pour into a greased baking dish and bake at 180°C for 25 minutes until puffed and set like a savory cake."
   },
   {
     id: "tn_m2",
@@ -3340,7 +3340,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well in slices.",
     ingredients: ["3 eggs", "25 g ghee", "20 g walnuts", "20 g parsley", "15 g dill", "15 g cilantro", "15 g spring onion", "4 g garlic", "2 g turmeric", "1 g salt"],
-    method: "Finely chop huge bunches of fresh parsley, dill, cilantro, and spring onions. Sauté in golden ghee with garlic and turmeric for 2 minutes to wilt. Beat eggs with sea salt and black pepper, fold in the herbs and toasted crushed walnuts. Pour into skillet, cover, and cook on low heat until set, flipping once."
+    method: "Finely chop huge bunches of fresh parsley, dill, cilantro, and spring onions. Saute in golden ghee with garlic and turmeric for 2 minutes to wilt. Beat eggs with sea salt and black pepper, fold in the herbs and toasted crushed walnuts. Pour into skillet, cover, and cook on low heat until set, flipping once."
   },
   {
     id: "ir_m1",
@@ -3372,7 +3372,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["180 g beef chuck roast", "25 g ghee", "40 g spinach", "20 g parsley", "15 g cilantro", "10 g fenugreek", "30 g onion", "4 g garlic", "1 lemon", "1 g salt"],
-    method: "Finely chop parsley, cilantro, spinach, and fenugreek. Sauté in ghee over medium-low heat for 15 minutes until dark green and intensely fragrant. Sear beef chuck cubes with onions, garlic, and turmeric. Combine beef, sautéed herbs, bone broth, and dried lime or lemon juice. Simmer covered on low heat for 2.5 hours until beef is tender and oil floats to top."
+    method: "Finely chop parsley, cilantro, spinach, and fenugreek. Saute in ghee over medium-low heat for 15 minutes until dark green and intensely fragrant. Sear beef chuck cubes with onions, garlic, and turmeric. Combine beef, sauteed herbs, bone broth, and dried lime or lemon juice. Simmer covered on low heat for 2.5 hours until beef is tender and oil floats to top."
   },
   {
     id: "ir_m3",
@@ -3440,7 +3440,7 @@ const RECIPES_DATA = [
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["180 g beef chuck roast", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "20 g lard", "30 g onion", "6 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
-    method: "Simmer beef chuck in water with black peppercorns and bay leaf until tender. Sauté onions, garlic, and tomato passata in pork lard with vinegar. Shred fresh green cabbage and add to the simmering beef broth with the sautéed tomato mixture. Simmer for 20 minutes. Serve with fresh dill and a massive dollop of sour cream 30%."
+    method: "Simmer beef chuck in water with black peppercorns and bay leaf until tender. Saute onions, garlic, and tomato passata in pork lard with vinegar. Shred fresh green cabbage and add to the simmering beef broth with the sauteed tomato mixture. Simmer for 20 minutes. Serve with fresh dill and a massive dollop of sour cream 30%."
   },
   {
     id: "ua_m2",
@@ -3472,7 +3472,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["170 g pork loin cutlet", "80 g mushrooms", "50 g sour cream 30%", "20 g unt 82%", "30 g onion", "4 g garlic", "5 g dill", "1 g black pepper", "1 g salt"],
-    method: "Pound pork schnitzel thin and season with salt and pepper. Sauté finely chopped mushrooms and onions in butter until tender, mix with fresh dill. Spread mushroom filling across pork cutlets, roll into tight rolls (kruchenyky), and secure with toothpicks. Sear in butter, pour in sour cream 30% and broth, and simmer covered for 25 minutes."
+    method: "Pound pork schnitzel thin and season with salt and pepper. Saute finely chopped mushrooms and onions in butter until tender, mix with fresh dill. Spread mushroom filling across pork cutlets, roll into tight rolls (kruchenyky), and secure with toothpicks. Sear in butter, pour in sour cream 30% and broth, and simmer covered for 25 minutes."
   },
   {
     id: "ua_d1",
@@ -3556,7 +3556,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
     ingredients: ["160 g zucchini", "140 g ground lamb", "60 g cauliflower rice", "60 g tomato passata", "20 g unt 82%", "15 g walnuts", "4 g garlic", "2 g allspice", "5 g mint", "1 g salt"],
-    method: "Hollow out zucchini or cut lengthwise into boats. Sauté minced lamb with grated cauliflower rice, allspice, garlic, and crushed walnuts or pine nuts in butter. Stuff into zucchini boats. Place in a pot with tomato passata, broth, dried mint, and garlic. Simmer covered for 30 minutes until zucchini is tender."
+    method: "Hollow out zucchini or cut lengthwise into boats. Saute minced lamb with grated cauliflower rice, allspice, garlic, and crushed walnuts or pine nuts in butter. Stuff into zucchini boats. Place in a pot with tomato passata, broth, dried mint, and garlic. Simmer covered for 30 minutes until zucchini is tender."
   },
   {
     id: "sy_d1",
@@ -3580,7 +3580,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "se_b1",
-    name: "Räksmörgås Keto (Swedish Shrimp Toast with Egg and Dill Mayo)",
+    name: "Raksmorgas Keto (Swedish Shrimp Toast with Egg and Dill Mayo)",
     cuisine: "Swedish",
     flag: "🇸🇪",
     meal: "Breakfast",
@@ -3596,7 +3596,7 @@ const RECIPES_DATA = [
   },
   {
     id: "se_m1",
-    name: "Köttbullar (Traditional Swedish Meatballs in Velvety Cream Gravy)",
+    name: "Kottbullar (Traditional Swedish Meatballs in Velvety Cream Gravy)",
     cuisine: "Swedish",
     flag: "🇸🇪",
     meal: "Lunch/Dinner",
@@ -3612,7 +3612,7 @@ const RECIPES_DATA = [
   },
   {
     id: "se_m2",
-    name: "Gravlax de Somon with Sugar-Free Mustard-Dill Hovmästarsås",
+    name: "Gravlax de Somon with Sugar-Free Mustard-Dill Hovmastarsas",
     cuisine: "Swedish",
     flag: "🇸🇪",
     meal: "Lunch/Dinner",
@@ -3624,11 +3624,11 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes well sliced.",
     ingredients: ["180 g salmon", "20 ml olive oil", "15 g mustard", "10 g erythritol", "10 ml vinegar", "5 g dill", "1 lemon", "2 g sea salt", "1 g black pepper"],
-    method: "Cure salmon fillet with coarse sea salt, cracked black pepper, erythritol, and fresh dill for 24-48 hours. Slice paper-thin. Whisk Dijon mustard with olive oil, white wine vinegar, finely chopped dill, and erythritol into traditional Swedish Hovmästarsås sauce. Serve salmon slices draped with the mustard-dill sauce."
+    method: "Cure salmon fillet with coarse sea salt, cracked black pepper, erythritol, and fresh dill for 24-48 hours. Slice paper-thin. Whisk Dijon mustard with olive oil, white wine vinegar, finely chopped dill, and erythritol into traditional Swedish Hovmastarsas sauce. Serve salmon slices draped with the mustard-dill sauce."
   },
   {
     id: "se_m3",
-    name: "Fläskfilé med Kantarellsås (Pork Medallions with Wild Chanterelle Cream)",
+    name: "Flaskfile med Kantarellsas (Pork Medallions with Wild Chanterelle Cream)",
     cuisine: "Swedish",
     flag: "🇸🇪",
     meal: "Lunch/Dinner",
@@ -3640,7 +3640,7 @@ const RECIPES_DATA = [
     batch: "3 servings, 3 days fridge",
     freezer: "Freezes well.",
     ingredients: ["180 g pork tenderloin", "80 g mushrooms", "60 ml heavy cream", "25 g butter", "30 g onion", "4 g garlic", "3 g thyme", "5 g parsley", "1 g salt"],
-    method: "Cut pork tenderloin into medallions and sear in foaming butter for 2 minutes per side until golden; set aside. Sauté wild chanterelle or forest mushrooms and onions in pan drippings. Pour in heavy cream, chicken stock, and fresh thyme. Simmer until sauce is thick and luxurious, return pork medallions, and warm through."
+    method: "Cut pork tenderloin into medallions and sear in foaming butter for 2 minutes per side until golden; set aside. Saute wild chanterelle or forest mushrooms and onions in pan drippings. Pour in heavy cream, chicken stock, and fresh thyme. Simmer until sauce is thick and luxurious, return pork medallions, and warm through."
   },
   {
     id: "se_d1",

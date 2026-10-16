@@ -239,25 +239,225 @@
     .nav-item.active { color: var(--color-primary); }
     .nav-item.active .nav-icon { transform: scale(1.1); }
 
-    /* Focus Mode Sticky Banner */
-    .focus-mode-bar {
+    /* Focus Mode Floating Window (50% screen height, 80% screen width, draggable, collapsible, expandable) */
+    .focus-recipe-window {
       position: fixed;
-      top: calc(56px + env(safe-area-inset-top, 0px));
-      left: 0;
-      right: 0;
-      z-index: 95;
-      background: #01696f;
-      color: #ffffff;
-      padding: 8px 14px;
+      z-index: 10000;
+      width: 80vw;
+      height: 50vh;
+      left: 10vw;
+      top: 25vh;
+      background: var(--color-surface, #ffffff);
+      color: var(--color-text, #1e293b);
+      border: 1px solid var(--color-border, #cbd5e1);
+      border-radius: 14px;
+      box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35), 0 2px 8px rgba(0, 0, 0, 0.15);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: width 0.22s cubic-bezier(0.16, 1, 0.3, 1), height 0.22s cubic-bezier(0.16, 1, 0.3, 1), border-radius 0.2s ease, box-shadow 0.2s ease;
+    }
+    .focus-recipe-window.hidden {
+      display: none !important;
+    }
+    .focus-recipe-window.collapsed {
+      height: 48px !important;
+      min-height: 48px !important;
+      max-height: 48px !important;
+      overflow: hidden;
+      border-radius: 24px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+    }
+    .focus-recipe-window.collapsed .focus-win-body {
+      display: none !important;
+    }
+    .focus-recipe-window.collapsed .focus-win-header {
+      height: 48px;
+      padding: 0 14px;
+      border-bottom: none;
+    }
+    .focus-recipe-window.maximized {
+      width: 96vw !important;
+      height: 85vh !important;
+      left: 2vw !important;
+      top: 7vh !important;
+    }
+
+    /* Window Header / Drag Bar */
+    .focus-win-header {
       display: flex;
       align-items: center;
       justify-content: space-between;
+      padding: 8px 12px;
+      background: #01696f;
+      color: #ffffff;
+      cursor: grab;
+      user-select: none;
+      -webkit-user-select: none;
+      touch-action: none;
+      border-top-left-radius: 13px;
+      border-top-right-radius: 13px;
+      flex-shrink: 0;
       gap: 8px;
-      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
-      font-size: var(--text-xs);
-      font-weight: 600;
     }
-    .focus-mode-bar.hidden { display: none !important; }
+    .focus-recipe-window.collapsed .focus-win-header {
+      border-radius: 24px;
+    }
+    .focus-win-header:active {
+      cursor: grabbing;
+    }
+    .focus-win-title-area {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 0;
+      flex: 1;
+      cursor: pointer;
+    }
+    .focus-win-badge {
+      font-size: 10px;
+      padding: 1px 6px;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.2);
+      white-space: nowrap;
+    }
+    .focus-win-title {
+      font-size: 13px;
+      font-weight: 700;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .focus-win-actions {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      flex-shrink: 0;
+    }
+    .focus-win-btn {
+      background: rgba(255, 255, 255, 0.15);
+      border: none;
+      color: #ffffff;
+      width: 26px;
+      height: 26px;
+      border-radius: 6px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: bold;
+      padding: 0;
+      line-height: 1;
+      transition: background 0.15s ease;
+    }
+    .focus-win-btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .focus-win-btn.danger:hover {
+      background: #ef4444;
+    }
+
+    /* Window Content Body (Scrollable) */
+    .focus-win-body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 12px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      -webkit-overflow-scrolling: touch;
+    }
+    .focus-win-macros {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .focus-macro-chip {
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 11px;
+      font-weight: 700;
+      background: var(--color-surface-offset, rgba(0,0,0,0.06));
+    }
+    .focus-timer-section {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 6px 10px;
+      margin-bottom: 10px;
+      border-radius: 8px;
+      background: rgba(1, 105, 111, 0.08);
+      border: 1px dashed rgba(1, 105, 111, 0.3);
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+    .focus-timer-display {
+      font-size: 15px;
+      font-weight: 800;
+      font-family: monospace;
+      color: #01696f;
+    }
+    .focus-timer-pills {
+      display: flex;
+      gap: 4px;
+    }
+    .focus-timer-btn {
+      background: var(--color-surface, #fff);
+      border: 1px solid var(--color-border, #cbd5e1);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 10px;
+      font-weight: 600;
+      cursor: pointer;
+      color: var(--color-text, #1e293b);
+    }
+    .focus-timer-btn:active {
+      background: #01696f;
+      color: #fff;
+    }
+    .focus-ing-check-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 12.5px;
+      cursor: pointer;
+      user-select: none;
+    }
+    .focus-ing-check-item input[type="checkbox"] {
+      margin-top: 3px;
+      cursor: pointer;
+      accent-color: #01696f;
+    }
+    .focus-ing-check-item.done span {
+      text-decoration: line-through;
+      opacity: 0.55;
+    }
+    .focus-section-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 800;
+      color: var(--color-muted, #64748b);
+      margin-top: 10px;
+      margin-bottom: 4px;
+    }
+    .focus-method-step {
+      margin-bottom: 8px;
+      padding-left: 4px;
+    }
+    .focus-tips-box {
+      margin-top: 10px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 3px solid #f59e0b;
+      font-size: 12px;
+    }
 
     /* Layout Containers */
     .main-content {
@@ -2359,14 +2559,23 @@
     </div>
   </header>
 
-  <!-- Sticky Focus Mode Bar when active cooking -->
-  <div id="focusModeFloatingBar" class="focus-mode-bar hidden">
-    <div style="display:flex;align-items:center;gap:8px;overflow:hidden">
-      <span>🍳</span>
-      <span id="focusBarText" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cooking Focus Mode: Active</span>
-      <span style="font-size:10px;opacity:0.85;background:rgba(255,255,255,0.18);padding:1px 6px;border-radius:4px">Ecran Activ / Screen Awake</span>
+  <!-- Focus Mode Floating Window (Draggable, Collapsible, Expandable 80vw x 50vh window) -->
+  <div id="focusRecipeWindow" class="focus-recipe-window hidden" role="dialog" aria-label="Cooking Focus Window">
+    <div class="focus-win-header" id="focusWinHeader">
+      <div class="focus-win-title-area" id="focusWinTitleArea" title="Tap to expand / collapse">
+        <span style="font-size:15px">🍳</span>
+        <span class="focus-win-title" id="focusWinTitle">Cooking Focus</span>
+        <span class="focus-win-badge" id="focusWinAwakeBadge">Awake</span>
+      </div>
+      <div class="focus-win-actions">
+        <button type="button" class="focus-win-btn" id="focusWinCollapseBtn" title="Collapse / Minimize" aria-label="Minimize">−</button>
+        <button type="button" class="focus-win-btn" id="focusWinExpandBtn" title="Expand / Restore" aria-label="Expand">▢</button>
+        <button type="button" class="focus-win-btn danger" id="focusWinCloseBtn" title="Exit Focus Mode" aria-label="Close">✕</button>
+      </div>
     </div>
-    <button id="focusBarExitBtn" class="act-btn small danger" type="button" style="padding:2px 8px;font-size:11px;background:#ef4444;color:#fff;border:none">✕ Exit</button>
+    <div class="focus-win-body" id="focusWinBody">
+      <!-- Injected by renderFocusWindowContent -->
+    </div>
   </div>
 
   <main class="main-content">
@@ -8344,7 +8553,7 @@ const CUP_DENSITY = {
     function nut(key) { return NX[key] || N[key] || null; }
     function sumMacros(list) { return list.reduce((a, s) => { const m = ingMacros(s); a.kcal += m.k; a.protein += m.p; a.fat += m.f; a.netCarbs += m.c; return a; }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 }); }
 
-    const SYN = { 'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey', 'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato', 'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds', 'large eggs': 'egg', 'eggs': 'egg', 'jamon': 'jamon serrano', 'jamón': 'jamón serrano', 'prosciutto': 'prosciutto di Parma' };
+    const SYN = { 'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey', 'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato', 'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds', 'large eggs': 'egg', 'eggs': 'egg', 'jamon': 'jamon serrano', 'jamón': 'jamon serrano', 'prosciutto': 'prosciutto di Parma' };
     function canon(name) {
   let n = String(name || '').toLowerCase().trim();
   const stripped = (typeof stripRo === 'function') ? stripRo(n) : n;
@@ -11767,26 +11976,268 @@ const CUP_DENSITY = {
       }
     }
 
+    let focusTimerInterval = null;
+    let focusTimerSeconds = 0;
+    let focusTimerRunning = false;
+
+    function playKitchenTimerBeep() {
+      try {
+        const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = audioCtx.createOscillator();
+        const gain = audioCtx.createGain();
+        osc.connect(gain);
+        gain.connect(audioCtx.destination);
+        osc.type = 'sine';
+        osc.frequency.setValueAtTime(880, audioCtx.currentTime);
+        gain.gain.setValueAtTime(0.3, audioCtx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.6);
+        osc.start();
+        osc.stop(audioCtx.currentTime + 0.6);
+      } catch (e) {
+        console.warn('AudioContext beep failed:', e);
+      }
+    }
+
+    function formatTimerDisplay(totalSecs) {
+      const mins = Math.floor(totalSecs / 60);
+      const secs = totalSecs % 60;
+      return `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function addFocusTimerSeconds(secs) {
+      focusTimerSeconds += secs;
+      const display = document.getElementById('focusWinTimerDisplay');
+      if (display) display.textContent = formatTimerDisplay(focusTimerSeconds);
+    }
+
+    function toggleFocusKitchenTimer() {
+      const toggleBtn = document.getElementById('focusTimerToggleBtn');
+      const display = document.getElementById('focusWinTimerDisplay');
+      if (focusTimerRunning) {
+        clearInterval(focusTimerInterval);
+        focusTimerRunning = false;
+        if (toggleBtn) { toggleBtn.textContent = '▶ Start'; toggleBtn.style.background = '#01696f'; }
+      } else {
+        if (focusTimerSeconds <= 0) focusTimerSeconds = 300;
+        if (display) {
+          display.textContent = formatTimerDisplay(focusTimerSeconds);
+          display.style.color = '#01696f';
+        }
+        focusTimerRunning = true;
+        if (toggleBtn) { toggleBtn.textContent = '⏸ Pause'; toggleBtn.style.background = '#eab308'; }
+        focusTimerInterval = setInterval(() => {
+          if (focusTimerSeconds > 0) {
+            focusTimerSeconds--;
+            if (display) display.textContent = formatTimerDisplay(focusTimerSeconds);
+            if (focusTimerSeconds === 0) {
+              clearInterval(focusTimerInterval);
+              focusTimerRunning = false;
+              if (toggleBtn) { toggleBtn.textContent = '▶ Start'; toggleBtn.style.background = '#01696f'; }
+              playKitchenTimerBeep();
+              if (display) {
+                display.textContent = '🎉 DONE!';
+                display.style.color = '#16a34a';
+              }
+              showAppToast('⏰ Kitchen Timer Finished! Check your food.');
+            }
+          }
+        }, 1000);
+      }
+    }
+
+    function resetFocusKitchenTimer() {
+      clearInterval(focusTimerInterval);
+      focusTimerRunning = false;
+      focusTimerSeconds = 0;
+      const toggleBtn = document.getElementById('focusTimerToggleBtn');
+      const display = document.getElementById('focusWinTimerDisplay');
+      if (toggleBtn) { toggleBtn.textContent = '▶ Start'; toggleBtn.style.background = '#01696f'; }
+      if (display) { display.textContent = '00:00'; display.style.color = '#01696f'; }
+    }
+
+    function initFocusWindowDraggable() {
+      const winEl = document.getElementById('focusRecipeWindow');
+      const headerEl = document.getElementById('focusWinHeader');
+      if (!winEl || !headerEl || winEl._dragInitialized) return;
+      winEl._dragInitialized = true;
+
+      let isDragging = false;
+      let startX = 0, startY = 0;
+      let initialLeft = 0, initialTop = 0;
+
+      function onPointerDown(e) {
+        if (e.target.closest('button')) return;
+        isDragging = true;
+        winEl.style.transition = 'none';
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        startX = clientX;
+        startY = clientY;
+
+        const rect = winEl.getBoundingClientRect();
+        initialLeft = rect.left;
+        initialTop = rect.top;
+
+        document.addEventListener('mousemove', onPointerMove, { passive: false });
+        document.addEventListener('mouseup', onPointerUp);
+        document.addEventListener('touchmove', onPointerMove, { passive: false });
+        document.addEventListener('touchend', onPointerUp);
+        document.addEventListener('touchcancel', onPointerUp);
+      }
+
+      function onPointerMove(e) {
+        if (!isDragging) return;
+        if (e.cancelable) e.preventDefault();
+
+        const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+        const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+        const dx = clientX - startX;
+        const dy = clientY - startY;
+
+        let newLeft = initialLeft + dx;
+        let newTop = initialTop + dy;
+
+        const maxLeft = window.innerWidth - winEl.offsetWidth;
+        const maxTop = window.innerHeight - winEl.offsetHeight;
+        newLeft = Math.max(0, Math.min(newLeft, Math.max(0, maxLeft)));
+        newTop = Math.max(0, Math.min(newTop, Math.max(0, maxTop)));
+
+        winEl.style.left = `${newLeft}px`;
+        winEl.style.top = `${newTop}px`;
+      }
+
+      function onPointerUp() {
+        if (!isDragging) return;
+        isDragging = false;
+        winEl.style.transition = '';
+        document.removeEventListener('mousemove', onPointerMove);
+        document.removeEventListener('mouseup', onPointerUp);
+        document.removeEventListener('touchmove', onPointerMove);
+        document.removeEventListener('touchend', onPointerUp);
+        document.removeEventListener('touchcancel', onPointerUp);
+      }
+
+      headerEl.addEventListener('mousedown', onPointerDown);
+      headerEl.addEventListener('touchstart', onPointerDown, { passive: false });
+
+      // Title click to expand if collapsed
+      const titleArea = document.getElementById('focusWinTitleArea');
+      titleArea?.addEventListener('click', () => {
+        if (winEl.classList.contains('collapsed')) {
+          winEl.classList.remove('collapsed');
+          const collapseBtn = document.getElementById('focusWinCollapseBtn');
+          if (collapseBtn) collapseBtn.textContent = '−';
+        }
+      });
+
+      // Controls
+      document.getElementById('focusWinCollapseBtn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        winEl.classList.toggle('collapsed');
+        const isCollapsed = winEl.classList.contains('collapsed');
+        const collapseBtn = document.getElementById('focusWinCollapseBtn');
+        if (collapseBtn) collapseBtn.textContent = isCollapsed ? '▢' : '−';
+      });
+
+      document.getElementById('focusWinExpandBtn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (winEl.classList.contains('collapsed')) {
+          winEl.classList.remove('collapsed');
+          const collapseBtn = document.getElementById('focusWinCollapseBtn');
+          if (collapseBtn) collapseBtn.textContent = '−';
+        } else {
+          winEl.classList.toggle('maximized');
+        }
+      });
+
+      document.getElementById('focusWinCloseBtn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (focusRecipeId) toggleFocusMode(focusRecipeId);
+      });
+    }
+
+    function renderFocusWindowContent(recipeId) {
+      const body = document.getElementById('focusWinBody');
+      const titleEl = document.getElementById('focusWinTitle');
+      if (!body) return;
+      const r = recipeMap[recipeId];
+      if (!r) {
+        body.innerHTML = '<p class="muted">No recipe selected.</p>';
+        return;
+      }
+
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const displayName = getRecipeDisplayName(r, settings?.lang);
+      if (titleEl) titleEl.textContent = displayName;
+
+      const rawSteps = (r.method || '').split(/(?<=[.!?])\s+(?=[A-Z0-9])/).filter(s => s.trim().length > 0);
+      const stepsHtml = rawSteps.length > 1
+        ? rawSteps.map((st, idx) => `<div class="focus-method-step"><strong>${idx + 1}.</strong> ${escapeHtml(st)}</div>`).join('')
+        : `<div class="focus-method-step">${escapeHtml(r.method || '')}</div>`;
+
+      const ingsHtml = (r.ingredients || []).map((ing, idx) => {
+        return `<label class="focus-ing-check-item" data-idx="${idx}">
+          <input type="checkbox" onchange="this.closest('.focus-ing-check-item').classList.toggle('done', this.checked)">
+          <span>${escapeHtml(ing)}</span>
+        </label>`;
+      }).join('');
+
+      const tips = getRecipeTips(r, isRo);
+      const tipsHtml = tips.length > 0
+        ? `<div class="focus-tips-box">${tips.join('<br>')}</div>`
+        : '';
+
+      body.innerHTML = `
+        <div class="focus-win-macros">
+          <span class="focus-macro-chip" style="background:rgba(239,68,68,0.12);color:#ef4444">🔥 ${r.kcal} kcal</span>
+          <span class="focus-macro-chip" style="background:rgba(59,130,246,0.12);color:#3b82f6">🥩 ${r.protein}g P</span>
+          <span class="focus-macro-chip" style="background:rgba(234,179,8,0.12);color:#ca8a04">🥑 ${r.fat}g F</span>
+          <span class="focus-macro-chip" style="background:rgba(34,197,94,0.12);color:#16a34a">🥬 ${r.netCarbs}g C</span>
+          ${r.cuisine ? `<span class="focus-macro-chip">${escapeHtml(r.flag || '')} ${escapeHtml(r.cuisine)}</span>` : ''}
+        </div>
+
+        <div class="focus-timer-section">
+          <div style="display:flex;align-items:center;gap:6px">
+            <span style="font-size:14px">⏱️</span>
+            <span class="focus-timer-display" id="focusWinTimerDisplay">${formatTimerDisplay(focusTimerSeconds)}</span>
+          </div>
+          <div class="focus-timer-pills">
+            <button type="button" class="focus-timer-btn" onclick="addFocusTimerSeconds(60)">+1m</button>
+            <button type="button" class="focus-timer-btn" onclick="addFocusTimerSeconds(300)">+5m</button>
+            <button type="button" class="focus-timer-btn" onclick="addFocusTimerSeconds(600)">+10m</button>
+            <button type="button" class="focus-timer-btn" id="focusTimerToggleBtn" onclick="toggleFocusKitchenTimer()" style="font-weight:bold;background:#01696f;color:#fff">${focusTimerRunning ? '⏸ Pause' : '▶ Start'}</button>
+            <button type="button" class="focus-timer-btn" onclick="resetFocusKitchenTimer()" style="color:#ef4444">↺</button>
+          </div>
+        </div>
+
+        <div class="focus-section-label">📋 ${isRo ? 'Ingrediente (Bifează pe măsură ce gătești)' : 'Ingredients (Check off as you cook)'}</div>
+        <div style="margin-bottom:10px">${ingsHtml}</div>
+
+        <div class="focus-section-label">🍳 ${isRo ? 'Instrucțiuni de preparare' : 'Cooking Method'}</div>
+        <div style="margin-bottom:8px">${stepsHtml}</div>
+
+        ${tipsHtml}
+      `;
+    }
+
     function toggleFocusMode(recipeId) {
       const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
       if (focusRecipeId === recipeId) {
-        // Turn OFF Focus Mode
         focusRecipeId = null;
         localStorage.removeItem('keto_focus_recipe_id');
         setDeviceKeepScreenOn(false);
         updateFocusModeUI();
         showAppToast(isRo ? '🔓 Mod Focus dezactivat (ecranul revine la normal)' : '🔓 Focus Mode exited (screen timeout restored)');
       } else {
-        // Turn ON Focus Mode
         focusRecipeId = recipeId;
         localStorage.setItem('keto_focus_recipe_id', recipeId);
         setDeviceKeepScreenOn(true);
         updateFocusModeUI();
         const r = recipeMap[recipeId];
-        showAppToast(isRo ? `🍳 Mod Focus activat pentru "${r?.name || ''}"! Ecranul va rămâne aprins.` : `🍳 Cooking Focus Mode active for "${r?.name || ''}"! Screen stays awake.`);
+        showAppToast(isRo ? `🍳 Mod Focus activat pentru "${r?.name || ''}"! Fereastra de gătit este deschisă.` : `🍳 Cooking Focus active for "${r?.name || ''}"! Cooking window opened.`);
       }
       if (activeRecipeId === recipeId) {
-        // Re-render detail card to update toggle button state
         const detail = document.getElementById(`recipeDetail_${recipeId}`);
         if (detail && recipeMap[recipeId]) {
           detail.innerHTML = getRecipeDetailHtml(recipeMap[recipeId]);
@@ -11796,15 +12247,16 @@ const CUP_DENSITY = {
     }
 
     function updateFocusModeUI() {
-      const bar = document.getElementById('focusModeFloatingBar');
-      const text = document.getElementById('focusBarText');
-      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const winEl = document.getElementById('focusRecipeWindow');
+      initFocusWindowDraggable();
       if (focusRecipeId && recipeMap[focusRecipeId]) {
-        const r = recipeMap[focusRecipeId];
-        if (bar) bar.classList.remove('hidden');
-        if (text) text.textContent = (isRo ? '🍳 Mod Focus Gătit: ' : '🍳 Cooking Focus: ') + r.name;
+        if (winEl) {
+          winEl.classList.remove('hidden');
+          renderFocusWindowContent(focusRecipeId);
+        }
       } else {
-        if (bar) bar.classList.add('hidden');
+        if (winEl) winEl.classList.add('hidden');
+        resetFocusKitchenTimer();
       }
     }
 
@@ -11814,24 +12266,19 @@ const CUP_DENSITY = {
         focusRecipeId = savedFocusId;
         setDeviceKeepScreenOn(true);
         updateFocusModeUI();
-        // If app was closed while on, reopening immediately displays that focused recipe as primary screen!
-        switchTab('recipes');
-        setTimeout(() => {
-          toggleRecipeDetail(savedFocusId);
-          const card = document.querySelector(`[data-card-rid="${savedFocusId}"]`);
-          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 200);
       }
     }
 
     /* FOREIGN RECIPE TRANSLATIONS (ROMANIAN & ENGLISH) */
     const RECIPE_TRANSLATIONS = {
       // Spanish
-      'Gambas al Ajillo': { en: 'Garlic Sautéed Shrimp', ro: 'Creveți cu usturoi și ulei de măsline' },
+      'Gambas al Ajillo': { en: 'Garlic Sauteed Shrimp', ro: 'Creveți cu usturoi și ulei de măsline' },
       'Tortilla Española': { en: 'Spanish Omelette', ro: 'Omletă spaniolă' },
+      'Tortilla Espanola': { en: 'Spanish Omelette', ro: 'Omletă spaniolă' },
       'Gazpacho Andaluz': { en: 'Andalusian Chilled Tomato Soup', ro: 'Supă rece andaluză de roșii' },
       'Pollo al Ajillo': { en: 'Spanish Garlic Chicken', ro: 'Pui cu usturoi în stil spaniol' },
       'Albóndigas en Salsa': { en: 'Spanish Meatballs in Sauce', ro: 'Chifteluțe spaniole în sos' },
+      'Albondigas en Salsa': { en: 'Spanish Meatballs in Sauce', ro: 'Chifteluțe spaniole în sos' },
       'Pulpo a la Gallega': { en: 'Galician Style Octopus', ro: 'Caracatiță cu boia și ulei de măsline' },
       'Pisto Manchego': { en: 'Spanish Braised Vegetables', ro: 'Ghiveci spaniol de legume' },
       // French
@@ -11839,10 +12286,12 @@ const CUP_DENSITY = {
       'Coq au Vin': { en: 'Chicken Braised in Red Wine', ro: 'Pui în sos de vin roșu' },
       'Ratatouille': { en: 'Provençal Vegetable Stew', ro: 'Ghiveci provensal de legume' },
       'Salade Niçoise': { en: 'Nicoise Tuna Salad', ro: 'Salată franțuzească cu ton' },
+      'Salade Nicoise': { en: 'Nicoise Tuna Salad', ro: 'Salată franțuzească cu ton' },
       'Quiche Lorraine (Crustless)': { en: 'Crustless Bacon & Egg Tart', ro: 'Tartă franțuzească cu bacon și ouă' },
       'Steak au Poivre': { en: 'Steak with Creamy Peppercorn Sauce', ro: 'Friptură de vită cu sos de piper' },
       'Confit de Canard': { en: 'Crispy Slow Duck Confit', ro: 'Pulpă de rață confiată' },
       'Soupe à l\'Oignon (Keto)': { en: 'French Onion Soup', ro: 'Supă franțuzească de ceapă' },
+      'Soupe a l\'Oignon (Keto)': { en: 'French Onion Soup', ro: 'Supă franțuzească de ceapă' },
       // Italian
       'Osso Buco alla Milanese': { en: 'Braised Veal Shank', ro: 'Rondel de vită în sos milanez' },
       'Pollo alla Cacciatora': { en: 'Hunter Style Chicken Stew', ro: 'Pui vânătoresc cu roșii și ierburi' },
@@ -11857,8 +12306,10 @@ const CUP_DENSITY = {
       'Wiener Schnitzel (Keto Crust)': { en: 'Viennese Cutlet in Keto Crust', ro: 'Șnițel vienez în crustă keto' },
       'Sauerbraten': { en: 'German Marinated Pot Roast', ro: 'Friptură marinată de vită în stil german' },
       'Zürcher Geschnetzeltes': { en: 'Sliced Meat in Mushroom Cream', ro: 'Fâșii de carne în sos cremos de ciuperci' },
+      'Zurcher Geschnetzeltes': { en: 'Sliced Meat in Mushroom Cream', ro: 'Fâșii de carne în sos cremos de ciuperci' },
       'Schweinebraten': { en: 'Bavarian Roast Pork with Crackling', ro: 'Friptură bavareză de porc la cuptor' },
       'Königsberger Klopse': { en: 'Meatballs in Creamy Caper Sauce', ro: 'Chifteluțe germane în sos de capere' },
+      'Konigsberger Klopse': { en: 'Meatballs in Creamy Caper Sauce', ro: 'Chifteluțe germane în sos de capere' },
       'Goulash': { en: 'Hungarian Spiced Beef Stew', ro: 'Gulaș unguresc de vită cu boia' },
       // Greek
       'Moussaka (Keto)': { en: 'Greek Eggplant & Meat Casserole', ro: 'Musaca grecească cu vinete' },
@@ -11931,8 +12382,8 @@ const CUP_DENSITY = {
           : '<strong>🍗 Poultry substitutions:</strong> Chicken thighs can be swapped for chicken breast (reduce cooking time by 3-4 mins to stay juicy), turkey cutlets, or duck breast for richer keto fats.');
       } else if (/pork belly|pork shoulder|pork loin|jamon|serrano|prosciutto|bacon/.test(text)) {
         tips.push(isRo
-          ? '<strong>🥓 Înlocuire porc:</strong> Pieptul de porc (pork belly) poate fi înlocuit cu ceafă sau cotlet fraged. Șunca jamón serrano sau prosciutto di Parma pot fi înlocuite cu bacon afumat crocant.'
-          : '<strong>🥓 Pork substitutions:</strong> Pork belly swaps well with marbled pork shoulder or thick-cut chops. Jamón serrano or prosciutto can be swapped with crispy smoked streaky bacon.');
+          ? '<strong>🥓 Înlocuire porc:</strong> Pieptul de porc (pork belly) poate fi înlocuit cu ceafă sau cotlet fraged. Șunca jamon serrano sau prosciutto di Parma pot fi înlocuite cu bacon afumat crocant.'
+          : '<strong>🥓 Pork substitutions:</strong> Pork belly swaps well with marbled pork shoulder or thick-cut chops. Jamon serrano or prosciutto can be swapped with crispy smoked streaky bacon.');
       } else if (/ground beef|ground pork|ground lamb|mince/.test(text)) {
         tips.push(isRo
           ? '<strong>🥩 Carne tocată:</strong> Carnea de vită 80/20 poate fi combinată cu carne de porc sau miel tocat pentru un gust mai aromat și un raport optim de grăsimi keto.'
@@ -12076,8 +12527,36 @@ const CUP_DENSITY = {
         </svg>`);
       }
 
-      // Breakfast & Eggs
-      if (/egg|frittata|omelette|scrambled|shakshuka|breakfast/.test(text) || meal === 'breakfast') {
+      // Protein Smoothies, Shakes & Yogurt / Skyr Bowls
+      if (/smoothie|shake|protein shake|skyr|chia|yogurt bowl|parfait|protein bowl|cottage cheese.*bowl|bol proteic/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_sm" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#4a154b"/><stop offset="100%" stop-color="#1e0520"/></radialGradient>
+            <linearGradient id="sm_drink" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#e879f9"/><stop offset="50%" stop-color="#c026d3"/><stop offset="100%" stop-color="#9333ea"/></linearGradient>
+            <linearGradient id="cup_gl" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ffffff" stop-opacity="0.35"/><stop offset="100%" stop-color="#ffffff" stop-opacity="0.08"/></linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_sm)"/>
+          <ellipse cx="60" cy="94" rx="38" ry="12" fill="#120214" opacity="0.6"/>
+          <path d="M42 42 L48 86 Q60 90 72 86 L78 42 Z" fill="url(#sm_drink)"/>
+          <path d="M42 42 L48 86 Q60 90 72 86 L78 42 Z" fill="url(#cup_gl)"/>
+          <ellipse cx="60" cy="42" rx="18" ry="5" fill="#f5d0fe"/>
+          <ellipse cx="60" cy="42" rx="16" ry="4" fill="#d946ef"/>
+          <line x1="64" y1="44" x2="74" y2="20" stroke="#f43f5e" stroke-width="4.5" stroke-linecap="round"/>
+          <line x1="64" y1="44" x2="74" y2="20" stroke="#ffffff" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="3,3"/>
+          <circle cx="53" cy="40" r="4.5" fill="#3b82f6"/>
+          <circle cx="52" cy="39" r="1.5" fill="#93c5fd"/>
+          <circle cx="61" cy="38" r="4" fill="#6366f1"/>
+          <circle cx="60" cy="37" r="1.3" fill="#c7d2fe"/>
+          <circle cx="67" cy="41" r="3.5" fill="#ec4899"/>
+          <path d="M50 36 C46 30 52 26 56 31 C53 35 50 36 50 36 Z" fill="#22c55e"/>
+          <circle cx="36" cy="32" r="1.5" fill="#fbcfe8" opacity="0.8"/>
+          <circle cx="86" cy="48" r="1.2" fill="#fbcfe8" opacity="0.8"/>
+          <text x="60" y="112" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#f0abfc" font-family="sans-serif">🥤 Protein Smoothie & Bowl</text>
+        </svg>`);
+      }
+
+      // Breakfast & Eggs (strictly authentic egg terms, never catch arbitrary breakfast or bowls)
+      if (/\b(egg|eggs|frittata|omelet|omelette|scrambled|shakshuka|sunny side|poached|benedict|tamagoyaki|oua|omleta)\b/i.test(text)) {
         return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
           <defs>
             <radialGradient id="bg_eg" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#382b14"/><stop offset="100%" stop-color="#171206"/></radialGradient>
@@ -14461,7 +14940,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.5';
+    const FALLBACK_APP_VERSION = '1.0.6';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -14624,6 +15103,30 @@ const CUP_DENSITY = {
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
       {
+        version: '1.0.6',
+        date: '16 Oct 2026',
+        items: {
+          ro: [
+            '🪟 Mod Focus ca Fereastră Flotantă (Windowed Page): afișează exclusiv rețeta activă pe 80% din lățime și 50% din înălțime',
+            '✋ Fereastră complet mobilă (drag-and-drop), pliabilă într-o pastilă compactă de 48px și extensibilă pentru vizualizare completă',
+            '⏱️ Cronometru inteligent de bucătărie încorporat (+1m, +5m, +10m) cu avertizare sonoră și ecran activ permanent',
+            '📋 Listă interactivă de verificare a ingredientelor: bifează ingredientele pe măsură ce le adaugi în cratiță',
+            '🥤 Ilustrație SVG nouă și dedicată pentru Smoothie-uri, Shake-uri proteice și Boluri cu Skyr / Iaurt',
+            '🍳 Corectare atribuire imagini SVG: ilustrația cu ouă este strict rezervată preparatelor autentice din ouă',
+            '🔤 Corectare codare caractere străine: conversie la echivalent englezesc standard (jamon, saute, etc.) eliminând erorile de afișare'
+          ],
+          en: [
+            '🪟 Focus Mode Windowed Page: dedicated floating recipe window at 80% screen width and 50% screen height',
+            '✋ Fully draggable, collapsible into a sleek 48px mini pill, and expandable back to recipe details',
+            '⏱️ Built-in interactive kitchen timer (+1m, +5m, +10m) with acoustic alert and screen-awake cooking lock',
+            '📋 Interactive ingredient checklist: check off items in real time as you add them to your pan or pot',
+            '🥤 Dedicated representative SVG illustrations for Protein Smoothies, Shakes & Skyr / Yogurt Bowls',
+            '🍳 Fixed SVG assignment logic: farm-fresh egg illustrations strictly reserved for authentic egg dishes',
+            '🔤 Cleaned foreign accented letters to standard English equivalents (jamon, saute, etc.) fixing character display errors'
+          ]
+        }
+      },
+      {
         version: '1.0.5',
         date: '16 Oct 2026',
         items: {
@@ -14632,7 +15135,7 @@ const CUP_DENSITY = {
             '🎨 Ilustrații vectoriale SVG reprezentative generate automat pentru toate categoriile culinare',
             '🌍 Traduceri în paranteză pentru rețete internaționale în funcție de limba selectată (ex: Boeuf Bourguignon (Vită înăbușită în vin roșu))',
             '💡 Secțiune nouă „Sfaturi & Înlocuiri Inteligente” sub Modul de preparare (tăieturi de carne alternative, opțiuni fără lactate, păstrare)',
-            '🥩 Denumiri exacte și autentice de carne în rețete și baza de date nutrițională (jamón serrano, ribeye, shank, brisket, flank, etc.)',
+            '🥩 Denumiri exacte și autentice de carne în rețete și baza de date nutrițională (jamon serrano, ribeye, shank, brisket, flank, etc.)',
             '🛒 Legături directe în lista de cumpărături: fiecare ingredient afișează rețeta aferentă cu navigare directă la 1 click',
             '🥘 Foaie nouă de gătit în serie (Batch Cook Sheet) pe o zi selectată: bifează mâncărurile gătite și consumă stocul automat',
             '📊 Rezumat macronutrienți mutat în partea superioară a planificatorului: sumă exactă pe ziua activă și medii zilnice la afișarea tuturor zilelor',
@@ -14643,7 +15146,7 @@ const CUP_DENSITY = {
             '🎨 AI-assigned representative vector SVG illustrations across all culinary categories',
             '🌍 Foreign language recipe translations in parentheses matching app language (e.g., Boeuf Bourguignon (Beef Braised in Red Wine))',
             '💡 New Chef Tips & Smart Substitutions section below Method (meat cut swaps, dairy-free alternatives, meal storage)',
-            '🥩 Exact cuts of meat and authentic naming across all 215 recipes and macronutrient database (jamón serrano, ribeye, brisket, etc.)',
+            '🥩 Exact cuts of meat and authentic naming across all 215 recipes and macronutrient database (jamon serrano, ribeye, brisket, etc.)',
             '🛒 Direct recipe shortcuts in Shopping List: each item displays its source recipe badge with 1-click redirect',
             '🥘 Revamped single-day Batch Cook Sheet: mark cooked dishes and automatically deplete used stock ingredients',
             '📊 Macronutrient summary repositioned to top of Planner: exact macro sum for single-day view, daily averages for all-days view',
@@ -15762,21 +16265,8 @@ const CUP_DENSITY = {
       updateSyncUI();
       checkFocusModeOnBoot();
 
-      // Focus Mode Floating Bar events
-      document.getElementById('focusBarExitBtn')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        if (focusRecipeId) toggleFocusMode(focusRecipeId);
-      });
-      document.getElementById('focusModeFloatingBar')?.addEventListener('click', () => {
-        if (focusRecipeId) {
-          switchTab('recipes');
-          setTimeout(() => {
-            toggleRecipeDetail(focusRecipeId);
-            const card = document.querySelector(`[data-card-rid="${focusRecipeId}"]`);
-            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 150);
-        }
-      });
+      // Initialize Focus Recipe Window drag & controls
+      initFocusWindowDraggable();
 
       document.getElementById('suggestFromStockBtn')?.addEventListener('click', openPantrySuggestions);
       document.getElementById('stockSuggestMealsBtn')?.addEventListener('click', openPantrySuggestions);
