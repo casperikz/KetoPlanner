@@ -1,4 +1,4 @@
-// recipes-data.js
+﻿// recipes-data.js
 // 41 World Cuisines Keto Recipe Library for Keto Planner
 // High-fat, low-carb (<5% net carbs), authentic international & Romanian recipes
 
@@ -87,7 +87,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well. Reheat gently.",
-    ingredients: ["200 g chicken thigh", "80 g tomato passata", "35 g olives", "15 ml olive oil", "50 g mushrooms", "4 g garlic", "2 g rosemary", "2 g oregano", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "80 g tomato passata", "35 g olives", "15 ml olive oil", "50 g mushrooms", "4 g garlic", "2 g rosemary", "2 g oregano", "1 g salt"],
     method: "Brown skin-on chicken thighs in extra virgin olive oil until crisp. Sauté sliced mushrooms and minced garlic in pan drippings. Return chicken, add tomato passata, kalamata olives, rosemary, and oregano. Simmer covered for 25 minutes until chicken is tender."
   },
   {
@@ -103,7 +103,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 4 days fridge",
     freezer: "Freezes very well in individual slices.",
-    ingredients: ["180 g zucchini", "140 g beef mince", "60 g tomato passata", "35 ml heavy cream", "30 g mozzarella", "20 g parmesan", "10 g butter", "3 g garlic", "2 g oregano"],
+    ingredients: ["180 g zucchini", "140 g ground beef 80/20", "60 g tomato passata", "35 ml heavy cream", "30 g mozzarella", "20 g parmesan", "10 g butter", "3 g garlic", "2 g oregano"],
     method: "Slice zucchini thin lengthwise, salt, and pat dry with paper towels to eliminate excess water. Brown beef mince with garlic, oregano, and passata. Whisk heavy cream with butter and parmesan for the keto bechamel. Layer zucchini, beef ragu, bechamel, and mozzarella, then bake at 190°C for 25 minutes until bubbling golden."
   },
   {
@@ -119,7 +119,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g beef strips", "160 g cauliflower rice", "20 g butter", "15 ml olive oil", "4 g garlic", "5 g parsley", "1 lemon", "30 ml heavy cream", "15 g parmesan", "1 g salt"],
+    ingredients: ["200 g beef shank", "160 g cauliflower rice", "20 g butter", "15 ml olive oil", "4 g garlic", "5 g parsley", "1 lemon", "30 ml heavy cream", "15 g parmesan", "1 g salt"],
     method: "Slow braise beef shank or beef until fork tender. In a separate skillet, sauté cauliflower rice in butter and olive oil with a pinch of saffron. Stir in cream and parmesan until thick and creamy. Top beef with fresh gremolata (lemon zest, minced garlic, and fresh parsley)."
   },
   {
@@ -171,7 +171,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze cooked pork skewers only.",
-    ingredients: ["180 g pork strips", "70 g greek yogurt 10%", "50 g cucumber", "35 g feta", "25 g olives", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 lemon"],
+    ingredients: ["180 g pork shoulder cubes", "70 g greek yogurt 10%", "50 g cucumber", "35 g feta", "25 g olives", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 lemon"],
     method: "Marinate pork skewers in olive oil, lemon juice, oregano, and garlic. Grill or broil over high heat until browned and juicy. Grate cucumber, squeeze out moisture, and stir into Greek yogurt 10% with minced garlic and olive oil for tzatziki. Serve with cucumber, feta, and kalamata olives."
   },
   {
@@ -187,7 +187,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 4 days fridge",
     freezer: "Freezes very well in portions.",
-    ingredients: ["150 g eggplant", "130 g lamb", "60 g tomato passata", "60 g greek yogurt 10%", "1 egg", "25 g parmesan", "15 ml olive oil", "3 g garlic", "1 g cinnamon"],
+    ingredients: ["150 g eggplant", "130 g ground lamb", "60 g tomato passata", "60 g greek yogurt 10%", "1 egg", "25 g parmesan", "15 ml olive oil", "3 g garlic", "1 g cinnamon"],
     method: "Slice eggplant, brush with olive oil, and roast until tender. Brown minced lamb with garlic, tomato passata, oregano, and cinnamon. Whisk Greek yogurt 10% with egg and parmesan for the crust. Layer eggplant and lamb in a baking dish, top with yogurt crust, and bake at 180°C for 30 minutes until golden."
   },
   {
@@ -203,7 +203,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["180 g lamb", "45 g feta", "15 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g rosemary", "1 lemon", "2 g oregano", "1 g salt"],
+    ingredients: ["180 g lamb shoulder", "45 g feta", "15 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g rosemary", "1 lemon", "2 g oregano", "1 g salt"],
     method: "Place seasoned lamb shoulder chunks on parchment paper with garlic cloves, bell pepper slices, olive oil, lemon juice, and rosemary. Top with chunks of feta. Seal parchment parcel tightly and slow roast at 160°C for 2.5 hours until fork tender and juicy."
   },
   {
@@ -255,7 +255,7 @@ const RECIPES_DATA = [
     netCarbs: 7,
     batch: "3 servings, 3 days fridge",
     freezer: "Best fresh; freeze cooked beef only.",
-    ingredients: ["180 g beef strips", "150 g cauliflower rice", "50 g bell pepper", "40 g red onion", "40 g tomato", "15 ml olive oil", "12 g soy sauce", "5 ml vinegar", "5 g cilantro"],
+    ingredients: ["180 g beef flank steak strips", "150 g cauliflower rice", "50 g bell pepper", "40 g red onion", "40 g tomato", "15 ml olive oil", "12 g soy sauce", "5 ml vinegar", "5 g cilantro"],
     method: "Sear beef strips in a smoking hot wok with olive oil. Remove beef, then quickly blister sliced bell pepper, red onion, and tomato wedges. Deglaze with tamari soy sauce and red wine vinegar. Toss beef back in with fresh cilantro and serve over steamed buttered cauliflower rice."
   },
   {
@@ -287,7 +287,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze raw marinated skewers.",
-    ingredients: ["190 g beef strips", "25 g mayonnaise", "30 g greek yogurt 10%", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "2 g cumin", "2 g paprika", "5 g cilantro"],
+    ingredients: ["190 g beef sirloin strips", "25 g mayonnaise", "30 g greek yogurt 10%", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "2 g cumin", "2 g paprika", "5 g cilantro"],
     method: "Marinate skewered beef chunks in red wine vinegar, garlic, cumin, paprika, and olive oil for at least 2 hours. Grill on high heat for 3 minutes per side until charred. Whisk mayonnaise and Greek yogurt 10% with minced cilantro and lime for the dipping sauce."
   },
   {
@@ -355,7 +355,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["200 g chicken thigh", "20 ml olive oil", "15 g butter", "50 g lettuce", "10 ml vinegar", "4 g garlic", "2 g chili flakes", "1 lemon", "2 g paprika"],
+    ingredients: ["200 g chicken thigh (bone-in)", "20 ml olive oil", "15 g butter", "50 g lettuce", "10 ml vinegar", "4 g garlic", "2 g chili flakes", "1 lemon", "2 g paprika"],
     method: "Blend olive oil, lemon juice, red wine vinegar, minced garlic, paprika, and crushed piri-piri chilies into a marinade. Coat chicken thighs and grill or roast at 200°C for 30 minutes, basting with melted butter and leftover sauce. Serve with a fresh dressed green salad."
   },
   {
@@ -439,7 +439,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "30 g ham", "80 g bell pepper", "70 g tomato passata", "15 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "30 g jamÃ³n serrano", "80 g bell pepper", "70 g tomato passata", "15 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
     method: "Sear chicken thighs in olive oil until skin is crisp and browned. Remove chicken and sauté diced jamón serrano or ham with sliced red bell peppers, onion, and garlic. Stir in tomato passata and rosemary. Return chicken, cover, and braise on low heat for 25 minutes until tender and rich."
   },
   {
@@ -455,7 +455,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["120 g beef mince", "60 g pork mince", "1 egg", "15 g almond flour", "15 ml olive oil", "50 g tomato passata", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
+    ingredients: ["120 g ground beef 80/20", "60 g ground pork", "1 egg", "15 g almond flour", "15 ml olive oil", "50 g tomato passata", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
     method: "Mix beef and pork mince with egg, almond flour, parsley, and garlic. Form meatballs and brown in olive oil. Sauté finely diced onion in the pan, deglaze with tomato passata and bone broth (with optional pinch of saffron). Simmer meatballs in the rich sauce for 15 minutes."
   },
   {
@@ -507,7 +507,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw breaded cutlets.",
-    ingredients: ["170 g pork", "25 g keto panko", "1 egg", "100 g cabbage", "15 ml olive oil", "10 g mayonnaise", "5 g sesame oil", "10 ml soy sauce", "1 g salt"],
+    ingredients: ["170 g pork loin cutlet", "25 g keto panko", "1 egg", "100 g cabbage", "15 ml olive oil", "10 g mayonnaise", "5 g sesame oil", "10 ml soy sauce", "1 g salt"],
     method: "Pound pork cutlet to even thickness and season with salt. Dip in beaten egg, then press firmly into crushed keto panko or pork rinds. Pan-fry in oil until golden and crunchy (3-4 mins per side). Serve with finely shredded white cabbage tossed with mayonnaise and sesame oil."
   },
   {
@@ -591,7 +591,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze raw shaped kebabs.",
-    ingredients: ["180 g lamb", "70 g greek yogurt 10%", "30 g red onion", "40 g bell pepper", "4 g garlic", "15 ml olive oil", "2 g cumin", "2 g paprika", "5 g parsley", "1 g salt"],
+    ingredients: ["180 g ground lamb", "70 g greek yogurt 10%", "30 g red onion", "40 g bell pepper", "4 g garlic", "15 ml olive oil", "2 g cumin", "2 g paprika", "5 g parsley", "1 g salt"],
     method: "Knead minced lamb with finely minced red bell pepper, garlic, cumin, paprika, and salt until tacky. Mold onto wide flat skewers and grill over high heat until charred and juicy. Mix sliced red onion with fresh parsley and olive oil. Serve with cool garlic-infused Greek yogurt 10%."
   },
   {
@@ -607,7 +607,7 @@ const RECIPES_DATA = [
     netCarbs: 7,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g eggplant", "140 g beef mince", "60 g tomato passata", "20 ml olive oil", "30 g onion", "4 g garlic", "1 g cumin", "5 g parsley", "1 g salt"],
+    ingredients: ["150 g eggplant", "140 g ground beef 80/20", "60 g tomato passata", "20 ml olive oil", "30 g onion", "4 g garlic", "1 g cumin", "5 g parsley", "1 g salt"],
     method: "Slit eggplant down the center, brush generously with olive oil, and roast at 200°C for 25 minutes until tender. Sauté beef mince with onion, garlic, tomato passata, cumin, and parsley. Stuff the center of the roasted eggplants with the hot spiced beef and bake for 15 minutes."
   },
   {
@@ -707,7 +707,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["180 g beef strips", "170 g broccoli", "15 ml sesame oil", "15 ml soy sauce", "6 g garlic", "6 g ginger", "5 g spring onion", "1 g black pepper"],
+    ingredients: ["180 g beef flank steak strips", "170 g broccoli", "15 ml sesame oil", "15 ml soy sauce", "6 g garlic", "6 g ginger", "5 g spring onion", "1 g black pepper"],
     method: "Sear seasoned beef strips in smoking hot wok with sesame oil for 2 minutes and set aside. Steam broccoli florets until bright green. Sauté minced garlic and ginger in wok, add tamari soy sauce and a splash of bone broth. Return beef and broccoli, tossing quickly until coated."
   },
   {
@@ -759,7 +759,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "40 g bacon", "70 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "40 g bacon", "70 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "1 g salt"],
     method: "Crisp diced bacon in a Dutch oven and remove. Brown chicken thighs in the bacon fat. Sauté mushrooms, pearl onions, and garlic. Pour in dry red wine reduction and rich chicken stock with fresh thyme. Return chicken and bacon, simmering covered for 30 minutes until deeply savory."
   },
   {
@@ -775,7 +775,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "35 g bacon", "60 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "2 g rosemary", "1 g salt"],
+    ingredients: ["180 g beef chuck roast", "35 g bacon", "60 g mushrooms", "15 g butter", "10 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "2 g rosemary", "1 g salt"],
     method: "Sear beef cubes in rendered bacon fat until deep dark crust forms. Sauté mushrooms, garlic, and onions. Combine with rich beef bone broth and dry red wine reduction with thyme and rosemary. Simmer on low heat for 2.5 hours until beef melts on the fork."
   },
   {
@@ -843,7 +843,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "100 ml coconut milk", "15 g coconut flakes", "15 ml coconut oil", "6 g ginger", "4 g garlic", "25 g onion", "2 g turmeric", "1 g chili flakes"],
+    ingredients: ["180 g beef brisket", "100 ml coconut milk", "15 g coconut flakes", "15 ml coconut oil", "6 g ginger", "4 g garlic", "25 g onion", "2 g turmeric", "1 g chili flakes"],
     method: "Sear beef cubes in coconut oil. Toast coconut flakes until golden (kerisik). Simmer beef with rich coconut milk, minced ginger, garlic, shallots, lemongrass, chili, and toasted coconut on very low heat for 2 hours until the liquid evaporates and beef is caramelized in its own coconut oil."
   },
   {
@@ -859,7 +859,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze raw marinated chicken skewers.",
-    ingredients: ["200 g chicken thigh", "30 g peanut butter", "40 ml coconut milk", "15 ml soy sauce", "10 ml sesame oil", "4 g garlic", "4 g ginger", "1 lime"],
+    ingredients: ["200 g chicken thigh (bone-in)", "30 g peanut butter", "40 ml coconut milk", "15 ml soy sauce", "10 ml sesame oil", "4 g garlic", "4 g ginger", "1 lime"],
     method: "Marinate chicken thigh pieces in garlic, ginger, coriander, and tamari soy sauce. Thread onto skewers and grill until charred. Whisk natural peanut butter with coconut milk, soy sauce, lime juice, and chili over low heat for the dipping sauce."
   },
   {
@@ -943,7 +943,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["200 g chicken thigh", "15 g cocoa powder", "20 g almond butter", "50 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g cumin", "1 g cinnamon", "1 g chili flakes", "5 g sesame seeds"],
+    ingredients: ["200 g chicken thigh (bone-in)", "15 g cocoa powder", "20 g almond butter", "50 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g cumin", "1 g cinnamon", "1 g chili flakes", "5 g sesame seeds"],
     method: "Pan-sear chicken thighs in olive oil until skin is browned. Blend unsweetened cocoa powder, almond butter, tomato passata, garlic, cumin, Mexican chili flakes, and cinnamon with rich chicken broth. Pour over chicken and simmer for 20 minutes until mole is dark, glossy, and fragrant. Garnish with toasted sesame seeds."
   },
   {
@@ -1011,7 +1011,7 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "4 patties, 4 days fridge",
     freezer: "Freeze raw shaped patties.",
-    ingredients: ["140 g beef mince", "60 g pork mince", "35 g cașcaval", "30 g bacon", "4 g garlic", "2 g paprika", "1 g chili flakes", "1 g salt"],
+    ingredients: ["140 g ground beef 80/20", "60 g ground pork", "35 g cașcaval", "30 g bacon", "4 g garlic", "2 g paprika", "1 g chili flakes", "1 g salt"],
     method: "Knead beef and pork mince with minced garlic, paprika, and salt. Fold in finely diced aged cașcaval or Serbian cheese and crispy bacon bits. Form into a large thin gourmet patty. Grill over high heat for 4 minutes per side until charred on the outside with molten cheese inside."
   },
   {
@@ -1027,7 +1027,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "5 servings, 4 days fridge",
     freezer: "Freeze raw shaped rolls.",
-    ingredients: ["130 g beef mince", "60 g lamb", "40 g sour cream 30%", "30 g butter", "25 g red onion", "4 g garlic", "1 g salt", "1 g black pepper"],
+    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "40 g sour cream 30%", "30 g butter", "25 g red onion", "4 g garlic", "1 g salt", "1 g black pepper"],
     method: "Mix beef and lamb mince with minced garlic, salt, and black pepper. Roll into finger-sized sausages (ćevapi) and chill for 1 hour. Grill on hot cast iron until browned all over. Whip room temperature butter with sour cream 30% and a pinch of salt to make authentic homemade kajmak cream. Serve hot with diced red onion."
   },
   {
@@ -1043,7 +1043,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze rolled cutlets raw.",
-    ingredients: ["170 g pork", "35 g sour cream 30%", "20 g butter", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
+    ingredients: ["170 g pork loin cutlet", "35 g sour cream 30%", "20 g butter", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
     method: "Pound pork schnitzel thin and season with salt. Spread cold homemade kajmak (butter and sour cream 30%) across the center. Roll tightly like a cylinder. Dip in beaten egg and roll in seasoned keto panko or pork rinds. Pan-fry in hot lard until crisp and golden. Serve with lemon slices."
   },
   {
@@ -1095,7 +1095,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "60 ml heavy cream", "25 g butter", "70 g tomato passata", "40 g greek yogurt 10%", "5 g garlic", "5 g ginger", "2 g garam masala", "2 g cumin", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "60 ml heavy cream", "25 g butter", "70 g tomato passata", "40 g greek yogurt 10%", "5 g garlic", "5 g ginger", "2 g garam masala", "2 g cumin", "1 g salt"],
     method: "Marinate chicken thigh pieces in Greek yogurt 10%, garlic, ginger, and cumin, then sear until lightly charred. In a saucepan, simmer tomato passata with spices and butter until rich. Stir in heavy cream and chicken with its juices, simmering gently for 10 minutes until chicken is tender."
   },
   {
@@ -1127,7 +1127,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g lamb", "60 g greek yogurt 10%", "20 g ghee", "5 g ginger", "4 g garlic", "2 g paprika", "2 g cumin", "2 g garam masala", "1 g salt"],
+    ingredients: ["180 g lamb shoulder", "60 g greek yogurt 10%", "20 g ghee", "5 g ginger", "4 g garlic", "2 g paprika", "2 g cumin", "2 g garam masala", "1 g salt"],
     method: "Brown lamb pieces in ghee over high heat. Sauté grated ginger and garlic. Whisk Greek yogurt 10% with Kashmiri paprika, ground fennel, cumin, and garam masala. Lower heat and stir yogurt mixture into lamb spoon by spoon so it doesn't split. Simmer covered on low heat for 1.5 hours until lamb melts in your mouth."
   },
   {
@@ -1195,7 +1195,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw breaded cutlets.",
-    ingredients: ["170 g pork", "25 g keto panko", "1 egg", "140 g cabbage", "20 g butter", "15 g lard", "4 g garlic", "1 g salt", "1 lemon"],
+    ingredients: ["170 g pork loin cutlet", "25 g keto panko", "1 egg", "140 g cabbage", "20 g butter", "15 g lard", "4 g garlic", "1 g salt", "1 lemon"],
     method: "Pound pork loin cutlet thin and season with salt and pepper. Dip in beaten egg and coat thoroughly in keto panko or pork rinds. Pan-fry in hot lard until golden brown and crisp. In a separate pan, braise shredded cabbage in butter with minced garlic, dill, and black pepper."
   },
   {
@@ -1263,7 +1263,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "Broth 5 days; assemble fresh",
     freezer: "Freeze bone broth.",
-    ingredients: ["200 g konjac noodles", "170 g beef strips", "15 ml fish sauce", "10 ml sesame oil", "6 g ginger", "4 g garlic", "1 lime", "10 g cilantro", "1 g chili flakes"],
+    ingredients: ["200 g konjac noodles", "170 g beef sirloin thin slices", "15 ml fish sauce", "10 ml sesame oil", "6 g ginger", "4 g garlic", "1 lime", "10 g cilantro", "1 g chili flakes"],
     method: "Simmer beef bone broth with charred ginger, garlic, star anise, cinnamon stick, and fish sauce. Rinse konjac shirataki noodles and warm in broth. Place thin raw beef slices on top of noodles in a deep bowl and ladle piping hot boiling broth directly over to gently poach the meat. Top with lime, fresh cilantro, and fresh chilies."
   },
   {
@@ -1415,7 +1415,7 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "40 g ham", "35 g cheese", "20 ml olive oil", "15 g butter", "1 g black pepper"],
+    ingredients: ["3 eggs", "40 g prosciutto di Parma", "35 g cheese", "20 ml olive oil", "15 g butter", "1 g black pepper"],
     method: "Cut authentic prosciutto or dry-cured ham into strips and crisp gently in extra virgin olive oil. Add butter and beaten eggs. Cook over low heat, stirring gently until soft curds form. Shave aged Croatian hard cheese or pecorino over top and serve with freshly ground black pepper."
   },
   {
@@ -1431,7 +1431,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["190 g lamb", "150 g cabbage", "20 ml olive oil", "15 g butter", "4 g garlic", "2 g rosemary", "1 g salt", "1 g black pepper"],
+    ingredients: ["190 g lamb shoulder", "150 g cabbage", "20 ml olive oil", "15 g butter", "4 g garlic", "2 g rosemary", "1 g salt", "1 g black pepper"],
     method: "Place seasoned lamb shoulder chunks in a heavy Dutch oven with generous olive oil, crushed garlic cloves, fresh rosemary sprigs, and thick wedges of green cabbage. Cover tightly with lid or foil to recreate the traditional Peka bell bake. Roast at 160°C for 2 hours until the lamb is meltingly tender."
   },
   {
@@ -1463,7 +1463,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw breaded cutlets.",
-    ingredients: ["170 g pork", "35 g ham", "35 g cheese", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
+    ingredients: ["170 g pork loin cutlet", "35 g prosciutto di Parma", "35 g cheese", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
     method: "Pound pork schnitzel thin and season with salt. Lay slices of ham and melting cheese inside, fold in half, and secure edges. Dredge in beaten egg and coat in keto panko or crushed pork rinds. Pan-fry in hot lard for 4 minutes per side until golden brown and cheese is melted inside. Serve with lemon wedges."
   },
   {
@@ -1531,7 +1531,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked chicken.",
-    ingredients: ["200 g chicken thigh", "50 g mozzarella", "100 g cabbage", "15 ml sesame oil", "15 ml soy sauce", "5 g garlic", "5 g ginger", "10 g erythritol", "2 g chili flakes", "15 g spring onion"],
+    ingredients: ["200 g chicken thigh (bone-in)", "50 g mozzarella", "100 g cabbage", "15 ml sesame oil", "15 ml soy sauce", "5 g garlic", "5 g ginger", "10 g erythritol", "2 g chili flakes", "15 g spring onion"],
     method: "Marinate chicken thigh pieces in tamari soy sauce, chili flakes, minced garlic, ginger, erythritol, and sesame oil. Sauté chicken and shredded cabbage in a cast iron skillet until chicken is cooked through and cabbage is tender. Push chicken to the sides, create a center trench, fill with shredded mozzarella, cover until cheese is bubbling, and dip chicken directly into cheese."
   },
   {
@@ -1547,7 +1547,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["190 g beef", "60 g radish", "15 ml sesame oil", "15 ml soy sauce", "10 g erythritol", "5 g garlic", "5 g ginger", "15 g spring onion", "1 g black pepper"],
+    ingredients: ["190 g beef ribeye thin slices", "60 g radish", "15 ml sesame oil", "15 ml soy sauce", "10 g erythritol", "5 g garlic", "5 g ginger", "15 g spring onion", "1 g black pepper"],
     method: "Brown beef short ribs or beef chuck in sesame oil. Add water, tamari soy sauce, erythritol, grated ginger, garlic, and black pepper. Simmer covered on low heat for 1.5 hours. Add peeled daikon radish cubes and simmer 30 minutes more until beef is falling off the bone and radish is translucent and savory."
   },
   {
@@ -1615,7 +1615,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g beef mince", "60 g lamb", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "5 g mint", "2 g cumin", "1 g salt"],
+    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "5 g mint", "2 g cumin", "1 g salt"],
     method: "Finely mince onion and fresh parsley. Knead with beef and lamb mince, allspice, cumin, and salt until sticky. Shape onto skewers and grill over high heat for 3-4 minutes per side. Whisk Greek yogurt 10% with minced fresh mint, garlic, and olive oil for dipping."
   },
   {
@@ -1683,7 +1683,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh", "80 g tomato passata", "15 ml olive oil", "15 g butter", "30 g onion", "6 g garlic", "10 g cilantro", "5 g basil", "2 g paprika", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "80 g tomato passata", "15 ml olive oil", "15 g butter", "30 g onion", "6 g garlic", "10 g cilantro", "5 g basil", "2 g paprika", "1 g salt"],
     method: "Dry-sear chicken thigh pieces in a hot skillet until skin is golden. Remove and sauté onions and garlic in butter. Return chicken, add tomato passata, paprika, and a splash of broth. Simmer covered for 25 minutes. Right off the heat, fold in heaps of fresh cilantro, purple basil, and minced garlic."
   },
   {
@@ -1699,7 +1699,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw meatballs.",
-    ingredients: ["110 g beef mince", "70 g pork mince", "1 egg", "15 g butter", "30 g onion", "4 g garlic", "10 g cilantro", "1 g cumin", "2 g black pepper", "1 g salt"],
+    ingredients: ["110 g ground beef 80/20", "70 g ground pork", "1 egg", "15 g butter", "30 g onion", "4 g garlic", "10 g cilantro", "1 g cumin", "2 g black pepper", "1 g salt"],
     method: "Knead beef and pork mince with finely grated onion, garlic, freshly ground cumin, copious black pepper, sea salt, and fresh cilantro while incorporating 50ml ice water for juiciness. Shape into plump meatballs and simmer gently in hot rich bone broth with butter for 15 minutes."
   },
   {
@@ -1767,7 +1767,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "15 g lard", "50 g bell pepper", "50 g tomato passata", "35 g onion", "4 g garlic", "6 g paprika", "2 g cumin", "1 g salt"],
+    ingredients: ["180 g beef chuck roast", "15 g lard", "50 g bell pepper", "50 g tomato passata", "35 g onion", "4 g garlic", "6 g paprika", "2 g cumin", "1 g salt"],
     method: "Melt lard in a heavy pot and cook onions slowly until translucent. Remove pot from heat and stir in generous sweet Hungarian paprika. Add beef chuck cubes, garlic, ground caraway seeds, and diced bell pepper. Simmer covered in its own juices and beef broth on low heat for 2 hours until the beef is meltingly tender."
   },
   {
@@ -1783,7 +1783,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh", "60 g sour cream 30%", "140 g cauliflower florets", "15 g lard", "30 g onion", "4 g garlic", "6 g paprika", "15 g butter", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "60 g sour cream 30%", "140 g cauliflower florets", "15 g lard", "30 g onion", "4 g garlic", "6 g paprika", "15 g butter", "1 g salt"],
     method: "Brown chicken thighs in lard. Sauté onions and garlic in pan drippings. Stir in sweet paprika and chicken broth, return chicken, and simmer covered for 25 minutes. Temper sour cream 30% with a ladle of hot broth and stir into the stew off the heat until velvety smooth. Serve with buttered steamed cauliflower florets."
   },
   {
@@ -1967,7 +1967,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "120 ml coconut milk", "50 g bell pepper", "30 g spinach", "15 ml coconut oil", "15 g curry paste", "12 ml fish sauce", "5 g basil"],
+    ingredients: ["200 g chicken thigh (bone-in)", "120 ml coconut milk", "50 g bell pepper", "30 g spinach", "15 ml coconut oil", "15 g curry paste", "12 ml fish sauce", "5 g basil"],
     method: "Fry authentic Thai green curry paste in hot coconut oil until aromatic and oil splits. Add sliced chicken thighs and sear. Pour in thick coconut milk and fish sauce, simmering gently for 15 minutes. Add sliced bell peppers and fold in spinach and fresh Thai purple basil at the end."
   },
   {
@@ -2003,7 +2003,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw cured pork.",
-    ingredients: ["130 g pork", "1 egg", "140 g cauliflower rice", "15 g butter", "15 ml coconut oil", "6 g garlic", "10 ml soy sauce", "10 g erythritol", "1 g paprika"],
+    ingredients: ["130 g pork belly", "1 egg", "140 g cauliflower rice", "15 g butter", "15 ml coconut oil", "6 g garlic", "10 ml soy sauce", "10 g erythritol", "1 g paprika"],
     method: "Marinate thinly sliced pork shoulder in soy sauce, erythritol, garlic, and paprika. Fry in coconut oil until caramelized and sticky. In the same pan, fry minced garlic in butter until golden, add cauliflower rice, and stir-fry for 3 minutes. Fry an egg sunny-side-up and plate together."
   },
   {
@@ -2103,7 +2103,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw breaded cutlets.",
-    ingredients: ["170 g pork", "25 g keto panko", "1 egg", "80 g cucumber", "20 g butter", "15 g lard", "1 lemon", "10 ml sour cream 30%", "1 g salt", "2 g dill"],
+    ingredients: ["170 g pork loin cutlet", "25 g keto panko", "1 egg", "80 g cucumber", "20 g butter", "15 g lard", "1 lemon", "10 ml sour cream 30%", "1 g salt", "2 g dill"],
     method: "Pound pork cutlet paper-thin between parchment paper and season with salt. Dip in beaten egg and coat in keto panko or crushed pork rinds. Pan-fry in hot butter and lard, swirling the pan continuously so the crust puffs. Slice cucumber thin and toss with sour cream 30%, fresh dill, and vinegar. Serve schnitzel with lemon."
   },
   {
@@ -2187,7 +2187,7 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked ribs.",
-    ingredients: ["200 g beef", "25 ml olive oil", "10 ml vinegar", "5 g garlic", "10 g parsley", "2 g oregano", "1 g chili flakes", "2 g sea salt"],
+    ingredients: ["200 g beef ribeye steak", "25 ml olive oil", "10 ml vinegar", "5 g garlic", "10 g parsley", "2 g oregano", "1 g chili flakes", "2 g sea salt"],
     method: "Season beef short ribs with coarse sea salt crystals. Slow grill over embers or roast at 150°C for 2 hours, then flash broil on high heat for 5 minutes to crisp the exterior. Mix extra virgin olive oil with red wine vinegar, minced garlic, finely chopped fresh parsley, oregano, and crushed chili flakes. Spoon chimichurri over hot ribs."
   },
   {
@@ -2203,7 +2203,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze cooked portions.",
-    ingredients: ["180 g steak", "50 g mozzarella", "30 g ham", "60 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 g salt"],
+    ingredients: ["180 g beef flank steak", "50 g mozzarella", "30 g jamÃ³n serrano", "60 g tomato passata", "15 ml olive oil", "4 g garlic", "2 g oregano", "1 g salt"],
     method: "Pound flank steak thin and sear on a hot grill or pan for 2 minutes on one side. Flip over, spread tomato passata with garlic and oregano across the meat, lay slices of ham, and cover with thick mozzarella slices. Cover pan with a lid or place under a broiler until cheese is completely melted and bubbly."
   },
   {
@@ -2271,7 +2271,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze beef and sauce; assemble fresh.",
-    ingredients: ["180 g beef strips", "80 g mushrooms", "60 g sour cream 30%", "20 g butter", "30 g onion", "4 g garlic", "10 g mustard", "5 g parsley", "1 g salt"],
+    ingredients: ["180 g beef sirloin strips", "80 g mushrooms", "60 g sour cream 30%", "20 g butter", "30 g onion", "4 g garlic", "10 g mustard", "5 g parsley", "1 g salt"],
     method: "Sear seasoned beef tenderloin strips in hot butter for 2 minutes and set aside. Sauté sliced mushrooms and onions in pan drippings until caramelized. Add minced garlic and Dijon mustard. Lower heat, fold in rich sour cream 30% and beef juices. Return beef strips, warm through gently without boiling, and finish with fresh parsley."
   },
   {
@@ -2287,7 +2287,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "6 patties, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["100 g chicken", "90 g pork mince", "1 egg", "20 g butter", "30 g onion", "4 g garlic", "20 g sour cream 30%", "3 g dill", "1 g salt", "1 g black pepper"],
+    ingredients: ["100 g ground chicken", "90 g ground pork", "1 egg", "20 g butter", "30 g onion", "4 g garlic", "20 g sour cream 30%", "3 g dill", "1 g salt", "1 g black pepper"],
     method: "Finely grate onion and garlic. Knead chicken mince and pork mince with egg, sour cream 30%, chopped dill, salt, and pepper until fluffy. Shape into oval kotleti patties. Pan-fry in foaming butter over medium heat for 5 minutes per side until golden brown and juicy."
   },
   {
@@ -2303,7 +2303,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["170 g beef", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "15 g butter", "30 g onion", "4 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
+    ingredients: ["170 g beef brisket", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "15 g butter", "30 g onion", "4 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
     method: "Simmer beef chuck in water with bay leaf and black peppercorns until tender. Sauté onions, garlic, and tomato passata in butter with red wine vinegar. Add shredded fresh green cabbage to the beef broth along with the sautéed tomato mixture. Simmer for 20 minutes until cabbage is soft. Serve piping hot with chopped fresh dill and a huge dollop of sour cream 30%."
   },
   {
@@ -2355,7 +2355,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["200 g chicken thigh", "110 ml coconut milk", "15 ml coconut oil", "6 g ginger", "4 g garlic", "30 g onion", "2 g turmeric", "2 g chili flakes", "1 lime"],
+    ingredients: ["200 g chicken thigh (bone-in)", "110 ml coconut milk", "15 ml coconut oil", "6 g ginger", "4 g garlic", "30 g onion", "2 g turmeric", "2 g chili flakes", "1 lime"],
     method: "Marinate chicken thighs in turmeric, minced garlic, ginger, and salt. Grill until half cooked. In a pan, simmer coconut milk with blended lemongrass, shallots, garlic, and chilies in coconut oil until thick, aromatic, and red-tinted. Baste chicken generously with coconut sauce and grill until deeply caramelized."
   },
   {
@@ -2371,7 +2371,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "100 ml coconut milk", "20 g coconut flakes", "15 ml coconut oil", "6 g ginger", "4 g garlic", "30 g onion", "2 g chili flakes", "1 g salt"],
+    ingredients: ["180 g beef brisket", "100 ml coconut milk", "20 g coconut flakes", "15 ml coconut oil", "6 g ginger", "4 g garlic", "30 g onion", "2 g chili flakes", "1 g salt"],
     method: "Dry-toast coconut flakes in a skillet until deep mahogany brown and grind to a paste (kerisik). Brown beef chuck cubes in coconut oil. Add blended shallots, garlic, ginger, and chili. Pour in rich coconut milk and stir in toasted coconut paste. Simmer covered on low heat for 2 hours until sauce reduces into a dry, intense, aromatic glaze."
   },
   {
@@ -2423,7 +2423,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
-    ingredients: ["2 eggs", "90 g beef mince", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g paprika", "5 g parsley"],
+    ingredients: ["2 eggs", "90 g ground beef 80/20", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g paprika", "5 g parsley"],
     method: "Roll beef mince with cumin, paprika, and salt into marble-sized kefta meatballs and sear in olive oil. Add diced bell peppers, garlic, and tomato passata, simmering 5 minutes until rich. Create wells and crack in whole eggs. Cover and simmer gently until whites are set and yolks are runny. Scatter with fresh parsley."
   },
   {
@@ -2439,7 +2439,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g lamb", "35 g olives", "20 ml olive oil", "15 g butter", "35 g onion", "4 g garlic", "6 g ginger", "1 lemon", "2 g turmeric", "2 g cumin", "1 g salt"],
+    ingredients: ["180 g lamb shank", "35 g olives", "20 ml olive oil", "15 g butter", "35 g onion", "4 g garlic", "6 g ginger", "1 lemon", "2 g turmeric", "2 g cumin", "1 g salt"],
     method: "Brown lamb pieces in olive oil and butter in a Dutch oven or tagine. Add chopped onions, minced garlic, grated ginger, turmeric, and cumin. Pour in rich broth, cover with tagine lid, and slow-cook on low heat for 2 hours. Add green olives and preserved lemon peel slices during the final 15 minutes of cooking until sauce is thick and glistening."
   },
   {
@@ -2455,7 +2455,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh", "20 g flaked almonds", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "5 g ginger", "1 g cinnamon", "2 g turmeric", "5 g cilantro"],
+    ingredients: ["200 g chicken thigh (bone-in)", "20 g flaked almonds", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "5 g ginger", "1 g cinnamon", "2 g turmeric", "5 g cilantro"],
     method: "Sear chicken thighs in olive oil and butter with onions, garlic, ground ginger, turmeric, and a pinch of cinnamon. Simmer covered in chicken broth for 30 minutes until chicken is tender. Dry-toast flaked almonds until golden. Plate chicken coated in fragrant yellow sauce, sprinkled with toasted almonds and fresh cilantro."
   },
   {
@@ -2471,7 +2471,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw marinated skewers.",
-    ingredients: ["190 g beef strips", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "2 g paprika", "5 g mint", "5 g parsley", "1 g salt"],
+    ingredients: ["190 g beef sirloin strips", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "2 g paprika", "5 g mint", "5 g parsley", "1 g salt"],
     method: "Cut beef into cubes and marinate with grated onion, minced garlic, cumin, paprika, olive oil, and fresh parsley for 3 hours. Thread onto skewers and grill over high heat for 3 minutes per side until nicely browned with juicy centers. Serve with cold Greek yogurt 10% mixed with fresh mint."
   },
   {
@@ -2571,7 +2571,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "6 servings, 6 days fridge (tastes best reheated!)",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["130 g pork mince", "60 g beef mince", "40 g smoked kaiser", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream 30%", "20 g lard", "30 g onion", "2 g paprika", "2 g thyme", "1 g black pepper"],
+    ingredients: ["130 g ground pork", "60 g ground beef 80/20", "40 g smoked kaiser", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream 30%", "20 g lard", "30 g onion", "2 g paprika", "2 g thyme", "1 g black pepper"],
     method: "Amestecă carnea tocată de porc și vită cu conopidă dată pe răzătoare mărunt (înlocuitor perfect pentru orez), ceapă călită în untură, cimbru uscat, boia dulce și piper. Împăturește sarmalele în foi subțiri de varză murată desărată. Așază-le în oală de lut pe pat de varză tocată și bucăți de kaiser afumat. Fierbe la foc domol 2.5 ore. Servește cu smântână grasă 30% și mămăligă keto fierbinte din făină de lupin și unt."
   },
   {
@@ -2667,7 +2667,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh", "80 g tomato passata", "20 g unt 82%", "10 ml olive oil", "6 g garlic", "30 g onion", "10 ml vinegar", "5 g parsley", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "80 g tomato passata", "20 g unt 82%", "10 ml olive oil", "6 g garlic", "30 g onion", "10 ml vinegar", "5 g parsley", "1 g salt"],
     method: "Rumenește pulpele de pui în unt și ulei. Scoate puiul și călește ceapa și feliuțele de usturoi. Stinge cu un strop de oțet și adaugă passata de roșii cu cimbru și foi de dafin. Reintrodu puiul și lasă să scadă la cuptor sau la foc mic 30 de minute până când sosul se leagă frumos și carnea este moale. Gătește cu pătrunjel proaspăt."
   },
   {
@@ -2767,7 +2767,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g beef mince", "60 g chicken", "1 egg", "160 g cauliflower florets", "30 ml heavy cream", "25 g olives", "20 g butter", "30 g onion", "2 g cumin", "1 g salt"],
+    ingredients: ["150 g ground beef 80/20", "60 g chicken", "1 egg", "160 g cauliflower florets", "30 ml heavy cream", "25 g olives", "20 g butter", "30 g onion", "2 g cumin", "1 g salt"],
     method: "Sauté beef mince with onions, cumin, oregano, and salt to create traditional Chilean pino filling. Place in a baking dish with cooked shredded chicken, hard-boiled egg quarters, and black olives. Puree steamed cauliflower with butter and heavy cream into a rich thick mash. Spread over beef, dust with erythritol, and bake at 200°C for 25 minutes until golden brown."
   },
   {
@@ -2851,7 +2851,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["180 g beef", "60 ml heavy cream", "40 g sour cream 30%", "20 g butter", "40 g celery", "30 g carrot", "30 g onion", "15 g cranberries", "1 lemon", "1 g allspice"],
+    ingredients: ["180 g beef tenderloin", "60 ml heavy cream", "40 g sour cream 30%", "20 g butter", "40 g celery", "30 g carrot", "30 g onion", "15 g cranberries", "1 lemon", "1 g allspice"],
     method: "Lard beef sirloin with bacon strips, season, and sear in butter. Braise with celery root, small amount of carrot, onions, allspice, and bay leaves until fork tender. Remove beef, blend vegetables with heavy cream, sour cream 30%, and lemon juice into a velvety smooth sauce. Serve sliced beef covered in cream sauce with a lemon slice and tart cranberries."
   },
   {
@@ -2883,7 +2883,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "20 g lard", "40 g onion", "4 g garlic", "6 g paprika", "2 g marjoram", "2 g cumin", "25 g red onion", "1 g salt"],
+    ingredients: ["180 g beef chuck roast", "20 g lard", "40 g onion", "4 g garlic", "6 g paprika", "2 g marjoram", "2 g cumin", "25 g red onion", "1 g salt"],
     method: "Slowly brown equal parts onions and beef chuck cubes in hot lard until onions melt into a deep mahogany color. Add sweet paprika, garlic, ground caraway, and marjoram. Pour in rich beef broth and simmer covered on low heat for 2 hours until the sauce is naturally thick and beef melts. Top with sliced raw red onions."
   },
   {
@@ -2919,7 +2919,7 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "35 g beef", "40 g cheddar", "20 g butter", "15 ml heavy cream", "1 g black pepper"],
+    ingredients: ["3 eggs", "35 g biltong beef jerky", "40 g cheddar", "20 g butter", "15 ml heavy cream", "1 g black pepper"],
     method: "Whisk eggs with a splash of heavy cream and freshly cracked black pepper. Melt butter in a skillet over low heat. Add eggs and fold gently until soft curds form. Fold in finely shaved cured beef biltong and sharp aged cheddar just before removing from heat so cheese melts into creamy ribbons."
   },
   {
@@ -2935,7 +2935,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g beef mince", "1 egg", "60 ml heavy cream", "20 g almond flour", "15 g butter", "30 g onion", "4 g garlic", "6 g curry paste", "2 g turmeric", "1 g salt"],
+    ingredients: ["150 g ground beef 80/20", "1 egg", "60 ml heavy cream", "20 g almond flour", "15 g butter", "30 g onion", "4 g garlic", "6 g curry paste", "2 g turmeric", "1 g salt"],
     method: "Sauté onions, garlic, curry powder, and turmeric in butter. Add beef mince and brown. Stir in almond flour and a splash of vinegar. Transfer spiced beef to a baking dish and press flat with bay leaves on top. Whisk egg with heavy cream and salt, pour over beef, and bake at 180°C for 25 minutes until custard is puffed and golden."
   },
   {
@@ -2967,7 +2967,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g lamb", "70 g mushrooms", "70 g cabbage", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g rosemary", "2 g thyme", "1 g salt"],
+    ingredients: ["180 g lamb shoulder", "70 g mushrooms", "70 g cabbage", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g rosemary", "2 g thyme", "1 g salt"],
     method: "Brown lamb pieces in butter and olive oil at the bottom of a heavy pot. Layer onions, mushrooms, and green cabbage on top of meat without stirring (traditional Potjiekos layer technique). Pour in rich lamb broth with rosemary, thyme, and garlic. Cover tightly and simmer over low coals or low heat for 2.5 hours."
   },
   {
@@ -3035,7 +3035,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped patties.",
-    ingredients: ["110 g pork mince", "80 g beef mince", "60 g bell pepper", "40 g tomato passata", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "1 g black pepper", "1 g salt"],
+    ingredients: ["110 g ground pork", "80 g ground beef 80/20", "60 g bell pepper", "40 g tomato passata", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "1 g black pepper", "1 g salt"],
     method: "Knead pork and beef mince with finely grated onion, crushed cumin seeds, black pepper, and salt. Shape half into flat round kyufte and half into elongated kebapche. Grill over hot charcoal until juicy. Blend roasted red peppers with tomato passata, garlic, and olive oil for homemade lyutenitsa relish."
   },
   {
@@ -3051,7 +3051,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g pork mince", "160 g zucchini", "60 g greek yogurt 10%", "1 egg", "50 g tomato passata", "20 g butter", "30 g onion", "4 g garlic", "2 g savory (chubritsa)", "1 g salt"],
+    ingredients: ["150 g ground pork", "160 g zucchini", "60 g greek yogurt 10%", "1 egg", "50 g tomato passata", "20 g butter", "30 g onion", "4 g garlic", "2 g savory (chubritsa)", "1 g salt"],
     method: "Dice zucchini into small cubes (replacing potatoes). Sauté pork mince with onions, garlic, tomato passata, chubritsa, and salt. Mix with diced zucchini and place in a baking dish with a splash of broth. Bake 25 minutes. Whisk Greek yogurt 10% with egg and pinch of salt, pour over top, and bake 15 minutes until golden crust sets."
   },
   {
@@ -3103,7 +3103,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g beef mince", "60 g lamb", "30 g tahini", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "2 g allspice", "1 lemon", "1 g salt"],
+    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "30 g tahini", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "2 g allspice", "1 lemon", "1 g salt"],
     method: "Knead beef and lamb mince with finely grated onion, parsley, allspice, garlic, and sea salt until sticky. Form onto flat skewers and grill over high heat until charred and juicy. Whisk sesame tahini with minced garlic, lemon juice, salt, and cold water until pale and creamy for dipping."
   },
   {
@@ -3119,7 +3119,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh", "140 g spinach", "25 g butter", "15 ml olive oil", "6 g garlic", "4 g coriander", "1 g sea salt", "1 g black pepper"],
+    ingredients: ["200 g chicken thigh (bone-in)", "140 g spinach", "25 g butter", "15 ml olive oil", "6 g garlic", "4 g coriander", "1 g sea salt", "1 g black pepper"],
     method: "Roast seasoned chicken thighs until skin is crispy. Simmer rich chicken stock with finely minced molokhia or green spinach leaves. In a small skillet, sizzle crushed garlic and ground coriander in butter until golden brown and intensely aromatic (the Egyptian Taqteya), then pour directly into soup with a sizzle. Serve with roast chicken."
   },
   {
@@ -3135,7 +3135,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze baked pockets.",
-    ingredients: ["140 g beef mince", "35 g almond flour", "1 egg", "40 g mozzarella", "20 g butter", "25 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "1 g salt"],
+    ingredients: ["140 g ground beef 80/20", "35 g almond flour", "1 egg", "40 g mozzarella", "20 g butter", "25 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "1 g salt"],
     method: "Make dough by melting mozzarella with almond flour, egg, and baking powder, and rolling into two flat rounds. Season raw beef mince with grated onion, minced garlic, cumin, allspice, and chili. Spread meat between dough rounds, seal edges, brush with butter, and bake at 200°C for 20 minutes until crust is crispy and meat is sizzling."
   },
   {
@@ -3187,7 +3187,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "1 egg", "25 g butter", "15 ml olive oil", "50 g onion", "6 g garlic", "6 g ginger", "6 g paprika", "2 g cardamom", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "1 egg", "25 g butter", "15 ml olive oil", "50 g onion", "6 g garlic", "6 g ginger", "6 g paprika", "2 g cardamom", "1 g salt"],
     method: "Cook finely minced red onions dry in a heavy pot until sweet and reduced. Add spiced butter, garlic, ginger, and berbere chili spice. Add chicken thighs and chicken broth, simmering covered for 40 minutes until chicken is tender. Drop in peeled hard-boiled eggs with small score marks so the rich red gravy penetrates. Simmer 10 minutes more."
   },
   {
@@ -3203,7 +3203,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw marinated beef.",
-    ingredients: ["190 g steak", "25 g butter", "15 ml olive oil", "40 g onion", "4 g garlic", "6 g ginger", "2 g rosemary", "1 g chili flakes", "1 g sea salt"],
+    ingredients: ["190 g beef sirloin strips", "25 g butter", "15 ml olive oil", "40 g onion", "4 g garlic", "6 g ginger", "2 g rosemary", "1 g chili flakes", "1 g sea salt"],
     method: "Cut tender beef into cubes. Heat spiced butter and olive oil in a heavy skillet until very hot. Add beef cubes and sear quickly on high heat. Add sliced onions, minced garlic, ginger, fresh rosemary sprigs, and jalapeño pepper rings. Sauté vigorously for 3 minutes until fragrant and serve sizzling hot."
   },
   {
@@ -3271,7 +3271,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 slices, 4 days fridge",
     freezer: "Freezes well in slices.",
-    ingredients: ["140 g beef mince", "3 eggs", "50 g cheese", "20 g butter", "20 g parsley", "30 g onion", "4 g garlic", "2 g turmeric", "2 g cumin", "1 g salt"],
+    ingredients: ["140 g ground beef 80/20", "3 eggs", "50 g cheese", "20 g butter", "20 g parsley", "30 g onion", "4 g garlic", "2 g turmeric", "2 g cumin", "1 g salt"],
     method: "Sauté beef mince with onions, garlic, turmeric, and cumin in butter until cooked through. Chop a large bunch of fresh parsley. Whisk eggs with grated cheese, parsley, and warm seasoned beef. Pour into a greased baking dish and bake at 180°C for 25 minutes until puffed and set like a savory cake."
   },
   {
@@ -3287,7 +3287,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "3 servings, 3 days fridge",
     freezer: "Not suitable.",
-    ingredients: ["160 g beef", "2 eggs", "100 g zucchini", "60 g bell pepper", "40 g tomato", "25 ml olive oil", "4 g garlic", "2 g cumin", "1 g salt"],
+    ingredients: ["160 g beef liver", "2 eggs", "100 g zucchini", "60 g bell pepper", "40 g tomato", "25 ml olive oil", "4 g garlic", "2 g cumin", "1 g salt"],
     method: "Pan-fry sliced zucchini, bell peppers, tomatoes, and tender beef strips in generous olive oil. Fry eggs sunny-side up. Transfer all cooked vegetables, meat, and eggs to a large cutting board and chop together with two knives into rustic coarse pieces. Season with ground caraway, cumin, and sea salt."
   },
   {
@@ -3355,7 +3355,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g beef mince", "60 g lamb", "130 g cauliflower rice", "20 g butter", "25 g onion", "4 g garlic", "2 g sumac", "1 g black pepper", "1 g sea salt"],
+    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "130 g cauliflower rice", "20 g butter", "25 g onion", "4 g garlic", "2 g sumac", "1 g black pepper", "1 g sea salt"],
     method: "Finely grate onion and squeeze out all excess juice. Knead beef and lamb mince with onion, black pepper, and salt for 10 minutes until elastic. Skewer onto wide metal skewers and grill over hot charcoal or high broil until charred and succulent. Serve over steamed buttered cauliflower rice, heavily dusted with tart sumac."
   },
   {
@@ -3371,7 +3371,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef", "25 g ghee", "40 g spinach", "20 g parsley", "15 g cilantro", "10 g fenugreek", "30 g onion", "4 g garlic", "1 lemon", "1 g salt"],
+    ingredients: ["180 g beef chuck roast", "25 g ghee", "40 g spinach", "20 g parsley", "15 g cilantro", "10 g fenugreek", "30 g onion", "4 g garlic", "1 lemon", "1 g salt"],
     method: "Finely chop parsley, cilantro, spinach, and fenugreek. Sauté in ghee over medium-low heat for 15 minutes until dark green and intensely fragrant. Sear beef chuck cubes with onions, garlic, and turmeric. Combine beef, sautéed herbs, bone broth, and dried lime or lemon juice. Simmer covered on low heat for 2.5 hours until beef is tender and oil floats to top."
   },
   {
@@ -3387,7 +3387,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh", "40 g walnuts", "20 g butter", "15 ml olive oil", "30 g onion", "15 ml vinegar", "10 g erythritol", "2 g cinnamon", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "40 g walnuts", "20 g butter", "15 ml olive oil", "30 g onion", "15 ml vinegar", "10 g erythritol", "2 g cinnamon", "1 g salt"],
     method: "Finely grind walnuts and dry-toast in a pot until fragrant. Add cold water and simmer gently for 45 minutes until walnuts release their rich natural oils and darken. Brown chicken thighs in butter with onions and cinnamon. Add chicken to walnut sauce with a splash of pomegranate reduction or vinegar-erythritol reduction. Simmer 30 minutes until glossy and dark brown."
   },
   {
@@ -3439,7 +3439,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["180 g beef", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "20 g lard", "30 g onion", "6 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
+    ingredients: ["180 g beef chuck roast", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "20 g lard", "30 g onion", "6 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
     method: "Simmer beef chuck in water with black peppercorns and bay leaf until tender. Sauté onions, garlic, and tomato passata in pork lard with vinegar. Shred fresh green cabbage and add to the simmering beef broth with the sautéed tomato mixture. Simmer for 20 minutes. Serve with fresh dill and a massive dollop of sour cream 30%."
   },
   {
@@ -3471,7 +3471,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["170 g pork", "80 g mushrooms", "50 g sour cream 30%", "20 g unt 82%", "30 g onion", "4 g garlic", "5 g dill", "1 g black pepper", "1 g salt"],
+    ingredients: ["170 g pork loin cutlet", "80 g mushrooms", "50 g sour cream 30%", "20 g unt 82%", "30 g onion", "4 g garlic", "5 g dill", "1 g black pepper", "1 g salt"],
     method: "Pound pork schnitzel thin and season with salt and pepper. Sauté finely chopped mushrooms and onions in butter until tender, mix with fresh dill. Spread mushroom filling across pork cutlets, roll into tight rolls (kruchenyky), and secure with toothpicks. Sear in butter, pour in sour cream 30% and broth, and simmer covered for 25 minutes."
   },
   {
@@ -3507,7 +3507,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
-    ingredients: ["120 g eggplant", "80 g lamb", "70 g greek yogurt 10%", "20 g tahini", "20 ml olive oil", "15 g walnuts", "4 g garlic", "2 g cumin", "1 g salt"],
+    ingredients: ["120 g eggplant", "80 g ground lamb", "70 g greek yogurt 10%", "20 g tahini", "20 ml olive oil", "15 g walnuts", "4 g garlic", "2 g cumin", "1 g salt"],
     method: "Cube eggplant and pan-fry in olive oil until golden and meltingly tender. Brown minced lamb with cumin, allspice, and salt. Whisk Greek yogurt 10% with sesame tahini, minced garlic, and lemon juice. Layer hot eggplants, spiced minced lamb, cold garlicky tahini yogurt, and finish with toasted crunchy walnuts in olive oil."
   },
   {
@@ -3523,7 +3523,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["180 g lamb", "80 g tomato passata", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "10 g parsley", "1 g salt"],
+    ingredients: ["180 g ground lamb", "80 g tomato passata", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "10 g parsley", "1 g salt"],
     method: "Knead minced lamb with finely grated onion, Syrian allspice, cumin, and salt. Shape onto skewers and char-grill over high heat. In a shallow pan, simmer tomato passata with garlic, Aleppo chili, butter, and olive oil. Place hot skewers directly into the bubbling tomato sauce, spooning sauce over the meat. Garnish with fresh parsley."
   },
   {
@@ -3539,7 +3539,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze cooked chicken only.",
-    ingredients: ["200 g chicken thigh", "110 g greek yogurt 10%", "1 egg", "20 g unt 82%", "4 g garlic", "5 g mint", "2 g coriander", "1 g salt"],
+    ingredients: ["200 g chicken thigh (bone-in)", "110 g greek yogurt 10%", "1 egg", "20 g unt 82%", "4 g garlic", "5 g mint", "2 g coriander", "1 g salt"],
     method: "Poach chicken thighs with whole spices until tender. Whisk Greek yogurt 10% with 1 egg yolk and pinch of salt in a pot. Cook yogurt over medium-low heat, stirring continuously in one direction until it comes to a gentle simmer and thickens without curdling. Add chicken pieces, chicken broth, and sizzle crushed garlic and dried mint in butter, pouring it over the warm yogurt sauce."
   },
   {
@@ -3555,7 +3555,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g zucchini", "140 g lamb", "60 g cauliflower rice", "60 g tomato passata", "20 g unt 82%", "15 g walnuts", "4 g garlic", "2 g allspice", "5 g mint", "1 g salt"],
+    ingredients: ["160 g zucchini", "140 g ground lamb", "60 g cauliflower rice", "60 g tomato passata", "20 g unt 82%", "15 g walnuts", "4 g garlic", "2 g allspice", "5 g mint", "1 g salt"],
     method: "Hollow out zucchini or cut lengthwise into boats. Sauté minced lamb with grated cauliflower rice, allspice, garlic, and crushed walnuts or pine nuts in butter. Stuff into zucchini boats. Place in a pot with tomato passata, broth, dried mint, and garlic. Simmer covered for 30 minutes until zucchini is tender."
   },
   {
@@ -3607,7 +3607,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["110 g beef mince", "70 g pork mince", "1 egg", "60 ml heavy cream", "25 g butter", "25 g onion", "15 g cranberries", "1 g allspice", "1 g nutmeg", "1 g salt"],
+    ingredients: ["110 g ground beef 80/20", "70 g ground pork", "1 egg", "60 ml heavy cream", "25 g butter", "25 g onion", "15 g cranberries", "1 g allspice", "1 g nutmeg", "1 g salt"],
     method: "Mix beef and pork mince with egg, grated onion, allspice, nutmeg, and salt. Form into small round meatballs and brown in foaming butter. Remove meatballs, deglaze pan with beef bone broth, add heavy cream and pan drippings, simmering until thick and glossy. Return meatballs to gravy and serve with unsweetened tart lingonberries or cranberries."
   },
   {
@@ -3639,7 +3639,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["180 g pork", "80 g mushrooms", "60 ml heavy cream", "25 g butter", "30 g onion", "4 g garlic", "3 g thyme", "5 g parsley", "1 g salt"],
+    ingredients: ["180 g pork tenderloin", "80 g mushrooms", "60 ml heavy cream", "25 g butter", "30 g onion", "4 g garlic", "3 g thyme", "5 g parsley", "1 g salt"],
     method: "Cut pork tenderloin into medallions and sear in foaming butter for 2 minutes per side until golden; set aside. Sauté wild chanterelle or forest mushrooms and onions in pan drippings. Pour in heavy cream, chicken stock, and fresh thyme. Simmer until sauce is thick and luxurious, return pork medallions, and warm through."
   },
   {

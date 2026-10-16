@@ -321,6 +321,17 @@ class MainActivity : ComponentActivity() {
         }
 
         @JavascriptInterface
+        fun setKeepScreenOn(enabled: Boolean) {
+            activity.runOnUiThread {
+                if (enabled) {
+                    activity.window.addFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                } else {
+                    activity.window.clearFlags(android.view.WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON)
+                }
+            }
+        }
+
+        @JavascriptInterface
         fun print() {
             activity.runOnUiThread {
                 try {

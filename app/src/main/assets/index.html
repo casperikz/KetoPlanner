@@ -220,7 +220,7 @@
       background: var(--color-surface);
       border-top: 1px solid var(--color-border);
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       padding-bottom: env(safe-area-inset-bottom, 0px);
       box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
@@ -238,6 +238,26 @@
     .nav-item .nav-icon { font-size: 18px; line-height: 1; }
     .nav-item.active { color: var(--color-primary); }
     .nav-item.active .nav-icon { transform: scale(1.1); }
+
+    /* Focus Mode Sticky Banner */
+    .focus-mode-bar {
+      position: fixed;
+      top: calc(56px + env(safe-area-inset-top, 0px));
+      left: 0;
+      right: 0;
+      z-index: 95;
+      background: #01696f;
+      color: #ffffff;
+      padding: 8px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      box-shadow: 0 3px 12px rgba(0,0,0,0.2);
+      font-size: var(--text-xs);
+      font-weight: 600;
+    }
+    .focus-mode-bar.hidden { display: none !important; }
 
     /* Layout Containers */
     .main-content {
@@ -2339,29 +2359,19 @@
     </div>
   </header>
 
+  <!-- Sticky Focus Mode Bar when active cooking -->
+  <div id="focusModeFloatingBar" class="focus-mode-bar hidden">
+    <div style="display:flex;align-items:center;gap:8px;overflow:hidden">
+      <span>🍳</span>
+      <span id="focusBarText" style="white-space:nowrap;overflow:hidden;text-overflow:ellipsis">Cooking Focus Mode: Active</span>
+      <span style="font-size:10px;opacity:0.85;background:rgba(255,255,255,0.18);padding:1px 6px;border-radius:4px">Ecran Activ / Screen Awake</span>
+    </div>
+    <button id="focusBarExitBtn" class="act-btn small danger" type="button" style="padding:2px 8px;font-size:11px;background:#ef4444;color:#fff;border:none">✕ Exit</button>
+  </div>
+
   <main class="main-content">
     <!-- 1. HOME / MAIN MENU -->
     <section data-tab="home" class="stack">
-      <div class="home-banner panel">
-        <span class="home-badge" data-i18n="home_badge">🥑 KETO MEAL PLANNER</span>
-        <h2 data-i18n="home_subtitle">Your Low-Carb Hub</h2>
-        <p class="muted small" data-i18n="home_banner_desc">High-protein keto weekly planner, stock manager, macro guide & recipe builder.</p>
-        <div class="home-target-card">
-          <div class="target-item">
-            <span class="t-lbl" data-i18n="home_target_kcal">Daily Target</span>
-            <strong class="t-val" id="homeTargetKcal">2,000 kcal</strong>
-          </div>
-          <div class="target-item">
-            <span class="t-lbl" data-i18n="home_target_prot">Protein Target</span>
-            <strong class="t-val" id="homeTargetProt">150 g</strong>
-          </div>
-          <div class="target-item">
-            <span class="t-lbl" data-i18n="home_target_carbs">Net Carbs Cap</span>
-            <strong class="t-val" id="homeTargetCarbs">≤ 50 g</strong>
-          </div>
-        </div>
-      </div>
-
       <!-- 7-Day Macro Bar Chart Dashboard -->
       <div class="week-dashboard" id="homeWeekDashboard">
         <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
@@ -2380,15 +2390,6 @@
       </div>
 
       <div class="menu-grid">
-        <button class="menu-card" data-tab-btn="fasting" style="border:1.5px solid var(--color-primary);background:var(--color-primary-highlight)">
-          <div class="menu-icon-wrap" style="background:var(--color-primary);color:#fff">⏱️</div>
-          <div class="menu-card-info">
-            <strong style="color:var(--color-primary)"><span data-i18n="title_fasting">Intermittent Fasting</span></strong>
-            <span id="homeFastSubtitle"><span data-i18n="home_card_fasting_desc">16:8 LeanGains • Tap to track or change protocol</span></span>
-          </div>
-          <div class="menu-arrow" style="color:var(--color-primary)">›</div>
-        </button>
-
         <button class="menu-card" data-tab-btn="planner">
           <div class="menu-icon-wrap">📅</div>
           <div class="menu-card-info">
@@ -2470,6 +2471,15 @@
           <div class="menu-arrow" style="color:#2e7d32">›</div>
         </button>
 
+        <button class="menu-card" data-tab-btn="fasting" style="border:1.5px solid var(--color-primary);background:var(--color-primary-highlight)">
+          <div class="menu-icon-wrap" style="background:var(--color-primary);color:#fff">⏱️</div>
+          <div class="menu-card-info">
+            <strong style="color:var(--color-primary)"><span data-i18n="title_fasting">Intermittent Fasting</span></strong>
+            <span id="homeFastSubtitle"><span data-i18n="home_card_fasting_desc">16:8 LeanGains • Tap to track or change protocol</span></span>
+          </div>
+          <div class="menu-arrow" style="color:var(--color-primary)">›</div>
+        </button>
+
         <button class="menu-card" data-tab-btn="settings">
           <div class="menu-icon-wrap">⚙️</div>
           <div class="menu-card-info">
@@ -2484,6 +2494,9 @@
     <!-- 2. WEEKLY PLANNER -->
     <section data-tab="planner" class="hidden stack">
       <div class="panel stack">
+        <!-- Macronutrient Summary at Top of Screen -->
+        <div class="kpis" id="customKpis" style="margin-bottom:var(--space-2)"></div>
+
         <div class="section-title">
           <div>
             <h2 style="font-size:var(--text-lg)" data-i18n="planner_title">Weekly Planner</h2>
@@ -2495,15 +2508,8 @@
           </div>
         </div>
 
-        <div class="kpis" id="customKpis"></div>
-
         <!-- Day Selector Pills -->
         <div class="day-pills-bar" id="plannerDayPills"></div>
-
-        <!-- Recipe search filter for dropdowns -->
-        <div style="margin:4px 0 8px 0">
-          <input id="plannerSearchInput" class="search" type="search" placeholder="🔍 Search recipes to filter meal dropdowns..." style="width:100%">
-        </div>
 
         <!-- Days Render Container -->
         <div id="customDays" class="stack"></div>
@@ -2530,20 +2536,30 @@
           </div>
         </div>
 
-        <!-- Prep Sheet -->
-        <div class="note small" style="display:flex;flex-direction:column;gap:.5rem">
-          <strong data-i18n="planner_batch_sheet_title">Batch Cook Sheet</strong>
-          <div style="display:flex;gap:.5rem;align-items:center;flex-wrap:wrap">
-            <select id="prepFrom" class="slot-select" style="width:auto"></select>
-            <span data-i18n="planner_to_day">to</span>
-            <select id="prepTo" class="slot-select" style="width:auto"></select>
-            <label>× <input id="prepServings" type="number" min="1" value="1" style="width:3.2rem;padding:.3rem;border-radius:4px;border:1px solid var(--color-border);background:var(--color-surface-2)"> <span data-i18n="planner_servings_label">serv</span></label>
-            <button id="prepBtn" class="act-btn" type="button"><span data-i18n="planner_make_sheet">Make cook sheet</span></button>
-            <button id="prepCopyBtn" class="act-btn" type="button"><span data-i18n="planner_copy_sheet">Copy</span></button>
-            <button id="depleteStockBtn" class="act-btn small" type="button" style="background:rgba(211,47,47,0.1);color:#d32f2f;border:1px solid rgba(211,47,47,0.3)" title="Mark planned meals as cooked and update pantry stock" data-i18n-title="planner_deplete_stock_title"><span data-i18n="planner_deplete_stock">🥘 Mark Cooked & Deplete Stock</span></button>
+        <!-- Batch Cook Sheet for a Specific Day -->
+        <div class="note small" style="display:flex;flex-direction:column;gap:.6rem;padding:12px;border-radius:var(--radius-md)">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <strong style="font-size:13px;display:flex;align-items:center;gap:6px" data-i18n="planner_batch_sheet_title">
+              🥘 Batch Cook & Stock Depletion
+            </strong>
+            <div style="display:flex;align-items:center;gap:6px">
+              <span class="muted tiny" data-i18n="planner_for_day">Day:</span>
+              <select id="prepDaySelect" class="slot-select" style="width:auto"></select>
+            </div>
           </div>
-          <div id="prepSheet" style="margin-top:8px"></div>
-          <div id="depleteStatusMsg" class="tiny good" style="margin-top:4px"></div>
+          <p class="tiny muted" style="margin:0" data-i18n="planner_batch_sheet_desc">
+            Select dishes cooked on this day to automatically deplete used ingredients from your Stock Manager.
+          </p>
+          <div id="prepDayDishesList" style="display:flex;flex-direction:column;gap:6px;margin:2px 0"></div>
+          <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-top:2px">
+            <button id="depleteStockBtn" class="act-btn primary small" type="button" style="background:rgba(211,47,47,0.12);color:#d32f2f;border:1px solid rgba(211,47,47,0.4);font-weight:700" title="Mark selected cooked meals and deplete stock">
+              🥘 <span data-i18n="planner_deplete_stock">Mark Cooked & Deplete Stock</span>
+            </button>
+            <button id="prepCopyBtn" class="act-btn small" type="button">
+              📋 <span data-i18n="planner_copy_sheet">Copy Sheet</span>
+            </button>
+          </div>
+          <div id="depleteStatusMsg" class="tiny good" style="margin-top:2px"></div>
         </div>
       </div>
     </section>
@@ -3811,14 +3827,6 @@
 
   <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav">
-    <button class="nav-item active" data-tab-btn="home">
-      <span class="nav-icon">🏠</span>
-      <span class="nav-label"><span data-i18n="nav_home">Menu</span></span>
-    </button>
-    <button class="nav-item" data-tab-btn="planner">
-      <span class="nav-icon">📅</span>
-      <span class="nav-label"><span data-i18n="nav_planner">Planner</span></span>
-    </button>
     <button class="nav-item" data-tab-btn="recipes">
       <span class="nav-icon">🍳</span>
       <span class="nav-label"><span data-i18n="nav_recipes">Recipes</span></span>
@@ -3827,9 +3835,13 @@
       <span class="nav-icon">📦</span>
       <span class="nav-label"><span data-i18n="nav_stock">Stock</span></span>
     </button>
-    <button class="nav-item" data-tab-btn="settings">
-      <span class="nav-icon">⚙️</span>
-      <span class="nav-label"><span data-i18n="nav_settings">Settings</span></span>
+    <button class="nav-item" data-tab-btn="shopping">
+      <span class="nav-icon">🛒</span>
+      <span class="nav-label"><span data-i18n="nav_shopping">Shopping</span></span>
+    </button>
+    <button class="nav-item" data-tab-btn="macros">
+      <span class="nav-icon">🥑</span>
+      <span class="nav-label"><span data-i18n="nav_macros">Macros</span></span>
     </button>
   </nav>
 
@@ -8198,14 +8210,24 @@ const DEFAULT_SETTINGS = { weightKg: 75, proteinPerKg: 2, dailyKcal: 2000, daily
 let settings = Object.assign({}, DEFAULT_SETTINGS, SAVED.settings || {});
 
 const DEFAULT_N = {
-      "chicken breast": [165, 31, 3.6, 0], "chicken": [175, 30, 5, 0], "chicken thigh": [209, 26, 11, 0],
-      "turkey mince": [150, 21, 7, 0], "beef mince": [250, 18, 20, 0],
-      "beef strips": [217, 26, 12, 0], "beef": [250, 18, 20, 0], "steak": [220, 27, 12, 0], "ribeye steak": [250, 24, 17, 0],
-      "lean beef": [180, 21, 10, 0], "pork strips": [240, 27, 14, 0], "pork mince": [260, 17, 21, 0], "pork shoulder": [270, 18, 22, 0],
+      "chicken breast": [165, 31, 3.6, 0], "chicken": [175, 30, 5, 0], "chicken thigh": [209, 26, 11, 0], "chicken thigh (bone-in)": [221, 24, 13, 0], "ground chicken": [170, 22, 9, 0],
+      "turkey mince": [150, 21, 7, 0], "beef mince": [250, 18, 20, 0], "ground beef 80/20": [254, 17, 20, 0], "ground beef 85/15": [215, 19, 15, 0],
+      "beef strips": [217, 26, 12, 0], "beef": [250, 18, 20, 0], "steak": [220, 27, 12, 0], "ribeye steak": [291, 24, 21, 0], "beef ribeye steak": [291, 24, 21, 0], "beef ribeye thin slices": [291, 24, 21, 0],
+      "beef chuck roast": [277, 25, 19, 0], "beef chuck": [277, 25, 19, 0], "beef shank": [195, 29, 8, 0], "veal shank": [195, 29, 8, 0],
+      "beef flank steak strips": [192, 28, 8, 0], "beef flank steak": [192, 28, 8, 0], "beef flank": [192, 28, 8, 0],
+      "beef sirloin strips": [244, 27, 14, 0], "beef sirloin thin slices": [244, 27, 14, 0], "beef sirloin": [244, 27, 14, 0],
+      "beef brisket": [290, 21, 22, 0], "beef tenderloin": [218, 26, 12, 0], "beef skirt steak": [240, 26, 15, 0], "beef bottom round roast": [200, 28, 9, 0],
+      "beef liver": [165, 26, 4.4, 3.8], "biltong beef jerky": [280, 54, 6, 1.5], "lean beef": [180, 21, 10, 0],
+      "pork strips": [240, 27, 14, 0], "pork shoulder cubes": [270, 18, 22, 0], "pork mince": [260, 17, 21, 0], "ground pork": [260, 17, 21, 0],
+      "pork shoulder": [270, 18, 22, 0], "pork loin cutlet": [210, 26, 11, 0], "pork loin": [210, 26, 11, 0], "pork tenderloin": [143, 26, 3.5, 0],
       "sausages": [300, 13, 27, 1], "sausage meat": [300, 13, 27, 1], "salmon": [208, 20, 13, 0], "salmon fillet": [208, 20, 13, 0],
       "smoked salmon": [180, 18, 11, 0], "cod": [82, 18, 0.7, 0], "shrimp": [99, 24, 0.3, 0], "mackerel": [205, 19, 14, 0],
-      "smoked mackerel": [300, 19, 25, 0], "duck breast": [200, 19, 13, 0], "ham": [145, 21, 6, 1], "bacon": [400, 12, 38, 1],
-      "pepperoni": [500, 20, 44, 1], "salami": [410, 22, 35, 1], "lamb": [294, 25, 21, 0], "pork": [242, 27, 14, 0], "tuna": [116, 26, 1, 0],
+      "smoked mackerel": [300, 19, 25, 0], "duck breast": [200, 19, 13, 0], "ham": [145, 21, 6, 1],
+      "jamón serrano": [224, 30, 11, 0.5], "jamon serrano": [224, 30, 11, 0.5],
+      "prosciutto di Parma": [220, 26, 12, 0.5], "prosciutto": [220, 26, 12, 0.5],
+      "bacon": [400, 12, 38, 1], "pepperoni": [500, 20, 44, 1], "salami": [410, 22, 35, 1],
+      "lamb": [294, 25, 21, 0], "ground lamb": [282, 17, 23, 0], "lamb shoulder": [278, 19, 22, 0], "lamb shank": [201, 28, 9, 0],
+      "pork": [242, 27, 14, 0], "tuna": [116, 26, 1, 0],
       "cottage cheese": [98, 11, 4, 3], "skyr": [63, 11, 0.2, 4], "greek yogurt 10%": [120, 9, 10, 3.5], "greek yogurt": [120, 9, 10, 3.5],
       "Milbona skyr natural": [63, 11, 0.2, 4], "ricotta": [174, 11, 13, 3],
       "whey": [400, 80, 7, 8], "whey protein": [400, 80, 7, 8], "whey protein (vanilla or neutral)": [400, 80, 7, 8], "protein powder": [400, 80, 7, 8],
@@ -8322,7 +8344,7 @@ const CUP_DENSITY = {
     function nut(key) { return NX[key] || N[key] || null; }
     function sumMacros(list) { return list.reduce((a, s) => { const m = ingMacros(s); a.kcal += m.k; a.protein += m.p; a.fat += m.f; a.netCarbs += m.c; return a; }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 }); }
 
-    const SYN = { 'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey', 'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato', 'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds', 'large eggs': 'egg', 'eggs': 'egg' };
+    const SYN = { 'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey', 'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato', 'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds', 'large eggs': 'egg', 'eggs': 'egg', 'jamon': 'jamon serrano', 'jamón': 'jamón serrano', 'prosciutto': 'prosciutto di Parma' };
     function canon(name) {
   let n = String(name || '').toLowerCase().trim();
   const stripped = (typeof stripRo === 'function') ? stripRo(n) : n;
@@ -8333,7 +8355,7 @@ const CUP_DENSITY = {
   return SYN[n] || n;
 }
     const CATEGORIES = [
-      ['Meat & seafood', ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds']],
+      ['Meat & seafood', ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'jamon', 'serrano', 'prosciutto', 'shank', 'ribeye', 'brisket', 'flank', 'tenderloin', 'sirloin', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds']],
       ['Dairy & eggs', ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk']],
       ['Fruits & vegetables', ['spinach', 'mushroom', 'broccoli', 'cauliflower', 'cabbage', 'asparagus', 'green bean', 'bell pepper', 'zucchini', 'cucumber', 'tomato', 'lettuce', 'romaine', 'onion', 'carrot', 'bok choy', 'eggplant', 'olive', 'pickle', 'celery', 'avocado', 'berr', 'blueberr', 'raspberr', 'strawberr', 'lemon', 'lime', 'ginger', 'garlic']],
       ['Pantry & baking', ['almond', 'coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'chia', 'flax', 'seeds', 'vanilla', 'walnut', 'pecan', 'macadamia', 'peanut', 'bread', 'granola', 'flour']],
@@ -10116,8 +10138,9 @@ const CUP_DENSITY = {
                 </div>
               </div>
               <div class="slot-control">
-                <img class="slot-thumb" src="${rec ? recipeImage(rec) : BLANK_IMG}" alt="" style="${rec ? '' : 'display:none'}">
+                <img class="slot-thumb" src="${rec ? recipeImage(rec) : BLANK_IMG}" alt="" style="${rec ? 'cursor:pointer;' : 'display:none'}" data-view-recipe="${cur || ''}" title="${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Vezi rețeta' : 'View recipe'}">
                 <select class="slot-select" data-day="${day}" data-slot="${slot}">${none}${opts}</select>
+                ${cur ? `<button class="act-btn small view-rec-btn" type="button" data-view-recipe="${cur}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Deschide rețeta' : 'View recipe page'}">🔍 ${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Vezi' : 'View'}</button>` : ''}
               </div>
             </div>`;
         }).join('');
@@ -10138,16 +10161,33 @@ const CUP_DENSITY = {
       wrap.querySelectorAll('select.slot-select').forEach(sel => sel.addEventListener('change', e => {
         const day = e.target.dataset.day;
         const slot = e.target.dataset.slot;
-        custom[day][slot] = e.target.value;
+        const selectedVal = e.target.value;
+        custom[day][slot] = selectedVal;
         const img = e.target.parentElement.querySelector('.slot-thumb');
-        const rec = recipeMap[e.target.value];
+        const rec = recipeMap[selectedVal];
         if (img) {
-          if (rec) { img.src = recipeImage(rec); img.style.display = ''; }
-          else { img.style.display = 'none'; }
+          if (rec) { img.src = recipeImage(rec); img.style.display = ''; img.dataset.viewRecipe = selectedVal; }
+          else { img.style.display = 'none'; img.dataset.viewRecipe = ''; }
         }
         buildCustom();
         updateCustomTotals();
         afterPlannerChange();
+        if (selectedVal && rec) {
+          const isRo = ((settings && settings.lang) === 'ro');
+          showAppToast(isRo ? `✓ ${rec.name} selectat! Atinge 🔍 Vezi pentru detalii.` : `✓ ${rec.name} selected! Tap 🔍 View for details.`);
+        }
+      }));
+
+      wrap.querySelectorAll('[data-view-recipe]').forEach(btn => btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const rid = btn.dataset.viewRecipe;
+        if (!rid || !recipeMap[rid]) return;
+        switchTab('recipes');
+        toggleRecipeDetail(rid);
+        setTimeout(() => {
+          const card = document.querySelector(`[data-card-rid="${rid}"]`);
+          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 150);
       }));
 
       wrap.querySelectorAll('[data-clear-day]').forEach(btn => btn.addEventListener('click', () => clearSlot(btn.dataset.clearDay, btn.dataset.clearSlot)));
@@ -10155,6 +10195,9 @@ const CUP_DENSITY = {
       wrap.querySelectorAll('.copy-day').forEach(sel => sel.addEventListener('change', e => { const dst = e.target.value; if (dst) copyDay(e.target.dataset.copySrc, dst); }));
 
       updateCustomTotals();
+      if (typeof renderBatchCookDaySheet === 'function') {
+        renderBatchCookDaySheet(activeDay === 'All Days' ? 'Day 1' : activeDay);
+      }
     }
 
     /* BATCH MEAL PREP & LEFTOVERS CONTROLLER */
@@ -10298,6 +10341,8 @@ const CUP_DENSITY = {
     }
 
     function updateCustomTotals() {
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+
       DAYS.forEach(day => {
         const el = document.getElementById('total-' + day.replace(/\s/g, ''));
         if (el) {
@@ -10306,28 +10351,45 @@ const CUP_DENSITY = {
           const r = macroPct(t);
           el.innerHTML = `
             <div class="day-macro-box">
-              <div class="day-macro-title">Day Total</div>
+              <div class="day-macro-title">${isRo ? 'Total ' + day.replace('Day', 'Ziua') : 'Day Total'}</div>
               <div class="day-macro-grid">
-                <div class="day-macro-line"><span class="macro-name">Calories:</span><span class="${k}"><strong>${fmt(t.kcal)} kcal</strong></span></div>
-                <div class="day-macro-line"><span class="macro-name">Fats:</span><span><strong>${fmt(t.fat)}g</strong> <span class="tiny muted">(${r.f}%)</span></span></div>
-                <div class="day-macro-line"><span class="macro-name">Proteins:</span><span class="${pc}"><strong>${fmt(t.protein)}g</strong> <span class="tiny muted">(${r.p}%)</span></span></div>
-                <div class="day-macro-line"><span class="macro-name">Net Carbs:</span><span class="${cc}"><strong>${fmt(t.netCarbs)}g</strong> <span class="tiny muted">(${r.c}%)</span></span></div>
+                <div class="day-macro-line"><span class="macro-name">${isRo ? 'Calorii:' : 'Calories:'}</span><span class="${k}"><strong>${fmt(t.kcal)} kcal</strong></span></div>
+                <div class="day-macro-line"><span class="macro-name">${isRo ? 'Grăsimi:' : 'Fats:'}</span><span><strong>${fmt(t.fat)}g</strong> <span class="tiny muted">(${r.f}%)</span></span></div>
+                <div class="day-macro-line"><span class="macro-name">${isRo ? 'Proteine:' : 'Proteins:'}</span><span class="${pc}"><strong>${fmt(t.protein)}g</strong> <span class="tiny muted">(${r.p}%)</span></span></div>
+                <div class="day-macro-line"><span class="macro-name">${isRo ? 'Carbohidrați neți:' : 'Net Carbs:'}</span><span class="${cc}"><strong>${fmt(t.netCarbs)}g</strong> <span class="tiny muted">(${r.c}%)</span></span></div>
               </div>
             </div>`;
         }
       });
 
-      const week = DAYS.reduce((acc, day) => { const t = totalForDay(custom[day]); acc.kcal += t.kcal; acc.protein += t.protein; acc.fat += t.fat; acc.netCarbs += t.netCarbs; return acc; }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 });
-      const avg = { kcal: week.kcal / DAYS.length, protein: week.protein / DAYS.length, fat: week.fat / DAYS.length, netCarbs: week.netCarbs / DAYS.length };
-
       const kpis = document.getElementById('customKpis');
       if (kpis) {
-        kpis.innerHTML = [
-          ['Avg kcal/day', fmt(avg.kcal), dayLevel('kcal', avg.kcal)],
-          ['Avg protein/day', fmt(avg.protein) + ' g', dayLevel('protein', avg.protein)],
-          ['Protein target', protTarget() + ' g', ''],
-          ['Avg net carbs/day', fmt(avg.netCarbs) + ' g', dayLevel('netCarbs', avg.netCarbs)]
-        ].map(([l, v, cls]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${cls}">${v}</div></div>`).join('');
+        if (activeDay && activeDay !== 'All Days') {
+          // SINGLE DAY SELECTED: display EXACT SUM of the macros for the meals selected that day!
+          const t = totalForDay(custom[activeDay]);
+          const dayName = isRo ? activeDay.replace('Day', 'Ziua') : activeDay;
+          kpis.innerHTML = [
+            [isRo ? `Calorii (${dayName})` : `Kcal (${dayName})`, `${fmt(t.kcal)} kcal`, dayLevel('kcal', t.kcal)],
+            [isRo ? `Proteine (${dayName})` : `Protein (${dayName})`, `${fmt(t.protein)} g`, dayLevel('protein', t.protein)],
+            [isRo ? 'Țintă proteine' : 'Protein target', `${protTarget()} g`, ''],
+            [isRo ? `Carbohidrați neți (${dayName})` : `Net Carbs (${dayName})`, `${fmt(t.netCarbs)} g`, dayLevel('netCarbs', t.netCarbs)]
+          ].map(([l, v, cls]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${cls}">${v}</div></div>`).join('');
+        } else {
+          // ALL DAYS SELECTED: display AVERAGE values across all days
+          const week = DAYS.reduce((acc, day) => {
+            const t = totalForDay(custom[day]);
+            acc.kcal += t.kcal; acc.protein += t.protein; acc.fat += t.fat; acc.netCarbs += t.netCarbs;
+            return acc;
+          }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 });
+          const avg = { kcal: week.kcal / DAYS.length, protein: week.protein / DAYS.length, fat: week.fat / DAYS.length, netCarbs: week.netCarbs / DAYS.length };
+
+          kpis.innerHTML = [
+            [isRo ? 'Medie kcal / zi' : 'Avg kcal/day', fmt(avg.kcal), dayLevel('kcal', avg.kcal)],
+            [isRo ? 'Medie proteine / zi' : 'Avg protein/day', fmt(avg.protein) + ' g', dayLevel('protein', avg.protein)],
+            [isRo ? 'Țintă proteine' : 'Protein target', protTarget() + ' g', ''],
+            [isRo ? 'Medie carbohidrați / zi' : 'Avg net carbs/day', fmt(avg.netCarbs) + ' g', dayLevel('netCarbs', avg.netCarbs)]
+          ].map(([l, v, cls]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${cls}">${v}</div></div>`).join('');
+        }
       }
 
       const hKcal = document.getElementById('homeTargetKcal');
@@ -10336,6 +10398,169 @@ const CUP_DENSITY = {
       if (hKcal) hKcal.textContent = (settings.dailyKcal || 2000) + ' kcal';
       if (hProt) hProt.textContent = protTarget() + ' g';
       if (hCarbs) hCarbs.textContent = '≤ ' + (settings.dailyNetCarbs || 50) + ' g';
+    }
+
+    /* BATCH COOK SHEET FOR SPECIFIC DAY & STOCK DEPLETION */
+    function initBatchCookSheet() {
+      const daySelect = document.getElementById('prepDaySelect');
+      if (!daySelect) return;
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      daySelect.innerHTML = DAYS.map(d => `<option value="${d}">${isRo ? d.replace('Day', 'Ziua') : d}</option>`).join('');
+      daySelect.value = (activeDay && activeDay !== 'All Days') ? activeDay : 'Day 1';
+      daySelect.addEventListener('change', e => {
+        renderBatchCookDaySheet(e.target.value);
+      });
+      document.getElementById('depleteStockBtn')?.addEventListener('click', depleteStockFromPlan);
+      document.getElementById('prepCopyBtn')?.addEventListener('click', copyPrepSheet);
+      renderBatchCookDaySheet(daySelect.value);
+    }
+
+    function renderBatchCookDaySheet(day) {
+      const container = document.getElementById('prepDayDishesList');
+      const daySelect = document.getElementById('prepDaySelect');
+      if (!container) return;
+      if (daySelect && daySelect.value !== day) daySelect.value = day;
+
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const dayMeals = custom[day] || {};
+      const dishes = [];
+
+      SLOTS.forEach(slot => {
+        const rid = dayMeals[slot];
+        if (rid && recipeMap[rid]) {
+          dishes.push({ slot, recipe: recipeMap[rid] });
+        }
+      });
+
+      if (dishes.length === 0) {
+        container.innerHTML = `<div class="tiny muted" style="padding:10px;text-align:center;background:var(--color-surface);border:1px dashed var(--color-border);border-radius:var(--radius-sm)">
+          ${isRo ? 'Nicio rețetă planificată pentru această zi. Alege rețete în planner-ul de mai sus!' : 'No meals planned for this day yet. Select meals in the weekly planner above!'}
+        </div>`;
+        return;
+      }
+
+      container.innerHTML = dishes.map(({ slot, recipe }) => {
+        const slotName = isRo ? (slot === 'Breakfast' ? 'Mic dejun' : slot === 'Lunch' ? 'Prânz' : slot === 'Dinner' ? 'Cină' : slot.replace('Snack', 'Gustare')) : slot;
+        const ingPreview = (recipe.ingredients || []).slice(0, 4).map(escapeHtml).join(' • ');
+        return `
+          <label class="prep-dish-card" style="display:flex;align-items:flex-start;gap:8px;padding:8px 10px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);cursor:pointer">
+            <input type="checkbox" class="prep-dish-cb" data-prep-slot="${slot}" data-prep-rid="${recipe.id}" checked style="margin-top:2px;accent-color:var(--color-primary)">
+            <div style="flex:1">
+              <div style="font-weight:700;font-size:12px;display:flex;align-items:center;justify-content:space-between">
+                <span>${slotName}: ${escapeHtml(recipe.name)}</span>
+                <span class="muted tiny">${recipe.kcal} kcal</span>
+              </div>
+              <div class="tiny muted" style="margin-top:2px">${ingPreview}${recipe.ingredients?.length > 4 ? '...' : ''}</div>
+            </div>
+          </label>`;
+      }).join('');
+    }
+
+    function depleteStockFromPlan() {
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const daySelect = document.getElementById('prepDaySelect');
+      const day = daySelect ? daySelect.value : (activeDay !== 'All Days' ? activeDay : 'Day 1');
+      const checkedBoxes = document.querySelectorAll('#prepDayDishesList .prep-dish-cb:checked');
+
+      if (!checkedBoxes.length) {
+        showAppToast(isRo ? 'Selectează cel puțin o mâncare gătită!' : 'Select at least one dish marked as cooked!');
+        return;
+      }
+
+      const selectedRecipes = [];
+      checkedBoxes.forEach(cb => {
+        const rid = cb.dataset.prepRid;
+        if (rid && recipeMap[rid]) selectedRecipes.push(recipeMap[rid]);
+      });
+
+      let depletedCount = 0;
+      const allStockLists = [stock.fridge, stock.pantry, stock.freezer];
+
+      selectedRecipes.forEach(recipe => {
+        (recipe.ingredients || []).forEach(rawIng => {
+          const parsed = parseQty(rawIng);
+          const ingCanon = canon(parsed.name);
+          const ingKey = (typeof normStockKey === 'function') ? normStockKey(parsed.name) : ingCanon;
+
+          allStockLists.forEach(list => {
+            if (!Array.isArray(list)) return;
+            list.forEach(item => {
+              if (!item || !item.have) return;
+              const itemCanon = canon(item.name);
+              const itemKey = (typeof normStockKey === 'function') ? normStockKey(item.name) : itemCanon;
+
+              if (itemCanon === ingCanon || itemKey === ingKey || itemCanon.includes(ingCanon) || ingCanon.includes(itemCanon)) {
+                if (typeof item.qty === 'number' && item.qty > 0) {
+                  const toDeduct = parsed.qty || 1;
+                  item.qty = Math.max(0, Math.round((item.qty - toDeduct) * 10) / 10);
+                  if (item.qty <= 0) {
+                    item.have = false;
+                  }
+                } else {
+                  item.have = false;
+                }
+                depletedCount++;
+              }
+            });
+          });
+        });
+      });
+
+      saveState();
+      renderStock();
+      const statusEl = document.getElementById('depleteStatusMsg');
+      const msg = isRo 
+        ? `✓ S-au consumat ingredientele din stoc pentru ${selectedRecipes.length} mâncăruri gătite!`
+        : `✓ Marked cooked & depleted stock ingredients for ${selectedRecipes.length} dish(es)!`;
+      if (statusEl) {
+        statusEl.textContent = msg;
+        statusEl.style.color = 'var(--color-primary, #01696f)';
+        setTimeout(() => { if (statusEl) statusEl.textContent = ''; }, 4500);
+      }
+      showAppToast(msg);
+    }
+
+    function copyPrepSheet() {
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const daySelect = document.getElementById('prepDaySelect');
+      const day = daySelect ? daySelect.value : (activeDay !== 'All Days' ? activeDay : 'Day 1');
+      const dayTitle = isRo ? day.replace('Day', 'Ziua') : day;
+      const dayMeals = custom[day] || {};
+      const lines = [`📋 Keto Batch Cook Sheet - ${dayTitle}`, ''];
+
+      lines.push(isRo ? 'Mâncăruri planificate:' : 'Planned Meals:');
+      const allIngs = [];
+      SLOTS.forEach(slot => {
+        const rid = dayMeals[slot];
+        if (rid && recipeMap[rid]) {
+          const r = recipeMap[rid];
+          const slotName = isRo ? (slot === 'Breakfast' ? 'Mic dejun' : slot === 'Lunch' ? 'Prânz' : slot === 'Dinner' ? 'Cină' : slot.replace('Snack', 'Gustare')) : slot;
+          lines.push(`• [${slotName}] ${r.name} (${r.kcal} kcal)`);
+          if (r.ingredients) allIngs.push(...r.ingredients);
+        }
+      });
+
+      if (allIngs.length > 0) {
+        lines.push('');
+        lines.push(isRo ? 'Ingrediente necesare:' : 'Ingredients Needed:');
+        const uniqueIngs = Array.from(new Set(allIngs));
+        uniqueIngs.forEach(ing => lines.push(`- ${ing}`));
+      }
+
+      const text = lines.join('\n');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showAppToast(isRo ? '📋 Foaia de gătit a fost copiată!' : '📋 Cook sheet copied to clipboard!');
+        });
+      } else {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        showAppToast(isRo ? '📋 Foaia de gătit a fost copiată!' : '📋 Cook sheet copied to clipboard!');
+      }
     }
 
     /* STOCK MANAGER IMPLEMENTATION */
@@ -11515,6 +11740,433 @@ const CUP_DENSITY = {
       return true;
     }
 
+    /* FOCUS MODE FOR ACTIVE COOKING (WAKELOCK + NATIVE SCREEN AWAKE) */
+    let focusRecipeId = localStorage.getItem('keto_focus_recipe_id') || null;
+    let wakeLockObj = null;
+
+    async function setDeviceKeepScreenOn(enabled) {
+      try {
+        if (window.Android && typeof window.Android.setKeepScreenOn === 'function') {
+          window.Android.setKeepScreenOn(enabled);
+        }
+      } catch (e) {
+        console.warn('Android keepScreenOn failed:', e);
+      }
+      try {
+        if ('wakeLock' in navigator) {
+          if (enabled && !wakeLockObj) {
+            wakeLockObj = await navigator.wakeLock.request('screen');
+            wakeLockObj.addEventListener('release', () => { wakeLockObj = null; });
+          } else if (!enabled && wakeLockObj) {
+            await wakeLockObj.release();
+            wakeLockObj = null;
+          }
+        }
+      } catch (e) {
+        console.warn('WakeLock failed:', e);
+      }
+    }
+
+    function toggleFocusMode(recipeId) {
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      if (focusRecipeId === recipeId) {
+        // Turn OFF Focus Mode
+        focusRecipeId = null;
+        localStorage.removeItem('keto_focus_recipe_id');
+        setDeviceKeepScreenOn(false);
+        updateFocusModeUI();
+        showAppToast(isRo ? '🔓 Mod Focus dezactivat (ecranul revine la normal)' : '🔓 Focus Mode exited (screen timeout restored)');
+      } else {
+        // Turn ON Focus Mode
+        focusRecipeId = recipeId;
+        localStorage.setItem('keto_focus_recipe_id', recipeId);
+        setDeviceKeepScreenOn(true);
+        updateFocusModeUI();
+        const r = recipeMap[recipeId];
+        showAppToast(isRo ? `🍳 Mod Focus activat pentru "${r?.name || ''}"! Ecranul va rămâne aprins.` : `🍳 Cooking Focus Mode active for "${r?.name || ''}"! Screen stays awake.`);
+      }
+      if (activeRecipeId === recipeId) {
+        // Re-render detail card to update toggle button state
+        const detail = document.getElementById(`recipeDetail_${recipeId}`);
+        if (detail && recipeMap[recipeId]) {
+          detail.innerHTML = getRecipeDetailHtml(recipeMap[recipeId]);
+          wireRecipeDetailEvents(recipeId);
+        }
+      }
+    }
+
+    function updateFocusModeUI() {
+      const bar = document.getElementById('focusModeFloatingBar');
+      const text = document.getElementById('focusBarText');
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      if (focusRecipeId && recipeMap[focusRecipeId]) {
+        const r = recipeMap[focusRecipeId];
+        if (bar) bar.classList.remove('hidden');
+        if (text) text.textContent = (isRo ? '🍳 Mod Focus Gătit: ' : '🍳 Cooking Focus: ') + r.name;
+      } else {
+        if (bar) bar.classList.add('hidden');
+      }
+    }
+
+    function checkFocusModeOnBoot() {
+      const savedFocusId = localStorage.getItem('keto_focus_recipe_id');
+      if (savedFocusId && recipeMap[savedFocusId]) {
+        focusRecipeId = savedFocusId;
+        setDeviceKeepScreenOn(true);
+        updateFocusModeUI();
+        // If app was closed while on, reopening immediately displays that focused recipe as primary screen!
+        switchTab('recipes');
+        setTimeout(() => {
+          toggleRecipeDetail(savedFocusId);
+          const card = document.querySelector(`[data-card-rid="${savedFocusId}"]`);
+          if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+      }
+    }
+
+    /* FOREIGN RECIPE TRANSLATIONS (ROMANIAN & ENGLISH) */
+    const RECIPE_TRANSLATIONS = {
+      // Spanish
+      'Gambas al Ajillo': { en: 'Garlic Sautéed Shrimp', ro: 'Creveți cu usturoi și ulei de măsline' },
+      'Tortilla Española': { en: 'Spanish Omelette', ro: 'Omletă spaniolă' },
+      'Gazpacho Andaluz': { en: 'Andalusian Chilled Tomato Soup', ro: 'Supă rece andaluză de roșii' },
+      'Pollo al Ajillo': { en: 'Spanish Garlic Chicken', ro: 'Pui cu usturoi în stil spaniol' },
+      'Albóndigas en Salsa': { en: 'Spanish Meatballs in Sauce', ro: 'Chifteluțe spaniole în sos' },
+      'Pulpo a la Gallega': { en: 'Galician Style Octopus', ro: 'Caracatiță cu boia și ulei de măsline' },
+      'Pisto Manchego': { en: 'Spanish Braised Vegetables', ro: 'Ghiveci spaniol de legume' },
+      // French
+      'Boeuf Bourguignon': { en: 'Beef Braised in Red Wine', ro: 'Vită înăbușită în vin roșu' },
+      'Coq au Vin': { en: 'Chicken Braised in Red Wine', ro: 'Pui în sos de vin roșu' },
+      'Ratatouille': { en: 'Provençal Vegetable Stew', ro: 'Ghiveci provensal de legume' },
+      'Salade Niçoise': { en: 'Nicoise Tuna Salad', ro: 'Salată franțuzească cu ton' },
+      'Quiche Lorraine (Crustless)': { en: 'Crustless Bacon & Egg Tart', ro: 'Tartă franțuzească cu bacon și ouă' },
+      'Steak au Poivre': { en: 'Steak with Creamy Peppercorn Sauce', ro: 'Friptură de vită cu sos de piper' },
+      'Confit de Canard': { en: 'Crispy Slow Duck Confit', ro: 'Pulpă de rață confiată' },
+      'Soupe à l\'Oignon (Keto)': { en: 'French Onion Soup', ro: 'Supă franțuzească de ceapă' },
+      // Italian
+      'Osso Buco alla Milanese': { en: 'Braised Veal Shank', ro: 'Rondel de vită în sos milanez' },
+      'Pollo alla Cacciatora': { en: 'Hunter Style Chicken Stew', ro: 'Pui vânătoresc cu roșii și ierburi' },
+      'Saltimbocca alla Romana': { en: 'Veal with Prosciutto & Sage', ro: 'Carne de vită cu prosciutto și salvie' },
+      'Insalata Caprese': { en: 'Caprese Tomato & Mozzarella Salad', ro: 'Salată Caprese cu busuioc proaspăt' },
+      'Frittata di Zucchine': { en: 'Zucchini Italian Frittata', ro: 'Omletă italiană cu dovlecei' },
+      'Bistecca alla Fiorentina': { en: 'Florentine T-Bone Steak', ro: 'Friptură florentină de vită la grătar' },
+      'Carpaccio di Manzo': { en: 'Thin Sliced Marinated Beef', ro: 'Felii subțiri de mușchi de vită marinat' },
+      'Vitello Tonnato': { en: 'Veal with Creamy Tuna Caper Sauce', ro: 'Vită cu sos cremos de ton și capere' },
+      'Melanzane alla Parmigiana': { en: 'Eggplant Parmesan Bake', ro: 'Vinete la cuptor cu parmezan și mozzarella' },
+      // German / Austrian / Hungarian
+      'Wiener Schnitzel (Keto Crust)': { en: 'Viennese Cutlet in Keto Crust', ro: 'Șnițel vienez în crustă keto' },
+      'Sauerbraten': { en: 'German Marinated Pot Roast', ro: 'Friptură marinată de vită în stil german' },
+      'Zürcher Geschnetzeltes': { en: 'Sliced Meat in Mushroom Cream', ro: 'Fâșii de carne în sos cremos de ciuperci' },
+      'Schweinebraten': { en: 'Bavarian Roast Pork with Crackling', ro: 'Friptură bavareză de porc la cuptor' },
+      'Königsberger Klopse': { en: 'Meatballs in Creamy Caper Sauce', ro: 'Chifteluțe germane în sos de capere' },
+      'Goulash': { en: 'Hungarian Spiced Beef Stew', ro: 'Gulaș unguresc de vită cu boia' },
+      // Greek
+      'Moussaka (Keto)': { en: 'Greek Eggplant & Meat Casserole', ro: 'Musaca grecească cu vinete' },
+      'Souvlaki Skewers': { en: 'Greek Marinated Meat Skewers', ro: 'Frigărui grecești la grătar' },
+      'Spanakopita Bowl': { en: 'Greek Spinach & Feta Bowl', ro: 'Bol grecesc cu spanac și brânză feta' },
+      'Tzatziki Bowl': { en: 'Chilled Cucumber & Garlic Bowl', ro: 'Bol răcoritor cu sos tzatziki' },
+      'Kleftiko Lamb': { en: 'Slow Roasted Parchment Lamb', ro: 'Friptură lentă de miel în pergament' },
+      'Stifado': { en: 'Greek Beef Stew with Onions', ro: 'Tocăniță grecească de vită cu ceapă' },
+      // Mexican
+      'Carne Asada': { en: 'Charred Marinated Flank Steak', ro: 'Friptură mexicană de vită marinată' },
+      'Chiles Rellenos': { en: 'Cheese-Stuffed Roasted Peppers', ro: 'Ardei copți umpluți cu brânză' },
+      'Carnitas': { en: 'Crispy Slow-Cooked Pulled Pork', ro: 'Carne fragedă de porc în stil mexican' },
+      'Tinga de Pollo': { en: 'Shredded Chicken in Chipotle Sauce', ro: 'Pui mărunțit în sos de roșii și chipotle' },
+      'Fajitas de Res': { en: 'Sizzling Beef & Pepper Skillet', ro: 'Fâșii de vită cu ardei și ceapă la tigaie' },
+      'Guacamole Bowl': { en: 'Fresh Avocado Lime Dip Bowl', ro: 'Bol cu guacamole proaspăt și lămâie verde' },
+      // Asian / Middle Eastern
+      'Chicken Yakitori': { en: 'Japanese Glazed Chicken Skewers', ro: 'Frigărui japoneze de pui la grătar' },
+      'Beef Tataki': { en: 'Seared Rare Beef with Sesame Ponzu', ro: 'Vită rumenită rapid în stil japonez' },
+      'Tamagoyaki': { en: 'Japanese Layered Rolled Omelette', ro: 'Omletă japoneză rulată în straturi' },
+      'Tonkatsu (Keto)': { en: 'Japanese Crispy Pork Cutlet', ro: 'Cotlet crocant de porc în stil japonez' },
+      'Shashimi Salad': { en: 'Fresh Sliced Fish Salad', ro: 'Salată cu pește proaspăt' },
+      'Tom Yum Soup': { en: 'Spicy & Sour Lemongrass Shrimp Soup', ro: 'Supă thailandeză acrișoară cu creveți' },
+      'Tom Kha Gai': { en: 'Thai Coconut Chicken Soup', ro: 'Supă thailandeză de pui cu lapte de cocos' },
+      'Pad Kra Pao': { en: 'Thai Holy Basil Minced Meat', ro: 'Carne tocată cu busuioc thailandez' },
+      'Butter Chicken (Murgh Makhani)': { en: 'Indian Spiced Butter Chicken', ro: 'Pui indian în sos cremos de unt' },
+      'Palak Paneer': { en: 'Indian Spinach with Paneer Cheese', ro: 'Spanac indian cu brânză paneer' },
+      'Tandoori Chicken': { en: 'Roasted Spiced Yogurt Chicken', ro: 'Pui tandoori rumenit cu condimente' },
+      'Lamb Rogan Josh': { en: 'Kashmiri Braised Lamb Curry', ro: 'Curry aromat de miel din Kashmir' },
+      'Shakshuka': { en: 'Poached Eggs in Spiced Pepper Sauce', ro: 'Ouă poșate în sos picant de roșii și ardei' },
+      // Romanian (translated if app language is English)
+      'Mititei (Mici) cu Muștar': { en: 'Romanian Grilled Minced Meat Rolls with Mustard', ro: '' },
+      'Ciorbă Rădăuțeană (Keto)': { en: 'Radauti Garlic Chicken Soup', ro: '' },
+      'Sarmale Keto în Foi de Varză': { en: 'Romanian Keto Cabbage Rolls', ro: '' },
+      'Tochitură Moldovenească': { en: 'Moldavian Pork Stew with Egg', ro: '' },
+      'Salată de Vinete cu Maioneză': { en: 'Roasted Eggplant Salad with Mayo', ro: '' },
+      'Ostropel de Pui': { en: 'Romanian Garlic Tomato Chicken Stew', ro: '' },
+      'Drob de Miel': { en: 'Romanian Spring Lamb Meatloaf with Herbs', ro: '' },
+      'Ciorbă de Burtă': { en: 'Romanian Tripe Soup with Sour Cream & Garlic', ro: '' },
+      'Piftie de Porc': { en: 'Traditional Garlic Pork Aspic', ro: '' },
+      'Musaca de Vinete': { en: 'Romanian Layered Eggplant Casserole', ro: '' },
+      'Papanași Keto Fărâmițați': { en: 'Romanian Keto Cottage Cheese Pancakes', ro: '' },
+      'Mămăligă Keto din Migdale': { en: 'Almond Keto Polenta Mash', ro: '' },
+      'Cozonac Keto cu Nucă': { en: 'Romanian Keto Walnut Sweet Bread', ro: '' }
+    };
+
+    function getRecipeDisplayName(r, lang) {
+      if (!r) return '';
+      const isRo = (lang === 'ro' || (typeof settings !== 'undefined' && settings?.lang === 'ro'));
+      const t = RECIPE_TRANSLATIONS[r.id] || RECIPE_TRANSLATIONS[r.name];
+      if (!t) return r.name;
+      const translation = isRo ? t.ro : t.en;
+      if (!translation || translation.trim() === '' || translation.toLowerCase() === r.name.toLowerCase()) return r.name;
+      return `${r.name} (${translation})`;
+    }
+
+    /* CHEF TIPS & INGREDIENT SUBSTITUTIONS */
+    function getRecipeTips(r, isRo) {
+      if (!r) return [];
+      const tips = [];
+      const text = ((r.name || '') + ' ' + (r.ingredients || []).join(' ')).toLowerCase();
+
+      // Meat cuts substitutions
+      if (/ribeye|flank|sirloin|steak|brisket|shank|beef chuck|tenderloin/.test(text)) {
+        tips.push(isRo 
+          ? '<strong>🥩 Înlocuire carne de vită:</strong> Vrăbioara de vită (sirloin), mușchiul file sau antricotul (ribeye) pot fi folosite interschimbabil. Pentru gătire lentă, pieptul de vită (brisket) sau rasolul (shank) devin extrem de fragede.'
+          : '<strong>🥩 Beef cut substitutions:</strong> Ribeye, sirloin, and flank steak can be swapped seamlessly. For braising or slow cooking, beef brisket or shank provide maximum tenderness and rich collagen.');
+      } else if (/chicken thigh|chicken breast|poultry|chicken wings|turkey/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🍗 Înlocuire carne pasăre:</strong> Pulpele de pui cu os pot fi înlocuite cu piept de pui (scurtează timpul pe foc cu 3 minute pentru a rămâne suculent), pulpe de curcan sau piept de rață pentru un plus de grăsimi sănătoase.'
+          : '<strong>🍗 Poultry substitutions:</strong> Chicken thighs can be swapped for chicken breast (reduce cooking time by 3-4 mins to stay juicy), turkey cutlets, or duck breast for richer keto fats.');
+      } else if (/pork belly|pork shoulder|pork loin|jamon|serrano|prosciutto|bacon/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🥓 Înlocuire porc:</strong> Pieptul de porc (pork belly) poate fi înlocuit cu ceafă sau cotlet fraged. Șunca jamón serrano sau prosciutto di Parma pot fi înlocuite cu bacon afumat crocant.'
+          : '<strong>🥓 Pork substitutions:</strong> Pork belly swaps well with marbled pork shoulder or thick-cut chops. Jamón serrano or prosciutto can be swapped with crispy smoked streaky bacon.');
+      } else if (/ground beef|ground pork|ground lamb|mince/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🥩 Carne tocată:</strong> Carnea de vită 80/20 poate fi combinată cu carne de porc sau miel tocat pentru un gust mai aromat și un raport optim de grăsimi keto.'
+          : '<strong>🥩 Minced meat blend:</strong> 80/20 ground beef can be blended or swapped with ground pork or ground lamb for higher keto fat ratios and deeper flavor.');
+      } else if (/salmon|shrimp|prawn|tuna|cod|mackerel|seafood/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🐟 Înlocuire pește & fructe de mare:</strong> Somonul poate fi înlocuit cu păstrăv somonat sau macrou proaspăt bogat în omega-3. Creveții pot fi înlocuiți cu inele de calamar sau scoici.'
+          : '<strong>🐟 Seafood alternatives:</strong> Salmon can be swapped with steelhead trout or fresh mackerel. Shrimp can be swapped with tender calamari rings or scallops.');
+      }
+
+      // Dairy-free keto swaps
+      if (/cream|cheese|cheddar|mozzarella|parmesan|butter|sour cream|iaurt|smantana/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🥛 Alternativă fără lactate (No Dairy):</strong> Înlocuiește smântâna cu cremă de cocos grasă (full-fat), untul cu ghee clarificat sau ulei de măsline/untură, iar parmezanul cu fulgi de drojdie inactivă.'
+          : '<strong>🥛 Dairy-free alternative:</strong> Swap heavy cream or sour cream with full-fat coconut cream, butter with clarified ghee or avocado oil/tallow, and cheese with nutritional yeast flakes.');
+      }
+
+      // Veggie & Keto Sides
+      if (/cauliflower|broccoli|zucchini|cabbage|spinach/.test(text)) {
+        tips.push(isRo
+          ? '<strong>🥦 Înlocuire legume:</strong> Orezul de conopidă poate fi înlocuit cu orez shirataki/konjac sau varză sotată fin. Dovleceii tăiați fâșii (zoodles) pot fi schimbați cu tăieței konjac.'
+          : '<strong>🥦 Veggie swaps:</strong> Cauliflower rice can be substituted with sautéed shredded cabbage or shirataki rice. Zucchini noodles can be swapped with hearts of palm or konjac pasta.');
+      }
+
+      // Storage & Meal Prep tip
+      tips.push(isRo
+        ? '<strong>❄️ Păstrare & Meal Prep:</strong> Se păstrează excelent la frigider 3-4 zile într-un recipient ermetic. Reîncălzește în tigaie cu puțin unt sau ulei pentru a păstra textura rumenită.'
+        : '<strong>❄️ Storage & Meal Prep:</strong> Keeps well refrigerated in an airtight container for 3-4 days. Reheat gently in a hot skillet with a dab of fat to restore crispiness.');
+
+      return tips;
+    }
+
+    /* AI REPRESENTATIVE VECTOR SVG ILLUSTRATIONS */
+    function getRecipeSvgImage(r) {
+      if (r && r.image && /^(data:image\/|https?:\/\/)/i.test(r.image)) {
+        return r.image;
+      }
+      const text = ((r?.name || '') + ' ' + (r?.ingredients || []).join(' ')).toLowerCase();
+      const meal = (r?.meal || '').toLowerCase();
+      const cuisine = (r?.cuisine || '').toLowerCase();
+
+      // Romanian traditional culinary visuals
+      if (/mici|mititei|tochit|sarmal|drob|radaut|burta|piftie/.test(text) || cuisine === 'romanian') {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_ro" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3b2318"/><stop offset="100%" stop-color="#1c110b"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_ro)"/>
+          <ellipse cx="60" cy="88" rx="46" ry="18" fill="#140b07" opacity="0.6"/>
+          <rect x="22" y="74" width="76" height="10" rx="4" fill="#6d4327"/>
+          <g transform="rotate(-12 60 55)">
+            <rect x="34" y="44" width="52" height="18" rx="8" fill="#582a18"/>
+            <line x1="42" y1="44" x2="44" y2="62" stroke="#261008" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="56" y1="44" x2="58" y2="62" stroke="#261008" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="70" y1="44" x2="72" y2="62" stroke="#261008" stroke-width="2.5" stroke-linecap="round"/>
+          </g>
+          <circle cx="85" cy="54" r="7" fill="#eab308"/>
+          <circle cx="83" cy="52" r="2" fill="#fef08a"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#f59e0b" font-family="sans-serif">🇷🇴 Tradițional</text>
+        </svg>`);
+      }
+
+      // Beef & Steaks
+      if (/ribeye|flank|sirloin|steak|brisket|shank|beef chuck|tenderloin|beef/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_bf" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3d181e"/><stop offset="100%" stop-color="#1c0a0d"/></radialGradient>
+            <linearGradient id="stk" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#991b1b"/><stop offset="100%" stop-color="#581010"/></linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_bf)"/>
+          <ellipse cx="60" cy="85" rx="44" ry="16" fill="#0f0507" opacity="0.6"/>
+          <path d="M30 52 C30 38, 52 32, 74 38 C90 42, 94 62, 88 72 C80 84, 48 86, 36 78 C28 72, 30 60, 30 52 Z" fill="url(#stk)"/>
+          <path d="M42 42 L76 74 M54 38 L88 70 M34 52 L66 84" stroke="#2e0509" stroke-width="2.5" stroke-linecap="round" opacity="0.85"/>
+          <path d="M40 70 L72 38 M52 82 L84 50" stroke="#2e0509" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+          <path d="M30 84 Q50 68 70 60" stroke="#15803d" stroke-width="2" fill="none"/>
+          <line x1="42" y1="75" x2="40" y2="70" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="70" x2="52" y2="64" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="58" y1="65" x2="58" y2="58" stroke="#22c55e" stroke-width="2" stroke-linecap="round"/>
+          <circle cx="68" cy="48" r="1.5" fill="#ffffff" opacity="0.9"/>
+          <circle cx="56" cy="56" r="1.5" fill="#ffffff" opacity="0.9"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#f87171" font-family="sans-serif">🥩 Prime Beef</text>
+        </svg>`);
+      }
+
+      // Seafood & Fish
+      if (/salmon|shrimp|prawn|tuna|cod|mackerel|seafood|octopus|pulpo/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_sf" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0e3a47"/><stop offset="100%" stop-color="#061c24"/></radialGradient>
+            <linearGradient id="slm" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#fb7185"/><stop offset="100%" stop-color="#e11d48"/></linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_sf)"/>
+          <ellipse cx="60" cy="85" rx="42" ry="15" fill="#030d12" opacity="0.6"/>
+          <path d="M28 62 C32 44, 75 36, 92 48 C96 66, 82 82, 45 80 C32 78, 26 72, 28 62 Z" fill="url(#slm)"/>
+          <path d="M40 48 Q55 56 42 74" stroke="#fecdd3" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <path d="M54 44 Q68 54 58 76" stroke="#fecdd3" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <path d="M68 44 Q80 54 72 74" stroke="#fecdd3" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <path d="M72 32 A14 14 0 0 1 96 46 Z" fill="#facc15"/>
+          <path d="M74 34 A11 11 0 0 1 93 45 Z" fill="#fef08a"/>
+          <circle cx="48" cy="60" r="1.5" fill="#22c55e"/>
+          <circle cx="62" cy="66" r="1.5" fill="#22c55e"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#38bdf8" font-family="sans-serif">🐟 Wild Seafood</text>
+        </svg>`);
+      }
+
+      // Chicken & Poultry
+      if (/chicken|turkey|poultry|duck|wings|thigh/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_ck" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#42240c"/><stop offset="100%" stop-color="#1f1005"/></radialGradient>
+            <linearGradient id="chk" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#f59e0b"/><stop offset="100%" stop-color="#b45309"/></linearGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_ck)"/>
+          <ellipse cx="60" cy="86" rx="42" ry="15" fill="#120902" opacity="0.6"/>
+          <g transform="rotate(-18 55 58)">
+            <rect x="22" y="54" width="22" height="7" rx="3" fill="#fef3c7"/>
+            <circle cx="21" cy="54" r="5" fill="#fef3c7"/>
+            <circle cx="21" cy="61" r="5" fill="#fef3c7"/>
+            <ellipse cx="60" cy="57" rx="28" ry="18" fill="url(#chk)"/>
+            <path d="M46 47 Q65 42 78 52" stroke="#78350f" stroke-width="2.5" fill="none"/>
+            <circle cx="56" cy="58" r="2" fill="#78350f" opacity="0.6"/>
+            <circle cx="68" cy="62" r="1.5" fill="#78350f" opacity="0.6"/>
+          </g>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#fbbf24" font-family="sans-serif">🍗 Crisp Poultry</text>
+        </svg>`);
+      }
+
+      // Pork, Bacon & Charcuterie
+      if (/pork|bacon|ham|jamon|serrano|prosciutto|carnitas|belly|ribs/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_pk" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3d1d1a"/><stop offset="100%" stop-color="#1a0a09"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_pk)"/>
+          <ellipse cx="60" cy="85" rx="44" ry="15" fill="#0d0404" opacity="0.6"/>
+          <path d="M26 48 Q42 38 60 48 T94 48 L94 62 Q78 52 60 62 T26 62 Z" fill="#b91c1c"/>
+          <path d="M26 53 Q42 43 60 53 T94 53" stroke="#fecaca" stroke-width="3" fill="none"/>
+          <path d="M26 68 Q42 58 60 68 T94 68 L94 78 Q78 68 60 78 T26 78 Z" fill="#991b1b"/>
+          <path d="M26 72 Q42 62 60 72 T94 72" stroke="#fee2e2" stroke-width="2.5" fill="none"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#f87171" font-family="sans-serif">🥓 Artisanal Pork</text>
+        </svg>`);
+      }
+
+      // Breakfast & Eggs
+      if (/egg|frittata|omelette|scrambled|shakshuka|breakfast/.test(text) || meal === 'breakfast') {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_eg" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#382b14"/><stop offset="100%" stop-color="#171206"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_eg)"/>
+          <ellipse cx="60" cy="62" rx="42" ry="34" fill="#1c1917" stroke="#292524" stroke-width="3"/>
+          <path d="M34 60 C32 46, 56 40, 72 44 C88 48, 88 74, 76 80 C60 86, 36 78, 34 60 Z" fill="#f8fafc"/>
+          <circle cx="58" cy="60" r="14" fill="#f59e0b"/>
+          <circle cx="54" cy="56" r="4" fill="#fbbf24"/>
+          <circle cx="52" cy="54" r="1.5" fill="#ffffff"/>
+          <circle cx="44" cy="68" r="1.2" fill="#09090b"/>
+          <circle cx="70" cy="52" r="1.2" fill="#09090b"/>
+          <circle cx="48" cy="52" r="1.5" fill="#16a34a"/>
+          <circle cx="72" cy="70" r="1.5" fill="#16a34a"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#facc15" font-family="sans-serif">🍳 Farm Fresh Eggs</text>
+        </svg>`);
+      }
+
+      // Salads, Greens & Bowls
+      if (/salad|greens|bowl|spinach|cucumber|avocado|caesar|poke/.test(text) || meal === 'side') {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_sl" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#123821"/><stop offset="100%" stop-color="#07170d"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_sl)"/>
+          <path d="M24 55 Q60 52 96 55 Q92 88 60 88 Q28 88 24 55 Z" fill="#1e293b"/>
+          <path d="M32 54 C36 42, 54 44, 52 56 Z" fill="#22c55e"/>
+          <path d="M48 52 C52 38, 72 40, 68 54 Z" fill="#16a34a"/>
+          <path d="M64 54 C70 42, 88 46, 84 56 Z" fill="#4ade80"/>
+          <ellipse cx="60" cy="56" rx="8" ry="12" fill="#84cc16" transform="rotate(20 60 56)"/>
+          <ellipse cx="60" cy="56" rx="5" ry="9" fill="#a3e635" transform="rotate(20 60 56)"/>
+          <circle cx="44" cy="58" r="4" fill="#312e81"/>
+          <circle cx="44" cy="58" r="1.5" fill="#123821"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#4ade80" font-family="sans-serif">🥗 Crisp Keto Bowl</text>
+        </svg>`);
+      }
+
+      // Soups & Broths
+      if (/soup|broth|ramen|pho|chowder|ciorba/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_sp" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#1e2c3d"/><stop offset="100%" stop-color="#0b121c"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_sp)"/>
+          <ellipse cx="60" cy="85" rx="40" ry="14" fill="#05090f" opacity="0.6"/>
+          <path d="M26 52 Q60 48 94 52 Q90 84 60 84 Q30 84 26 52 Z" fill="#334155"/>
+          <ellipse cx="60" cy="53" rx="33" ry="11" fill="#ca8a04"/>
+          <path d="M50 44 Q46 34 50 26" stroke="#fef08a" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <path d="M60 42 Q64 32 60 22" stroke="#fef08a" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.8"/>
+          <path d="M70 44 Q66 34 70 26" stroke="#fef08a" stroke-width="2" fill="none" stroke-linecap="round" opacity="0.7"/>
+          <circle cx="54" cy="54" r="2" fill="#22c55e"/>
+          <circle cx="66" cy="52" r="2.5" fill="#22c55e"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#38bdf8" font-family="sans-serif">🍲 Nourishing Soup</text>
+        </svg>`);
+      }
+
+      // Desserts & Sweets
+      if (/dessert|sweet|fat bomb|muffin|cake|chocolate|berry|pancake|waffle/.test(text) || meal === 'snack') {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_ds" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3d182b"/><stop offset="100%" stop-color="#1a0711"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_ds)"/>
+          <ellipse cx="60" cy="85" rx="36" ry="14" fill="#0d0308" opacity="0.6"/>
+          <path d="M38 58 L44 80 L76 80 L82 58 Z" fill="#451a03"/>
+          <path d="M34 58 C32 44, 52 38, 60 38 C68 38, 88 44, 86 58 Z" fill="#78350f"/>
+          <circle cx="60" cy="38" r="7" fill="#e11d48"/>
+          <circle cx="58" cy="36" r="2" fill="#fecdd3"/>
+          <path d="M62 33 Q68 28 64 26" stroke="#22c55e" stroke-width="2" fill="none"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#f43f5e" font-family="sans-serif">🧁 Keto Treat</text>
+        </svg>`);
+      }
+
+      // Gourmet default
+      return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+        <defs>
+          <radialGradient id="bg_gt" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#0c4e54"/><stop offset="100%" stop-color="#032124"/></radialGradient>
+        </defs>
+        <rect width="120" height="120" rx="16" fill="url(#bg_gt)"/>
+        <ellipse cx="60" cy="86" rx="42" ry="14" fill="#011112" opacity="0.6"/>
+        <circle cx="60" cy="58" r="32" fill="#18272b" stroke="#01696f" stroke-width="2"/>
+        <circle cx="60" cy="58" r="22" fill="#083338"/>
+        <path d="M52 46 L68 70" stroke="#f8fafc" stroke-width="2" stroke-linecap="round"/>
+        <path d="M68 46 L52 70" stroke="#f8fafc" stroke-width="2" stroke-linecap="round"/>
+        <circle cx="60" cy="58" r="6" fill="#2dd4bf"/>
+        <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#2dd4bf" font-family="sans-serif">🍽️ Keto Gourmet</text>
+      </svg>`);
+    }
+
     function buildRecipeList() {
       const wrap = document.getElementById('recipeList');
       if (!wrap) return;
@@ -11535,12 +12187,16 @@ const CUP_DENSITY = {
         const flag = r.flag || (r.cuisine && typeof getCuisineFlag === 'function' ? getCuisineFlag(r.cuisine) : '');
         const isDf = isRecipeDairyFree(r);
         const dfBadge = isDf ? `<span class="df-badge" title="${isRo ? 'Fără lactate' : 'Dairy-Free'}" style="font-size:10px;font-weight:700;color:#2e7d32;background:rgba(46,125,50,0.13);padding:1px 5px;border-radius:4px;margin-left:5px">🥛🚫 ${isRo ? 'Fără lactate' : 'No dairy'}</span>` : '';
+        const dispName = getRecipeDisplayName(r, settings?.lang);
+        const isFocused = (focusRecipeId === r.id);
+        const focusBadge = isFocused ? `<span style="font-size:10px;font-weight:700;color:#f59e0b;background:rgba(245,158,11,0.18);padding:1px 5px;border-radius:4px;margin-left:5px">🍳 FOCUS</span>` : '';
+
         return `
           <div class="recipe-card-wrap ${isExpanded ? 'expanded' : ''}" data-card-rid="${r.id}">
             <button class="recipe-btn ${isExpanded ? 'active' : ''}" data-rid="${r.id}" type="button">
               <img class="recipe-thumb" src="${recipeImage(r)}" alt="" loading="lazy">
               <span class="recipe-meta">
-                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${dfBadge}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
+                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(dispName)}${focusBadge}${dfBadge}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
                 <div class="tiny muted">${escapeHtml(r.meal)} • ${r.kcal} kcal • P ${r.protein}g • F ${r.fat}g • NC ${r.netCarbs}g • ⏱ ${fmtTime(timeOf(r).total)}</div>
               </span>
               <span class="recipe-chevron">▼</span>
@@ -11577,7 +12233,6 @@ const CUP_DENSITY = {
           }
         }
         activeRecipeId = null;
-        // Keep active kitchen timer running in background
         return;
       }
 
@@ -11617,9 +12272,23 @@ const CUP_DENSITY = {
       const cuisineName = r.cuisine ? (isRo && typeof WORLD_CUISINES !== 'undefined' ? (WORLD_CUISINES.find(c => c.id === r.cuisine)?.nameRo || r.cuisine) : r.cuisine) : '';
       const isDf = isRecipeDairyFree(r);
       const dfBadge = isDf ? `<span class="df-badge" title="${isRo ? 'Fără lactate' : 'Dairy-Free'}" style="font-size:11px;font-weight:700;color:#2e7d32;background:rgba(46,125,50,0.13);padding:2px 7px;border-radius:4px;margin-left:6px;display:inline-block;vertical-align:middle">🥛🚫 ${isRo ? 'Fără lactate' : 'No dairy'}</span>` : '';
+      const dispName = getRecipeDisplayName(r, settings?.lang);
+      const isFocused = (focusRecipeId === r.id);
+      const tips = getRecipeTips(r, isRo);
+
       return `
-        ${safeImg ? `<img src="${safeImg}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:10px" alt="${escapeHtml(r.name)}">` : ''}
-        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(r.name)}${dfBadge}${stats.badge}</h3>
+        <!-- Focus Mode Header Toggle -->
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px;padding:6px 10px;background:var(--color-surface-offset);border:1px solid var(--color-border);border-radius:var(--radius-md)">
+          <div style="font-size:11px;font-weight:700;color:var(--color-primary)">
+            ${isFocused ? (isRo ? '🔒 Mod Focus Activ: Ecranul nu se va stinge în timpul gătitului' : '🔒 Focus Mode Active: Screen timeout disabled while cooking') : (isRo ? '🍳 Mod Focus Gătit: Fixează rețeta și ține ecranul aprins' : '🍳 Cooking Focus Mode: Pin recipe & keep screen awake')}
+          </div>
+          <button id="focusToggleBtn_${r.id}" class="act-btn ${isFocused ? 'danger' : 'primary'} small" data-focus-recipe-id="${r.id}" type="button" style="white-space:nowrap;padding:3px 10px;font-size:11px">
+            ${isFocused ? (isRo ? '✕ Dezactivează' : '✕ Exit Focus') : (isRo ? '⚡ Activează' : '⚡ Enable')}
+          </button>
+        </div>
+
+        ${safeImg ? `<img src="${safeImg}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:10px" alt="${escapeHtml(dispName)}">` : ''}
+        <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(dispName)}${dfBadge}${stats.badge}</h3>
         <p class="muted tiny">${cuisineName ? `${flag ? flag + ' ' : ''}${escapeHtml(cuisineName)} • ` : ''}${escapeHtml(r.meal)} • ${escapeHtml(r.portion)} • <a href="${recipeLink(r)}" target="_blank">${isRo ? 'Caută online ↗' : 'Search online ↗'}</a></p>
         <div class="macro-chips-row" style="margin:10px 0">
           <div class="macro-stat-pill"><span>${isRo ? 'Calorii' : 'Calories'}</span><strong>${r.kcal}</strong></div>
@@ -11634,6 +12303,17 @@ const CUP_DENSITY = {
         <div style="margin-bottom:12px">
           <strong class="small">${isRo ? 'Mod de preparare:' : 'Method:'}</strong>
           <p class="small muted" style="margin-top:4px;line-height:1.4">${escapeHtml(r.method || (isRo ? 'Fără instrucțiuni.' : 'No instructions provided.'))}</p>
+        </div>
+
+        <!-- Tips & Smart Ingredient Substitutions -->
+        <div class="recipe-tips-box" style="background:var(--color-surface-offset);border-left:4px solid var(--color-primary);padding:10px 14px;border-radius:0 var(--radius-md) var(--radius-md) 0;margin-bottom:12px">
+          <div style="font-weight:700;font-size:12px;color:var(--color-primary);margin-bottom:6px;display:flex;align-items:center;gap:6px">
+            <span>💡</span>
+            <span>${isRo ? 'Sfaturi de la Bucătar & Înlocuiri Inteligente' : 'Chef Tips & Smart Substitutions'}</span>
+          </div>
+          <ul style="margin:0;padding-left:18px;font-size:12px;line-height:1.45" class="muted">
+            ${tips.map(tip => `<li style="margin-bottom:4px">${tip}</li>`).join('')}
+          </ul>
         </div>
 
         <!-- Kitchen Prep Timers -->
@@ -11671,6 +12351,11 @@ const CUP_DENSITY = {
       const r = recipeMap[id];
       const detail = document.getElementById(`recipeDetail_${id}`);
       if (!r || !detail) return;
+
+      // Focus Mode toggle
+      document.getElementById(`focusToggleBtn_${id}`)?.addEventListener('click', () => {
+        toggleFocusMode(id);
+      });
 
       // Wire Timers
       detail.querySelectorAll('.timer-pill').forEach(btn => {
@@ -11726,7 +12411,6 @@ const CUP_DENSITY = {
     }
 
     function renderRecipe(id) {
-      // Compatibility helper; routes directly to toggleRecipeDetail
       toggleRecipeDetail(id);
     }
 
@@ -11735,10 +12419,9 @@ const CUP_DENSITY = {
       if (/^https?:\/\//i.test(link)) return link;
       return 'https://www.google.com/search?q=' + encodeURIComponent((r?.name || 'keto') + ' keto recipe');
     }
+
     function recipeImage(r) {
-      if (r && r.image) return r.image;
-      const pal = { a: '#01696f', b: '#0c4e54' };
-      return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><rect width="100" height="100" fill="${pal.a}"/><circle cx="50" cy="50" r="30" fill="${pal.b}"/><text x="50" y="55" font-size="28" text-anchor="middle" fill="#ffffff" font-family="sans-serif">🍳</text></svg>`);
+      return getRecipeSvgImage(r);
     }
 
     /* SHOPPING LIST */
@@ -11781,7 +12464,7 @@ const CUP_DENSITY = {
       return { qty: 1, unit: 'count', name: canon(s) };
     }
 
-    function addToShoppingList(name, qty, unit) {
+    function addToShoppingList(name, qty, unit, sourceRecipeId, sourceRecipeName) {
       if (!name) return;
       const cleanName = canon(String(name).replace(/\s+optional$/i, '').trim());
       const qtyNum = parseFloat(qty) || 1;
@@ -11801,16 +12484,48 @@ const CUP_DENSITY = {
             existing.qty = (existing.qty ? existing.qty + ' + ' : '') + qtyText;
           }
         }
+        if (sourceRecipeId) {
+          existing.recipes = existing.recipes || [];
+          if (!existing.recipes.some(r => r.id === sourceRecipeId)) {
+            existing.recipes.push({ id: sourceRecipeId, name: sourceRecipeName || sourceRecipeId });
+          }
+        }
       } else {
         shoppingList.unshift({
           id: 'shop_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
           name: capitalize(cleanName),
           qty: qtyText,
           bought: false,
-          category: categoryOf(cleanName)
+          category: categoryOf(cleanName),
+          recipes: sourceRecipeId ? [{ id: sourceRecipeId, name: sourceRecipeName || sourceRecipeId }] : []
         });
       }
       shopping[cleanName] = (shopping[cleanName] || 0) + 1;
+    }
+
+    function getItemRecipes(item) {
+      if (item.recipes && Array.isArray(item.recipes) && item.recipes.length > 0) {
+        return item.recipes;
+      }
+      // Dynamic fallback: look for recipes in the weekly planner that use this ingredient
+      const matches = [];
+      const ingKey = canon(item.name);
+      const seen = new Set();
+      DAYS.forEach(d => {
+        if (custom[d]) {
+          SLOTS.forEach(s => {
+            const rid = custom[d][s];
+            if (rid && !seen.has(rid) && recipeMap[rid]) {
+              const rec = recipeMap[rid];
+              if (rec.ingredients && rec.ingredients.some(i => canon(parseQty(i).name) === ingKey || i.toLowerCase().includes(item.name.toLowerCase()))) {
+                seen.add(rid);
+                matches.push({ id: rec.id, name: rec.name });
+              }
+            }
+          });
+        }
+      });
+      return matches;
     }
 
     function addDaysToShopping(lo, hi, servings) {
@@ -11832,7 +12547,7 @@ const CUP_DENSITY = {
               ];
               const isStocked = allStock.some(item => item && item.have && canon(item.name) === p.name);
               if (!isStocked) {
-                addToShoppingList(p.name, p.qty * scale, p.unit);
+                addToShoppingList(p.name, p.qty * scale, p.unit, r.id, r.name);
                 count++;
               }
             });
@@ -11856,7 +12571,7 @@ const CUP_DENSITY = {
 
     const AISLE_DEFINITIONS = [
       { key: 'produce', title: '🥬 Fresh Produce', match: ['spinach', 'mushroom', 'broccoli', 'cauliflower', 'cabbage', 'asparagus', 'green bean', 'bell pepper', 'zucchini', 'cucumber', 'tomato', 'lettuce', 'romaine', 'onion', 'carrot', 'bok choy', 'eggplant', 'olive', 'pickle', 'celery', 'avocado', 'berr', 'blueberr', 'raspberr', 'strawberr', 'lemon', 'lime', 'ginger', 'garlic'] },
-      { key: 'meat', title: '🥩 Meat & Seafood', match: ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds'] },
+      { key: 'meat', title: '🥩 Meat & Seafood', match: ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'jamon', 'serrano', 'prosciutto', 'shank', 'ribeye', 'brisket', 'flank', 'tenderloin', 'sirloin', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds'] },
       { key: 'dairy', title: '🧀 Dairy & Eggs', match: ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk'] },
       { key: 'pantry', title: '🥫 Pantry & Baking', match: ['almond', 'coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'chia', 'flax', 'seeds', 'vanilla', 'walnut', 'pecan', 'macadamia', 'peanut', 'bread', 'granola', 'flour'] },
       { key: 'oils', title: '🧂 Oils, Sauces & Spices', match: ['oil', 'mayonnaise', 'soy sauce', 'fish sauce', 'mustard', 'dressing', 'ranch', 'buffalo', 'tzatziki', 'horseradish', 'balsamic', 'vinegar', 'curry', 'sauce', 'passata', 'salt', 'pepper', 'paprika', 'cumin', 'chili', 'turmeric', 'coriander', 'oregano', 'thyme', 'rosemary', 'sage', 'basil', 'parsley', 'dill', 'mint', 'cilantro', 'chives', 'cinnamon', 'zest', 'herbs', 'spice'] },
@@ -11915,6 +12630,13 @@ const CUP_DENSITY = {
         if (item.qty) subParts.push(item.qty);
         if (storeNote) subParts.push(`📍 ${storeNote}`);
         const subHtml = subParts.length ? `<span class="shop-item-sub">${subParts.join(' • ')}</span>` : '';
+        const itemRecs = getItemRecipes(item);
+        let recipesHtml = '';
+        if (itemRecs && itemRecs.length > 0) {
+          recipesHtml = `<div class="shop-item-recipes" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">
+            ${itemRecs.map(r => `<button type="button" class="shop-recipe-pill" data-open-recipe="${escapeHtml(r.id)}" title="${escapeHtml(r.name)}" style="background:rgba(1,105,111,0.12);color:var(--color-primary);border:1px solid rgba(1,105,111,0.25);border-radius:12px;font-size:10px;font-weight:600;padding:1px 7px;cursor:pointer;display:inline-flex;align-items:center;gap:3px">🍽️ ${escapeHtml(r.name)}</button>`).join('')}
+          </div>`;
+        }
 
         return `
           <div class="swipe-item" data-shop-id="${item.id}">
@@ -11927,6 +12649,7 @@ const CUP_DENSITY = {
                 <div class="shop-item-text">
                   <span class="shop-item-name">${escapeHtml(tIng(item.name))}</span>
                   ${subHtml}
+                  ${recipesHtml}
                 </div>
               </div>
               <button class="shop-del-btn" data-del-id="${item.id}" type="button" aria-label="Delete">✕</button>
@@ -11986,6 +12709,21 @@ const CUP_DENSITY = {
             renderShoppingPage();
             window.scrollTo(0, scrollPos);
           }
+        });
+      });
+
+      // Wire recipe shortcut pills to jump directly to recipe detail
+      document.querySelectorAll('.shop-recipe-pill').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const rid = btn.dataset.openRecipe;
+          if (!rid) return;
+          switchTab('recipes');
+          setTimeout(() => {
+            toggleRecipeDetail(rid);
+            const card = document.querySelector(`[data-card-rid="${rid}"]`);
+            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
         });
       });
 
@@ -13723,7 +14461,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.4';
+    const FALLBACK_APP_VERSION = '1.0.5';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -13885,6 +14623,34 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.0.5',
+        date: '16 Oct 2026',
+        items: {
+          ro: [
+            '🍳 Mod Focus pentru Gătit Activ: fixează rețeta pe ecran, menține ecranul aprins (fără timeout) și reia automat rețeta la redeschiderea aplicației',
+            '🎨 Ilustrații vectoriale SVG reprezentative generate automat pentru toate categoriile culinare',
+            '🌍 Traduceri în paranteză pentru rețete internaționale în funcție de limba selectată (ex: Boeuf Bourguignon (Vită înăbușită în vin roșu))',
+            '💡 Secțiune nouă „Sfaturi & Înlocuiri Inteligente” sub Modul de preparare (tăieturi de carne alternative, opțiuni fără lactate, păstrare)',
+            '🥩 Denumiri exacte și autentice de carne în rețete și baza de date nutrițională (jamón serrano, ribeye, shank, brisket, flank, etc.)',
+            '🛒 Legături directe în lista de cumpărături: fiecare ingredient afișează rețeta aferentă cu navigare directă la 1 click',
+            '🥘 Foaie nouă de gătit în serie (Batch Cook Sheet) pe o zi selectată: bifează mâncărurile gătite și consumă stocul automat',
+            '📊 Rezumat macronutrienți mutat în partea superioară a planificatorului: sumă exactă pe ziua activă și medii zilnice la afișarea tuturor zilelor',
+            '📱 Interfață curățată: meniu optimizat, buton fasting repoziționat și navigare inferioară simplificată (Rețete, Stoc, Cumpărături, Macronutrienți)'
+          ],
+          en: [
+            '🍳 Active Cooking Focus Mode: pins recipe, disables screen timeout (keeps screen awake), and auto-resumes to recipe on app reopen',
+            '🎨 AI-assigned representative vector SVG illustrations across all culinary categories',
+            '🌍 Foreign language recipe translations in parentheses matching app language (e.g., Boeuf Bourguignon (Beef Braised in Red Wine))',
+            '💡 New Chef Tips & Smart Substitutions section below Method (meat cut swaps, dairy-free alternatives, meal storage)',
+            '🥩 Exact cuts of meat and authentic naming across all 215 recipes and macronutrient database (jamón serrano, ribeye, brisket, etc.)',
+            '🛒 Direct recipe shortcuts in Shopping List: each item displays its source recipe badge with 1-click redirect',
+            '🥘 Revamped single-day Batch Cook Sheet: mark cooked dishes and automatically deplete used stock ingredients',
+            '📊 Macronutrient summary repositioned to top of Planner: exact macro sum for single-day view, daily averages for all-days view',
+            '📱 Streamlined interface: fasting button relocated above settings and bottom navigation refined to strictly 4 essential tools'
+          ]
+        }
+      },
       {
         version: '1.0.4',
         date: '14 Oct 2026',
@@ -14977,17 +15743,13 @@ const CUP_DENSITY = {
       // Initialize all sub-views
       (function() {
         const sf = document.getElementById('shopFrom'), st = document.getElementById('shopTo');
-        const pf = document.getElementById('prepFrom'), pt = document.getElementById('prepTo');
         if (sf && st) {
           sf.innerHTML = DAYS.map((d, i) => `<option value="${i}">${d}</option>`).join('');
           st.innerHTML = DAYS.map((d, i) => `<option value="${i}" ${i === 2 ? 'selected' : ''}>${d}</option>`).join('');
         }
-        if (pf && pt) {
-          pf.innerHTML = DAYS.map((d, i) => `<option value="${i}">${d}</option>`).join('');
-          pt.innerHTML = DAYS.map((d, i) => `<option value="${i}" ${i === 2 ? 'selected' : ''}>${d}</option>`).join('');
-        }
       })();
 
+      initBatchCookSheet();
       buildPlannerDayPills();
       buildCustom();
       buildRecipeList();
@@ -14998,11 +15760,22 @@ const CUP_DENSITY = {
       renderStock();
       addBuilderRow();
       updateSyncUI();
+      checkFocusModeOnBoot();
 
-      // Feature Enhancements Wiring
-      document.getElementById('plannerSearchInput')?.addEventListener('input', e => {
-        plannerSearchFilter = e.target.value.trim();
-        buildCustom();
+      // Focus Mode Floating Bar events
+      document.getElementById('focusBarExitBtn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        if (focusRecipeId) toggleFocusMode(focusRecipeId);
+      });
+      document.getElementById('focusModeFloatingBar')?.addEventListener('click', () => {
+        if (focusRecipeId) {
+          switchTab('recipes');
+          setTimeout(() => {
+            toggleRecipeDetail(focusRecipeId);
+            const card = document.querySelector(`[data-card-rid="${focusRecipeId}"]`);
+            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          }, 150);
+        }
       });
 
       document.getElementById('suggestFromStockBtn')?.addEventListener('click', openPantrySuggestions);
