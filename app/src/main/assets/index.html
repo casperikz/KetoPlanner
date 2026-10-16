@@ -1379,17 +1379,91 @@
     .is-bought .shop-checkbox-icon {
       display: block;
     }
-    .shop-item-text {
+    .shop-add-input-wrap {
+      position: relative;
+      flex: 1;
+    }
+    .shop-macro-dropup {
+      position: absolute;
+      bottom: calc(100% + 6px);
+      left: 0;
+      right: 0;
+      max-height: 250px;
+      overflow-y: auto;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.28);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      padding: 4px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .shop-macro-dropup.hidden { display: none !important; }
+    .shop-dropup-item {
+      padding: 8px 10px;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      font-size: var(--text-sm);
+      transition: background .12s ease;
+    }
+    .shop-dropup-item:hover, .shop-dropup-item:active {
+      background: var(--color-surface-offset, rgba(1, 105, 111, 0.12));
+    }
+    .shop-dropup-name {
+      font-weight: 600;
+      color: var(--color-text);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .shop-dropup-macro {
+      font-size: 11px;
+      color: var(--color-text-muted);
+      white-space: nowrap;
+      font-weight: 500;
+      flex-shrink: 0;
+    }
+
+    /* Shopping List Item Row (Inline Qty Box & Hint Icon) */
+    .shop-item-clickable {
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
       display: flex;
       flex-direction: column;
       gap: 2px;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+    .shop-item-clickable:active {
+      background: rgba(1, 105, 111, 0.06);
+    }
+    .shop-item-name-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
       min-width: 0;
     }
     .shop-item-name {
       font-size: var(--text-base);
-      font-weight: 500;
+      font-weight: 600;
       color: var(--color-text);
-      word-break: break-word;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    .swipe-item-inner.is-bought .shop-item-name {
+      text-decoration: line-through;
+      opacity: 0.6;
     }
     .shop-item-sub {
       font-size: var(--text-xs);
@@ -1398,16 +1472,275 @@
       gap: 6px;
       align-items: center;
     }
-    .shop-del-btn {
-      color: var(--color-text-faint);
-      font-size: 1.1rem;
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
+    .shop-recipe-hint-badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      line-height: 1;
+      cursor: pointer;
       flex-shrink: 0;
+      padding: 2px 5px;
+      border-radius: 4px;
+      background: rgba(1, 105, 111, 0.12);
+      border: 1px solid rgba(1, 105, 111, 0.25);
     }
-    .shop-del-btn:active {
-      color: var(--color-danger);
+    .shop-qty-box-wrap {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
     }
+    .shop-item-qty-input {
+      width: 95px;
+      min-width: 75px;
+      max-width: 120px;
+      padding: 6px 8px;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-sm);
+      background: var(--color-surface);
+      color: var(--color-text);
+      font-size: var(--text-xs);
+      font-weight: 700;
+      text-align: right;
+      outline: none;
+      transition: border-color .15s, box-shadow .15s;
+    }
+    .shop-item-qty-input:focus {
+      border-color: var(--color-primary);
+      box-shadow: 0 0 0 2px var(--color-primary-highlight, rgba(1, 105, 111, 0.2));
+      background: var(--color-surface-offset, rgba(1, 105, 111, 0.04));
+    }
+
+    /* Samsung Food Style Shopping Item Preview Modal */
+    .sfood-modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      z-index: 10500;
+      display: flex;
+      align-items: flex-end;
+      justify-content: center;
+    }
+    .sfood-modal-overlay.hidden { display: none !important; }
+    .sfood-modal-sheet {
+      width: 100%;
+      max-width: 500px;
+      background: #18181b;
+      color: #f4f4f5;
+      border-top-left-radius: 24px;
+      border-top-right-radius: 24px;
+      box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+      max-height: 88vh;
+      display: flex;
+      flex-direction: column;
+      animation: sfoodSlideUp .22s cubic-bezier(0.16, 1, 0.3, 1);
+      overflow: hidden;
+    }
+    @keyframes sfoodSlideUp {
+      from { transform: translateY(100%); }
+      to { transform: translateY(0); }
+    }
+    .sfood-modal-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .sfood-modal-heading {
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+    .sfood-icon-btn {
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: #f4f4f5;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+      font-weight: bold;
+      transition: background .15s;
+    }
+    .sfood-icon-btn:hover { background: rgba(255, 255, 255, 0.2); }
+    .sfood-avatar-wrap {
+      display: flex;
+      justify-content: center;
+      padding-top: 14px;
+      padding-bottom: 6px;
+    }
+    .sfood-avatar-circle {
+      width: 90px;
+      height: 90px;
+      border-radius: 50%;
+      background: #ffffff;
+      color: #18181b;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      overflow: hidden;
+    }
+    .sfood-modal-body {
+      padding: 10px 20px 16px;
+      overflow-y: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      -webkit-overflow-scrolling: touch;
+    }
+    .sfood-field-group {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+    }
+    .sfood-field-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      font-weight: 700;
+      color: #a1a1aa;
+    }
+    .sfood-field-input {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      border-radius: 10px;
+      padding: 11px 14px;
+      font-size: 15px;
+      color: #f4f4f5;
+      outline: none;
+      transition: border-color .15s, background .15s;
+    }
+    .sfood-field-input:focus {
+      border-color: #01696f;
+      background: rgba(255, 255, 255, 0.09);
+    }
+    .sfood-macro-card {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed rgba(255, 255, 255, 0.16);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sfood-macro-card.hidden { display: none !important; }
+    .sfood-macro-title {
+      font-size: 11px;
+      font-weight: 700;
+      color: #a1a1aa;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+    .sfood-macro-chips {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .sfood-chip {
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    .sfood-chip.red { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+    .sfood-chip.blue { background: rgba(59, 130, 246, 0.2); color: #60a5fa; }
+    .sfood-chip.yellow { background: rgba(234, 179, 8, 0.2); color: #facc15; }
+    .sfood-chip.green { background: rgba(34, 197, 94, 0.2); color: #4ade80; }
+
+    /* Recipe Linked Card in Samsung Food Modal */
+    .sfood-recipe-wrap {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .sfood-recipe-wrap.hidden { display: none !important; }
+    .sfood-recipe-card {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background .15s ease, border-color .15s ease;
+    }
+    .sfood-recipe-card:hover, .sfood-recipe-card:active {
+      background: rgba(1, 105, 111, 0.25);
+      border-color: #01696f;
+    }
+    .sfood-recipe-thumb {
+      width: 44px;
+      height: 44px;
+      border-radius: 8px;
+      object-fit: cover;
+      flex-shrink: 0;
+      background: rgba(255, 255, 255, 0.1);
+    }
+    .sfood-recipe-info {
+      flex: 1;
+      min-width: 0;
+    }
+    .sfood-recipe-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: #f4f4f5;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .sfood-recipe-sub {
+      font-size: 12px;
+      color: #a1a1aa;
+    }
+    .sfood-recipe-arrow {
+      font-size: 18px;
+      color: #a1a1aa;
+      font-weight: bold;
+    }
+
+    /* Modal Bottom Actions */
+    .sfood-modal-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 20px 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      gap: 12px;
+    }
+    .sfood-delete-btn {
+      background: transparent;
+      border: none;
+      color: #ef4444;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 12px;
+      border-radius: 8px;
+      transition: background .15s;
+    }
+    .sfood-delete-btn:hover { background: rgba(239, 68, 68, 0.15); }
+    .sfood-save-btn {
+      background: #01696f;
+      color: #ffffff;
+      border: none;
+      border-radius: 10px;
+      padding: 10px 24px;
+      font-size: 14px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity .15s;
+    }
+    .sfood-save-btn:hover { opacity: 0.9; }
 
     /* Custom Mobile Picker Bottom Sheet Modal */
     .picker-modal {
@@ -2919,9 +3252,13 @@
           </div>
         </div>
 
-        <!-- Add Item Bar -->
+        <!-- Add Item Bar with Drop-Up linked to Macro DB -->
         <div class="shop-add-bar">
-          <input id="shopAddInput" class="search" placeholder="Add item (e.g. Eggs, 500 g Chicken)..." data-i18n-ph="shop_add_ph" style="flex:1">
+          <div class="shop-add-input-wrap">
+            <input id="shopAddInput" class="search" placeholder="Add item (e.g. Eggs, 500 g Chicken)..." data-i18n-ph="shop_add_ph" autocomplete="off" style="width:100%">
+            <!-- Drop-up menu opens UPWARDS above the search bar -->
+            <div id="shopMacroDropup" class="shop-macro-dropup hidden"></div>
+          </div>
           <button id="shopAddBtn" class="act-btn primary" type="button"><span data-i18n="shop_add_btn">+ Add</span></button>
         </div>
 
@@ -4181,6 +4518,81 @@
   <!-- Generic App Toast (replaces generic usage of syncToast) -->
   <div id="appToast" class="sync-toast"></div>
 
+  <!-- Samsung Food Style Shopping Item Detail / Preview Modal -->
+  <div id="shopItemModal" class="sfood-modal-overlay hidden" role="dialog" aria-modal="true" aria-labelledby="sfoodModalTitle">
+    <div class="sfood-modal-sheet">
+      <!-- Top header bar with Star, title, and close button -->
+      <div class="sfood-modal-top">
+        <button id="sfoodStarBtn" class="sfood-icon-btn" type="button" title="Favorite">⭐</button>
+        <span id="sfoodModalTitle" class="sfood-modal-heading" data-i18n="shop_item_details">Item Details</span>
+        <button id="sfoodCloseBtn" class="sfood-icon-btn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <!-- Avatar with ingredient icon/emoji -->
+      <div class="sfood-avatar-wrap">
+        <div class="sfood-avatar-circle" id="sfoodAvatarCircle">
+          <span id="sfoodAvatarEmoji" style="font-size:48px;line-height:1">🥦</span>
+        </div>
+      </div>
+
+      <!-- Scrollable Body with Inputs & Recipe Card -->
+      <div class="sfood-modal-body">
+        <!-- Ingredient Name -->
+        <div class="sfood-field-group">
+          <label class="sfood-field-label" for="sfoodItemNameInput" data-i18n="shop_field_item">Item</label>
+          <input type="text" id="sfoodItemNameInput" class="sfood-field-input" placeholder="Item name">
+        </div>
+
+        <!-- Quantity Input (accepts any value, letters and numbers) -->
+        <div class="sfood-field-group">
+          <label class="sfood-field-label" for="sfoodItemQtyInput" data-i18n="shop_field_qty">Quantity</label>
+          <input type="text" id="sfoodItemQtyInput" class="sfood-field-input" placeholder="e.g. 1 lb, 200 g, 3 buc">
+        </div>
+
+        <!-- Notes / Preparation details -->
+        <div class="sfood-field-group">
+          <label class="sfood-field-label" for="sfoodItemNotesInput" data-i18n="shop_field_note">Note / Preparation</label>
+          <input type="text" id="sfoodItemNotesInput" class="sfood-field-input" placeholder="e.g. cut into florets, extra virgin, etc.">
+        </div>
+
+        <!-- Macro profile from DB (per 100g) -->
+        <div id="sfoodMacroCard" class="sfood-macro-card hidden">
+          <span class="sfood-macro-title" data-i18n="shop_macros_per_100g">Macronutrients (per 100g)</span>
+          <div class="sfood-macro-chips">
+            <span id="sfoodChipKcal" class="sfood-chip red">🔥 0 kcal</span>
+            <span id="sfoodChipProt" class="sfood-chip blue">🥩 0g P</span>
+            <span id="sfoodChipFat" class="sfood-chip yellow">🥑 0g F</span>
+            <span id="sfoodChipCarbs" class="sfood-chip green">🥬 0g C</span>
+          </div>
+        </div>
+
+        <!-- Linked Recipe Card (shows when item was added from a recipe) -->
+        <div id="sfoodRecipeWrap" class="sfood-recipe-wrap hidden">
+          <span class="sfood-field-label" data-i18n="shop_linked_recipe">Linked Recipe</span>
+          <div id="sfoodRecipeCard" class="sfood-recipe-card">
+            <img id="sfoodRecipeThumb" class="sfood-recipe-thumb" src="" alt="Recipe">
+            <div class="sfood-recipe-info">
+              <div id="sfoodRecipeName" class="sfood-recipe-name">Recipe Title</div>
+              <div id="sfoodRecipeSub" class="sfood-recipe-sub">Tap to view recipe ›</div>
+            </div>
+            <span class="sfood-recipe-arrow">›</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Bottom action bar: Delete (trash) + Save/Done -->
+      <div class="sfood-modal-actions">
+        <button id="sfoodModalDeleteBtn" class="sfood-delete-btn" type="button">
+          <span style="font-size:16px">🗑️</span>
+          <span data-i18n="btn_delete">Delete</span>
+        </button>
+        <button id="sfoodModalSaveBtn" class="sfood-save-btn" type="button">
+          <span data-i18n="save_done">Done</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Smart Pantry Suggestions Modal -->
   <div id="pantrySuggestModal" class="pantry-modal hidden">
     <div class="pantry-backdrop" id="pantryBackdrop"></div>
@@ -4707,6 +5119,13 @@ const I18N = {
     shop_ungroup: "Ungrouped List",
     shop_empty_active: "Your shopping list is empty! Add items above or from the Weekly Planner.",
     shop_empty_bought: "No bought items yet.",
+    shop_item_details: "Item Details",
+    shop_field_item: "Item",
+    shop_field_qty: "Quantity",
+    shop_field_note: "Note / Preparation",
+    shop_macros_per_100g: "Macronutrients (per 100g)",
+    shop_linked_recipe: "Linked Recipe",
+    save_done: "Done",
 
     // Fasting Screen
     fasting_title: "Intermittent Fasting",
@@ -5149,6 +5568,13 @@ const I18N = {
     shop_ungroup: "Lista Simplita",
     shop_empty_active: "Lista de cumparaturi este goala! Adauga articole mai sus sau din Planificator.",
     shop_empty_bought: "Nu exista articole cumparate.",
+    shop_item_details: "Detalii Articol",
+    shop_field_item: "Articol",
+    shop_field_qty: "Cantitate",
+    shop_field_note: "Notă / Preparare",
+    shop_macros_per_100g: "Macronutrienți (per 100g)",
+    shop_linked_recipe: "Rețetă Asociată",
+    save_done: "Gata",
 
     // Fasting Screen
     fasting_title: "Post Intermitent",
@@ -10235,6 +10661,17 @@ const CUP_DENSITY = {
 
     // Android Hardware Back button & Desktop Keyboard navigation
     window.onAndroidBack = function() {
+      const shopDropup = document.getElementById('shopMacroDropup');
+      if (shopDropup && !shopDropup.classList.contains('hidden')) {
+        shopDropup.classList.add('hidden');
+        shopDropup.innerHTML = '';
+        return true;
+      }
+      const shopModal = document.getElementById('shopItemModal');
+      if (shopModal && !shopModal.classList.contains('hidden')) {
+        saveShoppingItemDetailModal();
+        return true;
+      }
       const modal = document.getElementById('customPickerModal');
       if (modal && !modal.classList.contains('hidden')) {
         closeCustomPicker();
@@ -13106,32 +13543,31 @@ const CUP_DENSITY = {
       function buildItemHtml(item) {
         const storeNote = stores[canon(item.name)] || stores[item.name.toLowerCase()];
         const subParts = [];
-        if (item.qty) subParts.push(item.qty);
+        if (item.notes) subParts.push(item.notes);
         if (storeNote) subParts.push(`📍 ${storeNote}`);
-        const subHtml = subParts.length ? `<span class="shop-item-sub">${subParts.join(' • ')}</span>` : '';
+        const subHtml = subParts.length ? `<span class="shop-item-sub">${escapeHtml(subParts.join(' • '))}</span>` : '';
         const itemRecs = getItemRecipes(item);
-        let recipesHtml = '';
+        let recipeHintHtml = '';
         if (itemRecs && itemRecs.length > 0) {
-          recipesHtml = `<div class="shop-item-recipes" style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">
-            ${itemRecs.map(r => `<button type="button" class="shop-recipe-pill" data-open-recipe="${escapeHtml(r.id)}" title="${escapeHtml(r.name)}" style="background:rgba(1,105,111,0.12);color:var(--color-primary);border:1px solid rgba(1,105,111,0.25);border-radius:12px;font-size:10px;font-weight:600;padding:1px 7px;cursor:pointer;display:inline-flex;align-items:center;gap:3px">🍽️ ${escapeHtml(r.name)}</button>`).join('')}
-          </div>`;
+          const recNames = itemRecs.map(r => r.name).join(', ');
+          recipeHintHtml = `<span class="shop-recipe-hint-badge" title="Recipe: ${escapeHtml(recNames)}">📖</span>`;
         }
 
         return `
           <div class="swipe-item" data-shop-id="${item.id}">
             <div class="swipe-trash-bg">🗑️</div>
             <div class="swipe-item-inner ${item.bought ? 'is-bought' : ''}">
-              <div class="shop-item-main" data-toggle-id="${item.id}">
-                <div class="shop-checkbox" role="checkbox" aria-checked="${item.bought}">
-                  <span class="shop-checkbox-icon">✓</span>
-                </div>
-                <div class="shop-item-text">
-                  <span class="shop-item-name">${escapeHtml(tIng(item.name))}</span>
-                  ${subHtml}
-                  ${recipesHtml}
-                </div>
+              <div class="shop-checkbox" role="checkbox" aria-checked="${item.bought}" data-check-id="${item.id}">
+                <span class="shop-checkbox-icon">✓</span>
               </div>
-              <button class="shop-del-btn" data-del-id="${item.id}" type="button" aria-label="Delete">✕</button>
+              <div class="shop-item-clickable" data-open-modal-id="${item.id}">
+                <div class="shop-item-name-row">
+                  <span class="shop-item-name">${escapeHtml(tIng(item.name))}</span>
+                  ${recipeHintHtml}
+                </div>
+                ${subHtml}
+              </div>
+              <input type="text" class="shop-item-qty-input" data-qty-id="${item.id}" value="${escapeHtml(item.qty || '')}" placeholder="Qty..." autocomplete="off">
             </div>
           </div>`;
       }
@@ -13175,11 +13611,11 @@ const CUP_DENSITY = {
 
       boughtContainer.innerHTML = boughtItems.map(buildItemHtml).join('');
 
-      // Wire checkboxes / toggle
-      document.querySelectorAll('[data-toggle-id]').forEach(el => {
+      // Wire checkboxes
+      document.querySelectorAll('[data-check-id]').forEach(el => {
         el.addEventListener('click', (e) => {
           e.stopPropagation();
-          const id = el.dataset.toggleId;
+          const id = el.dataset.checkId;
           const target = shoppingList.find(x => x.id === id);
           if (target) {
             target.bought = !target.bought;
@@ -13191,26 +13627,36 @@ const CUP_DENSITY = {
         });
       });
 
-      // Wire recipe shortcut pills to jump directly to recipe detail
-      document.querySelectorAll('.shop-recipe-pill').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+      // Wire clicking ingredient to open Samsung Food preview modal
+      document.querySelectorAll('[data-open-modal-id]').forEach(el => {
+        el.addEventListener('click', (e) => {
           e.stopPropagation();
-          const rid = btn.dataset.openRecipe;
-          if (!rid) return;
-          switchTab('recipes');
-          setTimeout(() => {
-            toggleRecipeDetail(rid);
-            const card = document.querySelector(`[data-card-rid="${rid}"]`);
-            if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-          }, 150);
+          const id = el.dataset.openModalId;
+          if (id) openShoppingItemDetailModal(id);
         });
       });
 
-      // Wire direct ✕ delete buttons
-      document.querySelectorAll('[data-del-id]').forEach(btn => {
-        btn.addEventListener('click', (e) => {
+      // Wire inline editable quantity text box
+      document.querySelectorAll('.shop-item-qty-input').forEach(input => {
+        input.addEventListener('click', (e) => e.stopPropagation());
+        input.addEventListener('touchstart', (e) => e.stopPropagation(), { passive: true });
+        input.addEventListener('input', (e) => {
           e.stopPropagation();
-          deleteShoppingItem(btn.dataset.delId);
+          const id = input.dataset.qtyId;
+          const target = shoppingList.find(x => x.id === id);
+          if (target) {
+            target.qty = input.value;
+            saveState();
+          }
+        });
+        input.addEventListener('change', (e) => {
+          e.stopPropagation();
+          const id = input.dataset.qtyId;
+          const target = shoppingList.find(x => x.id === id);
+          if (target) {
+            target.qty = input.value.trim();
+            saveState();
+          }
         });
       });
 
@@ -13375,8 +13821,284 @@ const CUP_DENSITY = {
       });
     }
 
+    function getIngredientEmoji(name) {
+      if (!name) return '🛒';
+      const n = String(name).toLowerCase();
+      if (/egg|ou|oua|ouă/.test(n)) return '🥚';
+      if (/chicken|pui|curcan|turkey|poultry|pasare/.test(n)) return '🍗';
+      if (/beef|steak|vita|vită|carne de vita|sirloin|ribeye|tenderloin|chuck|brisket|flank|mince|tocata/.test(n)) return '🥩';
+      if (/bacon|ham|jamon|jamón|prosciutto|pancetta|sunca|șuncă|slanina|slănină/.test(n)) return '🥓';
+      if (/pork|porc|cotlet|ceafa|ceafă|costite|carnat|carnați|sausage/.test(n)) return '🥩';
+      if (/salmon|somon|tuna|ton|cod|mackerel|macrou|fish|peste|pește|sardine|anchovy|hamsie/.test(n)) return '🐟';
+      if (/shrimp|creveti|creveți|prawn|crab|lobster|calamar|squid|fructe de mare|seafood/.test(n)) return '🦐';
+      if (/butter|unt|ghee/.test(n)) return '🧈';
+      if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|cascaval|cașcaval|burduf|urda|halloumi|branza|brânză/.test(n)) return '🧀';
+      if (/milk|lapte|smantana|smântână|cream|frisca|frișcă|yogurt|iaurt|skyr|kefir|whey/.test(n)) return '🥛';
+      if (/avocado|guacamole/.test(n)) return '🥑';
+      if (/oil|ulei|olive oil|masline|măsline/.test(n)) return '🫒';
+      if (/peanut|almond|walnut|nuci|arahide|migdale|caju|cashew|pecan|seeds|seminte|semințe|chia|flax|in/.test(n)) return '🥜';
+      if (/berry|berries|strawberry|blueberry|raspberry|blackberry|capsuni|căpșuni|afine|zmeura|zmeură|mure/.test(n)) return '🫐';
+      if (/broccoli|cauliflower|conopida|conopidă|cabbage|varza|varză/.test(n)) return '🥦';
+      if (/spinach|spanac|lettuce|salata|salată|kale|rucola|arugula|greens|verdeata|verdeață/.test(n)) return '🥬';
+      if (/tomato|rosie|roșie|tomate/.test(n)) return '🍅';
+      if (/cucumber|castravete|castraveti|castraveți/.test(n)) return '🥒';
+      if (/pepper|ardei|chili|jalapeno|boia/.test(n)) return '🌶️';
+      if (/garlic|usturoi/.test(n)) return '🧄';
+      if (/onion|ceapa|ceapă|scallion|praz|leek/.test(n)) return '🧅';
+      if (/mushroom|ciuperci|champignon/.test(n)) return '🍄';
+      if (/lemon|lime|lamaie|lămâie/.test(n)) return '🍋';
+      if (/coffee|cafea/.test(n)) return '☕';
+      if (/tea|ceai/.test(n)) return '🍵';
+      if (/chocolate|cacao|cocoa/.test(n)) return '🍫';
+      return '🛒';
+    }
+
+    function getIngredientMacros(name) {
+      if (!name) return null;
+      const clean = name.toLowerCase().trim();
+      const stripped = (typeof stripRo === 'function') ? stripRo(clean) : clean;
+
+      if (typeof N !== 'undefined') {
+        if (N[clean]) return N[clean];
+        if (N[stripped]) return N[stripped];
+      }
+      if (typeof RO_TO_EN_ING !== 'undefined') {
+        const en = RO_TO_EN_ING[clean] || RO_TO_EN_ING[stripped];
+        if (en && typeof N !== 'undefined' && N[en]) return N[en];
+      }
+      if (typeof N !== 'undefined') {
+        const keys = Object.keys(N);
+        const match = keys.find(k => k === clean || clean.includes(k) || k.includes(clean));
+        if (match) return N[match];
+      }
+      return null;
+    }
+
+    let activeModalShopItemId = null;
+
+    function openShoppingItemDetailModal(id) {
+      const item = shoppingList.find(x => x.id === id);
+      if (!item) return;
+
+      activeModalShopItemId = id;
+      const modal = document.getElementById('shopItemModal');
+      const nameInput = document.getElementById('sfoodItemNameInput');
+      const qtyInput = document.getElementById('sfoodItemQtyInput');
+      const notesInput = document.getElementById('sfoodItemNotesInput');
+      const avatarEmoji = document.getElementById('sfoodAvatarEmoji');
+      const macroCard = document.getElementById('sfoodMacroCard');
+      const recipeWrap = document.getElementById('sfoodRecipeWrap');
+      const recipeName = document.getElementById('sfoodRecipeName');
+      const recipeThumb = document.getElementById('sfoodRecipeThumb');
+      const recipeCard = document.getElementById('sfoodRecipeCard');
+
+      if (nameInput) nameInput.value = item.name || '';
+      if (qtyInput) qtyInput.value = item.qty || '';
+      if (notesInput) notesInput.value = item.notes || '';
+
+      const emoji = getIngredientEmoji(item.name);
+      if (avatarEmoji) avatarEmoji.textContent = emoji;
+
+      // Display macros per 100g if available in DB
+      const macros = getIngredientMacros(item.name);
+      if (macros && Array.isArray(macros) && macros.length >= 4) {
+        if (macroCard) macroCard.classList.remove('hidden');
+        const kEl = document.getElementById('sfoodChipKcal');
+        const pEl = document.getElementById('sfoodChipProt');
+        const fEl = document.getElementById('sfoodChipFat');
+        const cEl = document.getElementById('sfoodChipCarbs');
+        if (kEl) kEl.textContent = `🔥 ${Math.round(macros[0])} kcal`;
+        if (pEl) pEl.textContent = `🥩 ${Math.round(macros[1])}g P`;
+        if (fEl) fEl.textContent = `🥑 ${Math.round(macros[2])}g F`;
+        if (cEl) cEl.textContent = `🥬 ${Math.round(macros[3])}g C`;
+      } else {
+        if (macroCard) macroCard.classList.add('hidden');
+      }
+
+      // Display linked recipe card if origin recipe exists
+      const itemRecs = getItemRecipes(item);
+      if (itemRecs && itemRecs.length > 0) {
+        const primary = itemRecs[0];
+        const rec = recipeMap[primary.id] || primary;
+        if (recipeWrap) recipeWrap.classList.remove('hidden');
+        if (recipeName) recipeName.textContent = rec.name || primary.name;
+        if (recipeThumb) recipeThumb.src = getRecipeSvgImage(rec);
+        if (recipeCard) {
+          recipeCard.onclick = () => {
+            closeShoppingItemDetailModal();
+            switchTab('recipes');
+            setTimeout(() => {
+              toggleRecipeDetail(primary.id);
+              const card = document.querySelector(`[data-card-rid="${primary.id}"]`);
+              if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 150);
+          };
+        }
+      } else {
+        if (recipeWrap) recipeWrap.classList.add('hidden');
+      }
+
+      if (modal) modal.classList.remove('hidden');
+    }
+
+    function closeShoppingItemDetailModal() {
+      const modal = document.getElementById('shopItemModal');
+      if (modal) modal.classList.add('hidden');
+      activeModalShopItemId = null;
+    }
+
+    function saveShoppingItemDetailModal() {
+      if (!activeModalShopItemId) return;
+      const item = shoppingList.find(x => x.id === activeModalShopItemId);
+      if (item) {
+        const newName = document.getElementById('sfoodItemNameInput')?.value.trim();
+        const newQty = document.getElementById('sfoodItemQtyInput')?.value.trim();
+        const newNotes = document.getElementById('sfoodItemNotesInput')?.value.trim();
+        if (newName) item.name = newName;
+        item.qty = newQty || '';
+        item.notes = newNotes || '';
+        saveState();
+        renderShoppingPage();
+      }
+      closeShoppingItemDetailModal();
+    }
+
+    function deleteShoppingItemFromModal() {
+      if (!activeModalShopItemId) return;
+      const idToDelete = activeModalShopItemId;
+      closeShoppingItemDetailModal();
+      deleteShoppingItem(idToDelete);
+    }
+
+    function handleShopAddInputChange(e) {
+      const dropup = document.getElementById('shopMacroDropup');
+      if (!dropup) return;
+      const q = (e.target.value || '').trim().toLowerCase();
+      if (!q || q.length < 1) {
+        dropup.classList.add('hidden');
+        dropup.innerHTML = '';
+        return;
+      }
+
+      const strippedQ = (typeof stripRo === 'function') ? stripRo(q) : q;
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+
+      const candidateKeys = Object.keys(N || {});
+      const matches = [];
+      const seen = new Set();
+
+      for (let i = 0; i < candidateKeys.length; i++) {
+        const enKey = candidateKeys[i];
+        const roName = tIng(enKey);
+        const enLower = enKey.toLowerCase();
+        const roLower = (roName || '').toLowerCase();
+        const strippedRo = (typeof stripRo === 'function') ? stripRo(roLower) : roLower;
+
+        let matched = false;
+        let score = 0;
+
+        if (isRo) {
+          if (roLower.startsWith(q) || strippedRo.startsWith(strippedQ)) { matched = true; score = 20; }
+          else if (roLower.includes(q) || strippedRo.includes(strippedQ)) { matched = true; score = 10; }
+          else if (enLower.startsWith(q)) { matched = true; score = 8; }
+          else if (enLower.includes(q)) { matched = true; score = 5; }
+        } else {
+          if (enLower.startsWith(q)) { matched = true; score = 20; }
+          else if (enLower.includes(q)) { matched = true; score = 10; }
+          else if (roLower.startsWith(q) || strippedRo.startsWith(strippedQ)) { matched = true; score = 8; }
+          else if (roLower.includes(q) || strippedRo.includes(strippedQ)) { matched = true; score = 5; }
+        }
+
+        if (matched) {
+          const displayName = isRo ? (roName || enKey) : enKey;
+          const subName = isRo && (roName !== enKey) ? enKey : '';
+          const normKey = displayName.toLowerCase();
+          if (!seen.has(normKey)) {
+            seen.add(normKey);
+            const macros = N[enKey];
+            matches.push({
+              name: displayName,
+              subName: subName,
+              rawKey: enKey,
+              emoji: getIngredientEmoji(displayName),
+              macros: Array.isArray(macros) ? macros : null,
+              score: score
+            });
+          }
+        }
+        if (matches.length >= 30) break;
+      }
+
+      matches.sort((a, b) => b.score - a.score);
+      const topMatches = matches.slice(0, 8);
+
+      if (topMatches.length === 0) {
+        dropup.classList.add('hidden');
+        dropup.innerHTML = '';
+        return;
+      }
+
+      dropup.innerHTML = topMatches.map(m => {
+        const macroStr = m.macros
+          ? `${Math.round(m.macros[0])} kcal • P:${Math.round(m.macros[1])}g F:${Math.round(m.macros[2])}g C:${Math.round(m.macros[3])}g`
+          : '';
+        return `
+          <div class="shop-dropup-item" data-add-macro-name="${escapeHtml(m.name)}">
+            <span class="shop-dropup-name">
+              <span>${m.emoji}</span>
+              <span>${escapeHtml(capitalize(m.name))}</span>
+              ${m.subName ? `<span class="tiny muted">(${escapeHtml(m.subName)})</span>` : ''}
+            </span>
+            ${macroStr ? `<span class="shop-dropup-macro">${escapeHtml(macroStr)}</span>` : ''}
+          </div>`;
+      }).join('');
+
+      dropup.classList.remove('hidden');
+
+      // Wire drop-up item clicks
+      dropup.querySelectorAll('[data-add-macro-name]').forEach(el => {
+        el.addEventListener('click', (ev) => {
+          ev.stopPropagation();
+          const nameToAdd = el.dataset.addMacroName;
+          if (!nameToAdd) return;
+
+          const newId = 'shop_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
+          const newItem = {
+            id: newId,
+            name: capitalize(nameToAdd),
+            qty: '',
+            bought: false,
+            category: categoryOf(nameToAdd)
+          };
+          shoppingList.unshift(newItem);
+
+          const inp = document.getElementById('shopAddInput');
+          if (inp) inp.value = '';
+          dropup.classList.add('hidden');
+          dropup.innerHTML = '';
+
+          saveState();
+          renderShoppingPage();
+
+          // Auto-focus quantity input of newly added item
+          setTimeout(() => {
+            const qtyBox = document.querySelector(`.shop-item-qty-input[data-qty-id="${newId}"]`);
+            if (qtyBox) {
+              qtyBox.focus();
+              qtyBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+            }
+          }, 80);
+        });
+      });
+    }
+
     function addShoppingManual() {
       const inp = document.getElementById('shopAddInput');
+      const dropup = document.getElementById('shopMacroDropup');
+      if (dropup) {
+        dropup.classList.add('hidden');
+        dropup.innerHTML = '';
+      }
       const val = inp ? inp.value.trim() : '';
       if (!val) return;
 
@@ -13391,8 +14113,9 @@ const CUP_DENSITY = {
         name = capitalize(val);
       }
 
+      const newId = 'shop_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6);
       shoppingList.unshift({
-        id: 'shop_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+        id: newId,
         name: name,
         qty: qty,
         bought: false,
@@ -13402,6 +14125,16 @@ const CUP_DENSITY = {
       inp.value = '';
       saveState();
       renderShoppingPage();
+
+      if (!qty) {
+        setTimeout(() => {
+          const qtyBox = document.querySelector(`.shop-item-qty-input[data-qty-id="${newId}"]`);
+          if (qtyBox) {
+            qtyBox.focus();
+            qtyBox.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }, 80);
+      }
     }
 
     function clearBoughtShopping() {
@@ -14940,7 +15673,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.6';
+    const FALLBACK_APP_VERSION = '1.0.7';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -15102,6 +15835,26 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.0.7',
+        date: '16 Oct 2026',
+        items: {
+          ro: [
+            '🔍 Autocompletare în lista de cumpărături conectată la baza de macronutrienți (drop-up orientat în sus cu căutare bilingvă)',
+            '✏️ Căsuță de cantitate editabilă inline pe fiecare rând: acceptă orice combinație de litere și cifre (ex: 1 lb, 200 g, 3 buc)',
+            '📖 Pictogramă subtilă de indiciu pentru ingredientele adăugate din rețete, eliminând aglomerarea textului pe rând',
+            '📱 Fereastră de previzualizare stil Samsung Food: avatar cu pictogramă/emoji, editare nume/cantitate/instrucțiuni, profil macronutrienți la 100g și card dedicat către rețeta asociată',
+            '🗑️ Eliminare buton direct ✕ de ștergere pe rând în favoarea căsuței de cantitate; ștergerea rămâne rapidă prin gest de swipe sau din fereastra detaliată'
+          ],
+          en: [
+            '🔍 Shopping search autocomplete linked to Macronutrients DB (upward drop-up with bilingual search and instant macro math)',
+            '✏️ Inline flexible quantity text box on every item row: accepts any letters and numbers (e.g. 1 lb, 200 g, 3 cans)',
+            '📖 Subtle recipe hint icon on items originating from recipes, keeping rows clean and uncluttered',
+            '📱 Samsung Food style item preview modal: ingredient avatar, editable item/qty/notes, per-100g macros, and linked recipe card with 1-tap jump',
+            '🗑️ Removed inline ✕ button to make room for flexible quantity input; deletion remains smooth via swipe-to-delete or the preview modal'
+          ]
+        }
+      },
       {
         version: '1.0.6',
         date: '16 Oct 2026',
@@ -16084,14 +16837,43 @@ const CUP_DENSITY = {
         if (m) m.textContent = `Added ${n} meal items to list!`;
       });
 
-      // Shopping Buttons
+      // Shopping Buttons & Autocomplete Drop-Up
       document.getElementById('shopAddBtn')?.addEventListener('click', addShoppingManual);
-      document.getElementById('shopAddInput')?.addEventListener('keydown', e => { if (e.key === 'Enter') addShoppingManual(); });
+      const shopAddInp = document.getElementById('shopAddInput');
+      if (shopAddInp) {
+        shopAddInp.addEventListener('keydown', e => { if (e.key === 'Enter') addShoppingManual(); });
+        shopAddInp.addEventListener('input', handleShopAddInputChange);
+        shopAddInp.addEventListener('focus', handleShopAddInputChange);
+      }
+      document.addEventListener('click', (e) => {
+        const dropup = document.getElementById('shopMacroDropup');
+        const inputWrap = document.querySelector('.shop-add-input-wrap');
+        if (dropup && !dropup.classList.contains('hidden')) {
+          if (!inputWrap || !inputWrap.contains(e.target)) {
+            dropup.classList.add('hidden');
+            dropup.innerHTML = '';
+          }
+        }
+      });
       document.getElementById('shopClearBoughtBtn')?.addEventListener('click', clearBoughtShopping);
       document.getElementById('shopCopyListBtn')?.addEventListener('click', copyShoppingList);
       document.getElementById('shopClearAllBtn')?.addEventListener('click', clearAllShopping);
       document.getElementById('clearShoppingBtn')?.addEventListener('click', clearShopping);
       document.getElementById('copyShoppingBtn')?.addEventListener('click', copyShoppingList);
+
+      // Samsung Food Modal Buttons
+      document.getElementById('sfoodCloseBtn')?.addEventListener('click', closeShoppingItemDetailModal);
+      document.getElementById('sfoodModalSaveBtn')?.addEventListener('click', saveShoppingItemDetailModal);
+      document.getElementById('sfoodModalDeleteBtn')?.addEventListener('click', deleteShoppingItemFromModal);
+      document.getElementById('shopItemModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'shopItemModal') {
+          saveShoppingItemDetailModal();
+        }
+      });
+      document.getElementById('sfoodStarBtn')?.addEventListener('click', () => {
+        const btn = document.getElementById('sfoodStarBtn');
+        if (btn) btn.textContent = (btn.textContent === '⭐' ? '🌟' : '⭐');
+      });
 
       // Builder Buttons
       document.getElementById('builderAddRow')?.addEventListener('click', () => addBuilderRow());
