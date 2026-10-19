@@ -4684,13 +4684,38 @@
       <div class="pantry-dialog-body" style="overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px">
         <!-- Photo Preview and Upload Controls -->
         <div style="display:flex;gap:10px;align-items:center">
-          <img id="photoImportPreview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23eeece6'/%3E%3Ctext x='50' y='55' font-size='26' text-anchor='middle' fill='%23888'%3E📷%3C/text%3E%3C/svg%3E" alt="Recipe photo" style="width:70px;height:70px;object-fit:cover;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-2)">
-          <div style="flex:1">
-            <label class="act-btn small" style="cursor:pointer;display:inline-block">
-              <span data-i18n="photo_choose_btn">📷 Choose / Take Photo</span>
-              <input id="photoImportFileInput" type="file" accept="image/*" style="display:none">
-            </label>
-            <div id="photoOcrStatus" class="tiny muted" style="margin-top:4px" data-i18n="photo_ocr_ready">Ready to analyze photo</div>
+          <img id="photoImportPreview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23eeece6'/%3E%3Ctext x='50' y='55' font-size='26' text-anchor='middle' fill='%23888'%3E📷%3C/text%3E%3C/svg%3E" alt="Recipe photo" style="width:72px;height:72px;object-fit:cover;border-radius:var(--radius-md);border:1px solid var(--color-border);background:var(--color-surface-2);flex-shrink:0">
+          <div style="flex:1;display:flex;flex-direction:column;gap:6px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button id="photoCameraDirectBtn" class="act-btn small primary" type="button">
+                <span data-i18n="photo_cam_btn">📷 Fă Poză (Camera)</span>
+              </button>
+              <button id="photoGalleryDirectBtn" class="act-btn small" type="button">
+                <span data-i18n="photo_gallery_btn">🖼️ Din Galerie</span>
+              </button>
+              <button id="photoLiveCamBtn" class="act-btn small" type="button">
+                <span data-i18n="photo_live_btn">📹 Camera Live</span>
+              </button>
+            </div>
+            <!-- Dedicated capture="environment" launches camera directly on Android without picker crash -->
+            <input id="photoCameraInput" type="file" accept="image/*" capture="environment" style="display:none">
+            <!-- Dedicated gallery input without capture opens photo gallery -->
+            <input id="photoGalleryInput" type="file" accept="image/*" style="display:none">
+            <input id="photoImportFileInput" type="file" accept="image/*" style="display:none">
+            <div id="photoOcrStatus" class="tiny muted" data-i18n="photo_ocr_ready">Ready to analyze photo</div>
+          </div>
+        </div>
+
+        <!-- Live Camera Viewport -->
+        <div id="photoCameraViewport" class="barcode-camera-viewport hidden" style="position:relative;height:260px;max-height:45vh">
+          <video id="photoLiveVideo" class="barcode-camera-video" playsinline muted autoplay></video>
+          <div style="position:absolute;bottom:8px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:2">
+            <button id="photoSnapBtn" class="act-btn small primary" type="button">
+              <span data-i18n="photo_snap_btn">📸 Captează Poza</span>
+            </button>
+            <button id="photoCloseLiveCamBtn" class="act-btn small" type="button" style="background:rgba(0,0,0,0.7);color:#fff;border:none">
+              <span data-i18n="photo_close_cam">✕ Închide Camera</span>
+            </button>
           </div>
         </div>
 
@@ -5352,6 +5377,11 @@ const I18N = {
     photo_import_title: "📸 Import Recipe from Photo",
     photo_import_sub: "Scan cookbook, handwritten card, food label, or screen",
     photo_choose_btn: "📷 Choose / Take Photo",
+    photo_cam_btn: "📷 Take Photo",
+    photo_gallery_btn: "🖼️ From Gallery",
+    photo_live_btn: "📹 Live Camera",
+    photo_snap_btn: "📸 Snap Photo",
+    photo_close_cam: "✕ Close Camera",
     photo_detected_name: "Detected Recipe Name:",
     photo_servings: "Servings:",
     photo_apply_btn: "✓ Import into Recipe Builder",
@@ -5801,6 +5831,11 @@ const I18N = {
     photo_import_title: "📸 Importă Rețetă din Poză",
     photo_import_sub: "Scanează carte de bucate, rețetă scrisă, etichetă sau ecran",
     photo_choose_btn: "📷 Alege / Fă o Poză",
+    photo_cam_btn: "📷 Fă Poză (Camera)",
+    photo_gallery_btn: "🖼️ Din Galerie",
+    photo_live_btn: "📹 Camera Live",
+    photo_snap_btn: "📸 Captează Poza",
+    photo_close_cam: "✕ Închide Camera",
     photo_detected_name: "Nume Rețetă Detectat:",
     photo_servings: "Porții:",
     photo_apply_btn: "✓ Importă în Creatorul de Rețete",
@@ -8754,8 +8789,13 @@ const RO_TO_EN_ING = {
     "dressing caesar":  "caesar dressing",
     "apa sau lapte vegetal neindulcit":  "water or milk alternative",
     "vanata":  "eggplant",
-    "ceafa / spata de porc":  "pork shoulder",
     "praf de copt":  "baking powder",
+    "bicarbonat de sodiu": "baking soda",
+    "bicarbonat": "baking soda",
+    "nucsoara": "nutmeg",
+    "morcovi": "carrot",
+    "morcov": "carrot",
+    "eritritol": "erythritol",
     "somon afumat":  "smoked salmon",
     "maioneza":  "mayonnaise",
     "telemea / feta":  "feta / telemea",
@@ -8902,8 +8942,8 @@ const DEFAULT_N = {
       "paprika": [0, 0, 0, 0], "cumin": [0, 0, 0, 0], "chili powder": [0, 0, 0, 0], "chili flakes": [0, 0, 0, 0], "chili": [0, 0, 0, 0],
       "garlic powder": [0, 0, 0, 0], "turmeric": [0, 0, 0, 0], "coriander": [0, 0, 0, 0], "oregano": [0, 0, 0, 0], "thyme": [0, 0, 0, 0],
       "rosemary": [0, 0, 0, 0], "sage": [0, 0, 0, 0], "basil": [0, 0, 0, 0], "parsley": [0, 0, 0, 0], "dill": [0, 0, 0, 0], "mint": [0, 0, 0, 0],
-      "cilantro": [0, 0, 0, 0], "chives": [0, 0, 0, 0], "baking powder": [0, 0, 0, 0], "vanilla": [0, 0, 0, 0], "vanilla extract": [0, 0, 0, 0],
-      "lemon zest": [0, 0, 0, 0], "orange zest": [0, 0, 0, 0], "lemon": [0, 0, 0, 1], "lime": [0, 0, 0, 1], "herbs": [0, 0, 0, 0],
+      "cilantro": [0, 0, 0, 0], "chives": [0, 0, 0, 0], "baking powder": [0, 0, 0, 0], "baking soda": [0, 0, 0, 0], "vanilla": [0, 0, 0, 0], "vanilla extract": [0, 0, 0, 0],
+      "lemon zest": [0, 0, 0, 0], "orange zest": [0, 0, 0, 0], "lemon": [0, 0, 0, 1], "lime": [0, 0, 0, 1], "herbs": [0, 0, 0, 0], "monk fruit": [0, 0, 0, 0], "nutmeg": [0, 0, 0, 0],
       "kale": [49, 4.3, 0.9, 5], "trout": [148, 21, 7, 0], "rainbow trout": [148, 21, 7, 0], "sardines": [208, 25, 11, 0],
       "swiss chard": [19, 1.8, 0.2, 2.1], "arugula": [25, 2.6, 0.7, 2.1], "gelatin": [335, 85, 0.1, 0], "capers": [23, 2.4, 0.9, 1.7],
       "tarragon": [0, 0, 0, 0], "pork belly": [518, 9.3, 53, 0], "smoked kaiser": [350, 16, 32, 0.5], "mici meat": [270, 16, 23, 1]
@@ -8935,7 +8975,8 @@ const CUP_DENSITY = {
       "almonds (chopped)": 108, "breadcrumbs": 108, "panko breadcrumbs": 50, "spinach (chopped)": 30,
       "kale (chopped)": 67, "parsley (chopped)": 60, "cilantro (chopped)": 16, "basil (chopped)": 25,
       "mint (chopped)": 23, "diced tomatoes": 180, "cherry tomatoes (halved)": 150, "onion (chopped)": 160,
-      "cauliflower rice": 107, "shredded cabbage": 90, "greek yogurt": 245, "cottage cheese": 226
+      "cauliflower rice": 107, "shredded cabbage": 90, "greek yogurt": 245, "cottage cheese": 226,
+      "carrot": 110, "carrots": 110, "grated carrots": 110, "sweetener": 190, "erythritol": 190, "pecans": 100, "walnuts": 100, "chopped pecans": 100
     };
     const LIQUID_INGS = new Set(["milk", "heavy cream", "cream", "sour cream", "buttermilk", "water", "coconut milk", "olive oil", "oil", "honey", "maple syrup"]);
     const OZ_G = 28.3495, LB_G = 453.592, TBSP_PER_CUP = 16, TSP_PER_CUP = 48, FLOZ_PER_CUP = 8;
@@ -8979,7 +9020,18 @@ const CUP_DENSITY = {
     function nut(key) { return NX[key] || N[key] || null; }
     function sumMacros(list) { return list.reduce((a, s) => { const m = ingMacros(s); a.kcal += m.k; a.protein += m.p; a.fat += m.f; a.netCarbs += m.c; return a; }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 }); }
 
-    const SYN = { 'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey', 'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato', 'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds', 'large eggs': 'egg', 'eggs': 'egg', 'jamon': 'jamon serrano', 'jamón': 'jamon serrano', 'prosciutto': 'prosciutto di Parma' };
+    const SYN = {
+      'whey protein': 'whey', 'whey protein (vanilla or neutral)': 'whey', 'whey isolate': 'whey', 'protein powder': 'whey',
+      'cherry tomato': 'tomato', 'cherry tomatoes': 'tomato', 'tomatoes': 'tomato',
+      'full-fat greek yogurt': 'greek yogurt', 'milbona skyr natural': 'skyr', 'flaked almonds': 'almonds',
+      'large eggs': 'egg', 'eggs': 'egg', 'jamon': 'jamon serrano', 'jamón': 'jamon serrano', 'prosciutto': 'prosciutto di Parma',
+      'granulated erythritol': 'erythritol', 'powdered erythritol': 'erythritol', 'monk fruit sweetener': 'sweetener', 'monk fruit': 'sweetener',
+      'blanched almond flour': 'almond flour', 'baking soda': 'baking soda', 'ground nutmeg': 'nutmeg',
+      'carrots': 'carrot', 'grated carrots': 'carrot',
+      'full-fat cream cheese': 'cream cheese', 'unsalted butter': 'butter',
+      'pecans or walnuts': 'pecans', 'chopped pecans or walnuts': 'pecans',
+      'coconut oil (or butter)': 'coconut oil', 'melted coconut oil (or butter)': 'coconut oil'
+    };
     function canon(name) {
   let n = String(name || '').toLowerCase().trim();
   const stripped = (typeof stripRo === 'function') ? stripRo(n) : n;
@@ -14686,6 +14738,7 @@ const CUP_DENSITY = {
     /* PHOTO RECIPE IMPORTER (OCR & PARSING) */
     let photoParsedIngredients = [];
     let photoCapturedImage = '';
+    let photoLiveStream = null;
 
     function openPhotoImportModal() {
       const modal = document.getElementById('recipePhotoImportModal');
@@ -14695,77 +14748,222 @@ const CUP_DENSITY = {
     }
 
     function closePhotoImportModal() {
+      stopLivePhotoCamera();
       const modal = document.getElementById('recipePhotoImportModal');
       if (modal) modal.classList.add('hidden');
       document.body.classList.remove('modal-open');
     }
 
+    async function startLivePhotoCamera() {
+      const statusEl = document.getElementById('photoOcrStatus');
+      const viewport = document.getElementById('photoCameraViewport');
+      const video = document.getElementById('photoLiveVideo');
+      const isRo = ((settings.lang || 'en') === 'ro');
+
+      if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+        if (statusEl) {
+          statusEl.textContent = isRo ? 'Camera live nu este suportată în acest browser. Folosește butonul "📷 Fă Poză".' : 'Live camera not supported. Use "📷 Take Photo" instead.';
+          statusEl.className = 'tiny warn';
+        }
+        return;
+      }
+
+      if (statusEl) {
+        statusEl.textContent = isRo ? 'Pornire cameră...' : 'Opening camera...';
+        statusEl.className = 'tiny muted';
+      }
+
+      try {
+        const stream = await navigator.mediaDevices.getUserMedia({
+          video: {
+            facingMode: { ideal: 'environment' },
+            width: { ideal: 1920 },
+            height: { ideal: 1080 }
+          },
+          audio: false
+        });
+
+        photoLiveStream = stream;
+        if (video) {
+          video.srcObject = stream;
+          video.setAttribute('playsinline', 'true');
+          await video.play();
+        }
+        if (viewport) viewport.classList.remove('hidden');
+
+        if (statusEl) {
+          statusEl.textContent = isRo ? '📹 Cameră activă! Încadrează rețeta și apasă "Captează Poza".' : '📹 Camera active! Frame recipe and tap "Snap Photo".';
+          statusEl.className = 'tiny good';
+        }
+      } catch (err) {
+        console.warn('Photo camera error:', err);
+        if (statusEl) {
+          statusEl.textContent = isRo ? 'Nu s-a putut accesa camera (' + (err.message || 'permisiune refuzată') + '). Încearcă "📷 Fă Poză".' : 'Could not access camera (' + (err.message || 'permission denied') + '). Try "📷 Take Photo".';
+          statusEl.className = 'tiny bad';
+        }
+      }
+    }
+
+    function stopLivePhotoCamera() {
+      if (photoLiveStream) {
+        photoLiveStream.getTracks().forEach(t => t.stop());
+        photoLiveStream = null;
+      }
+      const video = document.getElementById('photoLiveVideo');
+      if (video) video.srcObject = null;
+      const viewport = document.getElementById('photoCameraViewport');
+      if (viewport) viewport.classList.add('hidden');
+    }
+
+    function snapLivePhoto() {
+      const video = document.getElementById('photoLiveVideo');
+      if (!video || !video.videoWidth) return;
+      const canvas = document.createElement('canvas');
+      canvas.width = video.videoWidth;
+      canvas.height = video.videoHeight;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+      stopLivePhotoCamera();
+      preprocessAndRunOcr(canvas);
+    }
+
     function handlePhotoRecipeSelect(file) {
       if (!file) return;
       const statusEl = document.getElementById('photoOcrStatus');
-      if (statusEl) statusEl.textContent = 'Processing image...';
+      const isRo = ((settings.lang || 'en') === 'ro');
+      if (statusEl) statusEl.textContent = isRo ? 'Se procesează imaginea...' : 'Processing image...';
       const reader = new FileReader();
       reader.onload = e => {
         const img = new Image();
         img.onload = () => {
-          const canvas = document.createElement('canvas');
-          const maxDim = 640;
-          let w = img.width, h = img.height;
-          if (w > h) {
-            if (w > maxDim) { h = Math.round((h * maxDim) / w); w = maxDim; }
-          } else {
-            if (h > maxDim) { w = Math.round((w * maxDim) / h); h = maxDim; }
-          }
-          canvas.width = w; canvas.height = h;
-          const ctx = canvas.getContext('2d');
-          ctx.drawImage(img, 0, 0, w, h);
-          photoCapturedImage = canvas.toDataURL('image/jpeg', 0.70);
-          const prev = document.getElementById('photoImportPreview');
-          if (prev) prev.src = photoCapturedImage;
-          runPhotoOcr(photoCapturedImage);
+          preprocessAndRunOcr(img);
         };
         img.src = e.target.result;
       };
       reader.readAsDataURL(file);
     }
 
-    function runPhotoOcr(imageDataUrl) {
+    function preprocessAndRunOcr(source) {
       const statusEl = document.getElementById('photoOcrStatus');
+      const isRo = ((settings.lang || 'en') === 'ro');
+      if (statusEl) statusEl.textContent = isRo ? 'Optimizare rezoluție și contrast pentru OCR...' : 'Optimizing resolution and contrast for OCR...';
+
+      let srcW = source.naturalWidth || source.videoWidth || source.width;
+      let srcH = source.naturalHeight || source.videoHeight || source.height;
+      if (!srcW || !srcH) return;
+
+      // 1. High-Resolution Scaling:
+      // Tesseract needs character height >= 25-35px to accurately recognize text without gibberish.
+      // Target longest dimension between 1800 and 2400px.
+      const maxDim = 2400;
+      const minDim = 1200;
+      const longest = Math.max(srcW, srcH);
+
+      let scale = 1.0;
+      if (longest > maxDim) {
+        scale = maxDim / longest;
+      } else if (longest < minDim) {
+        scale = Math.min(2.5, minDim / longest);
+      }
+
+      const w = Math.round(srcW * scale);
+      const h = Math.round(srcH * scale);
+
+      // Create preview canvas
+      const previewCanvas = document.createElement('canvas');
+      previewCanvas.width = Math.min(w, 800);
+      previewCanvas.height = Math.round(h * (previewCanvas.width / w));
+      const pCtx = previewCanvas.getContext('2d');
+      pCtx.drawImage(source, 0, 0, previewCanvas.width, previewCanvas.height);
+      photoCapturedImage = previewCanvas.toDataURL('image/jpeg', 0.85);
+      const prev = document.getElementById('photoImportPreview');
+      if (prev) prev.src = photoCapturedImage;
+
+      // Create high-res canvas for OCR
+      const ocrCanvas = document.createElement('canvas');
+      ocrCanvas.width = w;
+      ocrCanvas.height = h;
+      const ctx = ocrCanvas.getContext('2d');
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+      ctx.drawImage(source, 0, 0, w, h);
+
+      // 2. Intelligent Dark-Mode / Inversion Detection:
+      const imgData = ctx.getImageData(0, 0, w, h);
+      const data = imgData.data;
+
+      let darkCount = 0;
+      let totalSamples = 0;
+      const step = Math.max(4, Math.floor(data.length / (8000 * 4))) * 4;
+      for (let i = 0; i < data.length; i += step) {
+        const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+        if (lum < 125) darkCount++;
+        totalSamples++;
+      }
+      const isDark = (darkCount / totalSamples) > 0.52;
+
+      // 3. Contrast stretch and binarization preparation
+      const contrast = 1.45;
+      for (let i = 0; i < data.length; i += 4) {
+        let lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+        if (isDark) {
+          lum = 255 - lum; // Invert dark screen -> crisp black text on white background
+        }
+        lum = ((lum - 128) * contrast) + 128;
+        lum = Math.max(0, Math.min(255, Math.round(lum)));
+        data[i] = lum;
+        data[i + 1] = lum;
+        data[i + 2] = lum;
+      }
+      ctx.putImageData(imgData, 0, 0);
+
+      runPhotoOcr(ocrCanvas);
+    }
+
+    function runPhotoOcr(ocrSource) {
+      const statusEl = document.getElementById('photoOcrStatus');
+      const isRo = ((settings.lang || 'en') === 'ro');
       if (typeof Tesseract === 'undefined') {
-        if (statusEl) statusEl.textContent = 'OCR library loading/offline. Paste recipe text below:';
+        if (statusEl) statusEl.textContent = isRo ? 'Librăria OCR se încarcă / offline. Lipește textul mai jos:' : 'OCR library loading/offline. Paste recipe text below:';
         document.getElementById('photoTextDetails')?.setAttribute('open', '');
         document.getElementById('photoRawText')?.focus();
         return;
       }
-      if (statusEl) statusEl.textContent = 'Scanning recipe with OCR... ⏳';
-      Tesseract.recognize(imageDataUrl, 'eng', {
+      if (statusEl) statusEl.textContent = isRo ? 'Scanare rețetă cu OCR... ⏳' : 'Scanning recipe with OCR... ⏳';
+
+      Tesseract.recognize(ocrSource, 'eng', {
         logger: m => {
           if (m.status === 'recognizing text' && statusEl) {
-            statusEl.textContent = `Scanning: ${Math.round((m.progress || 0) * 100)}%`;
+            statusEl.textContent = `${isRo ? 'Scanare text' : 'Scanning'}: ${Math.round((m.progress || 0) * 100)}%`;
           }
         }
       }).then(res => {
         const text = res?.data?.text || '';
-        if (statusEl) statusEl.textContent = '✓ Text recognized!';
+        if (statusEl) statusEl.textContent = isRo ? '✓ Text extras cu succes!' : '✓ Text recognized!';
         const rawEl = document.getElementById('photoRawText');
         if (rawEl) rawEl.value = text;
         parsePhotoRecipeText(text);
       }).catch(err => {
         console.warn('OCR error:', err);
-        if (statusEl) statusEl.textContent = 'Could not scan automatically. Please paste/type text below:';
+        if (statusEl) statusEl.textContent = isRo ? 'Nu s-a putut scana automat. Introdu / lipește textul mai jos:' : 'Could not scan automatically. Please paste/type text below:';
         document.getElementById('photoTextDetails')?.setAttribute('open', '');
       });
     }
 
     function matchBestIngredientName(raw) {
       if (!raw) return '';
-      const clean = canon(raw.replace(/\(.*?\)/g, '').replace(/,\s*.*$/, ''));
+      const clean = canon(raw.replace(/\(.*?\)/g, '').replace(/,\s*.*$/, '').trim());
       if (N[clean]) return clean;
       if (COUNT[clean]) return clean;
-      const stripped = clean.replace(/\b(fresh|frozen|large|small|medium|raw|cooked|organic|diced|chopped|sliced|grated|shredded|boneless|skinless|melted|softened|crushed|minced)\b/g, '').trim().replace(/\s+/g, ' ');
+      if (DEFAULT_COUNT[clean]) return clean;
+
+      const stripped = clean.replace(/\b(fresh|frozen|large|small|medium|raw|cooked|organic|diced|chopped|sliced|grated|shredded|boneless|skinless|melted|softened|crushed|minced|blanched|unsalted|powdered|granulated|full-fat|unsweetened|extra-virgin|dry|ground)\b/g, '').trim().replace(/\s+/g, ' ');
       if (N[stripped]) return stripped;
       if (COUNT[stripped]) return stripped;
-      const allKeys = Object.keys(N).concat(Object.keys(COUNT)).filter(k => !k.startsWith('_'));
+      if (DEFAULT_COUNT[stripped]) return stripped;
+      if (SYN[stripped]) return SYN[stripped];
+
+      const allKeys = Object.keys(N).concat(Object.keys(COUNT)).concat(Object.keys(DEFAULT_COUNT)).filter(k => !k.startsWith('_'));
       const found = allKeys.find(k => stripped.includes(k) || k.includes(stripped));
       if (found) return found;
       return capitalize(stripped || clean);
@@ -14773,92 +14971,158 @@ const CUP_DENSITY = {
 
     function parsePhotoRecipeText(text) {
       if (!text) return;
-      const lines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
-      if (!lines.length) return;
+      const rawLines = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean);
+      if (!rawLines.length) return;
 
-      // 1. Detect Recipe Name
+      // 1. Detect Recipe Title
       let title = '';
-      const skipHeaderRe = /^(ingredients|directions|method|instructions|nutrition|recipe|servings|prep|cook|total time|yield|notes)/i;
-      for (const l of lines) {
-        if (l.length >= 3 && l.length <= 60 && !skipHeaderRe.test(l) && !/^\d+[\s\/\.]/.test(l)) {
-          title = l.replace(/[#*_:;]/g, '').trim();
-          break;
+      const skipHeaderRe = /^(?:ingredients?|ingrediente|the\s+cake|the\s+frosting|the\s+filling|the\s+crust|the\s+sauce|directions?|instructions?|mod\s+de\s+preparare|method|steps?|servings?|yield|makes|por[țt]ii|prep|cook|total\s+time|notes?|nutrition)\b/i;
+      const skipPrefixRe = /^(?:[\d\.\)\/\-•*▪▫◦○●◽◾oO0©®°]|\[[ xX]?\])/;
+
+      for (const l of rawLines) {
+        const cleanL = l.trim();
+        if (cleanL.length >= 4 && cleanL.length <= 80 && !skipHeaderRe.test(cleanL) && !skipPrefixRe.test(cleanL) && !cleanL.endsWith(':')) {
+          let t = cleanL
+            .replace(/\s*[\.\,\-]?\s*(?:surs[aă]|source|by|de la|from|credit)\s*[:\-].*$/i, '')
+            .replace(/^[#*_"\s]+|[#*_"\s]+$/g, '')
+            .trim();
+          if (t.length >= 4) {
+            title = t;
+            break;
+          }
         }
       }
       const nameInp = document.getElementById('photoRecipeName');
       if (nameInp && title && !nameInp.value) nameInp.value = capitalize(title);
 
-      // 2. Detect Servings
+      // 2. Detect Servings (e.g. "Makes 10 Slices", "Servings: 4")
       let servings = 1;
-      const servMatch = text.match(/(?:servings?|yield|makes|portions?)\s*[:=]?\s*(\d+)/i);
-      if (servMatch) servings = Math.max(1, parseInt(servMatch[1], 10));
+      const servMatch = text.match(/(?:servings?|yield|makes|portions?|por[țt]ii?)\s*[:=]?\s*(\d+)/i);
+      if (servMatch) {
+        servings = Math.max(1, parseInt(servMatch[1], 10));
+      }
       const servInp = document.getElementById('photoRecipeServings');
       if (servInp) servInp.value = servings;
 
-      // 3. Detect Ingredients
-      photoParsedIngredients = [];
-      const fractionMap = { '½': 0.5, '¼': 0.25, '¾': 0.75, '⅓': 0.33, '⅔': 0.67, '⅛': 0.125, '⅜': 0.375, '⅝': 0.625, '⅞': 0.875 };
+      // 3. Pre-process lines: split compound lines, filter headers & stop at instructions
+      const processedLines = [];
+      const stopInstructionRe = /^(?:prep(?:aration)?\b|preheat\b|directions?\b|instructions?\b|method\b|steps?\b|how to make\b|mod de preparare\b|instruc[țt]iuni\b)/i;
+      const sectionHeaderRe = /^(?:the\s+cake|the\s+frosting|the\s+filling|the\s+crust|the\s+sauce|the\s+topping|for\s+the\b|glaze|dry\s+ingredients|wet\s+ingredients|ingredients?|ingrediente)\b/i;
 
-      lines.forEach((line, idx) => {
-        let clean = line.replace(/^[•\-\*\d+\.\)\s]+/, '').trim();
+      for (const line of rawLines) {
+        let trimmed = line.trim();
+        if (!trimmed || trimmed.length < 2) continue;
+        if (stopInstructionRe.test(trimmed)) {
+          break; // Stop once instructions begin
+        }
+        if (sectionHeaderRe.test(trimmed) || (trimmed.endsWith(':') && !/\d/.test(trimmed))) {
+          continue; // Skip section headers like "The Cake:" or "The Frosting:"
+        }
+
+        // Split compound lines joined with & or and, e.g. "1 tsp baking powder & 1 tsp baking soda"
+        const compoundMatch = trimmed.match(/^(.+?)\s+(?:&|\band\b|\+)\s+(\d.*)$/i);
+        if (compoundMatch && /\b(tsp|tbsp|cup|g|ml|oz|clove|slice|piece)\b/i.test(compoundMatch[2])) {
+          processedLines.push(compoundMatch[1].trim());
+          processedLines.push(compoundMatch[2].trim());
+        } else {
+          processedLines.push(trimmed);
+        }
+      }
+
+      // 4. Parse ingredients
+      photoParsedIngredients = [];
+      const fractionMap = {
+        '½': '1/2', '¼': '1/4', '¾': '3/4', '⅓': '1/3', '⅔': '2/3',
+        '⅛': '1/8', '⅜': '3/8', '⅝': '5/8', '⅞': '7/8', '⅕': '1/5',
+        '⅖': '2/5', '⅗': '3/5', '⅘': '4/5', '⅙': '1/6', '⅚': '5/6'
+      };
+
+      processedLines.forEach((rawLine, idx) => {
+        let clean = rawLine
+          .replace(/^\[[ xX\u2713]?\]\s*/, '')
+          .replace(/^(?:[\d]+[\.\)\:\-]\s*)+/, '')
+          .replace(/^[•·\*\-\–\—\+▪▫◦○●◽◾\u2022\u25E6\u2023\u2219oO0©®°]\s+/, '')
+          .trim();
+
         if (!clean || clean.length < 2) return;
         if (/^(directions|instructions|method|prep|cook|steps|nutrition)/i.test(clean)) return;
+
+        // Normalize fractions
+        for (const [frac, rep] of Object.entries(fractionMap)) {
+          if (clean.includes(frac)) clean = clean.split(frac).join(' ' + rep + ' ');
+        }
+        clean = clean.replace(/\b([lI|])\/(\d+)\b/g, '1/$2');
+        clean = clean.replace(/(\d+)\s*\/\s*(\d+)/g, '$1/$2');
+
+        // Resolve mixed numbers like "1 1/2" or standalone fractions like "1/3"
+        const mixedMatch = clean.match(/^(\d+)\s+(\d+)\/(\d+)\s*(.*)$/);
+        if (mixedMatch) {
+          const val = parseInt(mixedMatch[1], 10) + (parseInt(mixedMatch[2], 10) / parseInt(mixedMatch[3], 10));
+          clean = val.toFixed(2) + ' ' + mixedMatch[4];
+        } else {
+          const fracMatch = clean.match(/^(\d+)\/(\d+)\s*(.*)$/);
+          if (fracMatch) {
+            const val = parseInt(fracMatch[1], 10) / parseInt(fracMatch[2], 10);
+            clean = val.toFixed(2) + ' ' + fracMatch[3];
+          }
+        }
 
         let parsedQty = null;
         let parsedUnit = 'g';
         let ingredientName = '';
 
-        let normLine = clean;
-        for (const [frac, dec] of Object.entries(fractionMap)) {
-          if (normLine.includes(frac)) normLine = normLine.replace(frac, ' ' + dec + ' ');
-        }
-
-        const qtyUnitRe = /^(\d+(?:[,\.]\d+)?(?:\/\d+)?|\d+\s+\d+\/\d+|\d+\/\d+)\s*(?:(cups?|tbsp|tablespoons?|tsp|teaspoons?|oz|ounces?|lbs?|pounds?|grams?|g|kg|ml|slices?|cans?|cloves?|eggs?|pieces?|rashers?)\b\s*)?(?:of\s+)?(.+)$/i;
-        const match = normLine.match(qtyUnitRe);
+        const qtyUnitRe = /^(\d+(?:[\.,]\d+)?)\s*(cups?|tbsp|tablespoons?|tsp|teaspoons?|oz|ounces?|lbs?|pounds?|grams?|g|kg|ml|l|liters?|litres?|slices?|cans?|cloves?|eggs?|pieces?|rashers?|pinch|pinches|dash|v[aâ]rf|lingur[aă]|linguri[tț][aă]|pachete?|buca[tț]i)?\b\s*(?:of\s+)?(.+)$/i;
+        const match = clean.match(qtyUnitRe);
 
         if (match) {
-          let numStr = match[1].trim();
+          let numVal = parseFloat(match[1].replace(',', '.'));
           let rawUnit = (match[2] || '').toLowerCase();
           ingredientName = match[3].trim();
-          let numVal = parseQuantityNumber(numStr);
 
-          const canonName = canon(ingredientName);
+          const canonName = canon(ingredientName.replace(/\(.*?\)/g, '').replace(/,\s*.*$/, '').trim());
+
           if (/^(cups?)$/.test(rawUnit)) {
             const conv = convertToGrams(canonName, numVal, 'cup');
-            parsedQty = Math.round(conv.grams);
+            parsedQty = Math.max(1, Math.round(conv.grams));
             parsedUnit = conv.isLiquid ? 'ml' : 'g';
-          } else if (/^(tbsp|tablespoons?)$/.test(rawUnit)) {
+          } else if (/^(tbsp|tablespoons?|lingur[aă]|linguri)$/.test(rawUnit)) {
             const conv = convertToGrams(canonName, numVal, 'tbsp');
-            parsedQty = Math.round(conv.grams);
+            parsedQty = Math.max(1, Math.round(conv.grams));
             parsedUnit = conv.isLiquid ? 'ml' : 'g';
-          } else if (/^(tsp|teaspoons?)$/.test(rawUnit)) {
+          } else if (/^(tsp|teaspoons?|linguri[tț][aă]|linguri[tț]e)$/.test(rawUnit)) {
             const conv = convertToGrams(canonName, numVal, 'tsp');
-            parsedQty = Math.round(conv.grams);
+            parsedQty = Math.max(1, Math.round(conv.grams));
             parsedUnit = 'g';
           } else if (/^(oz|ounces?)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal * 28.35);
+            parsedQty = Math.max(1, Math.round(numVal * 28.35));
             parsedUnit = 'g';
           } else if (/^(lbs?|pounds?)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal * 453.6);
+            parsedQty = Math.max(1, Math.round(numVal * 453.6));
             parsedUnit = 'g';
           } else if (/^(kg)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal * 1000);
+            parsedQty = Math.max(1, Math.round(numVal * 1000));
             parsedUnit = 'g';
           } else if (/^(ml)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal);
+            parsedQty = Math.max(1, Math.round(numVal));
             parsedUnit = 'ml';
-          } else if (/^(eggs?|slices?|cans?|cloves?|pieces?|rashers?)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal);
+          } else if (/^(l|liters?|litres?)$/.test(rawUnit)) {
+            parsedQty = Math.max(1, Math.round(numVal * 1000));
+            parsedUnit = 'ml';
+          } else if (/^(eggs?|slices?|cans?|cloves?|pieces?|rashers?|buca[tț]i|pachete?)$/.test(rawUnit)) {
+            parsedQty = Math.max(1, Math.round(numVal));
             parsedUnit = 'count';
+          } else if (/^(pinch|pinches|dash|v[aâ]rf)$/.test(rawUnit)) {
+            parsedQty = 1;
+            parsedUnit = 'g';
           } else if (/^(grams?|g)$/.test(rawUnit)) {
-            parsedQty = Math.round(numVal);
+            parsedQty = Math.max(1, Math.round(numVal));
             parsedUnit = 'g';
           } else {
-            if (COUNT[canonName] || COUNT[canonName.replace(/s$/, '')]) {
-              parsedQty = Math.round(numVal);
+            if (COUNT[canonName] || COUNT[canonName.replace(/s$/, '')] || DEFAULT_COUNT[canonName] || DEFAULT_COUNT[canonName.replace(/s$/, '')]) {
+              parsedQty = Math.max(1, Math.round(numVal));
               parsedUnit = 'count';
             } else {
-              parsedQty = Math.round(numVal);
+              parsedQty = Math.max(1, Math.round(numVal));
               parsedUnit = 'g';
             }
           }
@@ -15673,7 +15937,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.7';
+    const FALLBACK_APP_VERSION = '1.0.8';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -15835,6 +16099,26 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.0.8',
+        date: '19 Oct 2026',
+        items: {
+          ro: [
+            '📸 Import rețetă din poză perfecționat: detectare automată a modului întunecat (ecrane laptop/tablete/mod dark) și inversare inteligentă a contrastului pentru Tesseract OCR',
+            '🔍 Scalare OCR la rezoluție înaltă (2400px) ce elimină erorile de citire și caracterele deformate',
+            '📱 Butoane dedicate în modal: "📷 Fă Poză (Camera)", "🖼️ Din Galerie" și "📹 Camera Live"',
+            '⚡ Lansarea camerei native Android remediată: solicitare permisiuni runtime Manifest.permission.CAMERA și transmitere securizată ClipData URI',
+            '🍰 Suport avansat pentru fracții (½, ⅓, ¼), ingrediente compuse pe același rând și separarea automată a instrucțiunilor de preparare'
+          ],
+          en: [
+            '📸 Enhanced Photo Recipe Importer: automatic dark mode detection (laptop/tablet dark screens) with smart contrast inversion for crisp OCR',
+            '🔍 High-resolution OCR scaling up to 2400px preventing garbled text and missing digits',
+            '📱 Dedicated buttons in modal: "📷 Take Photo (Camera)", "🖼️ From Gallery", and "📹 Live Camera"',
+            '⚡ Native Android camera launch fix: runtime Manifest.permission.CAMERA and ClipData URI grants',
+            '🍰 Advanced parsing for fractions (½, ⅓, ¼), compound ingredient lines, and automated exclusion of prep directions'
+          ]
+        }
+      },
       {
         version: '1.0.7',
         date: '16 Oct 2026',
@@ -17082,11 +17366,23 @@ const CUP_DENSITY = {
 
       // Photo Recipe Importer
       document.getElementById('builderImportPhotoBtn')?.addEventListener('click', openPhotoImportModal);
-      document.getElementById('builderPhotoFileInput')?.addEventListener('change', e => {
-        if (e.target.files && e.target.files[0]) handlePhotoRecipeSelect(e.target.files[0]);
+      document.getElementById('photoCameraDirectBtn')?.addEventListener('click', () => {
+        document.getElementById('photoCameraInput')?.click();
       });
-      document.getElementById('photoImportFileInput')?.addEventListener('change', e => {
-        if (e.target.files && e.target.files[0]) handlePhotoRecipeSelect(e.target.files[0]);
+      document.getElementById('photoGalleryDirectBtn')?.addEventListener('click', () => {
+        document.getElementById('photoGalleryInput')?.click();
+      });
+      document.getElementById('photoLiveCamBtn')?.addEventListener('click', startLivePhotoCamera);
+      document.getElementById('photoSnapBtn')?.addEventListener('click', snapLivePhoto);
+      document.getElementById('photoCloseLiveCamBtn')?.addEventListener('click', stopLivePhotoCamera);
+
+      ['photoCameraInput', 'photoGalleryInput', 'photoImportFileInput', 'builderPhotoFileInput'].forEach(id => {
+        document.getElementById(id)?.addEventListener('change', e => {
+          if (e.target.files && e.target.files[0]) {
+            handlePhotoRecipeSelect(e.target.files[0]);
+            e.target.value = '';
+          }
+        });
       });
       document.getElementById('photoImportCloseBtn')?.addEventListener('click', closePhotoImportModal);
       document.getElementById('photoImportBackdrop')?.addEventListener('click', closePhotoImportModal);

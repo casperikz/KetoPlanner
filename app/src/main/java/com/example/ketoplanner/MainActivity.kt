@@ -112,10 +112,17 @@ class MainActivity : ComponentActivity() {
 
         configureWebView()
 
+        val permissionsToRequest = mutableListOf<String>()
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             if (checkSelfPermission(android.Manifest.permission.POST_NOTIFICATIONS) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
-                requestPermissions(arrayOf(android.Manifest.permission.POST_NOTIFICATIONS), 101)
+                permissionsToRequest.add(android.Manifest.permission.POST_NOTIFICATIONS)
             }
+        }
+        if (checkSelfPermission(android.Manifest.permission.CAMERA) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+            permissionsToRequest.add(android.Manifest.permission.CAMERA)
+        }
+        if (permissionsToRequest.isNotEmpty()) {
+            requestPermissions(permissionsToRequest.toTypedArray(), 101)
         }
         FastingAlarmReceiver.createNotificationChannel(this)
 
@@ -193,6 +200,7 @@ class MainActivity : ComponentActivity() {
                 cameraImageUri = null
 
                 val isImage = fileChooserParams?.acceptTypes?.any { it.contains("image") } == true
+                val isCapture = fileChooserParams?.isCaptureEnabled == true
 
                 var cameraIntent: Intent? = null
                 if (isImage) {
@@ -206,10 +214,29 @@ class MainActivity : ComponentActivity() {
                         cameraImageUri = uri
                         cameraIntent = Intent(MediaStore.ACTION_IMAGE_CAPTURE).apply {
                             putExtra(MediaStore.EXTRA_OUTPUT, uri)
+                            clipData = ClipData.newRawUri("", uri)
                             addFlags(Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                        }
+                        val resInfoList = packageManager.queryIntentActivities(cameraIntent, android.content.pm.PackageManager.MATCH_DEFAULT_ONLY)
+                        for (resolveInfo in resInfoList) {
+                            val packageName = resolveInfo.activityInfo.packageName
+                            grantUriPermission(packageName, uri, Intent.FLAG_GRANT_WRITE_URI_PERMISSION or Intent.FLAG_GRANT_READ_URI_PERMISSION)
                         }
                     } catch (e: Exception) {
                         cameraImageUri = null
+                        cameraIntent = null
+                    }
+                }
+
+                if (isCapture && cameraIntent != null) {
+                    return try {
+                        filePickerLauncher.launch(cameraIntent)
+                        true
+                    } catch (e: Exception) {
+                        fileUploadCallback?.onReceiveValue(null)
+                        fileUploadCallback = null
+                        cameraImageUri = null
+                        false
                     }
                 }
 
