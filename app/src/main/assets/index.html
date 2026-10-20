@@ -546,7 +546,7 @@
       box-sizing: border-box;
       overflow-x: hidden;
     }
-    .hidden { display: none !important; }
+    .hidden, section.hidden, [data-tab].hidden { display: none !important; }
 
     /* Home / Main Menu */
     .home-banner {
@@ -2943,13 +2943,16 @@
     }
 
     /* Health & Evolution Tracker Styles */
-    section[data-tab="health"] {
+    section[data-tab="health"]:not(.hidden) {
       display: block !important;
       width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
       overflow-x: hidden !important;
       box-sizing: border-box !important;
+    }
+    section[data-tab="health"].hidden {
+      display: none !important;
     }
     section[data-tab="health"] .panel,
     .health-panel {
@@ -18025,7 +18028,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.3';
+    const FALLBACK_APP_VERSION = '1.1.4';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -18187,6 +18190,18 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.4',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '🛡️ Rezolvat afișarea simultană: secțiunea Sănătate & Evoluție nu se mai suprapune peste Lista de Cumpărături sau alte pagini'
+          ],
+          en: [
+            '🛡️ Fixed tab isolation: Health & Evolution tracker no longer bleeds into Shopping List or other pages'
+          ]
+        }
+      },
       {
         version: '1.1.3',
         date: '20 Oct 2026',
