@@ -186,6 +186,22 @@
       align-items: center;
       justify-content: center;
       gap: 6px;
+      position: relative;
+      width: 100%;
+    }
+    .cloud-status-dot-btn {
+      position: absolute;
+      right: 0;
+      top: 50%;
+      transform: translateY(-50%);
+      background: transparent;
+      border: none;
+      padding: 6px 8px;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
     }
     .header-title-row strong {
       font-size: 1.15rem;
@@ -2140,6 +2156,264 @@
     .dash-legend .leg-warn::before { background: var(--color-warning); }
     .dash-legend .leg-bad::before { background: var(--color-danger); }
 
+    /* Daily Nutrition Overview Card (Home Tab) */
+    .daily-overview-card {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px 10px;
+      margin-top: 4px;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      cursor: pointer;
+      transition: border-color 0.15s ease, transform 0.15s ease;
+    }
+    .daily-overview-card:active {
+      transform: scale(0.99);
+      border-color: var(--color-primary);
+    }
+    .daily-overview-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 10px;
+    }
+    .daily-overview-tag {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--color-primary);
+      display: block;
+      margin-bottom: 1px;
+    }
+    .daily-overview-title {
+      font-size: var(--text-sm);
+      font-weight: 800;
+      margin: 0;
+      color: var(--color-text);
+    }
+    .daily-macro-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .daily-macro-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 8px 6px;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+    .daily-macro-val {
+      font-size: 15px;
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--color-text);
+      font-variant-numeric: tabular-nums;
+    }
+    .daily-macro-label {
+      font-size: 9.5px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      margin: 2px 0 4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+    .daily-macro-progress {
+      width: 100%;
+      height: 4px;
+      background: var(--color-border);
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .daily-macro-bar {
+      height: 100%;
+      border-radius: 999px;
+      background: var(--color-primary);
+      transition: width 0.3s ease;
+    }
+    .macro-kcal .daily-macro-bar { background: var(--color-primary); }
+    .macro-protein .daily-macro-bar { background: #2563eb; }
+    .macro-carbs .daily-macro-bar { background: #16a34a; }
+    .macro-carbs .daily-macro-bar.over { background: var(--color-danger); }
+    .macro-fat .daily-macro-bar { background: #d97706; }
+    .daily-meals-preview {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      padding-top: 6px;
+      border-top: 1px dashed var(--color-border);
+      font-size: 11.5px;
+      color: var(--color-text-muted);
+    }
+    .daily-meal-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 2px 8px;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: 999px;
+      font-size: 11px;
+      color: var(--color-text);
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    /* Floating Recipe Family Sub-navigation Bar */
+    .recipe-subnav-bar {
+      position: fixed;
+      bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 95;
+      pointer-events: none;
+      width: max-content;
+      max-width: calc(100vw - 32px);
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .recipe-subnav-bar.hidden {
+      display: none !important;
+    }
+    .recipe-subnav-inner {
+      pointer-events: auto;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 4px 6px;
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-primary);
+      border-radius: 999px;
+      box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1);
+      backdrop-filter: blur(8px);
+    }
+    .recipe-subnav-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 6px 14px;
+      border-radius: 999px;
+      border: none;
+      background: transparent;
+      color: var(--color-text-muted);
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.15s ease;
+      white-space: nowrap;
+    }
+    .recipe-subnav-btn:hover {
+      color: var(--color-text);
+      background: var(--color-surface-2);
+    }
+    .recipe-subnav-btn.active {
+      background: var(--color-primary);
+      color: #fff;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    }
+
+    /* Stock Checkbox & Row Styling */
+    .stock-need-cb {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+      accent-color: var(--color-primary);
+      margin-right: 8px;
+      flex-shrink: 0;
+    }
+    .stock-item-row.is-stocked {
+      opacity: 0.95;
+    }
+    .stock-item-row.is-missing {
+      background: rgba(239, 68, 68, 0.04);
+      border-color: rgba(239, 68, 68, 0.3);
+    }
+    .stock-badge {
+      cursor: pointer;
+      transition: opacity 0.15s ease;
+    }
+    .stock-badge:hover {
+      opacity: 0.8;
+    }
+
+    /* Dedicated Goals Page Styles */
+    .goals-card {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
+    }
+    .goals-card-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .goals-card-icon {
+      font-size: 22px;
+      line-height: 1;
+      padding: 8px;
+      border-radius: var(--radius-md);
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+    }
+    .goals-summary-card {
+      background: var(--color-surface);
+      border: 1.5px solid var(--color-primary);
+      border-radius: var(--radius-lg);
+      padding: 14px;
+      text-align: center;
+    }
+    .goals-macro-split-bar {
+      display: flex;
+      height: 12px;
+      border-radius: 999px;
+      overflow: hidden;
+      margin: 8px 0 12px;
+      background: var(--color-border);
+    }
+    .goals-bar-segment {
+      height: 100%;
+      transition: width 0.3s ease;
+    }
+    .goals-bar-segment.seg-prot { background: #2563eb; }
+    .goals-bar-segment.seg-fat { background: #d97706; }
+    .goals-bar-segment.seg-carbs { background: #16a34a; }
+    .goals-split-chips {
+      display: flex;
+      justify-content: space-around;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .goals-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11.5px;
+      padding: 4px 8px;
+      border-radius: var(--radius-md);
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+    }
+    .goals-chip-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+    }
+    .chip-prot .goals-chip-dot { background: #2563eb; }
+    .chip-fat .goals-chip-dot { background: #d97706; }
+    .chip-carbs .goals-chip-dot { background: #16a34a; }
+
 
     /* Nutrition Badge (Traffic Light) */
     .nutrition-badge {
@@ -3249,14 +3523,16 @@
       <div class="header-title-row">
         <img src="icon.png" class="brand-icon" alt="">
         <strong>Keto Planner</strong>
+        <button id="cloudDotHeaderBtn" class="cloud-status-dot-btn" data-tab-btn="sync" aria-label="Cloud sync" type="button" title="Live Cloud Share & Sync">
+          <span class="cloud-dot" id="cloudDot"></span>
+        </button>
       </div>
       <div class="header-actions-row">
         <button id="headerFastTimerBtn" class="fast-header-pill" data-tab-btn="fasting" type="button" title="View Fasting Tracker">
           ⏱️ <span id="headerFastTimerDisplay">16:8</span>
         </button>
-        <button id="cloudHeaderBtn" class="cloud-pill" data-tab-btn="sync" aria-label="Cloud sync" type="button">
-          <span class="cloud-dot" id="cloudDot"></span>
-          <span id="cloudLabel">Local</span>
+        <button id="headerGoalsBtn" class="fast-header-pill" data-tab-btn="goals" type="button" title="Personal Goals & Targets">
+          🎯 <span id="headerGoalsDisplay" data-i18n="header_goals_btn">Goals</span>
         </button>
       </div>
     </div>
@@ -3306,19 +3582,41 @@
   <main class="main-content">
     <!-- 1. HOME / MAIN MENU -->
     <section data-tab="home" class="stack">
-      <!-- 7-Day Macro Bar Chart Dashboard -->
-      <div class="week-dashboard" id="homeWeekDashboard">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
-          <div>
-            <h3 style="margin:0;font-size:var(--text-sm)" data-i18n="home_macro_overview">📊 7-Day Weekly Macro Overview</h3>
+      <!-- Daily Nutrition Overview Card -->
+      <div class="daily-overview-card" id="homeDailyOverview" data-tab-btn="planner">
+        <div class="daily-overview-header">
+          <div class="daily-overview-title-group">
+            <span class="daily-overview-tag" id="homeDailyDayTag">Today • Day 1</span>
+            <h3 class="daily-overview-title" data-i18n="home_daily_overview_title">Daily Nutrition Overview</h3>
           </div>
-          <button class="act-btn small" data-tab-btn="planner" type="button" style="padding:2px 8px;font-size:11px"><span data-i18n="home_open_planner">Open Planner ›</span></button>
+          <button class="act-btn small primary" data-tab-btn="planner" type="button" style="padding:3px 10px;font-size:11.5px">
+            <span data-i18n="home_open_today_planner">Plan Meals ›</span>
+          </button>
         </div>
-        <div class="dash-bars" id="dashBarsContainer"></div>
-        <div class="dash-legend">
-          <span class="leg-ok" data-i18n="home_leg_ok">Target (±15%)</span>
-          <span class="leg-warn" data-i18n="home_leg_warn">Under/Over</span>
-          <span class="leg-bad" data-i18n="home_leg_bad">Excess Carbs</span>
+        <div class="daily-macro-grid">
+          <div class="daily-macro-item macro-kcal">
+            <div class="daily-macro-val" id="dailyOverviewKcal">0</div>
+            <div class="daily-macro-label">Kcal / <span id="dailyOverviewKcalTarget">2000</span></div>
+            <div class="daily-macro-progress"><div class="daily-macro-bar" id="dailyOverviewKcalBar" style="width:0%"></div></div>
+          </div>
+          <div class="daily-macro-item macro-protein">
+            <div class="daily-macro-val" id="dailyOverviewProtein">0g</div>
+            <div class="daily-macro-label">Protein / <span id="dailyOverviewProteinTarget">140g</span></div>
+            <div class="daily-macro-progress"><div class="daily-macro-bar" id="dailyOverviewProteinBar" style="width:0%"></div></div>
+          </div>
+          <div class="daily-macro-item macro-carbs">
+            <div class="daily-macro-val" id="dailyOverviewCarbs">0g</div>
+            <div class="daily-macro-label">Net Carbs / <span id="dailyOverviewCarbsTarget">25g</span></div>
+            <div class="daily-macro-progress"><div class="daily-macro-bar" id="dailyOverviewCarbsBar" style="width:0%"></div></div>
+          </div>
+          <div class="daily-macro-item macro-fat">
+            <div class="daily-macro-val" id="dailyOverviewFat">0g</div>
+            <div class="daily-macro-label">Fat / <span id="dailyOverviewFatTarget">145g</span></div>
+            <div class="daily-macro-progress"><div class="daily-macro-bar" id="dailyOverviewFatBar" style="width:0%"></div></div>
+          </div>
+        </div>
+        <div class="daily-meals-preview" id="dailyMealsPreview">
+          <!-- Injected by renderDailyOverview -->
         </div>
       </div>
 
@@ -3344,8 +3642,8 @@
         <button class="menu-card" data-tab-btn="recipes">
           <div class="menu-icon-wrap">🍳</div>
           <div class="menu-card-info">
-            <strong><span data-i18n="title_recipes">Recipe Library</span></strong>
-            <span><span data-i18n="home_card_recipes_desc">60+ keto meals, protein-first sorting, tags & ratings</span></span>
+            <strong><span data-i18n="title_recipes_hub">Recipes</span></strong>
+            <span><span data-i18n="home_card_recipes_hub_desc">Library, Recipe Builder & Macronutrients Database</span></span>
           </div>
           <div class="menu-arrow">›</div>
         </button>
@@ -3364,24 +3662,6 @@
           <div class="menu-card-info">
             <strong><span data-i18n="title_shopping">Shopping List</span></strong>
             <span><span data-i18n="home_card_shopping_desc">Interactive checklist with strikethrough & swipe-to-delete</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
-        </button>
-
-        <button class="menu-card" data-tab-btn="builder">
-          <div class="menu-icon-wrap">🧪</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_builder">Recipe Builder</span></strong>
-            <span><span data-i18n="home_card_builder_desc">Formulate custom meals with automatic nutrition tracking</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
-        </button>
-
-        <button class="menu-card" data-tab-btn="macros">
-          <div class="menu-icon-wrap">🥑</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_macros">Macronutrients</span></strong>
-            <span><span data-i18n="home_card_macros_desc">Search 100+ keto ingredients for protein, fat & carbs</span></span>
           </div>
           <div class="menu-arrow">›</div>
         </button>
@@ -3438,6 +3718,21 @@
       <div class="panel stack">
         <!-- Macronutrient Summary at Top of Screen -->
         <div class="kpis" id="customKpis" style="margin-bottom:var(--space-2)"></div>
+
+        <!-- 7-Day Macro Bar Chart Dashboard (Moved from Home to Weekly Planner) -->
+        <div class="week-dashboard" id="plannerWeekDashboard" style="margin-bottom:var(--space-2)">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
+            <div>
+              <h3 style="margin:0;font-size:var(--text-sm)" data-i18n="planner_macro_overview">📊 7-Day Weekly Macro Overview</h3>
+            </div>
+          </div>
+          <div class="dash-bars" id="dashBarsContainer"></div>
+          <div class="dash-legend">
+            <span class="leg-ok" data-i18n="home_leg_ok">Target (±15%)</span>
+            <span class="leg-warn" data-i18n="home_leg_warn">Under/Over</span>
+            <span class="leg-bad" data-i18n="home_leg_bad">Excess Carbs</span>
+          </div>
+        </div>
 
         <div class="section-title">
           <div>
@@ -3814,7 +4109,7 @@
 
         <!-- Stock Quick Actions -->
         <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:8px">
-          <button id="stockMissingToShopBtn" class="act-btn" type="button"><span data-i18n="stock_add_missing_to_shop">🛒 Add missing items to Shopping List</span></button>
+          <button id="stockMissingToShopBtn" class="act-btn" type="button"><span data-i18n="stock_add_selected_to_shop">🛒 Add selected missing to Shopping List</span></button>
           <button id="stockResetBtn" class="panel small" type="button" style="padding:6px 10px"><span data-i18n="stock_restore_defaults">Restore defaults</span></button>
         </div>
       </div>
@@ -3843,6 +4138,7 @@
         <!-- Action Bar -->
         <div class="shop-header-actions" style="flex-wrap:wrap;gap:6px">
           <button id="shopShareBtn" class="act-btn primary small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_share_title"><span data-i18n="shop_whatsapp">📤 Share / WhatsApp</span></button>
+          <button id="shopUpdateStockBtn" class="act-btn small primary" type="button" title="Add bought items to Stock Manager"><span data-i18n="shop_update_stock">📥 Add Bought to Stock</span></button>
           <button id="shopCopyListBtn" class="act-btn small" type="button"><span data-i18n="shop_copy_btn">📋 Copy</span></button>
           <button id="shopAisleToggleBtn" class="act-btn small" type="button"><span data-i18n="shop_group_aisle">🏷️ By Aisle: ON</span></button>
           <button id="shopClearBoughtBtn" class="act-btn small" type="button"><span data-i18n="shop_clear_bought">🧹 Clear Bought</span></button>
@@ -3857,8 +4153,9 @@
 
         <!-- Bought Section (At bottom with strikethrough) -->
         <div id="shopBoughtWrap" class="hidden" style="margin-top:var(--space-4)">
-          <div class="shop-section-title">
+          <div class="shop-section-title" style="display:flex;align-items:center;justify-content:space-between">
             <span><span data-i18n="shop_bought">Bought</span> (<span id="shopBoughtCount">0</span>)</span>
+            <button id="shopUpdateStockBtn2" class="act-btn small" type="button" style="font-size:11px;padding:3px 8px"><span data-i18n="shop_update_stock">📥 Add Bought to Stock</span></button>
           </div>
           <div id="shopBoughtList" class="shop-items-container"></div>
         </div>
@@ -4052,6 +4349,91 @@
           <summary class="small" data-i18n="convert_density_title">Density table (grams per cup)</summary>
           <div id="convDensityList" class="stack" style="gap:4px;margin-top:8px;font-size:var(--text-xs)"></div>
         </details>
+      </div>
+    </section>
+
+    <!-- PERSONAL GOALS & TARGETS (DEDICATED PAGE) -->
+    <section data-tab="goals" class="hidden stack">
+      <div class="panel stack">
+        <div class="section-title">
+          <div>
+            <h2 style="font-size:var(--text-lg)" data-i18n="goals_page_title">🎯 Personal Goals & Targets</h2>
+            <p class="muted small" data-i18n="goals_page_subtitle">Set your body measurements, keto macros, and daily nutrition targets.</p>
+          </div>
+        </div>
+
+        <!-- Body Measurements Card -->
+        <div class="goals-card stack">
+          <div class="goals-card-header">
+            <span class="goals-card-icon">⚖️</span>
+            <div>
+              <h3 style="margin:0;font-size:var(--text-sm)">Body Measurements & Target Weight</h3>
+              <p class="muted tiny" style="margin:0">Used to calculate your daily protein needs and track progress.</p>
+            </div>
+          </div>
+          <div class="settings-grid" style="grid-template-columns:repeat(auto-fit, minmax(130px, 1fr))">
+            <label class="small"><span data-i18n="goals_weight_label">Current Weight (kg)</span>
+              <input id="goalsWeight" type="number" min="30" max="300" step="0.5" class="search" placeholder="e.g. 78">
+            </label>
+            <label class="small"><span data-i18n="goals_target_weight_label">Target Weight (kg)</span>
+              <input id="goalsTargetWeight" type="number" min="30" max="300" step="0.5" class="search" placeholder="e.g. 70">
+            </label>
+            <label class="small"><span data-i18n="goals_height_label">Height (cm)</span>
+              <input id="goalsHeight" type="number" min="100" max="250" step="1" class="search" placeholder="e.g. 175">
+            </label>
+          </div>
+        </div>
+
+        <!-- Keto Macro Targets Card -->
+        <div class="goals-card stack">
+          <div class="goals-card-header">
+            <span class="goals-card-icon">🥑</span>
+            <div>
+              <h3 style="margin:0;font-size:var(--text-sm)">Daily Keto Nutrition Targets</h3>
+              <p class="muted tiny" style="margin:0">Target calories, protein ratio, and strict net-carb cap.</p>
+            </div>
+          </div>
+          <div class="settings-grid" style="grid-template-columns:repeat(auto-fit, minmax(130px, 1fr))">
+            <label class="small"><span data-i18n="goals_kcal_label">Daily Calories (kcal)</span>
+              <input id="goalsKcal" type="number" min="500" max="5000" step="50" class="search" placeholder="e.g. 2000">
+            </label>
+            <label class="small"><span data-i18n="goals_protein_label">Protein per kg (g)</span>
+              <input id="goalsPerKg" type="number" min="0.8" max="3.0" step="0.1" class="search" placeholder="e.g. 1.8">
+            </label>
+            <label class="small"><span data-i18n="goals_carbs_label">Net-Carb Cap (g)</span>
+              <input id="goalsCarbs" type="number" min="10" max="100" step="5" class="search" placeholder="e.g. 25">
+            </label>
+          </div>
+        </div>
+
+        <!-- Macro Ratio Breakdown & Summary -->
+        <div class="goals-summary-card">
+          <h4 style="margin:0 0 8px 0;font-size:var(--text-sm);text-align:center">Computed Daily Macronutrient Split</h4>
+          <div class="goals-macro-split-bar">
+            <div id="goalsBarProtein" class="goals-bar-segment seg-prot" style="width:30%" title="Protein"></div>
+            <div id="goalsBarFat" class="goals-bar-segment seg-fat" style="width:65%" title="Fat"></div>
+            <div id="goalsBarCarbs" class="goals-bar-segment seg-carbs" style="width:5%" title="Carbs"></div>
+          </div>
+          <div class="goals-split-chips">
+            <div class="goals-chip chip-prot">
+              <span class="goals-chip-dot"></span>
+              <strong>Protein:</strong>&nbsp;<span id="goalsSummaryProtein">140g</span>&nbsp;(<span id="goalsSummaryProteinPct">28%</span>)
+            </div>
+            <div class="goals-chip chip-fat">
+              <span class="goals-chip-dot"></span>
+              <strong>Fat:</strong>&nbsp;<span id="goalsSummaryFat">145g</span>&nbsp;(<span id="goalsSummaryFatPct">65%</span>)
+            </div>
+            <div class="goals-chip chip-carbs">
+              <span class="goals-chip-dot"></span>
+              <strong>Net Carbs:</strong>&nbsp;<span id="goalsSummaryCarbs">25g</span>&nbsp;(<span id="goalsSummaryCarbsPct">5%</span>)
+            </div>
+          </div>
+        </div>
+
+        <!-- Save Button -->
+        <button id="goalsSaveBtn" class="act-btn primary" type="button" style="width:100%;justify-content:center;padding:12px;font-size:var(--text-base)">
+          <span data-i18n="goals_save_btn">💾 Save Goals & Apply to Planner</span>
+        </button>
       </div>
     </section>
 
@@ -4976,11 +5358,33 @@
     </section>
   </main>
 
+  <!-- Floating Shortcut Bar for Recipe Family (Library, Builder, Nutrients) -->
+  <div id="recipeSubnavBar" class="recipe-subnav-bar hidden" role="navigation" aria-label="Recipe Navigation">
+    <div class="recipe-subnav-inner">
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="recipes">
+        <span>📖</span>
+        <span data-i18n="subnav_recipe_library">Library</span>
+      </button>
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="builder">
+        <span>⚡</span>
+        <span data-i18n="subnav_recipe_builder">Builder</span>
+      </button>
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="macros">
+        <span>🥑</span>
+        <span data-i18n="subnav_recipe_macros">Nutrients</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav">
+    <button class="nav-item" data-tab-btn="planner">
+      <span class="nav-icon">📅</span>
+      <span class="nav-label"><span data-i18n="nav_planner">Planner</span></span>
+    </button>
     <button class="nav-item" data-tab-btn="recipes">
       <span class="nav-icon">🍳</span>
-      <span class="nav-label"><span data-i18n="nav_recipes">Recipes</span></span>
+      <span class="nav-label"><span data-i18n="title_recipes_hub">Recipes</span></span>
     </button>
     <button class="nav-item" data-tab-btn="stock">
       <span class="nav-icon">📦</span>
@@ -4989,10 +5393,6 @@
     <button class="nav-item" data-tab-btn="shopping">
       <span class="nav-icon">🛒</span>
       <span class="nav-label"><span data-i18n="nav_shopping">Shopping</span></span>
-    </button>
-    <button class="nav-item" data-tab-btn="macros">
-      <span class="nav-icon">🥑</span>
-      <span class="nav-label"><span data-i18n="nav_macros">Macros</span></span>
     </button>
   </nav>
 
@@ -5698,6 +6098,27 @@ const I18N = {
 
     // Page Titles
     title_home: "Keto Planner",
+    title_goals: "Personal Goals & Targets",
+    goals_page_title: "Personal Goals & Targets",
+    goals_page_subtitle: "Set your body measurements, keto macros, and daily nutrition targets.",
+    header_goals_btn: "Goals",
+    title_recipes_hub: "Recipes",
+    home_card_recipes_hub_desc: "Library, Recipe Builder & Macronutrients Database",
+    home_daily_overview_title: "Daily Nutrition Overview",
+    home_open_today_planner: "Plan Meals ›",
+    planner_macro_overview: "7-Day Weekly Macro Overview",
+    subnav_recipe_library: "Library",
+    subnav_recipe_builder: "Builder",
+    subnav_recipe_macros: "Nutrients",
+    shop_update_stock: "📥 Add Bought to Stock",
+    stock_add_selected_to_shop: "🛒 Add selected missing to Shopping List",
+    goals_weight_label: "Current Weight (kg)",
+    goals_target_weight_label: "Target Weight (kg)",
+    goals_height_label: "Height (cm)",
+    goals_kcal_label: "Daily Calories (kcal)",
+    goals_protein_label: "Protein per kg (g)",
+    goals_carbs_label: "Net-Carb Cap (g)",
+    goals_save_btn: "💾 Save Goals & Apply to Planner",
     title_fasting: "Intermittent Fasting",
     title_planner: "Weekly Planner",
     title_health: "Health & Evolution",
@@ -6211,6 +6632,27 @@ const I18N = {
 
     // Page Titles
     title_home: "Keto Planner",
+    title_goals: "Obiective & Ținte Personale",
+    goals_page_title: "Obiective & Ținte Personale",
+    goals_page_subtitle: "Setează greutatea, macronutrienții keto și țintele nutriționale zilnice.",
+    header_goals_btn: "Obiective",
+    title_recipes_hub: "Rețete",
+    home_card_recipes_hub_desc: "Colecție de rețete, creator rețete & baza de date nutrienți",
+    home_daily_overview_title: "Sumar Nutrițional Zilnic",
+    home_open_today_planner: "Planifică Mese ›",
+    planner_macro_overview: "Privire Generală Macro pe 7 Zile",
+    subnav_recipe_library: "Bibliotecă",
+    subnav_recipe_builder: "Creator",
+    subnav_recipe_macros: "Nutrienți",
+    shop_update_stock: "📥 Adaugă cumpărate în Stoc",
+    stock_add_selected_to_shop: "🛒 Adaugă produsele selectate în listă",
+    goals_weight_label: "Greutate Actuală (kg)",
+    goals_target_weight_label: "Greutate Obiectiv (kg)",
+    goals_height_label: "Înălțime (cm)",
+    goals_kcal_label: "Țintă Calorii Zilnice (kcal)",
+    goals_protein_label: "Raport Proteine (g per kg)",
+    goals_carbs_label: "Limită Carbohidrați Neți (g)",
+    goals_save_btn: "💾 Salvează Obiectivele în Planificator",
     title_fasting: "Post Intermitent",
     title_planner: "Planificator Săptămânal",
     title_health: "Monitorizare & Evoluție",
@@ -12355,6 +12797,7 @@ const CUP_DENSITY = {
     /* NAVIGATION LOGIC */
     const TAB_TITLES = {
       'home': 'Keto Planner',
+      'goals': 'Personal Goals & Targets',
       'fasting': 'Intermittent Fasting',
       'planner': 'Weekly Planner',
       'health': 'Health & Evolution',
@@ -12388,6 +12831,20 @@ const CUP_DENSITY = {
       document.querySelectorAll('[data-tab]').forEach(sec => sec.classList.toggle('hidden', sec.dataset.tab !== tabName));
       document.querySelectorAll('.bottom-nav .nav-item, .desktop-nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tabBtn === tabName));
 
+      const isRecipeFamily = ['recipes', 'builder', 'macros'].includes(tabName);
+      const recipeSubnav = document.getElementById('recipeSubnavBar');
+      if (recipeSubnav) {
+        recipeSubnav.classList.toggle('hidden', !isRecipeFamily);
+        if (isRecipeFamily) {
+          recipeSubnav.querySelectorAll('.recipe-subnav-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.recipeSubtab === tabName);
+          });
+        }
+      }
+      if (isRecipeFamily) {
+        document.querySelectorAll('.bottom-nav .nav-item[data-tab-btn="recipes"]').forEach(btn => btn.classList.add('active'));
+      }
+
       const mainHeader = document.getElementById('mainAppHeader');
       if (mainHeader) mainHeader.classList.toggle('home-mode', tabName === 'home');
 
@@ -12411,6 +12868,9 @@ const CUP_DENSITY = {
         if (innerRight) innerRight.classList.remove('hidden');
       }
 
+      if (tabName === 'home') renderDailyOverview();
+      if (tabName === 'planner') renderWeeklyMacroChart();
+      if (tabName === 'goals') renderGoalsPage();
       if (tabName === 'fasting') renderFastingWidget();
       if (tabName === 'health') renderHealthPage();
       if (tabName === 'stock') renderStock();
@@ -13222,14 +13682,18 @@ const CUP_DENSITY = {
           const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro'); macroHtml = `<button class="stock-macro-record-btn tiny" type="button" data-record-macro="${escapeHtml(item.name)}" title="Add this item to nutrition database">${isRo ? '+ Înregistrează în Macro' : '+ Record in Macros'}</button>`;
         }
 
+        const checkboxHtml = item.have
+          ? ''
+          : `<input type="checkbox" class="stock-need-cb" data-stock-need-idx="${realIdx}" ${item.selectedForShop !== false ? 'checked' : ''} aria-label="Select ${escapeHtml(item.name)} for shopping list" title="Check to add to shopping list">`;
+
         return `
           <div class="stock-item-row ${item.have ? 'is-stocked' : 'is-missing'}">
             <div class="stock-item-left">
-              <input type="checkbox" class="stock-check-input" data-stock-idx="${realIdx}" ${item.have ? 'checked' : ''} aria-label="Mark ${escapeHtml(item.name)} as stocked">
+              ${checkboxHtml}
               <div class="stock-item-info" data-stock-toggle="${realIdx}">
                 <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
                   <span class="stock-item-name">${escapeHtml(tIng(item.name))}</span>
-                  <span class="stock-badge ${item.have ? 'badge-have' : 'badge-need'}">${item.have ? t('stock_btn_in_stock') : t('stock_btn_need')}</span>
+                  <span class="stock-badge ${item.have ? 'badge-have' : 'badge-need'}" data-badge-idx="${realIdx}" title="Tap to toggle stock status">${item.have ? t('stock_btn_in_stock') : t('stock_btn_need')}</span>
                 </div>
                 ${macroHtml}
               </div>
@@ -13245,10 +13709,31 @@ const CUP_DENSITY = {
           </div>`;
       }).join('');
 
-      wrap.querySelectorAll('.stock-check-input').forEach(cb => {
+      wrap.querySelectorAll('.stock-need-cb').forEach(cb => {
         cb.addEventListener('change', e => {
-          const idx = parseInt(e.target.dataset.stockIdx, 10);
-          stock[currentStockTab][idx].have = e.target.checked;
+          e.stopPropagation();
+          const idx = parseInt(e.target.dataset.stockNeedIdx, 10);
+          if (stock[currentStockTab] && stock[currentStockTab][idx]) {
+            stock[currentStockTab][idx].selectedForShop = e.target.checked;
+            saveState();
+          }
+        });
+      });
+
+      wrap.querySelectorAll('[data-badge-idx]').forEach(badge => {
+        badge.addEventListener('click', e => {
+          e.stopPropagation();
+          const idx = parseInt(badge.dataset.badgeIdx, 10);
+          const currentItem = stock[currentStockTab][idx];
+          if (!currentItem) return;
+          currentItem.have = !currentItem.have;
+          if (currentItem.have) {
+            if (!currentItem.qty || currentItem.qty === 0) currentItem.qty = 1;
+            currentItem.selectedForShop = false;
+          } else {
+            currentItem.qty = 0;
+            currentItem.selectedForShop = true;
+          }
           saveState();
           renderStock();
           renderMacros();
@@ -13258,9 +13743,18 @@ const CUP_DENSITY = {
 
       wrap.querySelectorAll('[data-stock-toggle]').forEach(info => {
         info.addEventListener('click', e => {
-          if (e.target.closest('[data-record-macro]')) return;
+          if (e.target.closest('[data-record-macro]') || e.target.closest('[data-badge-idx]')) return;
           const idx = parseInt(info.dataset.stockToggle, 10);
-          stock[currentStockTab][idx].have = !stock[currentStockTab][idx].have;
+          const currentItem = stock[currentStockTab][idx];
+          if (!currentItem) return;
+          currentItem.have = !currentItem.have;
+          if (currentItem.have) {
+            if (!currentItem.qty || currentItem.qty === 0) currentItem.qty = 1;
+            currentItem.selectedForShop = false;
+          } else {
+            currentItem.qty = 0;
+            currentItem.selectedForShop = true;
+          }
           saveState();
           renderStock();
           renderMacros();
@@ -13357,7 +13851,7 @@ const CUP_DENSITY = {
       let count = 0;
       ['pantry', 'fridge', 'freezer'].forEach(cat => {
         (stock[cat] || []).forEach(item => {
-          if (!item.have) {
+          if (!item.have && item.selectedForShop !== false) {
             const k = canon(item.name);
             const existing = shoppingList.find(x => !x.bought && canon(x.name) === k);
             if (!existing) {
@@ -13375,7 +13869,77 @@ const CUP_DENSITY = {
       });
       renderShoppingPage();
       saveState();
-      showSyncToast(`🛒 Added ${count} missing item(s) to Shopping List!`);
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+      showSyncToast(isRo ? `🛒 S-au adăugat ${count} produse selectate în listă!` : `🛒 Added ${count} selected missing item(s) to Shopping List!`);
+    }
+
+    function updateStockFromBought() {
+      const boughtItems = shoppingList.filter(item => item.bought);
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+
+      if (!boughtItems.length) {
+        showSyncToast(isRo ? 'Nu există produse cumpărate de adăugat în stoc!' : 'No bought items to add to stock! Check items first.');
+        return;
+      }
+
+      let updatedCount = 0;
+      boughtItems.forEach(bItem => {
+        const bName = (bItem.name || '').trim();
+        if (!bName) return;
+        const bKey = canon(bName);
+
+        let foundItem = null;
+        for (const cat of ['pantry', 'fridge', 'freezer']) {
+          if (!stock[cat]) stock[cat] = [];
+          const match = stock[cat].find(s => canon(s.name) === bKey || normStockKey(s.name) === normStockKey(bName));
+          if (match) {
+            foundItem = match;
+            break;
+          }
+        }
+
+        let parsedQty = 1;
+        if (bItem.qty) {
+          const matchNum = String(bItem.qty).match(/^(\d+(\.\d+)?)/);
+          if (matchNum) {
+            parsedQty = Math.max(1, Math.round(parseFloat(matchNum[1])) || 1);
+          }
+        }
+
+        if (foundItem) {
+          foundItem.have = true;
+          foundItem.qty = (foundItem.qty || 0) + parsedQty;
+          foundItem.selectedForShop = false;
+          updatedCount++;
+        } else {
+          let targetCat = 'pantry';
+          const aisle = getAisle(bName);
+          if (['dairy', 'meat', 'produce'].includes(aisle.key)) {
+            targetCat = 'fridge';
+          } else if (aisle.key === 'frozen') {
+            targetCat = 'freezer';
+          } else {
+            targetCat = 'pantry';
+          }
+          if (!stock[targetCat]) stock[targetCat] = [];
+          stock[targetCat].push({
+            name: capitalize(bName),
+            have: true,
+            qty: parsedQty,
+            selectedForShop: false
+          });
+          updatedCount++;
+        }
+      });
+
+      saveState();
+      renderStock();
+      renderShoppingPage();
+
+      const msg = isRo
+        ? `📥 S-au actualizat ${updatedCount} produse cumpărate în Stoc!`
+        : `📥 Added/updated ${updatedCount} bought item(s) into Stock Manager!`;
+      showSyncToast(msg);
     }
 
     /* MACRONUTRIENTS (MOBILE CARDS & STOCK INTEGRATION) */
@@ -17453,6 +18017,7 @@ const CUP_DENSITY = {
       // Update TAB_TITLES for header
       if (typeof TAB_TITLES !== 'undefined') {
         TAB_TITLES['home'] = t('title_home');
+        TAB_TITLES['goals'] = t('title_goals');
         TAB_TITLES['fasting'] = t('title_fasting');
         TAB_TITLES['planner'] = t('title_planner');
         TAB_TITLES['health'] = t('title_health');
@@ -17470,6 +18035,7 @@ const CUP_DENSITY = {
         if (headerTitle && currentTab && currentTab !== 'home') {
           headerTitle.textContent = TAB_TITLES[currentTab] || 'Keto Planner';
         }
+        updateHeaderGoalsDisplay();
       }
 
       // Update AISLE_DEFINITIONS titles
@@ -17800,6 +18366,184 @@ const CUP_DENSITY = {
       });
     }
 
+    /* DAILY NUTRITION OVERVIEW (HOME TAB) */
+    function renderDailyOverview() {
+      const container = document.getElementById('homeDailyOverview');
+      if (!container) return;
+
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+      const curDay = activeDay || 'Day 1';
+      const tagEl = document.getElementById('homeDailyDayTag');
+      if (tagEl) {
+        const dayName = isRo ? curDay.replace('Day ', 'Ziua ') : curDay;
+        tagEl.textContent = `${isRo ? 'Astăzi' : 'Today'} • ${dayName}`;
+      }
+
+      const totals = totalForDay(custom[curDay] || {});
+      const tgtKcal = Number(settings.dailyKcal) || 2000;
+      const tgtProtein = Math.round((Number(settings.weight) || 75) * (Number(settings.perKg) || 1.8));
+      const tgtCarbs = Number(settings.dailyNetCarbs) || 25;
+      const tgtFat = Math.max(20, Math.round((tgtKcal - (tgtProtein * 4) - (tgtCarbs * 4)) / 9));
+
+      const kcalVal = document.getElementById('dailyOverviewKcal');
+      const kcalTgt = document.getElementById('dailyOverviewKcalTarget');
+      const kcalBar = document.getElementById('dailyOverviewKcalBar');
+      if (kcalVal) kcalVal.textContent = Math.round(totals.kcal);
+      if (kcalTgt) kcalTgt.textContent = tgtKcal;
+      if (kcalBar) kcalBar.style.width = Math.min(100, Math.round((totals.kcal / (tgtKcal || 1)) * 100)) + '%';
+
+      const protVal = document.getElementById('dailyOverviewProtein');
+      const protTgt = document.getElementById('dailyOverviewProteinTarget');
+      const protBar = document.getElementById('dailyOverviewProteinBar');
+      if (protVal) protVal.textContent = Math.round(totals.protein) + 'g';
+      if (protTgt) protTgt.textContent = tgtProtein + 'g';
+      if (protBar) protBar.style.width = Math.min(100, Math.round((totals.protein / (tgtProtein || 1)) * 100)) + '%';
+
+      const carbVal = document.getElementById('dailyOverviewCarbs');
+      const carbTgt = document.getElementById('dailyOverviewCarbsTarget');
+      const carbBar = document.getElementById('dailyOverviewCarbsBar');
+      if (carbVal) carbVal.textContent = Math.round(totals.netCarbs) + 'g';
+      if (carbTgt) carbTgt.textContent = tgtCarbs + 'g';
+      if (carbBar) {
+        const pct = Math.min(100, Math.round((totals.netCarbs / (tgtCarbs || 1)) * 100));
+        carbBar.style.width = pct + '%';
+        carbBar.classList.toggle('over', totals.netCarbs > tgtCarbs);
+      }
+
+      const fatVal = document.getElementById('dailyOverviewFat');
+      const fatTgt = document.getElementById('dailyOverviewFatTarget');
+      const fatBar = document.getElementById('dailyOverviewFatBar');
+      if (fatVal) fatVal.textContent = Math.round(totals.fat) + 'g';
+      if (fatTgt) fatTgt.textContent = tgtFat + 'g';
+      if (fatBar) fatBar.style.width = Math.min(100, Math.round((totals.fat / (tgtFat || 1)) * 100)) + '%';
+
+      const mealsWrap = document.getElementById('dailyMealsPreview');
+      if (mealsWrap) {
+        const dayData = custom[curDay] || {};
+        const mealKeys = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+        const activeMeals = [];
+        mealKeys.forEach(m => {
+          const rec = dayData[m];
+          if (rec && rec.name && rec.name !== 'None' && rec.name !== 'Niciuna') {
+            const mLabel = isRo ? (m === 'Breakfast' ? 'Mic dejun' : m === 'Lunch' ? 'Prânz' : m === 'Dinner' ? 'Cină' : 'Gustări') : m;
+            activeMeals.push(`<span class="daily-meal-chip" title="${escapeHtml(rec.name)}"><strong>${mLabel}:</strong> ${escapeHtml(tIng(rec.name))}</span>`);
+          }
+        });
+
+        if (activeMeals.length > 0) {
+          mealsWrap.innerHTML = activeMeals.join('');
+        } else {
+          mealsWrap.innerHTML = `<span class="tiny muted" style="font-style:italic">${isRo ? 'Nicio masă planificată pentru astăzi. Apasă „Planifică Mese” pentru a adăuga!' : 'No meals planned for today yet. Tap "Plan Meals" to set your day!'}</span>`;
+        }
+      }
+    }
+
+    /* PERSONAL GOALS & TARGETS (DEDICATED PAGE LOGIC) */
+    function updateHeaderGoalsDisplay() {
+      const el = document.getElementById('headerGoalsDisplay');
+      if (!el) return;
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+      const w = Number(settings.weight);
+      if (w && !isNaN(w) && w > 0) {
+        el.textContent = `${w} kg`;
+      } else {
+        el.textContent = isRo ? 'Obiective' : 'Goals';
+      }
+    }
+
+    function renderGoalsPage() {
+      const gWeight = document.getElementById('goalsWeight');
+      const gTarget = document.getElementById('goalsTargetWeight');
+      const gHeight = document.getElementById('goalsHeight');
+      const gKcal = document.getElementById('goalsKcal');
+      const gPerKg = document.getElementById('goalsPerKg');
+      const gCarbs = document.getElementById('goalsCarbs');
+
+      if (gWeight && settings.weight) gWeight.value = settings.weight;
+      if (gTarget && settings.targetWeight) gTarget.value = settings.targetWeight;
+      if (gHeight && settings.height) gHeight.value = settings.height;
+      if (gKcal && settings.dailyKcal) gKcal.value = settings.dailyKcal;
+      if (gPerKg && settings.perKg) gPerKg.value = settings.perKg;
+      if (gCarbs && settings.dailyNetCarbs) gCarbs.value = settings.dailyNetCarbs;
+
+      updateGoalsLiveMath();
+    }
+
+    function updateGoalsLiveMath() {
+      const w = parseFloat(document.getElementById('goalsWeight')?.value) || Number(settings.weight) || 75;
+      const perKg = parseFloat(document.getElementById('goalsPerKg')?.value) || Number(settings.perKg) || 1.8;
+      const kcal = parseFloat(document.getElementById('goalsKcal')?.value) || Number(settings.dailyKcal) || 2000;
+      const carbs = parseFloat(document.getElementById('goalsCarbs')?.value) || Number(settings.dailyNetCarbs) || 25;
+
+      const protGrams = Math.round(w * perKg);
+      const protKcal = protGrams * 4;
+      const carbKcal = carbs * 4;
+      const fatKcal = Math.max(0, kcal - protKcal - carbKcal);
+      const fatGrams = Math.round(fatKcal / 9);
+
+      const totalKcal = Math.max(1, protKcal + carbKcal + fatKcal);
+      const protPct = Math.round((protKcal / totalKcal) * 100);
+      const fatPct = Math.round((fatKcal / totalKcal) * 100);
+      const carbPct = Math.max(0, 100 - protPct - fatPct);
+
+      const barProt = document.getElementById('goalsBarProtein');
+      const barFat = document.getElementById('goalsBarFat');
+      const barCarbs = document.getElementById('goalsBarCarbs');
+      if (barProt) barProt.style.width = protPct + '%';
+      if (barFat) barFat.style.width = fatPct + '%';
+      if (barCarbs) barCarbs.style.width = carbPct + '%';
+
+      const sumProt = document.getElementById('goalsSummaryProtein');
+      const sumProtPct = document.getElementById('goalsSummaryProteinPct');
+      if (sumProt) sumProt.textContent = protGrams + 'g';
+      if (sumProtPct) sumProtPct.textContent = protPct + '%';
+
+      const sumFat = document.getElementById('goalsSummaryFat');
+      const sumFatPct = document.getElementById('goalsSummaryFatPct');
+      if (sumFat) sumFat.textContent = fatGrams + 'g';
+      if (sumFatPct) sumFatPct.textContent = fatPct + '%';
+
+      const sumCarbs = document.getElementById('goalsSummaryCarbs');
+      const sumCarbsPct = document.getElementById('goalsSummaryCarbsPct');
+      if (sumCarbs) sumCarbs.textContent = Math.round(carbs) + 'g';
+      if (sumCarbsPct) sumCarbsPct.textContent = carbPct + '%';
+    }
+
+    function saveGoalsFromPage() {
+      const gWeight = parseFloat(document.getElementById('goalsWeight')?.value);
+      const gTarget = parseFloat(document.getElementById('goalsTargetWeight')?.value);
+      const gHeight = parseFloat(document.getElementById('goalsHeight')?.value);
+      const gKcal = parseFloat(document.getElementById('goalsKcal')?.value);
+      const gPerKg = parseFloat(document.getElementById('goalsPerKg')?.value);
+      const gCarbs = parseFloat(document.getElementById('goalsCarbs')?.value);
+
+      if (!isNaN(gWeight) && gWeight > 0) settings.weight = gWeight;
+      if (!isNaN(gTarget) && gTarget > 0) settings.targetWeight = gTarget;
+      if (!isNaN(gHeight) && gHeight > 0) settings.height = gHeight;
+      if (!isNaN(gKcal) && gKcal > 0) settings.dailyKcal = gKcal;
+      if (!isNaN(gPerKg) && gPerKg > 0) settings.perKg = gPerKg;
+      if (!isNaN(gCarbs) && gCarbs >= 0) settings.dailyNetCarbs = gCarbs;
+
+      // Keep settings tab inputs in sync
+      const setWeight = document.getElementById('setWeight');
+      const setPerKg = document.getElementById('setPerKg');
+      const setKcal = document.getElementById('setKcal');
+      const setCarbs = document.getElementById('setCarbs');
+      if (setWeight && settings.weight) setWeight.value = settings.weight;
+      if (setPerKg && settings.perKg) setPerKg.value = settings.perKg;
+      if (setKcal && settings.dailyKcal) setKcal.value = settings.dailyKcal;
+      if (setCarbs && settings.dailyNetCarbs) setCarbs.value = settings.dailyNetCarbs;
+
+      saveState();
+      renderKpis();
+      renderWeeklyMacroChart();
+      renderDailyOverview();
+      updateHeaderGoalsDisplay();
+
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
+      showSyncToast(isRo ? '🎯 Obiectivele personale au fost salvate și aplicate!' : '🎯 Personal goals saved and applied!');
+    }
+
     /* INTERACTIVE STEP-BY-STEP TUTORIAL ENGINE */
     let currentTutorialStep = 0;
     const TUTORIAL_STEPS = [
@@ -18028,7 +18772,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.4';
+    const FALLBACK_APP_VERSION = '1.1.5';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -18190,6 +18934,28 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.5',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '📊 Sumar Nutrițional Zilnic direct pe ecranul principal (Acasă) cu acces rapid la planificare',
+            '📈 Graficul de macronutrienți pe 7 zile mutat în Planificatorul Săptămânal',
+            '🎯 Pagină dedicată pentru Obiective Personale & Ținte Macro (greutate, înălțime, calorii, proteine/kg)',
+            '📥 Actualizare directă a Managerului de Stoc cu produsele cumpărate din lista de cumpărături',
+            '☑️ Sistem intuitiv de selecție în Managerul de Stoc: casetă de bifare doar pentru produsele lipsă dorite în lista de cumpărături',
+            '🍳 Buton unificat „Rețete” în meniu și bara de jos, cu bară plutitoare de comenzi rapide (Bibliotecă, Creator, Nutrienți)'
+          ],
+          en: [
+            '📊 Daily Nutrition Overview card directly on Home with 1-tap jump to meal planner',
+            '📈 7-Day Weekly Macro Overview bar chart moved into the Weekly Planner section',
+            '🎯 Dedicated Personal Goals & Targets page for body measurements, calories & protein per kg',
+            '📥 Directly add and update bought grocery items into Stock Manager from Shopping List',
+            '☑️ Intuitive Stock Manager checkboxes: selection checkboxes appear only on needed items to add to shopping',
+            '🍳 Unified "Recipes" button with floating quick-switch bar between Library, Builder & Nutrients'
+          ]
+        }
+      },
       {
         version: '1.1.4',
         date: '20 Oct 2026',
@@ -19818,6 +20584,26 @@ const CUP_DENSITY = {
       document.getElementById('healthImportCloseBtn')?.addEventListener('click', closeHealthImportModal);
       document.getElementById('healthImportBackdrop')?.addEventListener('click', closeHealthImportModal);
       document.getElementById('healthImportCancelBtn')?.addEventListener('click', closeHealthImportModal);
+
+      // Recipe Floating Sub-navigation Bar
+      document.querySelectorAll('#recipeSubnavBar .recipe-subnav-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetSub = btn.dataset.recipeSubtab;
+          if (targetSub) switchTab(targetSub);
+        });
+      });
+
+      // Shopping List -> Update Stock from Bought Items
+      document.getElementById('shopUpdateStockBtn')?.addEventListener('click', updateStockFromBought);
+      document.getElementById('shopUpdateStockBtn2')?.addEventListener('click', updateStockFromBought);
+
+      // Goals Page Wiring
+      document.getElementById('goalsSaveBtn')?.addEventListener('click', saveGoalsFromPage);
+      ['goalsWeight', 'goalsTargetWeight', 'goalsHeight', 'goalsKcal', 'goalsPerKg', 'goalsCarbs'].forEach(id => {
+        document.getElementById(id)?.addEventListener('input', updateGoalsLiveMath);
+      });
+      updateHeaderGoalsDisplay();
 
       applyLanguage(settings.lang || 'en');
       switchTab('home');
