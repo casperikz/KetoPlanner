@@ -153,11 +153,54 @@
       width: 100%;
       box-sizing: border-box;
       overflow: hidden;
+      transition: height 0.15s ease, padding 0.15s ease;
+    }
+    .app-header.home-mode {
+      height: auto;
+      min-height: 64px;
+      padding: 6px 12px 8px;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 4px;
+    }
+    .app-header.home-mode .header-left,
+    .app-header.home-mode .header-title,
+    .app-header.home-mode .header-right {
+      display: none !important;
+    }
+    .header-brand-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      gap: 5px;
+    }
+    .app-header:not(.home-mode) .header-brand-container {
+      display: none !important;
+    }
+    .header-title-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+    }
+    .header-title-row strong {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--color-primary);
+      letter-spacing: 0.2px;
+    }
+    .header-actions-row {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
     }
     .header-left { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; overflow: hidden; }
     .header-brand { display: flex; align-items: center; gap: 6px; min-width: 0; flex-shrink: 0; }
     .brand-icon { width: 28px; height: 28px; border-radius: 8px; object-fit: cover; flex-shrink: 0; }
-    .header-brand strong { font-size: var(--text-base); font-weight: 700; color: var(--color-primary); white-space: nowrap; }
     .fast-header-pill {
       display: inline-flex;
       align-items: center;
@@ -203,17 +246,6 @@
     }
     .header-title { font-size: var(--text-base); font-weight: 700; text-align: center; flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
     .header-right { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .theme-btn {
-      width: 38px;
-      height: 38px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      background: var(--color-surface-2);
-      border: 1px solid var(--color-border);
-    }
 
     /* Bottom Navigation Bar */
     .bottom-nav {
@@ -2003,19 +2035,19 @@
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: var(--space-3);
-      margin-top: var(--space-3);
+      padding: 8px 12px 6px;
+      margin-top: 4px;
     }
     .week-dashboard h3 {
       font-size: var(--text-sm);
-      margin-bottom: var(--space-2);
+      margin-bottom: 2px;
     }
     .dash-bars {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       gap: 4px;
       align-items: end;
-      height: 80px;
+      height: 70px;
     }
     .dash-bar-col {
       display: flex;
@@ -2036,28 +2068,29 @@
     .dash-bar-label {
       font-size: 9px;
       color: var(--color-text-muted);
-      margin-top: 3px;
+      margin-top: 2px;
       text-align: center;
     }
     .dash-bar-val {
       font-size: 8px;
       color: var(--color-text-faint);
-      margin-bottom: 2px;
+      margin-bottom: 1px;
     }
     .dash-legend {
       display: flex;
-      flex-wrap: wrap;
-      gap: 6px 12px;
-      margin-top: var(--space-2);
-      font-size: 10px;
+      flex-wrap: nowrap;
+      justify-content: space-around;
+      gap: 4px;
+      margin-top: 4px;
+      font-size: 9px;
+      white-space: nowrap;
       color: var(--color-text-muted);
-      justify-content: center;
     }
     .dash-legend span::before {
       content: '';
       display: inline-block;
-      width: 8px;
-      height: 8px;
+      width: 7px;
+      height: 7px;
       border-radius: 2px;
       margin-right: 3px;
       vertical-align: middle;
@@ -2861,11 +2894,33 @@
     }
 
     /* Health & Evolution Tracker Styles */
+    section[data-tab="health"] {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    section[data-tab="health"] .panel {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow-x: hidden;
+      padding: 12px 14px;
+    }
     .health-summary-row {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
       margin-bottom: 12px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+    @media (min-width: 600px) {
+      .health-summary-row {
+        grid-template-columns: repeat(4, 1fr);
+      }
     }
     .health-kpi-chip {
       background: var(--color-surface);
@@ -2876,6 +2931,8 @@
       flex-direction: column;
       gap: 2px;
       box-shadow: var(--shadow-sm);
+      min-width: 0;
+      box-sizing: border-box;
     }
     .health-kpi-chip .kpi-label {
       font-size: 11px;
@@ -2883,6 +2940,9 @@
       color: var(--color-text-muted);
       text-transform: uppercase;
       letter-spacing: 0.4px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
     .health-kpi-chip .kpi-val {
       font-size: 1.25rem;
@@ -2894,13 +2954,19 @@
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 14px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
     .health-form-grid {
       display: grid;
       grid-template-columns: 1fr;
       gap: 10px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
     @media (min-width: 600px) {
       .health-form-grid {
@@ -2952,66 +3018,52 @@
     [data-theme="dark"] .health-gki-badge.low { background: #78350f; color: #fde68a; border-color: #f59e0b; }
     [data-theme="dark"] .health-gki-badge.none { background: #7f1d1d; color: #fca5a5; border-color: #ef4444; }
 
-    .health-guides-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      margin-bottom: 14px;
-    }
-    @media (min-width: 700px) {
-      .health-guides-grid {
-        grid-template-columns: 1.2fr 1fr 1fr;
-      }
-    }
-    .health-guide-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
+    .health-gki-card {
+      background: rgba(37,99,235,0.06);
+      border: 1px solid rgba(37,99,235,0.3);
       border-radius: var(--radius-lg);
-      padding: 12px 14px;
-      font-size: var(--text-xs);
-      box-shadow: var(--shadow-sm);
+      padding: 10px 14px;
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      margin-bottom: 12px;
     }
-    .health-guide-card h4 {
-      margin: 0 0 6px 0;
-      font-size: var(--text-sm);
-      font-weight: 700;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .health-guide-card ul {
-      margin: 0;
-      padding-left: 18px;
-      line-height: 1.5;
-    }
-    .health-guide-card li {
-      margin-bottom: 3px;
-    }
-
     .health-controls-row {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       align-items: center;
       gap: 10px;
-      padding: 10px 14px;
+      padding: 8px 12px;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
     .health-chart-container {
       position: relative;
-      height: 380px;
+      height: 330px;
       width: 100%;
+      max-width: 100%;
+      min-width: 0;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 12px 14px;
+      padding: 10px 12px;
       box-sizing: border-box;
-      margin-bottom: 14px;
+      margin-bottom: 12px;
       box-shadow: var(--shadow-sm);
+    }
+    .health-chart-container canvas {
+      max-width: 100% !important;
+      max-height: 100% !important;
+      width: 100% !important;
+      display: block;
+      box-sizing: border-box;
     }
 
     .health-forecast-box {
@@ -3019,9 +3071,12 @@
       color: #f8fafc;
       border: 1px solid #312e81;
       border-radius: var(--radius-lg);
-      padding: 16px 18px;
-      margin-bottom: 14px;
+      padding: 14px 16px;
+      margin-bottom: 12px;
       box-shadow: var(--shadow-md);
+      width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
     }
     [data-theme="dark"] .health-forecast-box {
       background: linear-gradient(135deg, #17153a 0%, #090d16 100%);
@@ -3033,6 +3088,17 @@
       color: #38bdf8;
       letter-spacing: 0.5px;
       font-variant-numeric: tabular-nums;
+    }
+    .health-table-wrap {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      margin-top: 8px;
     }
 
     .health-history-table {
@@ -3062,40 +3128,51 @@
 </head>
 <body>
   <!-- Fixed App Header -->
-  <header class="app-header">
-    <div class="header-left">
-      <button id="appBackBtn" class="back-btn hidden" aria-label="Back to menu">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
-        <span>Menu</span>
-      </button>
-      <div id="headerBrand" class="header-brand">
+  <header class="app-header home-mode" id="mainAppHeader">
+    <!-- Back button for inner tabs -->
+    <button id="appBackBtn" class="back-btn hidden" aria-label="Back to menu">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      <span>Menu</span>
+    </button>
+
+    <!-- 2-Line Header for Main Menu -->
+    <div id="headerBrand" class="header-brand-container">
+      <div class="header-title-row">
         <img src="icon.png" class="brand-icon" alt="">
         <strong>Keto Planner</strong>
+      </div>
+      <div class="header-actions-row">
         <button id="headerFastTimerBtn" class="fast-header-pill" data-tab-btn="fasting" type="button" title="View Fasting Tracker">
           ⏱️ <span id="headerFastTimerDisplay">16:8</span>
         </button>
+        <button id="cloudHeaderBtn" class="cloud-pill" data-tab-btn="sync" aria-label="Cloud sync" type="button">
+          <span class="cloud-dot" id="cloudDot"></span>
+          <span id="cloudLabel">Local</span>
+        </button>
       </div>
-      <nav class="desktop-nav-links">
-        <button class="desktop-nav-btn active" data-tab-btn="home">🏠 <span data-i18n="nav_home">Menu</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="fasting">⏱️ <span data-i18n="nav_fasting">Fasting</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="planner">📅 <span data-i18n="nav_planner">Planner</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="health">📈 <span data-i18n="nav_health">Health</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="recipes">🍳 <span data-i18n="nav_recipes">Recipes</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="stock">📦 <span data-i18n="nav_stock">Stock</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="shopping">🛒 <span data-i18n="nav_shopping">Shopping</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="sync">☁️ <span data-i18n="nav_sync">Sync</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="learn">📚 <span data-i18n="nav_learn">Learn</span></button>
-        <button class="desktop-nav-btn" data-tab-btn="settings">⚙️ <span data-i18n="nav_settings">Settings</span></button>
-      </nav>
     </div>
+
+    <!-- Inner page title & right-side sync for non-home pages -->
     <div id="appHeaderTitle" class="header-title hidden"></div>
-    <div class="header-right" style="display:flex;align-items:center;gap:8px">
-      <button id="cloudHeaderBtn" class="cloud-pill" data-tab-btn="sync" aria-label="Cloud sync" type="button">
-        <span class="cloud-dot" id="cloudDot"></span>
-        <span id="cloudLabel">Local</span>
+    <div id="innerHeaderRight" class="header-right hidden">
+      <button id="innerCloudHeaderBtn" class="cloud-pill" data-tab-btn="sync" aria-label="Cloud sync" type="button">
+        <span class="cloud-dot" id="innerCloudDot"></span>
+        <span id="innerCloudLabel">Local</span>
       </button>
-      <button data-theme-toggle class="theme-btn" aria-label="Toggle theme">◐</button>
     </div>
+
+    <nav class="desktop-nav-links">
+      <button class="desktop-nav-btn active" data-tab-btn="home">🏠 <span data-i18n="nav_home">Menu</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="fasting">⏱️ <span data-i18n="nav_fasting">Fasting</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="planner">📅 <span data-i18n="nav_planner">Planner</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="health">📈 <span data-i18n="nav_health">Health</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="recipes">🍳 <span data-i18n="nav_recipes">Recipes</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="stock">📦 <span data-i18n="nav_stock">Stock</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="shopping">🛒 <span data-i18n="nav_shopping">Shopping</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="sync">☁️ <span data-i18n="nav_sync">Sync</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="learn">📚 <span data-i18n="nav_learn">Learn</span></button>
+      <button class="desktop-nav-btn" data-tab-btn="settings">⚙️ <span data-i18n="nav_settings">Settings</span></button>
+    </nav>
   </header>
 
   <!-- Focus Mode Floating Window (Draggable, Collapsible, Expandable 80vw x 50vh window) -->
@@ -3122,18 +3199,17 @@
     <section data-tab="home" class="stack">
       <!-- 7-Day Macro Bar Chart Dashboard -->
       <div class="week-dashboard" id="homeWeekDashboard">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:4px">
           <div>
             <h3 style="margin:0;font-size:var(--text-sm)" data-i18n="home_macro_overview">📊 7-Day Weekly Macro Overview</h3>
-            <span class="muted tiny" data-i18n="home_chart_hint">Tap any day column to jump to Planner</span>
           </div>
-          <button class="act-btn small" data-tab-btn="planner" type="button" style="padding:4px 8px;font-size:11px"><span data-i18n="home_open_planner">Open Planner ›</span></button>
+          <button class="act-btn small" data-tab-btn="planner" type="button" style="padding:2px 8px;font-size:11px"><span data-i18n="home_open_planner">Open Planner ›</span></button>
         </div>
         <div class="dash-bars" id="dashBarsContainer"></div>
         <div class="dash-legend">
-          <span class="leg-ok" data-i18n="home_leg_ok">Within Target (±15%)</span>
-          <span class="leg-warn" data-i18n="home_leg_warn">Under/Over Goal</span>
-          <span class="leg-bad" data-i18n="home_leg_bad">Exceeds Net Carbs</span>
+          <span class="leg-ok" data-i18n="home_leg_ok">Target (±15%)</span>
+          <span class="leg-warn" data-i18n="home_leg_warn">Under/Over</span>
+          <span class="leg-bad" data-i18n="home_leg_bad">Excess Carbs</span>
         </div>
       </div>
 
@@ -3388,6 +3464,12 @@
                 <option value="" data-i18n="health_opt_select_type_first">Selectează tipul întâi</option>
               </select>
             </div>
+
+            <!-- Durată Efort -->
+            <div class="health-input-group" style="grid-column: 1 / -1">
+              <label for="healthExerciseDuration" data-i18n="health_label_ex_duration">Durată Efort (minute)</label>
+              <input type="number" id="healthExerciseDuration" min="1" max="480" step="5" placeholder="ex: 30">
+            </div>
           </div>
 
           <div style="margin-top:12px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
@@ -3397,40 +3479,18 @@
           </div>
         </div>
 
-        <!-- GKI & Ghid Valori -->
-        <div class="health-guides-grid">
-          <!-- GKI Live Display Card -->
-          <div class="health-guide-card" style="display:flex;flex-direction:column;justify-content:center;text-align:center;background:rgba(37,99,235,0.06);border-color:rgba(37,99,235,0.3)">
-            <h4 style="justify-content:center;color:#2563eb" data-i18n="health_gki_card_title">Indicele GKI Curent</h4>
-            <div id="healthLiveGkiDisplay" style="font-size:2.8rem;font-weight:900;color:#2563eb;line-height:1">--</div>
-            <div id="healthLiveGkiBadgeWrap" style="margin-top:4px">
+        <!-- GKI Live Card -->
+        <div class="health-gki-card">
+          <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:8px">
+            <div>
+              <span class="small font-bold" style="color:#2563eb" data-i18n="health_gki_card_title">Indicele GKI Curent</span>
+              <span class="tiny muted" style="margin-left:6px" data-i18n="health_gki_formula_note">(Glicemie / 18) / Cetoză</span>
+            </div>
+            <div id="healthLiveGkiBadgeWrap">
               <span id="healthLiveGkiBadge" class="health-gki-badge none">Așteaptă valori</span>
             </div>
-            <span class="tiny muted" style="margin-top:6px" data-i18n="health_gki_formula_note">*Calcul automat: (Glicemie / 18) / Cetoză</span>
           </div>
-
-          <!-- Ghid Cetoză -->
-          <div class="health-guide-card" style="background:rgba(22,163,74,0.05);border-color:rgba(22,163,74,0.25)">
-            <h4 style="color:#16a34a" data-i18n="health_guide_ketones_title">🩸 Ghid Cetoză (mmol/L)</h4>
-            <ul>
-              <li><strong>&lt; 0.5:</strong> <span data-i18n="health_ket_1">Fără cetoză</span></li>
-              <li><strong>0.5 – 1.5:</strong> <span data-i18n="health_ket_2">Cetoză ușoară (nutrițională)</span></li>
-              <li><strong>1.5 – 3.0:</strong> <span data-i18n="health_ket_3">Cetoză optimă (ardere grăsimi)</span></li>
-              <li><strong>&gt; 3.0:</strong> <span data-i18n="health_ket_4">Cetoză profundă / terapeutică</span></li>
-            </ul>
-          </div>
-
-          <!-- Ghid GKI -->
-          <div class="health-guide-card" style="background:rgba(147,51,234,0.05);border-color:rgba(147,51,234,0.25)">
-            <h4 style="color:#9333ea" data-i18n="health_guide_gki_title">🎯 Ghid GKI</h4>
-            <ul>
-              <li><strong>&lt; 1:</strong> <span data-i18n="health_gki_1">Nivel terapeutic maxim</span></li>
-              <li><strong>1 – 3:</strong> <span data-i18n="health_gki_2">Terapeutic înalt</span></li>
-              <li><strong>3 – 6:</strong> <span data-i18n="health_gki_3">Moderat (slăbire, rezistență insulină)</span></li>
-              <li><strong>6 – 9:</strong> <span data-i18n="health_gki_4">Scăzut (menținere)</span></li>
-              <li><strong>&gt; 9:</strong> <span data-i18n="health_gki_5">Fără stare de cetoză</span></li>
-            </ul>
-          </div>
+          <div id="healthLiveGkiDisplay" style="font-size:2.2rem;font-weight:900;color:#2563eb;line-height:1;margin-top:6px">--</div>
         </div>
 
         <!-- Bara de controale grafic (Filtre + Timeframe) -->
@@ -3483,11 +3543,18 @@
         </div>
 
         <!-- Istoric Înregistrări (Log History) -->
-        <details class="more-filters" style="margin-bottom:14px">
+        <details class="more-filters" style="margin-bottom:14px" open>
           <summary class="small" style="font-weight:700;cursor:pointer">
             <span>📋</span> <span data-i18n="health_history_title">Istoric Înregistrări</span> (<span id="healthHistoryCount">0</span>)
           </summary>
-          <div style="overflow-x:auto;margin-top:8px">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:8px;flex-wrap:wrap">
+            <span class="tiny muted" data-i18n="health_history_hint">Istoricul măsurătorilor biometrice</span>
+            <div style="display:flex;gap:6px">
+              <button id="healthSeedDemoBtn" class="act-btn small" type="button" data-i18n="health_btn_restore_demo">📥 Încarcă demo</button>
+              <button id="healthClearDemoBtn" class="act-btn danger small" type="button" data-i18n="health_btn_clear_demo">🗑️ Șterge datele demo</button>
+            </div>
+          </div>
+          <div class="health-table-wrap">
             <table class="health-history-table">
               <thead>
                 <tr>
@@ -3496,47 +3563,16 @@
                   <th data-i18n="health_th_glucose">Glicemie</th>
                   <th data-i18n="health_th_ketones">Cetoză</th>
                   <th>GKI</th>
-                  <th data-i18n="health_th_exercise">Efort</th>
+                  <th data-i18n="health_th_exercise">Efort & Durată</th>
                   <th></th>
                 </tr>
               </thead>
               <tbody id="healthHistoryTableBody"></tbody>
             </table>
           </div>
-          <div style="display:flex;justify-content:flex-end;margin-top:8px;gap:8px">
-            <button id="healthSeedDemoBtn" class="act-btn small" type="button" data-i18n="health_btn_restore_demo">Încarcă date demo</button>
-            <button id="healthClearAllBtn" class="act-btn danger small" type="button" data-i18n="health_btn_clear_all">Șterge tot istoricul</button>
-          </div>
         </details>
-
-        <!-- Glosar Expandabil -->
-        <details class="more-filters">
-          <summary class="small" style="font-weight:700;cursor:pointer">
-            <span>📖</span> <span data-i18n="health_glossary_title">Glosar Termeni & Explicații</span>
-          </summary>
-          <div style="margin-top:10px;display:flex;flex-direction:column;gap:10px;font-size:var(--text-xs);line-height:1.5">
-            <div>
-              <strong style="color:#2563eb" data-i18n="health_gloss_1_t">Cetoză (Ketosis)</strong>
-              <p style="margin:2px 0 0 0" data-i18n="health_gloss_1_d">Starea metabolică în care organismul trece de la utilizarea glucozei (carbohidraților) la arderea grăsimilor ca sursă principală de combustibil. În acest proces, ficatul produce corpi cetonici. Nivelul se măsoară în milimoli pe litru (mmol/L).</p>
-            </div>
-            <div>
-              <strong style="color:#2563eb" data-i18n="health_gloss_2_t">Glicemie (Blood Glucose)</strong>
-              <p style="margin:2px 0 0 0" data-i18n="health_gloss_2_d">Reprezintă nivelul zahărului din sânge, măsurat în miligrame pe decilitru (mg/dL). În dieta ketogenică, menținerea unei glicemii scăzute și stabile este esențială pentru a permite corpului să rămână în starea de ardere a grăsimilor.</p>
-            </div>
-            <div>
-              <strong style="color:#2563eb" data-i18n="health_gloss_3_t">Indicele GKI (Glucose Ketone Index)</strong>
-              <p style="margin:2px 0 0 0" data-i18n="health_gloss_3_d">Un biomarcator complex care corelează glicemia cu cetoza. Se calculează convertind glicemia în mmol/L (împărțind valoarea din mg/dL la 18) și împărțind rezultatul la valoarea cetonelor: (Glicemie / 18) / Cetoză. Un GKI mai mic indică o eficiență metabolică mai mare și o stare de cetoză mai profundă.</p>
-            </div>
-            <div>
-              <strong style="color:#2563eb" data-i18n="health_gloss_4_t">Simulare & Prognoză (Forecast)</strong>
-              <p style="margin:2px 0 0 0" data-i18n="health_gloss_4_d">Un model de estimare a evoluției greutății corporale. Algoritmul ia în calcul o rată metabolică de bază estimată și o ajustează în funcție de nivelul actual al oxidării grăsimilor (dictat de valoarea cetonelor din sânge) și de mecanismele termogenice activate de intensitatea efortului fizic (cardio sau forță).</p>
-            </div>
-            <div>
-              <strong style="color:#2563eb" data-i18n="health_gloss_5_t">Intensitatea Efortului</strong>
-              <p style="margin:2px 0 0 0" data-i18n="health_gloss_5_d">Impactul direct asupra corpului depinde de tipul de antrenament. Antrenamentele de Forță (cum ar fi tiparele Push/Pull/Legs) stimulează hipertrofia și cresc consumul caloric post-efort prin refacerea țesuturilor. Antrenamentele Cardio (de la mers alert la sprinturi) contribuie la eliberarea acizilor grași și arderea directă a caloriilor în timpul activității.</p>
-            </div>
-          </div>
-        </details>
+      </div>
+    </section>
 
       </div>
     </section>
@@ -3928,6 +3964,24 @@
           </label>
           <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
             <input type="radio" name="appLangRadio" value="ro" id="langRadioRo"> Romana
+          </label>
+        </div>
+      </div>
+
+      <!-- App Theme Switcher -->
+      <div class="panel stack">
+        <div class="section-title">
+          <div>
+            <h2 style="font-size:var(--text-lg)" data-i18n="settings_theme_card_title">Theme & Appearance / Aspect Vizual</h2>
+            <p class="muted small" data-i18n="settings_theme_card_desc">Choose Light or Dark mode / Alege modul luminos sau întunecat:</p>
+          </div>
+        </div>
+        <div style="display:flex;gap:12px;align-items:center;margin-top:4px">
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+            <input type="radio" name="appThemeRadio" value="light" id="themeRadioLight"> ☀️ <span data-i18n="settings_theme_light">Light (Luminos)</span>
+          </label>
+          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+            <input type="radio" name="appThemeRadio" value="dark" id="themeRadioDark"> 🌙 <span data-i18n="settings_theme_dark">Dark (Întunecat)</span>
           </label>
         </div>
       </div>
@@ -5480,6 +5534,9 @@ const I18N = {
     home_desc: "Choose a section to start planning, cooking, or managing your kitchen:",
     home_macro_overview: "7-Day Weekly Macro Overview",
     home_open_planner: "Open Planner ›",
+    home_leg_ok: "Target (±15%)",
+    home_leg_warn: "Under/Over",
+    home_leg_bad: "Excess Carbs",
     home_card_fasting_desc: "Track fasting timer, ketosis milestones & fasting protocol.",
     home_card_planner_desc: "Set meals for Days 1–7, balance macros & generate shopping lists.",
     home_card_health_desc: "Track weight, glucose, ketones, GKI & 4-week forecast.",
@@ -5496,6 +5553,7 @@ const I18N = {
     health_label_ketones: "Ketones (mmol/L)",
     health_label_ex_type: "Exercise Type",
     health_label_ex_intensity: "Workout Intensity",
+    health_label_ex_duration: "Duration (minutes)",
     health_opt_no_exercise: "No exercise today",
     health_opt_cardio: "Cardio",
     health_opt_strength: "Strength",
@@ -5504,17 +5562,6 @@ const I18N = {
     health_btn_save: "Save Daily Entry",
     health_gki_card_title: "Current GKI Index",
     health_gki_formula_note: "*Live formula: (Glucose / 18) / Ketones",
-    health_guide_ketones_title: "Ketosis Guide (mmol/L)",
-    health_ket_1: "No ketosis",
-    health_ket_2: "Light ketosis (nutritional)",
-    health_ket_3: "Optimal ketosis (fat burning)",
-    health_ket_4: "Deep / therapeutic ketosis",
-    health_guide_gki_title: "GKI Guide",
-    health_gki_1: "Maximum therapeutic level",
-    health_gki_2: "High therapeutic",
-    health_gki_3: "Moderate (fat burning, insulin sensitivity)",
-    health_gki_4: "Low (maintenance)",
-    health_gki_5: "Out of ketosis",
     health_ctrl_timeframe: "Timeframe:",
     health_tf_all: "All data",
     health_tf_7: "Last 7 days",
@@ -5528,24 +5575,19 @@ const I18N = {
     health_forecast_desc: "Estimates how your weight will evolve over the next 4 weeks based on your average ketosis and workout intensity.",
     health_forecast_btn: "Run Simulation",
     health_history_title: "Log History",
+    health_history_hint: "Your logged biometric measurements",
     health_th_date: "Date",
     health_th_weight: "Weight",
     health_th_glucose: "Glucose",
     health_th_ketones: "Ketones",
-    health_th_exercise: "Workout",
+    health_th_exercise: "Workout & Duration",
     health_btn_restore_demo: "Restore Demo Data",
+    health_btn_clear_demo: "Clear Demo Data",
     health_btn_clear_all: "Clear History",
-    health_glossary_title: "Glossary & Explanations",
-    health_gloss_1_t: "Ketosis",
-    health_gloss_1_d: "The metabolic state where the body shifts from burning glucose (carbs) to burning fats and ketone bodies as primary fuel.",
-    health_gloss_2_t: "Blood Glucose",
-    health_gloss_2_d: "The concentration of sugar in the blood (mg/dL). Maintaining low, steady glucose is essential to stay in ketosis.",
-    health_gloss_3_t: "GKI Index (Glucose Ketone Index)",
-    health_gloss_3_d: "Biomarker tracking metabolic efficiency: (Glucose / 18) / Ketones. Lower values reflect deeper ketosis.",
-    health_gloss_4_t: "Simulation & Forecast Model",
-    health_gloss_4_d: "Estimates weight trajectory based on baseline metabolic rate, ketone-driven fat oxidation rate, and thermogenic exercise factors.",
-    health_gloss_5_t: "Workout Intensity",
-    health_gloss_5_d: "Strength training triggers post-exercise recovery calorie burn (EPOC), while cardio mobilizes fatty acids during exercise.",
+    settings_theme_card_title: "Theme & Appearance",
+    settings_theme_card_desc: "Choose Light or Dark mode:",
+    settings_theme_light: "Light (Luminos)",
+    settings_theme_dark: "Dark (Întunecat)",
     home_card_recipes_desc: "High-protein & keto meals with prep steps and macro breakdown.",
     home_card_stock_desc: "Track pantry, fridge & freezer inventory and find matching meals.",
     home_card_shopping_desc: "Smart categorized grocery list with aisle grouping & pack rounding.",
@@ -5996,11 +6038,14 @@ const I18N = {
     title_learn: "Ghid & invatare Keto",
 
     // Home Screen
-    home_subtitle: "Centrul Tau Low-Carb",
-    home_desc: "Alege o sectiune pentru planificare, gatit sau gestionarea bucatariei:",
-    home_macro_overview: "Privire Generala Macro pe 7 Zile",
+    home_subtitle: "Centrul Tău Low-Carb",
+    home_desc: "Alege o secțiune pentru planificare, gătit sau gestionarea bucătăriei:",
+    home_macro_overview: "Privire Generală Macro pe 7 Zile",
     home_open_planner: "Deschide Planificator ›",
-    home_card_fasting_desc: "Cronometru de post, etape de cetoza si protocoale de post.",
+    home_leg_ok: "În țintă (±15%)",
+    home_leg_warn: "Sub/Peste",
+    home_leg_bad: "Exces carbo",
+    home_card_fasting_desc: "Cronometru de post, etape de cetoză și protocoale de post.",
     home_card_planner_desc: "Setează mesele pentru Zilele 1–7, balansează macronutrienții și generează lista de cumpărături.",
     home_card_health_desc: "Greutate, glicemie, cetoză, GKI & prognoză metabolică pe 4 săptămâni.",
     health_title: "Monitorizare Sănătate & Evoluție",
@@ -6016,6 +6061,7 @@ const I18N = {
     health_label_ketones: "Cetoză (mmol/L)",
     health_label_ex_type: "Tip Efort Fizic",
     health_label_ex_intensity: "Intensitate Efort",
+    health_label_ex_duration: "Durată Efort (minute)",
     health_opt_no_exercise: "Fără efort azi",
     health_opt_cardio: "Cardio",
     health_opt_strength: "Forță",
@@ -6024,17 +6070,6 @@ const I18N = {
     health_btn_save: "Salvează Datele Zilei",
     health_gki_card_title: "Indicele GKI Curent",
     health_gki_formula_note: "*Calcul automat: (Glicemie / 18) / Cetoză",
-    health_guide_ketones_title: "Ghid Cetoză (mmol/L)",
-    health_ket_1: "Fără cetoză",
-    health_ket_2: "Cetoză ușoară (nutrițională)",
-    health_ket_3: "Cetoză optimă (ardere grăsimi)",
-    health_ket_4: "Cetoză profundă / terapeutică",
-    health_guide_gki_title: "Ghid GKI",
-    health_gki_1: "Nivel terapeutic maxim",
-    health_gki_2: "Terapeutic înalt",
-    health_gki_3: "Moderat (slăbire, rezistență insulină)",
-    health_gki_4: "Scăzut (menținere)",
-    health_gki_5: "Fără stare de cetoză",
     health_ctrl_timeframe: "Previzualizare:",
     health_tf_all: "Toate datele",
     health_tf_7: "Ultimele 7 zile",
@@ -6048,24 +6083,19 @@ const I18N = {
     health_forecast_desc: "Estimează cum va evolua greutatea ta în următoarele 4 săptămâni pe baza mediei curente de cetoză și a intensității antrenamentului de astăzi.",
     health_forecast_btn: "Rulează Simularea",
     health_history_title: "Istoric Înregistrări",
+    health_history_hint: "Istoricul măsurătorilor tale biometrice",
     health_th_date: "Data",
     health_th_weight: "Greutate",
     health_th_glucose: "Glicemie",
     health_th_ketones: "Cetoză",
-    health_th_exercise: "Efort",
+    health_th_exercise: "Efort & Durată",
     health_btn_restore_demo: "Încarcă date demo",
+    health_btn_clear_demo: "Șterge datele demo",
     health_btn_clear_all: "Șterge tot istoricul",
-    health_glossary_title: "Glosar Termeni & Explicații",
-    health_gloss_1_t: "Cetoză (Ketosis)",
-    health_gloss_1_d: "Starea metabolică în care organismul trece de la utilizarea glucozei (carbohidraților) la arderea grăsimilor ca sursă principală de combustibil. În acest proces, ficatul produce corpi cetonici. Nivelul se măsoară în milimoli pe litru (mmol/L).",
-    health_gloss_2_t: "Glicemie (Blood Glucose)",
-    health_gloss_2_d: "Reprezintă nivelul zahărului din sânge, măsurat în miligrame pe decilitru (mg/dL). În dieta ketogenică, menținerea unei glicemii scăzute și stabile este esențială pentru a permite corpului să rămână în starea de ardere a grăsimilor.",
-    health_gloss_3_t: "Indicele GKI (Glucose Ketone Index)",
-    health_gloss_3_d: "Un biomarcator complex care corelează glicemia cu cetoza. Se calculează convertind glicemia în mmol/L (împărțind valoarea din mg/dL la 18) și împărțind rezultatul la valoarea cetonelor: (Glicemie / 18) / Cetoză. Un GKI mai mic indică o eficiență metabolică mai mare și o stare de cetoză mai profundă.",
-    health_gloss_4_t: "Simulare & Prognoză (Forecast)",
-    health_gloss_4_d: "Un model de estimare a evoluției greutății corporale. Algoritmul ia în calcul o rată metabolică de bază estimată și o ajustează în funcție de nivelul actual al oxidării grăsimilor (dictat de valoarea cetonelor din sânge) și de mecanismele termogenice activate de intensitatea efortului fizic (cardio sau forță).",
-    health_gloss_5_t: "Intensitatea Efortului",
-    health_gloss_5_d: "Impactul direct asupra corpului depinde de tipul de antrenament. Antrenamentele de Forță (cum ar fi tiparele Push/Pull/Legs) stimulează hipertrofia și cresc consumul caloric post-efort prin refacerea țesuturilor. Antrenamentele Cardio (de la mers alert la sprinturi) contribuie la eliberarea acizilor grași și arderea directă a caloriilor în timpul activității.",
+    settings_theme_card_title: "Aspect Vizual (Temă)",
+    settings_theme_card_desc: "Alege modul luminos sau întunecat:",
+    settings_theme_light: "Mod Luminos",
+    settings_theme_dark: "Mod Întunecat",
     home_card_recipes_desc: "Mese bogate in proteine si keto cu pasi de preparare si defalcare macronutrienti.",
     home_card_stock_desc: "Urmareste camara, frigiderul si congelatorul si gaseste retete potrivite.",
     home_card_shopping_desc: "Lista inteligenta de cumparaturi organizata pe raioane si rotunjire ambalaje.",
@@ -9452,16 +9482,16 @@ const DEFAULT_SETTINGS = { weightKg: 75, proteinPerKg: 2, dailyKcal: 2000, daily
 let settings = Object.assign({}, DEFAULT_SETTINGS, SAVED.settings || {});
 
 const DEFAULT_HEALTH_LOG = [
-  { id: 'hl_demo_1', date: '2026-10-10', weight: 79.0, glucose: 95, ketones: 0.8, gki: 6.60, exerciseType: 'cardio', exerciseIntensity: 'light' },
-  { id: 'hl_demo_2', date: '2026-10-11', weight: 78.8, glucose: 93, ketones: 0.9, gki: 5.74, exerciseType: '', exerciseIntensity: '' },
-  { id: 'hl_demo_3', date: '2026-10-12', weight: 78.5, glucose: 90, ketones: 1.0, gki: 5.00, exerciseType: 'strength', exerciseIntensity: 'light' },
-  { id: 'hl_demo_4', date: '2026-10-13', weight: 78.6, glucose: 89, ketones: 1.0, gki: 4.94, exerciseType: 'cardio', exerciseIntensity: 'medium' },
-  { id: 'hl_demo_5', date: '2026-10-14', weight: 78.2, glucose: 92, ketones: 1.1, gki: 4.65, exerciseType: 'mixed', exerciseIntensity: 'light' },
-  { id: 'hl_demo_6', date: '2026-10-15', weight: 78.0, glucose: 88, ketones: 1.3, gki: 3.76, exerciseType: 'strength', exerciseIntensity: 'intense' },
-  { id: 'hl_demo_7', date: '2026-10-16', weight: 77.9, glucose: 85, ketones: 1.8, gki: 2.62, exerciseType: 'cardio', exerciseIntensity: 'hard' },
-  { id: 'hl_demo_8', date: '2026-10-17', weight: 77.8, glucose: 84, ketones: 1.9, gki: 2.46, exerciseType: '', exerciseIntensity: '' },
-  { id: 'hl_demo_9', date: '2026-10-18', weight: 77.6, glucose: 82, ketones: 2.1, gki: 2.17, exerciseType: 'mixed', exerciseIntensity: 'hard' },
-  { id: 'hl_demo_10', date: '2026-10-19', weight: 77.5, glucose: 80, ketones: 2.4, gki: 1.85, exerciseType: 'cardio', exerciseIntensity: 'medium' }
+  { id: 'hl_demo_1', date: '2026-10-10', weight: 79.0, glucose: 95, ketones: 0.8, gki: 6.60, exerciseType: 'cardio', exerciseIntensity: 'light', duration: 30 },
+  { id: 'hl_demo_2', date: '2026-10-11', weight: 78.8, glucose: 93, ketones: 0.9, gki: 5.74, exerciseType: '', exerciseIntensity: '', duration: 0 },
+  { id: 'hl_demo_3', date: '2026-10-12', weight: 78.5, glucose: 90, ketones: 1.0, gki: 5.00, exerciseType: 'strength', exerciseIntensity: 'light', duration: 45 },
+  { id: 'hl_demo_4', date: '2026-10-13', weight: 78.6, glucose: 89, ketones: 1.0, gki: 4.94, exerciseType: 'cardio', exerciseIntensity: 'medium', duration: 35 },
+  { id: 'hl_demo_5', date: '2026-10-14', weight: 78.2, glucose: 92, ketones: 1.1, gki: 4.65, exerciseType: 'mixed', exerciseIntensity: 'light', duration: 40 },
+  { id: 'hl_demo_6', date: '2026-10-15', weight: 78.0, glucose: 88, ketones: 1.3, gki: 3.76, exerciseType: 'strength', exerciseIntensity: 'intense', duration: 55 },
+  { id: 'hl_demo_7', date: '2026-10-16', weight: 77.9, glucose: 85, ketones: 1.8, gki: 2.62, exerciseType: 'cardio', exerciseIntensity: 'hard', duration: 45 },
+  { id: 'hl_demo_8', date: '2026-10-17', weight: 77.8, glucose: 84, ketones: 1.9, gki: 2.46, exerciseType: '', exerciseIntensity: '', duration: 0 },
+  { id: 'hl_demo_9', date: '2026-10-18', weight: 77.6, glucose: 82, ketones: 2.1, gki: 2.17, exerciseType: 'mixed', exerciseIntensity: 'hard', duration: 60 },
+  { id: 'hl_demo_10', date: '2026-10-19', weight: 77.5, glucose: 80, ketones: 2.4, gki: 1.85, exerciseType: 'cardio', exerciseIntensity: 'medium', duration: 45 }
 ];
 
 let healthLog = Array.isArray(SAVED.healthLog) ? SAVED.healthLog : DEFAULT_HEALTH_LOG.slice();
@@ -10078,6 +10108,7 @@ const CUP_DENSITY = {
     let builderCurrentPhoto = '';   // tracks the photo data URL attached to the recipe being built
 
     /* Intermittent Fasting State */
+    const appSessionBootTime = Date.now();
     let fasting = Object.assign({
       active: false,
       style: '16:8',
@@ -10139,9 +10170,9 @@ const CUP_DENSITY = {
     initFirebase();
 
     function updateSyncUI(state, text) {
-      const pill = document.getElementById('cloudHeaderBtn');
-      const dot = document.getElementById('cloudDot');
-      const label = document.getElementById('cloudLabel');
+      const pills = [document.getElementById('cloudHeaderBtn'), document.getElementById('innerCloudHeaderBtn')].filter(Boolean);
+      const dots = [document.getElementById('cloudDot'), document.getElementById('innerCloudDot')].filter(Boolean);
+      const labels = [document.getElementById('cloudLabel'), document.getElementById('innerCloudLabel')].filter(Boolean);
       const badge = document.getElementById('syncBadge');
       const activeDetails = document.getElementById('syncActiveDetails');
       const setupContainer = document.getElementById('syncSetupContainer');
@@ -10153,10 +10184,10 @@ const CUP_DENSITY = {
         ? state 
         : (isConnected ? 'connected' : '');
 
-      if (pill) {
+      pills.forEach(pill => {
         pill.className = 'cloud-pill ' + (effectiveState ? effectiveState : '');
-      }
-      if (dot) {
+      });
+      dots.forEach(dot => {
         if (effectiveState === 'connected') {
           dot.style.background = 'var(--color-success)';
           dot.style.boxShadow = '0 0 6px var(--color-success)';
@@ -10170,10 +10201,11 @@ const CUP_DENSITY = {
           dot.style.background = 'var(--color-text-faint)';
           dot.style.boxShadow = 'none';
         }
-      }
-      if (label) {
-        label.textContent = text || (isConnected ? currentHouseholdCode : 'Local');
-      }
+      });
+      const lblText = text || (isConnected ? currentHouseholdCode : 'Local');
+      labels.forEach(label => {
+        label.textContent = lblText;
+      });
 
       if (isConnected) {
         if (badge) {
@@ -10754,14 +10786,27 @@ const CUP_DENSITY = {
             : `Goal: ${fasting.targetHours}h • Ends at ${win.endStr} ${win.dayDesc}`;
         }
 
-        if (headerDisplay) headerDisplay.textContent = `${fasting.style}`;
+        if (headerDisplay) headerDisplay.textContent = `${win.startStr}`;
         if (headerBtn) {
           headerBtn.classList.remove('is-fasting', 'is-goal-met');
-          headerBtn.title = `Fasting Protocol: ${styleLabel} (Not started)`;
+          headerBtn.title = `Fasting Protocol: ${styleLabel} (Starts ${win.startStr})`;
         }
         if (homeSubtitle) {
+          const sParts = (fasting.startHour || '18:00').split(':');
+          const sH = parseInt(sParts[0], 10) || 0;
+          const sM = parseInt(sParts[1], 10) || 0;
+          const nowRef = new Date();
+          const nextStart = new Date(nowRef.getFullYear(), nowRef.getMonth(), nowRef.getDate(), sH, sM, 0, 0);
+          if (nextStart.getTime() <= nowRef.getTime()) {
+            nextStart.setDate(nextStart.getDate() + 1);
+          }
+          const msUntil = Math.max(0, nextStart.getTime() - nowRef.getTime());
+          const uH = Math.floor(msUntil / 3600000);
+          const uM = Math.floor((msUntil % 3600000) / 60000);
+          const untilStr = uH > 0 ? `${uH}h ${uM}m` : `${uM}m`;
+
           homeSubtitle.textContent = fasting.autoStart
-            ? (isRo ? `${styleLabel} • Începe auto la ${win.startStr} (până la ${win.endStr} ${win.dayDesc})` : `${styleLabel} • Auto-starts at ${win.startStr} (ends ${win.endStr} ${win.dayDesc})`)
+            ? (isRo ? `🍽️ Fereastră masă • Postul începe în ${untilStr} (la ${win.startStr})` : `🍽️ Eating window • Next fast starts in ${untilStr} (at ${win.startStr})`)
             : (isRo ? `${styleLabel} • Apasă pentru a începe` : `${styleLabel} • Tap to start fast`);
         }
         return;
@@ -10815,8 +10860,6 @@ const CUP_DENSITY = {
       if (elapsedMs >= targetMs) {
         // Target reached
         const overtimeMs = elapsedMs - targetMs;
-        const oH = Math.floor(overtimeMs / 3600000);
-        const oM = Math.floor((overtimeMs % 3600000) / 60000);
 
         if (!fasting._notifEndFired) {
           fasting._notifEndFired = true;
@@ -10848,21 +10891,48 @@ const CUP_DENSITY = {
           }
         }
 
+        // Calculate time until next fast
+        const sParts = (fasting.startHour || '18:00').split(':');
+        const sH = parseInt(sParts[0], 10) || 0;
+        const sM = parseInt(sParts[1], 10) || 0;
+        const nextStart = new Date(nowD.getFullYear(), nowD.getMonth(), nowD.getDate(), sH, sM, 0, 0);
+        if (nextStart.getTime() <= now) {
+          nextStart.setDate(nextStart.getDate() + 1);
+        }
+        const msUntil = Math.max(0, nextStart.getTime() - now);
+        const uH = Math.floor(msUntil / 3600000);
+        const uM = Math.floor((msUntil % 3600000) / 60000);
+        const untilStr = uH > 0 ? `${uH}h ${uM}m` : `${uM}m`;
+
+        const isCelebrationWindow = (Date.now() - appSessionBootTime < 30000);
+
         if (stageBadge) {
-          stageBadge.textContent = isRo ? `🎉 Obiectiv Atins! (+${oH}h ${oM}m)` : `🎉 Goal Met! (+${oH}h ${oM}m)`;
+          stageBadge.textContent = isRo ? `🎉 Obiectiv Atins (${fasting.targetHours}h)` : `🎉 Goal Met (${fasting.targetHours}h)`;
           stageBadge.style.background = 'rgba(46,125,50,0.18)';
           stageBadge.style.color = '#2e7d32';
         }
         if (timerDisplay) {
-          timerDisplay.textContent = `${elapsedStr}`;
+          timerDisplay.textContent = isRo ? `Următorul post în: ${untilStr}` : `Next fast in: ${untilStr}`;
         }
-        if (headerDisplay) headerDisplay.textContent = isRo ? `🎉 Obiectiv Atins!` : `🎉 Goal Met!`;
+        if (headerDisplay) {
+          headerDisplay.textContent = isCelebrationWindow
+            ? (isRo ? `🎉 Obiectiv Atins!` : `🎉 Goal Met!`)
+            : `${win.startStr}`;
+        }
         if (headerBtn) {
           headerBtn.classList.remove('is-fasting');
-          headerBtn.classList.add('is-goal-met');
-          headerBtn.title = `Fast Completed! Elapsed: ${elapsedStr}`;
+          if (isCelebrationWindow) {
+            headerBtn.classList.add('is-goal-met');
+          } else {
+            headerBtn.classList.remove('is-goal-met');
+          }
+          headerBtn.title = `Next fast at ${win.startStr} (in ${untilStr})`;
         }
-        if (homeSubtitle) homeSubtitle.textContent = isRo ? `🎉 Obiectiv Atins! Timp: ${elapsedStr}` : `🎉 Goal Met! Elapsed: ${elapsedStr}`;
+        if (homeSubtitle) {
+          homeSubtitle.textContent = isCelebrationWindow
+            ? (isRo ? `🎉 Obiectiv Atins (${fasting.targetHours}h) • Următorul post în ${untilStr}` : `🎉 Goal Met (${fasting.targetHours}h) • Next fast in ${untilStr}`)
+            : (isRo ? `🍽️ Fereastră masă • Postul începe în ${untilStr} (la ${win.startStr})` : `🍽️ Eating window • Next fast starts in ${untilStr} (at ${win.startStr})`);
+        }
       } else {
         // Fast in progress
         const remSec = Math.max(0, Math.floor((targetMs - elapsedMs) / 1000));
@@ -11072,34 +11142,60 @@ const CUP_DENSITY = {
       const weightInp = document.getElementById('healthWeight');
       const gluInp = document.getElementById('healthGlucose');
       const ketInp = document.getElementById('healthKetones');
+      const durInp = document.getElementById('healthExerciseDuration');
       const typeSel = document.getElementById('healthExerciseType');
       const intSel = document.getElementById('healthExerciseIntensity');
 
       const date = dateInp?.value;
-      const weight = parseFloat(weightInp?.value);
-      const glucose = parseFloat(gluInp?.value);
-      const ketones = parseFloat(ketInp?.value);
+      const weightRaw = (weightInp?.value || '').trim();
+      const gluRaw = (gluInp?.value || '').trim();
+      const ketRaw = (ketInp?.value || '').trim();
+      const durRaw = (durInp?.value || '').trim();
+
+      const inputWeight = (weightRaw !== '' && !isNaN(parseFloat(weightRaw))) ? parseFloat(weightRaw) : null;
+      const inputGlucose = (gluRaw !== '' && !isNaN(parseFloat(gluRaw))) ? parseFloat(gluRaw) : null;
+      const inputKetones = (ketRaw !== '' && !isNaN(parseFloat(ketRaw))) ? parseFloat(ketRaw) : null;
+      const inputDuration = (durRaw !== '' && !isNaN(parseInt(durRaw, 10))) ? parseInt(durRaw, 10) : null;
+
+      const exType = typeSel?.value || '';
+      const exInt = (exType && intSel) ? intSel.value : '';
       const isRo = ((settings && settings.lang) === 'ro');
 
-      if (!date || isNaN(weight) || isNaN(glucose) || isNaN(ketones)) {
-        showAppToast(isRo ? '⚠️ Completează Data, Greutatea, Glicemia și Cetoza!' : '⚠️ Please enter Date, Weight, Glucose, and Ketones!');
+      const existingIdx = healthLog.findIndex(e => e.date === date);
+      const existing = existingIdx >= 0 ? healthLog[existingIdx] : null;
+
+      const finalWeight = (inputWeight !== null) ? inputWeight : (existing ? existing.weight : null);
+      const finalGlucose = (inputGlucose !== null) ? inputGlucose : (existing ? existing.glucose : null);
+      const finalKetones = (inputKetones !== null) ? inputKetones : (existing ? existing.ketones : null);
+      const finalDuration = (inputDuration !== null) ? inputDuration : (existing ? (existing.duration || null) : null);
+      const finalExType = exType || (existing ? (existing.exerciseType || '') : '');
+      const finalExInt = exInt || (existing ? (existing.exerciseIntensity || '') : '');
+
+      const hasAnyMetric = (finalWeight !== null && finalWeight > 0) ||
+                           (finalGlucose !== null && finalGlucose > 0) ||
+                           (finalKetones !== null && finalKetones >= 0) ||
+                           Boolean(finalExType);
+
+      if (!date || !hasAnyMetric) {
+        showAppToast(isRo ? '⚠️ Completează cel puțin o valoare (Greutate, Glicemie, Cetoză sau Efort)!' : '⚠️ Please enter at least one metric (Weight, Glucose, Ketones, or Workout)!');
         return;
       }
 
-      const gki = parseFloat(((glucose / 18) / ketones).toFixed(2));
-      const exType = typeSel?.value || '';
-      const exInt = (exType && intSel) ? intSel.value : '';
+      let finalGki = null;
+      if (finalGlucose !== null && finalGlucose > 0 && finalKetones !== null && finalKetones > 0) {
+        finalGki = parseFloat(((finalGlucose / 18) / finalKetones).toFixed(2));
+      }
 
-      const existingIdx = healthLog.findIndex(e => e.date === date);
       const entry = {
-        id: existingIdx >= 0 ? healthLog[existingIdx].id : ('hl_' + Date.now()),
+        id: existing ? existing.id : ('hl_' + Date.now()),
         date: date,
-        weight: weight,
-        glucose: glucose,
-        ketones: ketones,
-        gki: gki,
-        exerciseType: exType,
-        exerciseIntensity: exInt
+        weight: finalWeight,
+        glucose: finalGlucose,
+        ketones: finalKetones,
+        gki: finalGki,
+        exerciseType: finalExType,
+        exerciseIntensity: finalExInt,
+        duration: finalDuration
       };
 
       if (existingIdx >= 0) {
@@ -11110,8 +11206,8 @@ const CUP_DENSITY = {
 
       healthLog.sort((a, b) => new Date(a.date) - new Date(b.date));
 
-      if (weight > 0) {
-        settings.weightKg = weight;
+      if (finalWeight !== null && finalWeight > 0) {
+        settings.weightKg = finalWeight;
       }
 
       saveState();
@@ -11153,10 +11249,10 @@ const CUP_DENSITY = {
         return e.date;
       });
 
-      const weights = filtered.map(e => e.weight);
-      const glucoses = filtered.map(e => e.glucose);
-      const ketones = filtered.map(e => e.ketones);
-      const gkis = filtered.map(e => e.gki);
+      const weights = filtered.map(e => (typeof e.weight === 'number' && !isNaN(e.weight)) ? e.weight : null);
+      const glucoses = filtered.map(e => (typeof e.glucose === 'number' && !isNaN(e.glucose)) ? e.glucose : null);
+      const ketones = filtered.map(e => (typeof e.ketones === 'number' && !isNaN(e.ketones)) ? e.ketones : null);
+      const gkis = filtered.map(e => (typeof e.gki === 'number' && !isNaN(e.gki)) ? e.gki : null);
 
       const isDark = (document.documentElement.getAttribute('data-theme') === 'dark');
       const textColor = isDark ? '#cbd5e1' : '#475569';
@@ -11171,12 +11267,16 @@ const CUP_DENSITY = {
         healthChartInstance.data.labels = labels;
         healthChartInstance.data.datasets[0].data = weights;
         healthChartInstance.data.datasets[0].hidden = !showWeight;
+        healthChartInstance.data.datasets[0].spanGaps = true;
         healthChartInstance.data.datasets[1].data = glucoses;
         healthChartInstance.data.datasets[1].hidden = !showGlucose;
+        healthChartInstance.data.datasets[1].spanGaps = true;
         healthChartInstance.data.datasets[2].data = ketones;
         healthChartInstance.data.datasets[2].hidden = !showKetones;
+        healthChartInstance.data.datasets[2].spanGaps = true;
         healthChartInstance.data.datasets[3].data = gkis;
         healthChartInstance.data.datasets[3].hidden = !showGki;
+        healthChartInstance.data.datasets[3].spanGaps = true;
 
         healthChartInstance.options.scales.x.ticks.color = textColor;
         healthChartInstance.options.scales.yWeight.ticks.color = textColor;
@@ -11204,6 +11304,7 @@ const CUP_DENSITY = {
               borderWidth: 3,
               pointRadius: 4,
               pointBackgroundColor: '#2563eb',
+              spanGaps: true,
               hidden: !showWeight
             },
             {
@@ -11216,6 +11317,7 @@ const CUP_DENSITY = {
               borderWidth: 2,
               pointRadius: 3,
               pointBackgroundColor: '#dc2626',
+              spanGaps: true,
               hidden: !showGlucose
             },
             {
@@ -11228,6 +11330,7 @@ const CUP_DENSITY = {
               borderWidth: 3,
               pointRadius: 4,
               pointBackgroundColor: '#16a34a',
+              spanGaps: true,
               hidden: !showKetones
             },
             {
@@ -11241,6 +11344,7 @@ const CUP_DENSITY = {
               borderWidth: 2,
               pointRadius: 2,
               pointBackgroundColor: '#9333ea',
+              spanGaps: true,
               hidden: !showGki
             }
           ]
@@ -11316,12 +11420,23 @@ const CUP_DENSITY = {
         return;
       }
 
-      resDiv.classList.remove('hidden');
+      // Find the latest non-null weight, or fall back to settings.weightKg
+      let currentWeight = null;
+      for (let i = healthLog.length - 1; i >= 0; i--) {
+        if (typeof healthLog[i].weight === 'number' && healthLog[i].weight > 0) {
+          currentWeight = healthLog[i].weight;
+          break;
+        }
+      }
+      if (!currentWeight) {
+        currentWeight = parseFloat(settings.weightKg) || 75;
+      }
 
-      const latest = healthLog[healthLog.length - 1];
-      const currentWeight = latest.weight;
-      const totalKet = healthLog.reduce((sum, e) => sum + (e.ketones || 0), 0);
-      const avgKetones = (totalKet / healthLog.length);
+      // Calculate average of valid ketones entries
+      const validKetones = healthLog.map(e => e.ketones).filter(k => typeof k === 'number' && !isNaN(k) && k >= 0);
+      const avgKetones = validKetones.length > 0
+        ? (validKetones.reduce((sum, v) => sum + v, 0) / validKetones.length)
+        : 1.0;
 
       let projectedLossPerWeek = 0.40;
 
@@ -11333,21 +11448,45 @@ const CUP_DENSITY = {
         projectedLossPerWeek -= 0.20;
       }
 
+      const latest = healthLog[healthLog.length - 1];
       const exType = document.getElementById('healthExerciseType')?.value || latest.exerciseType || '';
       const exInt = document.getElementById('healthExerciseIntensity')?.value || latest.exerciseIntensity || '';
+      const durVal = document.getElementById('healthExerciseDuration')?.value;
+      const exDur = (durVal && !isNaN(parseInt(durVal, 10)))
+        ? parseInt(durVal, 10)
+        : (latest.duration || (exType ? 30 : 0));
 
+      let exerciseBoost = 0;
       if (exType === 'cardio' && exInt === 'hard') {
-        projectedLossPerWeek += 0.30;
+        exerciseBoost = 0.30;
       } else if (exType === 'cardio' && exInt === 'medium') {
-        projectedLossPerWeek += 0.20;
+        exerciseBoost = 0.20;
+      } else if (exType === 'cardio' && exInt === 'light') {
+        exerciseBoost = 0.10;
       } else if (exType === 'strength' && (exInt === 'intense' || exInt === 'hardcore')) {
-        projectedLossPerWeek += 0.25;
+        exerciseBoost = 0.25;
+      } else if (exType === 'strength') {
+        exerciseBoost = 0.15;
       } else if (exType === 'mixed' && exInt === 'hard') {
-        projectedLossPerWeek += 0.35;
+        exerciseBoost = 0.35;
+      } else if (exType === 'mixed') {
+        exerciseBoost = 0.20;
       }
 
+      // Duration factor: scale exercise effect relative to standard 45-min session
+      if (exerciseBoost > 0 && exDur > 0) {
+        const durFactor = Math.min(2.0, Math.max(0.25, exDur / 45));
+        exerciseBoost *= durFactor;
+      }
+
+      projectedLossPerWeek += exerciseBoost;
       projectedLossPerWeek = Math.max(0.10, projectedLossPerWeek);
       const futureWeight = (currentWeight - (projectedLossPerWeek * 4)).toFixed(1);
+
+      resDiv.classList.remove('hidden');
+      const workoutLabel = exType
+        ? `${exType}${exInt ? ' (' + exInt + ')' : ''}${exDur > 0 ? ' • ' + exDur + ' min' : ''}`
+        : (isRo ? 'Fără efort' : 'None');
 
       resDiv.innerHTML = `
         <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
@@ -11366,7 +11505,7 @@ const CUP_DENSITY = {
               </div>
               <div style="display:flex;justify-content:space-between;padding:3px 0">
                 <span>${isRo ? 'Factor Efort Fizic:' : 'Workout Factor:'}</span>
-                <strong style="color:#c4b5fd">${exType ? (exType + ' (' + (exInt || 'default') + ')') : (isRo ? 'Fără efort' : 'None')}</strong>
+                <strong style="color:#c4b5fd">${workoutLabel}</strong>
               </div>
             </div>
           </div>
@@ -11400,15 +11539,21 @@ const CUP_DENSITY = {
       const reversed = healthLog.slice().reverse();
       reversed.forEach(entry => {
         const tr = document.createElement('tr');
-        const gkiInfo = getGkiClassification(entry.gki);
-        const exText = entry.exerciseType ? `${entry.exerciseType} ${entry.exerciseIntensity ? '(' + entry.exerciseIntensity + ')' : ''}` : '-';
+        const gkiInfo = (entry.gki != null) ? getGkiClassification(entry.gki) : null;
+        const durText = entry.duration ? ` • ${entry.duration} min` : '';
+        const exText = entry.exerciseType ? `${entry.exerciseType}${entry.exerciseIntensity ? ' (' + entry.exerciseIntensity + ')' : ''}${durText}` : '–';
+
+        const weightStr = (entry.weight != null) ? `${entry.weight} kg` : '–';
+        const gluStr = (entry.glucose != null) ? `${entry.glucose} mg/dL` : '–';
+        const ketStr = (entry.ketones != null) ? `<span style="color:#16a34a;font-weight:700">${entry.ketones}</span>` : '–';
+        const gkiStr = (entry.gki != null && gkiInfo) ? `<span class="health-gki-badge ${gkiInfo.cls}" style="margin:0;font-size:10px">${entry.gki}</span>` : '–';
 
         tr.innerHTML = `
           <td><strong>${entry.date}</strong></td>
-          <td>${entry.weight} kg</td>
-          <td>${entry.glucose} mg/dL</td>
-          <td><span style="color:#16a34a;font-weight:700">${entry.ketones}</span></td>
-          <td><span class="health-gki-badge ${gkiInfo.cls}" style="margin:0;font-size:10px">${entry.gki}</span></td>
+          <td>${weightStr}</td>
+          <td>${gluStr}</td>
+          <td>${ketStr}</td>
+          <td>${gkiStr}</td>
           <td class="tiny muted">${exText}</td>
           <td style="text-align:right">
             <button class="x-btn" type="button" title="Delete" style="font-size:12px;padding:2px 6px">✕</button>
@@ -11439,20 +11584,30 @@ const CUP_DENSITY = {
       const kk = document.getElementById('healthKpiKetones');
       const kGki = document.getElementById('healthKpiGki');
 
-      if (healthLog.length > 0) {
-        const latest = healthLog[healthLog.length - 1];
-        if (kw) kw.innerHTML = `${latest.weight} <small style="font-size:12px;font-weight:600">kg</small>`;
-        if (kg) kg.innerHTML = `${latest.glucose} <small style="font-size:12px;font-weight:600">mg/dL</small>`;
-        if (kk) kk.innerHTML = `${latest.ketones} <small style="font-size:12px;font-weight:600">mmol/L</small>`;
-        if (kGki) {
-          const info = getGkiClassification(latest.gki);
-          kGki.innerHTML = `${latest.gki} <span class="health-gki-badge ${info.cls}" style="font-size:10px;vertical-align:middle">${info.label}</span>`;
+      let latestWeight = null;
+      let latestGlucose = null;
+      let latestKetones = null;
+      let latestGki = null;
+
+      for (let i = healthLog.length - 1; i >= 0; i--) {
+        const e = healthLog[i];
+        if (latestWeight === null && e.weight != null) latestWeight = e.weight;
+        if (latestGlucose === null && e.glucose != null) latestGlucose = e.glucose;
+        if (latestKetones === null && e.ketones != null) latestKetones = e.ketones;
+        if (latestGki === null && e.gki != null) latestGki = e.gki;
+      }
+      if (latestWeight === null && settings.weightKg) latestWeight = settings.weightKg;
+
+      if (kw) kw.innerHTML = (latestWeight != null) ? `${latestWeight} <small style="font-size:12px;font-weight:600">kg</small>` : '--';
+      if (kg) kg.innerHTML = (latestGlucose != null) ? `${latestGlucose} <small style="font-size:12px;font-weight:600">mg/dL</small>` : '--';
+      if (kk) kk.innerHTML = (latestKetones != null) ? `${latestKetones} <small style="font-size:12px;font-weight:600">mmol/L</small>` : '--';
+      if (kGki) {
+        if (latestGki != null) {
+          const info = getGkiClassification(latestGki);
+          kGki.innerHTML = `${latestGki} <span class="health-gki-badge ${info.cls}" style="font-size:10px;vertical-align:middle">${info.label}</span>`;
+        } else {
+          kGki.textContent = '--';
         }
-      } else {
-        if (kw) kw.textContent = '--';
-        if (kg) kg.textContent = '--';
-        if (kk) kk.textContent = '--';
-        if (kGki) kGki.textContent = '--';
       }
 
       calculateLiveGKI();
@@ -11593,19 +11748,27 @@ const CUP_DENSITY = {
       document.querySelectorAll('[data-tab]').forEach(sec => sec.classList.toggle('hidden', sec.dataset.tab !== tabName));
       document.querySelectorAll('.bottom-nav .nav-item, .desktop-nav-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.tabBtn === tabName));
 
+      const mainHeader = document.getElementById('mainAppHeader');
+      if (mainHeader) mainHeader.classList.toggle('home-mode', tabName === 'home');
+
       const backBtn = document.getElementById('appBackBtn');
       const brand = document.getElementById('headerBrand');
       const headerTitle = document.getElementById('appHeaderTitle');
+      const innerRight = document.getElementById('innerHeaderRight');
 
       if (tabName === 'home') {
-        backBtn.classList.add('hidden');
-        brand.classList.remove('hidden');
-        headerTitle.classList.add('hidden');
+        if (backBtn) backBtn.classList.add('hidden');
+        if (brand) brand.classList.remove('hidden');
+        if (headerTitle) headerTitle.classList.add('hidden');
+        if (innerRight) innerRight.classList.add('hidden');
       } else {
-        backBtn.classList.remove('hidden');
-        brand.classList.add('hidden');
-        headerTitle.classList.remove('hidden');
-        headerTitle.textContent = TAB_TITLES[tabName] || 'Keto Planner';
+        if (backBtn) backBtn.classList.remove('hidden');
+        if (brand) brand.classList.add('hidden');
+        if (headerTitle) {
+          headerTitle.classList.remove('hidden');
+          headerTitle.textContent = TAB_TITLES[tabName] || 'Keto Planner';
+        }
+        if (innerRight) innerRight.classList.remove('hidden');
       }
 
       if (tabName === 'fasting') renderFastingWidget();
@@ -16552,6 +16715,12 @@ const CUP_DENSITY = {
       if (radioEn) radioEn.checked = ((settings.lang || 'en') !== 'ro');
       if (radioRo) radioRo.checked = ((settings.lang || 'en') === 'ro');
 
+      const themeRadioLight = document.getElementById('themeRadioLight');
+      const themeRadioDark = document.getElementById('themeRadioDark');
+      const curThemeVal = document.documentElement.getAttribute('data-theme') || localStorage.getItem('ketoTheme') || 'light';
+      if (themeRadioLight) themeRadioLight.checked = (curThemeVal === 'light');
+      if (themeRadioDark) themeRadioDark.checked = (curThemeVal === 'dark');
+
       if (radioEn && !radioEn._wired) {
         radioEn._wired = true;
         radioEn.addEventListener('change', () => {
@@ -17026,7 +17195,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.0.9';
+    const FALLBACK_APP_VERSION = '1.1.0';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -17188,6 +17357,34 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.0',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '📐 Layout optimizat: corectare lățime pagină Sănătate & Evoluție și încadrare scrollabilă pentru tabelul de istoric',
+            '🗑️ Buton nou "Șterge datele demo" pentru resetarea rapidă a măsurătorilor demonstrative',
+            '⏱️ Câmp durată efort fizic (minute) ce scalează matematic simularea și prognoza greutății',
+            '🧪 Înregistrare flexibilă fără conflicte: se pot salva doar cetonele sau doar greutatea/glicemia în mod independent',
+            '✨ Interfață aerisită în Trackerul de Sănătate prin eliminarea cardurilor statice de glosar',
+            '🎨 Comutare Temă (Luminos / Întunecat) mutată complet în secțiunea Setări & Backup',
+            '📱 Antet principal pe 2 rânduri: titlul Keto Planner centrat pe primul rând, butoanele de post și sync pe al doilea',
+            '📊 Prezentare compactă pe 7 zile a macronutrienților cu legendă aliniată pe un singur rând',
+            '🎉 Temporizator fasting cizelat: afișare celebrare 30 secunde, urmată de ora următorului post în antet și numărătoare inversă pe buton'
+          ],
+          en: [
+            '📐 Optimized page width for Health & Evolution tracker with smooth horizontal table scrolling',
+            '🗑️ Added "Clear demo data" button to effortlessly reset sample health records',
+            '⏱️ Added workout duration input (minutes) that mathematically scales weight forecast simulations',
+            '🧪 Conflict-free flexible logging: record ketones only, weight only, or glucose only without validation barriers',
+            '✨ Cleaned Health Tracker interface by removing static glossary cards to streamline logging',
+            '🎨 Moved Light / Dark theme selector to a dedicated card in Settings & Backup',
+            '📱 Centered 2-line Main Menu header: Keto Planner title centered on line 1, fasting & cloud sync on line 2',
+            '📊 Compacted 7-day macro bar chart overview with single-line legend',
+            '🎉 Polished fasting timer: celebration feedback for 30s then switches to next fast start hour in header & countdown on home button'
+          ]
+        }
+      },
       {
         version: '1.0.9',
         date: '20 Oct 2026',
@@ -18408,17 +18605,24 @@ const CUP_DENSITY = {
         else { window.print(); }
       });
 
-      // Theme toggle
-      const themeBtn = document.querySelector('[data-theme-toggle]');
+      // Theme management (moved to Settings & Backup page)
       let curTheme = localStorage.getItem('ketoTheme') || (matchMedia('(prefers-color-scheme:dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', curTheme);
-      if (window.Android && window.Android.setNavTheme) window.Android.setNavTheme(curTheme === 'dark');
-      themeBtn?.addEventListener('click', () => {
-        curTheme = curTheme === 'dark' ? 'light' : 'dark';
+      window.setAppTheme = function(theme) {
+        curTheme = theme === 'dark' ? 'dark' : 'light';
         document.documentElement.setAttribute('data-theme', curTheme);
         localStorage.setItem('ketoTheme', curTheme);
         if (window.Android && window.Android.setNavTheme) window.Android.setNavTheme(curTheme === 'dark');
+        const rLight = document.getElementById('themeRadioLight');
+        const rDark = document.getElementById('themeRadioDark');
+        if (rLight) rLight.checked = (curTheme === 'light');
+        if (rDark) rDark.checked = (curTheme === 'dark');
         updateHealthChartTheme();
+      };
+      setAppTheme(curTheme);
+      document.querySelectorAll('input[name="appThemeRadio"]').forEach(r => {
+        r.addEventListener('change', () => {
+          if (r.checked) setAppTheme(r.value);
+        });
       });
 
       // Initialize all sub-views
@@ -18630,21 +18834,23 @@ const CUP_DENSITY = {
         renderHealthPage();
         showAppToast(((settings && settings.lang) === 'ro') ? '✓ Date demo încărcate!' : '✓ Demo data loaded!');
       });
-      document.getElementById('healthClearAllBtn')?.addEventListener('click', () => {
+      const clearHealthLogs = () => {
         const isRo = ((settings && settings.lang) === 'ro');
         askConfirm(
-          isRo ? 'Șterge Istoric' : 'Clear History',
-          isRo ? 'Sigur dorești să ștergi toate înregistrările din istoric?' : 'Are you sure you want to clear all health logs?',
+          isRo ? 'Șterge Datele Biometrice' : 'Clear Health Data',
+          isRo ? 'Sigur dorești să ștergi înregistrările din istoricul de sănătate?' : 'Are you sure you want to clear your health log entries?',
           () => {
             healthLog = [];
             saveState();
             renderHealthPage();
-            showAppToast(isRo ? 'Istoric șters' : 'History cleared');
+            showAppToast(isRo ? '✓ Istoric sănătate șters' : '✓ Health log cleared');
           },
-          isRo ? 'Șterge tot' : 'Clear all',
+          isRo ? 'Șterge' : 'Clear',
           isRo ? 'Anulează' : 'Cancel'
         );
-      });
+      };
+      document.getElementById('healthClearDemoBtn')?.addEventListener('click', clearHealthLogs);
+      document.getElementById('healthClearAllBtn')?.addEventListener('click', clearHealthLogs);
 
       applyLanguage(settings.lang || 'en');
       switchTab('home');
