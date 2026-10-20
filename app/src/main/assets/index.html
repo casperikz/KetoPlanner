@@ -130,7 +130,7 @@
       color: var(--color-text);
       background: var(--color-bg);
       overflow-x: hidden;
-      padding-bottom: calc(72px + env(safe-area-inset-bottom, 12px));
+      padding-bottom: 64px;
     }
 
     button, input, select, textarea { font: inherit; color: inherit; }
@@ -293,12 +293,13 @@
       left: 0;
       right: 0;
       z-index: 100;
-      height: calc(60px + env(safe-area-inset-bottom, 0px));
+      height: 52px;
       background: var(--color-surface);
       border-top: 1px solid var(--color-border);
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      padding-bottom: env(safe-area-inset-bottom, 0px);
+      align-items: center;
+      padding: 0;
       box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
     }
     .nav-item {
@@ -306,6 +307,8 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      height: 100%;
+      padding: 2px 0;
       gap: 2px;
       color: var(--color-text-muted);
       font-size: 10px;
@@ -618,6 +621,77 @@
     .target-item .t-val { font-size: var(--text-sm); font-weight: 700; color: var(--color-primary); }
 
     .menu-grid { display: grid; gap: var(--space-3); }
+    
+    /* App Launcher Grid (Mobile Home Screen Style) */
+    .app-launcher-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px 10px;
+      padding: 6px 4px 18px;
+    }
+    @media (min-width: 600px) {
+      .app-launcher-grid {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px 14px;
+      }
+    }
+    @media (min-width: 860px) {
+      .app-launcher-grid {
+        grid-template-columns: repeat(5, 1fr);
+        gap: 24px 16px;
+      }
+    }
+    .app-launcher-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      background: transparent;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-align: center;
+      transition: transform 0.12s ease;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .app-launcher-item:active {
+      transform: scale(0.92);
+    }
+    .app-launcher-icon {
+      width: 58px;
+      height: 58px;
+      border-radius: 17px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 28px;
+      margin-bottom: 6px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.06);
+      border: 1px solid var(--color-border);
+      background: var(--color-surface);
+      transition: box-shadow 0.15s ease, transform 0.15s ease;
+    }
+    .app-launcher-icon.icon-planner { background: rgba(1, 105, 111, 0.1); border-color: rgba(1, 105, 111, 0.25); }
+    .app-launcher-icon.icon-tracking { background: rgba(37, 99, 235, 0.1); border-color: rgba(37, 99, 235, 0.25); }
+    .app-launcher-icon.icon-recipes { background: rgba(245, 158, 11, 0.1); border-color: rgba(245, 158, 11, 0.25); }
+    .app-launcher-icon.icon-stock { background: rgba(14, 165, 233, 0.1); border-color: rgba(14, 165, 233, 0.25); }
+    .app-launcher-icon.icon-shopping { background: rgba(16, 185, 129, 0.1); border-color: rgba(16, 185, 129, 0.25); }
+    .app-launcher-icon.icon-units { background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.25); }
+    .app-launcher-icon.icon-sync { background: rgba(6, 182, 212, 0.1); border-color: rgba(6, 182, 212, 0.25); }
+    .app-launcher-icon.icon-learn { background: rgba(34, 197, 94, 0.1); border-color: rgba(34, 197, 94, 0.25); }
+    .app-launcher-icon.icon-fasting { background: rgba(249, 115, 22, 0.1); border-color: rgba(249, 115, 22, 0.25); }
+    .app-launcher-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--color-text);
+      line-height: 1.25;
+      text-align: center;
+      max-width: 100%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
     .menu-card {
       display: flex;
       align-items: center;
@@ -744,58 +818,164 @@
       color: #fff;
     }
 
-    /* Planner Meals */
-    .day-card {
-      background: var(--color-surface);
-      border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: var(--space-4);
+    /* Planner Macro Summary Bar (Compact 4-Macro Top Bar) */
+    .planner-macro-bar {
       display: grid;
-      gap: var(--space-3);
-      box-shadow: var(--shadow-sm);
-    }
-    .day-card-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      border-bottom: 1px solid var(--color-divider);
-      padding-bottom: var(--space-2);
-    }
-    .day-card-header h3 { font-size: var(--text-lg); font-weight: 700; }
-    .copy-day {
-      font-size: var(--text-xs);
-      padding: 4px 8px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--color-border);
-      background: var(--color-surface-2);
-    }
-    .meal-slot-row {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: var(--space-2) var(--space-3);
+      padding: 6px 8px;
+      margin-bottom: 8px;
+    }
+    .planner-macro-pill {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+      min-width: 0;
+    }
+    .planner-macro-pill .p-lbl {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.3px;
+      color: var(--color-text-muted);
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .planner-macro-pill .p-val {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--color-text);
+      line-height: 1.2;
+      margin-top: 1px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      width: 100%;
+    }
+    .planner-macro-pill .p-val.good { color: #16a34a; }
+    .planner-macro-pill .p-val.warn { color: #f59e0b; }
+    .planner-macro-pill .p-val.bad { color: #ef4444; }
+
+    .planner-action-btn {
+      font-size: 11px !important;
+      padding: 4px 8px !important;
+      height: 30px !important;
+      font-weight: 600 !important;
+      border-radius: var(--radius-md) !important;
+    }
+
+    /* Planner Meals */
+    .day-card {
+      background: transparent;
+      border: none;
+      padding: 0;
+      display: grid;
+      gap: 10px;
+      box-shadow: none;
+    }
+    .day-card-header {
+      display: none;
+    }
+    .copy-day {
+      display: none;
+    }
+    .meal-slot-row {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-xl);
+      padding: 12px 14px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      box-shadow: var(--shadow-sm);
     }
     .slot-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 4px;
     }
     .slot-badge {
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .04em;
+      font-size: 13px;
+      font-weight: 800;
       color: var(--color-primary);
-      text-transform: uppercase;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .slot-control { display: flex; gap: 8px; align-items: center; width: 100%; }
-    .slot-thumb { width: 38px; height: 38px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: var(--color-surface-offset); }
+    .slot-actions {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .slot-control { display: flex; gap: 10px; align-items: center; width: 100%; }
+    .slot-thumb { width: 44px; height: 44px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: var(--color-surface-offset); border: 1px solid var(--color-border); }
     .slot-control select { flex: 1; min-width: 0; }
+    .slot-macros-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 6px 12px;
+      padding: 6px 10px;
+      background: var(--color-surface-2);
+      border-radius: var(--radius-md);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--color-text-muted);
+      border-left: 3px solid var(--color-primary);
+    }
+    .slot-macros-bar strong { color: var(--color-text); }
+    .slot-custom-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #16a34a;
+      background: rgba(22, 163, 74, 0.12);
+      border: 1px solid rgba(22, 163, 74, 0.3);
+      padding: 2px 6px;
+      border-radius: 999px;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
     .day-totals-box {
       background: var(--color-surface-offset);
       border-radius: var(--radius-lg);
       padding: var(--space-3);
       font-size: var(--text-sm);
+    }
+
+    /* Custom Mobile Picker Sorting Toolbar */
+    .picker-sort-bar {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      padding: 4px 16px 8px;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -webkit-overflow-scrolling: touch;
+    }
+    .picker-sort-bar::-webkit-scrollbar { display: none; }
+    .picker-sort-btn {
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 600;
+      border-radius: 999px;
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      color: var(--color-text-muted);
+      cursor: pointer;
+      white-space: nowrap;
+      transition: all 0.12s ease;
+    }
+    .picker-sort-btn.active {
+      background: var(--color-primary);
+      border-color: var(--color-primary);
+      color: #fff;
     }
 
     /* Stock Manager */
@@ -2295,7 +2475,7 @@
     /* Floating Recipe Family Sub-navigation Bar */
     .recipe-subnav-bar {
       position: fixed;
-      bottom: calc(64px + env(safe-area-inset-bottom, 0px));
+      bottom: 58px;
       left: 50%;
       transform: translateX(-50%);
       z-index: 95;
@@ -3650,86 +3830,50 @@
         </div>
       </div>
 
-      <div class="menu-grid">
-        <button class="menu-card" data-tab-btn="planner">
-          <div class="menu-icon-wrap">📅</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_planner">Weekly Planner</span></strong>
-            <span><span data-i18n="home_card_planner_desc">7-day dropdown planner with live macro calculations</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
+      <div class="app-launcher-grid">
+        <button class="app-launcher-item" data-tab-btn="planner" type="button" aria-label="Planner">
+          <div class="app-launcher-icon icon-planner">📅</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_planner">Planner</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="health" style="border:1.5px solid #2563eb;background:rgba(37,99,235,0.06)">
-          <div class="menu-icon-wrap" style="background:#2563eb;color:#fff">📈</div>
-          <div class="menu-card-info">
-            <strong style="color:#2563eb"><span data-i18n="title_health">Health & Evolution</span></strong>
-            <span id="homeHealthSubtitle"><span data-i18n="home_card_health_desc">Track weight, glucose, ketones, GKI & 4-week forecast</span></span>
-          </div>
-          <div class="menu-arrow" style="color:#2563eb">›</div>
+        <button class="app-launcher-item" data-tab-btn="health" type="button" aria-label="Tracking">
+          <div class="app-launcher-icon icon-tracking">📈</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_tracking">Tracking</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="recipes">
-          <div class="menu-icon-wrap">🍳</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_recipes_hub">Recipes</span></strong>
-            <span><span data-i18n="home_card_recipes_hub_desc">Library, Recipe Builder & Macronutrients Database</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
+        <button class="app-launcher-item" data-tab-btn="recipes" type="button" aria-label="Recipes">
+          <div class="app-launcher-icon icon-recipes">🍳</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_recipes">Recipes</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="stock">
-          <div class="menu-icon-wrap">📦</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_stock">Stock Manager</span></strong>
-            <span><span data-i18n="home_card_stock_desc">Pantry, Fridge & Freezer inventory with on-hand checkmarks</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
+        <button class="app-launcher-item" data-tab-btn="stock" type="button" aria-label="Stock">
+          <div class="app-launcher-icon icon-stock">📦</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_stock">Stock</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="shopping">
-          <div class="menu-icon-wrap">🛒</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_shopping">Shopping List</span></strong>
-            <span><span data-i18n="home_card_shopping_desc">Interactive checklist with strikethrough & swipe-to-delete</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
+        <button class="app-launcher-item" data-tab-btn="shopping" type="button" aria-label="Shopping">
+          <div class="app-launcher-icon icon-shopping">🛒</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_shopping">Shopping</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="convert">
-          <div class="menu-icon-wrap">⚖️</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_convert">Unit Converter</span></strong>
-            <span><span data-i18n="home_card_convert_desc">Convert cups, spoons & ounces to grams instantly</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
+        <button class="app-launcher-item" data-tab-btn="convert" type="button" aria-label="Units">
+          <div class="app-launcher-icon icon-units">⚖️</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_units">Units</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="sync" style="border:1.5px solid var(--color-primary);background:var(--color-primary-highlight)">
-          <div class="menu-icon-wrap" style="background:var(--color-primary);color:#fff">☁️</div>
-          <div class="menu-card-info">
-            <strong style="color:var(--color-primary)"><span data-i18n="title_sync">Live Share & Sync</span></strong>
-            <span id="homeSyncSubtitle"><span data-i18n="home_card_sync_desc">Share planner & stock in real time with partner</span></span>
-          </div>
-          <div class="menu-arrow" style="color:var(--color-primary)">›</div>
+        <button class="app-launcher-item" data-tab-btn="sync" type="button" aria-label="Sync">
+          <div class="app-launcher-icon icon-sync">☁️</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_sync">Sync</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="learn" style="border:1.5px solid #2e7d32;background:rgba(46,125,50,0.08)">
-          <div class="menu-icon-wrap" style="background:#2e7d32;color:#fff">📚</div>
-          <div class="menu-card-info">
-            <strong style="color:#2e7d32"><span data-i18n="title_learn">Learning About Keto</span></strong>
-            <span><span data-i18n="home_card_learn_desc">15 visual chapters: biology, ketone testing, nutrients & safe checklist</span></span>
-          </div>
-          <div class="menu-arrow" style="color:#2e7d32">›</div>
+        <button class="app-launcher-item" data-tab-btn="learn" type="button" aria-label="Learn">
+          <div class="app-launcher-icon icon-learn">📚</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_learn">Learn</span></span>
         </button>
 
-        <button class="menu-card" data-tab-btn="fasting" style="border:1.5px solid var(--color-primary);background:var(--color-primary-highlight)">
-          <div class="menu-icon-wrap" style="background:var(--color-primary);color:#fff">⏱️</div>
-          <div class="menu-card-info">
-            <strong style="color:var(--color-primary)"><span data-i18n="title_fasting">Intermittent Fasting</span></strong>
-            <span id="homeFastSubtitle"><span data-i18n="home_card_fasting_desc">16:8 LeanGains • Tap to track or change protocol</span></span>
-          </div>
-          <div class="menu-arrow" style="color:var(--color-primary)">›</div>
+        <button class="app-launcher-item" data-tab-btn="fasting" type="button" aria-label="Fasting">
+          <div class="app-launcher-icon icon-fasting">⏱️</div>
+          <span class="app-launcher-label"><span data-i18n="launcher_fasting">Fasting</span></span>
         </button>
       </div>
     </section>
@@ -3755,15 +3899,9 @@
           </div>
         </div>
 
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="planner_title">Weekly Planner</h2>
-            <p class="muted small" data-i18n="planner_subtitle">Select meals per day. Total macros adjust automatically.</p>
-          </div>
-          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-            <button id="suggestFromStockBtn" class="act-btn primary small" type="button"><span data-i18n="planner_suggest_meals">💡 Suggest Meals</span></button>
-            <button id="clearAllPlannerBtn" class="act-btn small" type="button"><span data-i18n="planner_clear_all">Clear all</span></button>
-          </div>
+        <div style="display:flex;justify-content:flex-end;align-items:center;gap:6px;margin:2px 0 6px">
+          <button id="suggestFromStockBtn" class="act-btn primary small planner-action-btn" type="button"><span data-i18n="planner_suggest_meals">💡 Suggest Meals</span></button>
+          <button id="clearAllPlannerBtn" class="act-btn small planner-action-btn" type="button"><span data-i18n="planner_clear_all">Clear all</span></button>
         </div>
 
         <!-- Day Selector Pills -->
@@ -4015,6 +4153,7 @@
           <label class="small" for="sortRule"><strong data-i18n="recipes_sort_label">Sort recipes:</strong></label>
           <select id="sortRule" class="slot-select">
             <option value="protein">🥩 Protein first</option>
+            <option value="fat">🥑 Fat first</option>
             <option value="calories">🔥 Closest to 500-600 kcal</option>
             <option value="batch">🧊 Best for batch/freezer</option>
             <option value="rating">⭐ Highest rated</option>
@@ -5404,10 +5543,55 @@
         <h3 id="pickerTitle" class="picker-title" data-i18n="picker_select_option">Select Option</h3>
         <button class="x-btn" id="pickerCloseBtn" type="button" aria-label="Close">✕</button>
       </div>
+      <div id="pickerSortBar" class="picker-sort-bar hidden">
+        <span class="tiny muted" style="font-weight:700">Sort:</span>
+        <button type="button" class="picker-sort-btn active" data-picker-sort="protein">🥩 Protein</button>
+        <button type="button" class="picker-sort-btn" data-picker-sort="fat">🥑 Fats</button>
+        <button type="button" class="picker-sort-btn" data-picker-sort="calories">🔥 Calories</button>
+        <button type="button" class="picker-sort-btn" data-picker-sort="name">🔤 Name</button>
+      </div>
       <div id="pickerSearchWrap" class="picker-search-wrap hidden">
         <input id="pickerSearchInput" class="search" type="search" placeholder="Search option..." data-i18n-ph="picker_search_ph">
       </div>
       <div id="pickerOptionsList" class="picker-options-list"></div>
+    </div>
+  </div>
+
+  <!-- Customize Recipe Locally for Planner Modal -->
+  <div id="customizeMealModal" class="confirm-modal-overlay hidden" style="z-index:120">
+    <div class="confirm-modal-box stack" style="max-width:540px;width:94%;max-height:88vh;display:flex;flex-direction:column;padding:16px;overflow:hidden">
+      <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--color-border);padding-bottom:10px">
+        <div>
+          <h3 id="custMealTitle" style="font-size:var(--text-base);margin:0">✏️ Customize Meal for Today</h3>
+          <p id="custMealSubtitle" class="tiny muted" style="margin:2px 0 0 0">Adjust ingredients only for this day without modifying master recipe.</p>
+        </div>
+        <button id="custMealCloseBtn" class="x-btn" type="button" aria-label="Close">✕</button>
+      </div>
+
+      <div id="custMealRowsWrap" style="flex:1;overflow-y:auto;padding:10px 0;display:flex;flex-direction:column;gap:8px">
+        <!-- Injected rows -->
+      </div>
+
+      <div style="padding-top:8px;border-top:1px solid var(--color-border);display:flex;flex-direction:column;gap:8px">
+        <button id="custMealAddIngBtn" class="act-btn small" type="button" style="align-self:flex-start">
+          ➕ <span data-i18n="cust_add_ingredient">Add ingredient</span>
+        </button>
+
+        <!-- Live Macro Calculated Bar -->
+        <div id="custMealMacroBar" class="slot-macros-bar" style="margin:0">
+          <!-- Injected live macros -->
+        </div>
+
+        <div style="display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:4px">
+          <button id="custMealResetBtn" class="act-btn small" type="button" style="color:var(--color-danger)">
+            ↺ <span data-i18n="cust_reset_btn">Reset to original</span>
+          </button>
+          <div style="display:flex;gap:8px">
+            <button id="custMealCancelBtn" class="act-btn small" type="button"><span data-i18n="btn_cancel">Cancel</span></button>
+            <button id="custMealSaveBtn" class="act-btn primary small" type="button"><span data-i18n="cust_save_btn">💾 Apply to Day</span></button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -6215,8 +6399,24 @@ const I18N = {
     planner_slot_breakfast: "Breakfast",
     planner_slot_lunch: "Lunch",
     planner_slot_dinner: "Dinner",
-    planner_slot_snack1: "Snack 1",
-    planner_slot_snack2: "Snack 2",
+    planner_slot_snack: "Snack",
+    planner_slot_snack1: "Snack",
+    planner_slot_snack2: "Snack",
+    launcher_planner: "Planner",
+    launcher_tracking: "Tracking",
+    launcher_recipes: "Recipes",
+    launcher_stock: "Stock",
+    launcher_shopping: "Shopping",
+    launcher_units: "Units",
+    launcher_sync: "Sync",
+    launcher_learn: "Learn",
+    launcher_fasting: "Fasting",
+    sort_fats: "Fats",
+    cust_customize_for_day: "✏️ Customize for Today",
+    cust_custom_for_day_badge: "✨ Custom for today",
+    cust_add_ingredient: "Add ingredient",
+    cust_reset_btn: "Reset to original",
+    cust_save_btn: "Apply to Day",
     planner_leftover: "🍱 Leftover",
     planner_batch_btn: "🍱 Batch",
     planner_none_option: "— none —",
@@ -6764,8 +6964,24 @@ const I18N = {
     planner_slot_breakfast: "Mic dejun",
     planner_slot_lunch: "Pranz",
     planner_slot_dinner: "Cina",
-    planner_slot_snack1: "Gustare 1",
-    planner_slot_snack2: "Gustare 2",
+    planner_slot_snack: "Gustare",
+    planner_slot_snack1: "Gustare",
+    planner_slot_snack2: "Gustare",
+    launcher_planner: "Planner",
+    launcher_tracking: "Tracking",
+    launcher_recipes: "Rețete",
+    launcher_stock: "Stoc",
+    launcher_shopping: "Cumpărături",
+    launcher_units: "Unități",
+    launcher_sync: "Sincronizare",
+    launcher_learn: "Ghid Keto",
+    launcher_fasting: "Post",
+    sort_fats: "Grăsimi",
+    cust_customize_for_day: "✏️ Personalizează pentru Azi",
+    cust_custom_for_day_badge: "✨ Personalizat azi",
+    cust_add_ingredient: "Adaugă ingredient",
+    cust_reset_btn: "Resetează la rețeta inițială",
+    cust_save_btn: "Aplică pentru această zi",
     planner_leftover: "🍱 Portie ramasa",
     planner_batch_btn: "🍱 Portii multiple",
     planner_none_option: "— niciuna —",
@@ -10162,7 +10378,7 @@ function getLocalizedRecipe(r) {
 }
 
 const DAYS = ['Day 1', 'Day 2', 'Day 3', 'Day 4', 'Day 5', 'Day 6', 'Day 7'];
-const SLOTS = ['Breakfast', 'Lunch', 'Dinner', 'Snack 1', 'Snack 2'];
+const SLOTS = ['Breakfast', 'Lunch', 'Dinner', 'Snack'];
 const TARGET = { kcal: 2000, protein: 190, netCarbs: 50, fat: 70 };
 const LS_KEY = 'ketoPlanner.v1';
 function loadState() { try { return JSON.parse(localStorage.getItem(LS_KEY)) || {}; } catch (e) { return {}; } }
@@ -10775,7 +10991,25 @@ const CUP_DENSITY = {
     function emptyPlan() { const o = {}; DAYS.forEach(d => { o[d] = {}; SLOTS.forEach(s => o[d][s] = ''); }); return o; }
     let custom = emptyPlan();
     if (SAVED.custom && typeof SAVED.custom === 'object') {
-      DAYS.forEach(day => { if (SAVED.custom[day]) SLOTS.forEach(slot => { if (typeof SAVED.custom[day][slot] === 'string') custom[day][slot] = SAVED.custom[day][slot]; }); });
+      DAYS.forEach(day => {
+        if (SAVED.custom[day]) {
+          SLOTS.forEach(slot => {
+            if (typeof SAVED.custom[day][slot] === 'string') custom[day][slot] = SAVED.custom[day][slot];
+          });
+          if (!custom[day]['Snack'] && typeof SAVED.custom[day]['Snack 1'] === 'string') {
+            custom[day]['Snack'] = SAVED.custom[day]['Snack 1'];
+          }
+        }
+      });
+    }
+    let dayOverrides = (SAVED.dayOverrides && typeof SAVED.dayOverrides === 'object') ? SAVED.dayOverrides : {};
+    
+    function getSlotRecipe(day, slot) {
+      if (day && slot && dayOverrides[day] && dayOverrides[day][slot]) {
+        return dayOverrides[day][slot];
+      }
+      const id = (custom[day] && custom[day][slot]) ? custom[day][slot] : null;
+      return id ? recipeMap[id] : null;
     }
     let shopping = (SAVED.shopping && typeof SAVED.shopping === 'object') ? SAVED.shopping : {};
     let shoppingList = Array.isArray(SAVED.shoppingList) ? SAVED.shoppingList : [];
@@ -11202,7 +11436,7 @@ const CUP_DENSITY = {
       try {
         pushToCloud(false);
         localStorage.setItem(LS_KEY, JSON.stringify({
-          custom, shopping, shoppingList, customRecipes, deletedBuiltInRecipes: deletedBuiltInRecipeIds,
+          custom, dayOverrides, shopping, shoppingList, customRecipes, deletedBuiltInRecipes: deletedBuiltInRecipeIds,
           editedBuiltInMacros, deletedBuiltInMacros, customIngredients,
           stockCategoryOverrides, cloudMacroDatabase, cloudStockCategories,
           settings, stock, packSizes, stores, ticked, meta,
@@ -12776,6 +13010,7 @@ const CUP_DENSITY = {
     function sortRecipes(list) {
       const copy = list.slice();
       if (currentSort === 'protein') return copy.sort((a, b) => b.protein - a.protein);
+      if (currentSort === 'fat') return copy.sort((a, b) => b.fat - a.fat);
       if (currentSort === 'calories') {
         const target = (settings.dailyKcal || 2000) / 4;
         return copy.sort((a, b) => Math.abs(a.kcal - target) - Math.abs(b.kcal - target));
@@ -12810,9 +13045,12 @@ const CUP_DENSITY = {
       }
       return `${safeName} (${r.kcal} kcal | P ${r.protein}g | F ${r.fat}g | NC ${r.netCarbs}g)`;
     }
-    function totalForDay(dayMap) {
+    function totalForDay(dayMap, dayName) {
       const t = { kcal: 0, protein: 0, fat: 0, netCarbs: 0 };
-      SLOTS.forEach(s => { const r = recipeMap[dayMap[s]]; if (r) { t.kcal += r.kcal; t.protein += r.protein; t.fat += r.fat; t.netCarbs += r.netCarbs; } });
+      SLOTS.forEach(s => {
+        const r = dayName ? getSlotRecipe(dayName, s) : recipeMap[dayMap[s]];
+        if (r) { t.kcal += r.kcal; t.protein += r.protein; t.fat += r.fat; t.netCarbs += r.netCarbs; }
+      });
       return t;
     }
     function fmt(n) { return Math.round(n); }
@@ -12967,9 +13205,41 @@ const CUP_DENSITY = {
         }
       }
 
+      const sortBar = document.getElementById('pickerSortBar');
+      let pickerSortMode = 'protein';
+      if (sortBar) {
+        const isSlotPicker = !!selectEl.dataset.slot;
+        sortBar.classList.toggle('hidden', !isSlotPicker);
+        if (isSlotPicker) {
+          sortBar.querySelectorAll('.picker-sort-btn').forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.pickerSort === pickerSortMode);
+            btn.onclick = () => {
+              pickerSortMode = btn.dataset.pickerSort;
+              sortBar.querySelectorAll('.picker-sort-btn').forEach(b => b.classList.toggle('active', b === btn));
+              renderPickerList(searchInput ? searchInput.value : '');
+            };
+          });
+        }
+      }
+
       function renderPickerList(query = '') {
         const q = query.trim().toLowerCase();
-        const filtered = opts.filter(o => !q || o.text.toLowerCase().includes(q));
+        let filtered = opts.filter(o => !q || o.text.toLowerCase().includes(q));
+
+        if (selectEl.dataset.slot) {
+          filtered = [...filtered].sort((a, b) => {
+            if (!a.value) return -1;
+            if (!b.value) return 1;
+            const ra = recipeMap[a.value];
+            const rb = recipeMap[b.value];
+            if (!ra || !rb) return 0;
+            if (pickerSortMode === 'protein') return (rb.protein || 0) - (ra.protein || 0);
+            if (pickerSortMode === 'fat') return (rb.fat || 0) - (ra.fat || 0);
+            if (pickerSortMode === 'calories') return Math.abs((ra.kcal || 0) - 500) - Math.abs((rb.kcal || 0) - 500);
+            if (pickerSortMode === 'name') return (ra.name || '').localeCompare(rb.name || '');
+            return 0;
+          });
+        }
 
         if (!filtered.length) {
           listEl.innerHTML = '<div class="muted small" style="text-align:center;padding:16px">No matching options</div>';
@@ -13205,6 +13475,7 @@ const CUP_DENSITY = {
       const wrap = document.getElementById('customDays');
       if (!wrap) return;
 
+      const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
       const daysToShow = activeDay === 'All Days' ? DAYS : [activeDay];
 
       wrap.innerHTML = daysToShow.map(day => {
@@ -13213,7 +13484,8 @@ const CUP_DENSITY = {
 
         const rows = SLOTS.map(slot => {
           const cur = custom[day][slot];
-          const rec = cur ? recipeMap[cur] : null;
+          const rec = cur ? getSlotRecipe(day, slot) : null;
+          const isCustomized = !!(dayOverrides[day] && dayOverrides[day][slot]);
           const none = `<option value="" ${cur ? '' : 'selected'}>— none —</option>`;
           const opts = optionsForSlot(slot, cur).map(r => `<option value="${r.id}" ${cur === r.id ? 'selected' : ''}>${optionLabel(r)}</option>`).join('');
 
@@ -13223,35 +13495,41 @@ const CUP_DENSITY = {
             (slot === 'Lunch' && custom[prevDay]['Dinner'] === cur)
           );
 
+          const slotLabel = isRo ? (slot === 'Breakfast' ? 'Mic dejun' : slot === 'Lunch' ? 'Prânz' : slot === 'Dinner' ? 'Cină' : 'Gustare') : slot;
+
           return `
             <div class="meal-slot-row">
               <div class="slot-header">
                 <div style="display:flex;align-items:center;gap:6px">
-                  <span class="slot-badge">${slot}</span>
+                  <span class="slot-badge">${slotLabel}</span>
+                  ${isCustomized ? `<span class="slot-custom-badge">✨ ${isRo ? 'Personalizat azi' : 'Custom for today'}</span>` : ''}
                   ${isLeftover ? `<span class="tiny" style="font-size:10px;font-weight:700;color:var(--color-primary);background:rgba(1,105,111,0.1);padding:1px 6px;border-radius:6px">🍱 Leftover</span>` : ''}
                 </div>
-                <div style="display:flex;align-items:center;gap:6px">
+                <div class="slot-actions">
+                  ${cur ? `<button class="act-btn small cust-rec-btn" type="button" data-cust-day="${day}" data-cust-slot="${slot}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${isRo ? 'Personalizează ingredientele doar pentru această zi' : 'Customize ingredients only for this day'}">✏️ ${isRo ? 'Modifică' : 'Edit'}</button>` : ''}
+                  ${cur ? `<button class="act-btn small view-rec-btn" type="button" data-view-recipe="${cur}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${isRo ? 'Deschide rețeta' : 'View recipe page'}">🔍 ${isRo ? 'Vezi' : 'View'}</button>` : ''}
                   ${cur ? `<button class="batch-prep-pill" type="button" data-batch-day="${day}" data-batch-slot="${slot}" title="Auto-fill meal into subsequent days as leftovers">🍱 Batch</button>` : ''}
                   ${cur ? `<button class="x-btn" type="button" data-clear-day="${day}" data-clear-slot="${slot}" title="Clear slot">×</button>` : ''}
                 </div>
               </div>
               <div class="slot-control">
-                <img class="slot-thumb" src="${rec ? recipeImage(rec) : BLANK_IMG}" alt="" style="${rec ? 'cursor:pointer;' : 'display:none'}" data-view-recipe="${cur || ''}" title="${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Vezi rețeta' : 'View recipe'}">
+                <img class="slot-thumb" src="${rec ? recipeImage(rec) : BLANK_IMG}" alt="" style="${rec ? 'cursor:pointer;' : 'display:none'}" data-view-recipe="${cur || ''}" title="${isRo ? 'Vezi rețeta' : 'View recipe'}">
                 <select class="slot-select" data-day="${day}" data-slot="${slot}">${none}${opts}</select>
-                ${cur ? `<button class="act-btn small view-rec-btn" type="button" data-view-recipe="${cur}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Deschide rețeta' : 'View recipe page'}">🔍 ${(typeof settings !== 'undefined' && settings.lang === 'ro') ? 'Vezi' : 'View'}</button>` : ''}
               </div>
+              ${rec ? `
+                <div class="slot-macros-bar">
+                  <span>🔥 <strong>${fmt(rec.kcal)}</strong> kcal</span>
+                  <span>🥩 P: <strong>${fmt(rec.protein)}g</strong></span>
+                  <span>🥑 F: <strong>${fmt(rec.fat)}g</strong></span>
+                  <span>🥬 NC: <strong>${fmt(rec.netCarbs)}g</strong></span>
+                </div>` : ''}
             </div>`;
         }).join('');
 
-        const copySel = `<select class="copy-day" data-copy-src="${day}"><option value="">Copy to…</option>${DAYS.filter(d => d !== day).map(d => `<option value="${d}">${d}</option>`).join('')}<option value="all">All days</option></select>`;
-
         return `
           <div class="day-card">
-            <div class="day-card-header">
-              <h3>${(typeof settings !== 'undefined' && settings.lang === 'ro') ? day.replace('Day', 'Ziua') : day}</h3>
-              ${copySel}
-            </div>
-            <div class="stack" style="gap:6px">${rows}</div>
+            ${activeDay === 'All Days' ? `<div style="font-size:14px;font-weight:800;color:var(--color-primary);padding:4px 0 2px;border-bottom:1px solid var(--color-border);margin-bottom:4px">${isRo ? day.replace('Day', 'Ziua') : day}</div>` : ''}
+            <div class="stack" style="gap:10px">${rows}</div>
             <div class="day-totals-box" id="total-${day.replace(/\s/g, '')}"></div>
           </div>`;
       }).join('');
@@ -13260,9 +13538,12 @@ const CUP_DENSITY = {
         const day = e.target.dataset.day;
         const slot = e.target.dataset.slot;
         const selectedVal = e.target.value;
+        if (dayOverrides[day] && dayOverrides[day][slot] && selectedVal !== custom[day][slot]) {
+          delete dayOverrides[day][slot];
+        }
         custom[day][slot] = selectedVal;
         const img = e.target.parentElement.querySelector('.slot-thumb');
-        const rec = recipeMap[selectedVal];
+        const rec = selectedVal ? getSlotRecipe(day, slot) : null;
         if (img) {
           if (rec) { img.src = recipeImage(rec); img.style.display = ''; img.dataset.viewRecipe = selectedVal; }
           else { img.style.display = 'none'; img.dataset.viewRecipe = ''; }
@@ -13270,10 +13551,6 @@ const CUP_DENSITY = {
         buildCustom();
         updateCustomTotals();
         afterPlannerChange();
-        if (selectedVal && rec) {
-          const isRo = ((settings && settings.lang) === 'ro');
-          showAppToast(isRo ? `✓ ${rec.name} selectat! Atinge 🔍 Vezi pentru detalii.` : `✓ ${rec.name} selected! Tap 🔍 View for details.`);
-        }
       }));
 
       wrap.querySelectorAll('[data-view-recipe]').forEach(btn => btn.addEventListener('click', (e) => {
@@ -13288,14 +13565,192 @@ const CUP_DENSITY = {
         }, 150);
       }));
 
-      wrap.querySelectorAll('[data-clear-day]').forEach(btn => btn.addEventListener('click', () => clearSlot(btn.dataset.clearDay, btn.dataset.clearSlot)));
+      wrap.querySelectorAll('[data-cust-day]').forEach(btn => btn.addEventListener('click', (e) => {
+        e.stopPropagation();
+        openCustomizeMealModal(btn.dataset.custDay, btn.dataset.custSlot);
+      }));
+
+      wrap.querySelectorAll('[data-clear-day]').forEach(btn => btn.addEventListener('click', () => {
+        const d = btn.dataset.clearDay;
+        const s = btn.dataset.clearSlot;
+        if (dayOverrides[d]) delete dayOverrides[d][s];
+        clearSlot(d, s);
+      }));
       wrap.querySelectorAll('[data-batch-day]').forEach(btn => btn.addEventListener('click', () => openBatchPrepModal(btn.dataset.batchDay, btn.dataset.batchSlot, custom[btn.dataset.batchDay][btn.dataset.batchSlot])));
-      wrap.querySelectorAll('.copy-day').forEach(sel => sel.addEventListener('change', e => { const dst = e.target.value; if (dst) copyDay(e.target.dataset.copySrc, dst); }));
 
       updateCustomTotals();
       if (typeof renderBatchCookDaySheet === 'function') {
         renderBatchCookDaySheet(activeDay === 'All Days' ? 'Day 1' : activeDay);
       }
+    }
+
+    /* CUSTOMIZE RECIPE FOR PLANNER DAY MODAL */
+    let customizeMealState = { day: null, slot: null, workingRecipe: null };
+
+    function openCustomizeMealModal(day, slot) {
+      const curId = custom[day] ? custom[day][slot] : null;
+      if (!curId) return;
+      const baseRec = recipeMap[curId];
+      if (!baseRec) return;
+
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+
+      // Use existing override if already customized, otherwise clone baseRec
+      let currentOverride = dayOverrides[day] && dayOverrides[day][slot];
+      if (currentOverride) {
+        customizeMealState.workingRecipe = JSON.parse(JSON.stringify(currentOverride));
+      } else {
+        customizeMealState.workingRecipe = {
+          id: baseRec.id,
+          name: baseRec.name,
+          portion: baseRec.portion || '1 serving',
+          meal: baseRec.meal || slot,
+          servings: baseRec.servings || 1,
+          ingredients: Array.isArray(baseRec.ingredients) ? [...baseRec.ingredients] : [],
+          kcal: baseRec.kcal,
+          protein: baseRec.protein,
+          fat: baseRec.fat,
+          netCarbs: baseRec.netCarbs,
+          isCustomized: true
+        };
+      }
+      customizeMealState.day = day;
+      customizeMealState.slot = slot;
+
+      const modal = document.getElementById('customizeMealModal');
+      const titleEl = document.getElementById('custMealTitle');
+      const subEl = document.getElementById('custMealSubtitle');
+      const dayLabel = isRo ? day.replace('Day', 'Ziua') : day;
+      const slotLabel = isRo ? (slot === 'Breakfast' ? 'Mic dejun' : slot === 'Lunch' ? 'Prânz' : slot === 'Dinner' ? 'Cină' : 'Gustare') : slot;
+
+      if (titleEl) titleEl.textContent = `✏️ ${baseRec.name} (${dayLabel} • ${slotLabel})`;
+      if (subEl) subEl.textContent = isRo ? 'Modificările se aplică doar pentru această zi în planificator.' : 'Changes only apply to this day in your planner. Master recipe remains unchanged.';
+
+      renderCustomizeMealRows();
+      recalcCustomizeMealMacros();
+
+      modal?.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+    }
+
+    function closeCustomizeMealModal() {
+      const modal = document.getElementById('customizeMealModal');
+      if (modal) modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+      customizeMealState = { day: null, slot: null, workingRecipe: null };
+    }
+
+    function renderCustomizeMealRows() {
+      const wrap = document.getElementById('custMealRowsWrap');
+      if (!wrap || !customizeMealState.workingRecipe) return;
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      const ings = customizeMealState.workingRecipe.ingredients || [];
+
+      wrap.innerHTML = ings.map((raw, idx) => {
+        let qty = 100, unit = 'g', name = raw;
+        const m = String(raw).match(/^(\d+(?:[,\.]\d+)?(?:\/\d+)?|\d+\s+\d+\/\d+|\d+\/\d+)\s*(?:(g|ml|kg|l|count|oz|tbsp|tsp|cup|buc)\b\s*)?(.+)$/i);
+        if (m) {
+          qty = parseQuantityNumber(m[1]);
+          unit = m[2] ? m[2].toLowerCase() : 'g';
+          if (unit === 'kg') { qty *= 1000; unit = 'g'; }
+          else if (unit === 'l') { qty *= 1000; unit = 'ml'; }
+          else if (unit === 'buc') { unit = 'count'; }
+          name = m[3].trim();
+        }
+        return `
+          <div class="cust-ing-row" data-idx="${idx}" style="display:flex;gap:6px;align-items:center">
+            <input class="search cust-ing-name" type="text" value="${escapeHtml(name)}" placeholder="Ingredient" style="flex:2;min-width:110px">
+            <input class="search cust-ing-qty" type="number" step="any" min="0" value="${qty}" placeholder="Qty" style="width:70px">
+            <select class="slot-select cust-ing-unit" style="width:75px">
+              <option value="g"${unit === 'g' ? ' selected' : ''}>g</option>
+              <option value="ml"${unit === 'ml' ? ' selected' : ''}>ml</option>
+              <option value="count"${unit === 'count' ? ' selected' : ''}>${isRo ? 'buc' : 'count'}</option>
+            </select>
+            <button class="x-btn cust-ing-del" type="button" data-del-idx="${idx}">×</button>
+          </div>
+        `;
+      }).join('');
+
+      wrap.querySelectorAll('.cust-ing-name, .cust-ing-qty, .cust-ing-unit').forEach(el => {
+        el.addEventListener('input', recalcCustomizeMealMacros);
+        el.addEventListener('change', recalcCustomizeMealMacros);
+      });
+
+      wrap.querySelectorAll('.cust-ing-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.delIdx, 10);
+          if (customizeMealState.workingRecipe && customizeMealState.workingRecipe.ingredients) {
+            customizeMealState.workingRecipe.ingredients.splice(idx, 1);
+            renderCustomizeMealRows();
+            recalcCustomizeMealMacros();
+          }
+        });
+      });
+    }
+
+    function recalcCustomizeMealMacros() {
+      const wrap = document.getElementById('custMealRowsWrap');
+      const macroBar = document.getElementById('custMealMacroBar');
+      if (!wrap || !macroBar || !customizeMealState.workingRecipe) return;
+
+      const rows = wrap.querySelectorAll('.cust-ing-row');
+      const ingList = [];
+      rows.forEach(r => {
+        const name = (r.querySelector('.cust-ing-name')?.value || '').trim();
+        const qty = parseFloat(r.querySelector('.cust-ing-qty')?.value) || 0;
+        const unit = r.querySelector('.cust-ing-unit')?.value || 'g';
+        if (name && qty > 0) {
+          ingList.push(`${qty} ${unit === 'count' ? '' : unit} ${name}`.trim());
+        }
+      });
+
+      const totals = sumMacros(ingList);
+      customizeMealState.workingRecipe.ingredients = ingList;
+      customizeMealState.workingRecipe.kcal = Math.round(totals.kcal);
+      customizeMealState.workingRecipe.protein = Math.round(totals.protein);
+      customizeMealState.workingRecipe.fat = Math.round(totals.fat);
+      customizeMealState.workingRecipe.netCarbs = Math.round(totals.netCarbs);
+
+      macroBar.innerHTML = `
+        <span>🔥 <strong>${fmt(totals.kcal)}</strong> kcal</span>
+        <span>🥩 P: <strong>${fmt(totals.protein)}g</strong></span>
+        <span>🥑 F: <strong>${fmt(totals.fat)}g</strong></span>
+        <span>🥬 NC: <strong>${fmt(totals.netCarbs)}g</strong></span>
+      `;
+    }
+
+    function saveCustomizeMealModal() {
+      if (!customizeMealState.day || !customizeMealState.slot || !customizeMealState.workingRecipe) return;
+      recalcCustomizeMealMacros();
+      const { day, slot, workingRecipe } = customizeMealState;
+      if (!dayOverrides[day]) dayOverrides[day] = {};
+      dayOverrides[day][slot] = workingRecipe;
+
+      saveState();
+      buildCustom();
+      updateCustomTotals();
+      afterPlannerChange();
+      closeCustomizeMealModal();
+
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      showAppToast(isRo ? '✓ Modificările au fost salvate pentru această zi!' : '✓ Recipe customized for this day!');
+    }
+
+    function resetCustomizeMealModal() {
+      if (!customizeMealState.day || !customizeMealState.slot) return;
+      const { day, slot } = customizeMealState;
+      if (dayOverrides[day]) {
+        delete dayOverrides[day][slot];
+        if (Object.keys(dayOverrides[day]).length === 0) delete dayOverrides[day];
+      }
+      saveState();
+      buildCustom();
+      updateCustomTotals();
+      afterPlannerChange();
+      closeCustomizeMealModal();
+
+      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+      showAppToast(isRo ? '↺ Rețeta a fost resetată la original.' : '↺ Reset to original recipe.');
     }
 
     /* BATCH MEAL PREP & LEFTOVERS CONTROLLER */
@@ -13444,7 +13899,7 @@ const CUP_DENSITY = {
       DAYS.forEach(day => {
         const el = document.getElementById('total-' + day.replace(/\s/g, ''));
         if (el) {
-          const t = totalForDay(custom[day]);
+          const t = totalForDay(custom[day], day);
           const k = dayLevel('kcal', t.kcal), pc = dayLevel('protein', t.protein), cc = dayLevel('netCarbs', t.netCarbs);
           const r = macroPct(t);
           el.innerHTML = `
@@ -13464,29 +13919,30 @@ const CUP_DENSITY = {
       if (kpis) {
         if (activeDay && activeDay !== 'All Days') {
           // SINGLE DAY SELECTED: display EXACT SUM of the macros for the meals selected that day!
-          const t = totalForDay(custom[activeDay]);
-          const dayName = isRo ? activeDay.replace('Day', 'Ziua') : activeDay;
-          kpis.innerHTML = [
-            [isRo ? `Calorii (${dayName})` : `Kcal (${dayName})`, `${fmt(t.kcal)} kcal`, dayLevel('kcal', t.kcal)],
-            [isRo ? `Proteine (${dayName})` : `Protein (${dayName})`, `${fmt(t.protein)} g`, dayLevel('protein', t.protein)],
-            [isRo ? 'Țintă proteine' : 'Protein target', `${protTarget()} g`, ''],
-            [isRo ? `Carbohidrați neți (${dayName})` : `Net Carbs (${dayName})`, `${fmt(t.netCarbs)} g`, dayLevel('netCarbs', t.netCarbs)]
-          ].map(([l, v, cls]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${cls}">${v}</div></div>`).join('');
+          const t = totalForDay(custom[activeDay], activeDay);
+          kpis.innerHTML = `
+            <div class="planner-macro-bar">
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Calorii' : 'Calories'}</span><span class="p-val ${dayLevel('kcal', t.kcal)}">${fmt(t.kcal)}</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Proteine' : 'Protein'}</span><span class="p-val ${dayLevel('protein', t.protein)}">${fmt(t.protein)}g</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Carb Neți' : 'Net Carbs'}</span><span class="p-val ${dayLevel('netCarbs', t.netCarbs)}">${fmt(t.netCarbs)}g</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Grăsimi' : 'Fats'}</span><span class="p-val">${fmt(t.fat)}g</span></div>
+            </div>`;
         } else {
           // ALL DAYS SELECTED: display AVERAGE values across all days
           const week = DAYS.reduce((acc, day) => {
-            const t = totalForDay(custom[day]);
+            const t = totalForDay(custom[day], day);
             acc.kcal += t.kcal; acc.protein += t.protein; acc.fat += t.fat; acc.netCarbs += t.netCarbs;
             return acc;
           }, { kcal: 0, protein: 0, fat: 0, netCarbs: 0 });
           const avg = { kcal: week.kcal / DAYS.length, protein: week.protein / DAYS.length, fat: week.fat / DAYS.length, netCarbs: week.netCarbs / DAYS.length };
 
-          kpis.innerHTML = [
-            [isRo ? 'Medie kcal / zi' : 'Avg kcal/day', fmt(avg.kcal), dayLevel('kcal', avg.kcal)],
-            [isRo ? 'Medie proteine / zi' : 'Avg protein/day', fmt(avg.protein) + ' g', dayLevel('protein', avg.protein)],
-            [isRo ? 'Țintă proteine' : 'Protein target', protTarget() + ' g', ''],
-            [isRo ? 'Medie carbohidrați / zi' : 'Avg net carbs/day', fmt(avg.netCarbs) + ' g', dayLevel('netCarbs', avg.netCarbs)]
-          ].map(([l, v, cls]) => `<div class="kpi"><div class="label">${l}</div><div class="value ${cls}">${v}</div></div>`).join('');
+          kpis.innerHTML = `
+            <div class="planner-macro-bar">
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Kcal' : 'Avg Kcal'}</span><span class="p-val ${dayLevel('kcal', avg.kcal)}">${fmt(avg.kcal)}</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Prot' : 'Avg Protein'}</span><span class="p-val ${dayLevel('protein', avg.protein)}">${fmt(avg.protein)}g</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie NC' : 'Avg Net Carbs'}</span><span class="p-val ${dayLevel('netCarbs', avg.netCarbs)}">${fmt(avg.netCarbs)}g</span></div>
+              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Grăsimi' : 'Avg Fats'}</span><span class="p-val">${fmt(avg.fat)}g</span></div>
+            </div>`;
         }
       }
 
@@ -13524,9 +13980,9 @@ const CUP_DENSITY = {
       const dishes = [];
 
       SLOTS.forEach(slot => {
-        const rid = dayMeals[slot];
-        if (rid && recipeMap[rid]) {
-          dishes.push({ slot, recipe: recipeMap[rid] });
+        const rec = getSlotRecipe(day, slot);
+        if (rec) {
+          dishes.push({ slot, recipe: rec });
         }
       });
 
@@ -15946,7 +16402,7 @@ const CUP_DENSITY = {
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
           <select id="planDaySelect_${r.id}" class="slot-select" style="flex:1;min-width:90px">${DAYS.map(d => `<option value="${d}">${isRo ? d.replace('Day', 'Ziua') : d}</option>`).join('')}</select>
           <select id="planSlotSelect_${r.id}" class="slot-select" style="flex:1;min-width:110px">
-            ${isRo ? (r.meal === 'Breakfast' ? '<option value="Breakfast">Mic dejun</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Prânz</option><option value="Dinner">Cină</option>' : (r.meal === 'Side' ? '<option value="Lunch">Prânz (Garnitură)</option><option value="Dinner">Cină (Garnitură)</option><option value="Breakfast">Mic dejun</option><option value="Snack 1">Gustare 1</option>' : '<option value="Snack 1">Gustare 1</option><option value="Snack 2">Gustare 2</option>'))) : (r.meal === 'Breakfast' ? '<option value="Breakfast">Breakfast</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Lunch</option><option value="Dinner">Dinner</option>' : (r.meal === 'Side' ? '<option value="Lunch">Lunch (Side)</option><option value="Dinner">Dinner (Side)</option><option value="Breakfast">Breakfast</option><option value="Snack 1">Snack 1</option>' : '<option value="Snack 1">Snack 1</option><option value="Snack 2">Snack 2</option>')))}
+            ${isRo ? (r.meal === 'Breakfast' ? '<option value="Breakfast">Mic dejun</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Prânz</option><option value="Dinner">Cină</option>' : (r.meal === 'Side' ? '<option value="Lunch">Prânz (Garnitură)</option><option value="Dinner">Cină (Garnitură)</option><option value="Breakfast">Mic dejun</option><option value="Snack">Gustare</option>' : '<option value="Snack">Gustare</option>'))) : (r.meal === 'Breakfast' ? '<option value="Breakfast">Breakfast</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Lunch</option><option value="Dinner">Dinner</option>' : (r.meal === 'Side' ? '<option value="Lunch">Lunch (Side)</option><option value="Dinner">Dinner (Side)</option><option value="Breakfast">Breakfast</option><option value="Snack">Snack</option>' : '<option value="Snack">Snack</option>')))}
           </select>
           <button id="addPlanBtn_${r.id}" class="act-btn primary" type="button" style="flex:1;min-width:130px;justify-content:center">${isRo ? 'Adaugă în plan' : 'Add to planner'}</button>
         </div>
@@ -15993,6 +16449,9 @@ const CUP_DENSITY = {
         addPlanBtn.onclick = () => {
           const day = document.getElementById(`planDaySelect_${id}`)?.value || 'Day 1';
           const slot = document.getElementById(`planSlotSelect_${id}`)?.value || 'Lunch';
+          if (dayOverrides[day] && dayOverrides[day][slot]) {
+            delete dayOverrides[day][slot];
+          }
           custom[day][slot] = r.id;
           afterPlannerChange();
           const msg = document.getElementById(`recipeActionMsg_${id}`);
@@ -16145,7 +16604,7 @@ const CUP_DENSITY = {
       for (let i = lo; i <= hi; i++) {
         const d = DAYS[i];
         SLOTS.forEach(s => {
-          const r = recipeMap[custom[d][s]];
+          const r = getSlotRecipe(d, s);
           if (r) {
             const recipeServings = Math.max(1, parseFloat(r.servings) || 1);
             const scale = (servings || 1) / recipeServings;
@@ -18453,22 +18912,18 @@ const CUP_DENSITY = {
 
       const mealsWrap = document.getElementById('dailyMealsPreview');
       if (mealsWrap) {
-        const dayData = custom[curDay] || {};
-        const mealKeys = ['Breakfast', 'Lunch', 'Dinner', 'Snacks'];
+        const mealKeys = SLOTS;
         const activeMeals = [];
         mealKeys.forEach(m => {
-          const rec = dayData[m];
+          const rec = getSlotRecipe(curDay, m);
           if (rec && rec.name && rec.name !== 'None' && rec.name !== 'Niciuna') {
-            const mLabel = isRo ? (m === 'Breakfast' ? 'Mic dejun' : m === 'Lunch' ? 'Prânz' : m === 'Dinner' ? 'Cină' : 'Gustări') : m;
+            const mLabel = isRo ? (m === 'Breakfast' ? 'Mic dejun' : m === 'Lunch' ? 'Prânz' : m === 'Dinner' ? 'Cină' : 'Gustare') : m;
             activeMeals.push(`<span class="daily-meal-chip" title="${escapeHtml(rec.name)}"><strong>${mLabel}:</strong> ${escapeHtml(tIng(rec.name))}</span>`);
           }
         });
 
-        if (activeMeals.length > 0) {
-          mealsWrap.innerHTML = activeMeals.join('');
-        } else {
-          mealsWrap.innerHTML = `<span class="tiny muted" style="font-style:italic">${isRo ? 'Nicio masă planificată pentru astăzi. Apasă „Planifică Mese” pentru a adăuga!' : 'No meals planned for today yet. Tap "Plan Meals" to set your day!'}</span>`;
-        }
+        mealsWrap.innerHTML = activeMeals.length > 0 ? activeMeals.join('') : '';
+        mealsWrap.style.display = activeMeals.length > 0 ? 'flex' : 'none';
       }
     }
 
@@ -18576,6 +19031,22 @@ const CUP_DENSITY = {
 
       const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
       showSyncToast(isRo ? '🎯 Obiectivele personale au fost salvate și aplicate!' : '🎯 Personal goals saved and applied!');
+
+      const btn = document.getElementById('goalsSaveBtn');
+      if (btn) {
+        if (!btn._origHtml) btn._origHtml = btn.innerHTML;
+        btn.innerHTML = `<span>${isRo ? '✅ Salvat!' : '✅ Saved!'}</span>`;
+        btn.style.background = '#16a34a';
+        btn.style.borderColor = '#16a34a';
+        btn.style.color = '#ffffff';
+        if (btn._savedTimer) clearTimeout(btn._savedTimer);
+        btn._savedTimer = setTimeout(() => {
+          btn.innerHTML = btn._origHtml;
+          btn.style.background = '';
+          btn.style.borderColor = '';
+          btn.style.color = '';
+        }, 5000);
+      }
     }
 
     /* INTERACTIVE STEP-BY-STEP TUTORIAL ENGINE */
@@ -18806,7 +19277,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.6';
+    const FALLBACK_APP_VERSION = '1.1.7';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -18968,6 +19439,34 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.7',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '📱 Meniu principal reproiectat în stil lansator de aplicații mobile: 9 iconițe cu text dedesubt (Planner, Tracking, Rețete, Stoc, Cumpărături, Unități, Sincronizare, Ghid Keto, Post)',
+            '🔽 Butoanele din bara de navigare de jos optimizate la marginea ecranului (fără spațiu alb dedesubt)',
+            '🧹 Curățat textul de prisos „Nicio masă planificată” din sumarul nutrițional zilnic',
+            '✅ Feedback vizual de 5 secunde la salvarea obiectivelor personale („Salvat!”)',
+            '🥑 Opțiune nouă de sortare după Grăsimi (Fats) direct în meniul dropdown din planner și librăria de rețete',
+            '✏️ Personalizare locală a rețetelor pentru o zi anume în planner (modificare ingrediente/cantități fără a afecta rețeta master)',
+            '🥑 Afișare directă a macronutrienților (kcal, P, G, C) pe cardul fiecărei mese selectate în planner',
+            '📊 Bară compactă și elegantă cu valorile de sus din planner (Kcal, Proteine, Carbohidrați neți, Grăsimi)',
+            '🚫 Eliminat complet slotul „Snack 2” și notificarea redundantă „Tap View for details”'
+          ],
+          en: [
+            '📱 Redesigned Home menu grid into mobile app launcher icon buttons with titles underneath',
+            '🔽 Refined bottom navigation bar positioning right at the screen edge (eliminated blank gap beneath)',
+            '🧹 Removed cluttered "No meals planned" placeholder text from daily nutrition overview',
+            '✅ Added 5-second "Saved!" visual feedback on Personal Goals page',
+            '🥑 New "Fats first" sorting option directly in the planner recipe picker and library',
+            '✏️ Local recipe customization for specific planner days (adjust quantities without editing master recipe)',
+            '🥑 Direct macro breakdown (kcal, protein, fat, net carbs) displayed on every selected meal card',
+            '📊 Compact, streamlined 4-macro summary bar at top of weekly planner (Kcal, Protein, Net Carbs, Fats)',
+            '🚫 Removed "Snack 2" slot and silenced "Tap View for details" notification'
+          ]
+        }
+      },
       {
         version: '1.1.6',
         date: '20 Oct 2026',
@@ -19586,6 +20085,9 @@ const CUP_DENSITY = {
           if (!r) return;
           const slot = r.meal === 'Breakfast' ? 'Breakfast' : (r.meal === 'Snack' ? 'Snack' : 'Lunch');
           const day = activeDay === 'All Days' ? 'Day 1' : activeDay;
+          if (dayOverrides[day] && dayOverrides[day][slot]) {
+            delete dayOverrides[day][slot];
+          }
           custom[day][slot] = r.id;
           buildCustom();
           afterPlannerChange();
@@ -20663,6 +21165,19 @@ const CUP_DENSITY = {
         document.getElementById(id)?.addEventListener('input', updateGoalsLiveMath);
       });
       updateHeaderGoalsDisplay();
+
+      // Customize Meal Modal Wiring
+      document.getElementById('custMealCloseBtn')?.addEventListener('click', closeCustomizeMealModal);
+      document.getElementById('custMealCancelBtn')?.addEventListener('click', closeCustomizeMealModal);
+      document.getElementById('custMealSaveBtn')?.addEventListener('click', saveCustomizeMealModal);
+      document.getElementById('custMealResetBtn')?.addEventListener('click', resetCustomizeMealModal);
+      document.getElementById('custMealAddIngBtn')?.addEventListener('click', () => {
+        if (!customizeMealState.workingRecipe) return;
+        if (!Array.isArray(customizeMealState.workingRecipe.ingredients)) customizeMealState.workingRecipe.ingredients = [];
+        customizeMealState.workingRecipe.ingredients.push('20 g butter');
+        renderCustomizeMealRows();
+        recalcCustomizeMealMacros();
+      });
 
       applyLanguage(settings.lang || 'en');
       switchTab('home');
