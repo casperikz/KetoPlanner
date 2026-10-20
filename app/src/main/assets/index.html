@@ -2269,7 +2269,7 @@
       inset: 0;
       background: rgba(0,0,0,0.5);
       z-index: 10000;
-      display: flex;
+      display: none;
       align-items: center;
       justify-content: center;
       padding: 24px;
@@ -2278,10 +2278,15 @@
       transition: opacity .2s ease;
       cursor: pointer;
     }
-    .confirm-modal-overlay.show,
-    .confirm-modal-overlay:not(.hidden) {
+    .confirm-modal-overlay.show:not(.hidden) {
+      display: flex;
       opacity: 1;
       pointer-events: auto;
+    }
+    .confirm-modal-overlay.hidden {
+      display: none !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
     }
     .confirm-modal-box {
       background: var(--color-surface);
@@ -5652,7 +5657,7 @@
   </div>
 
   <!-- Styled Confirmation Modal -->
-  <div id="confirmModal" class="confirm-modal-overlay">
+  <div id="confirmModal" class="confirm-modal-overlay hidden">
     <div class="confirm-modal-box stack">
       <h3 id="confirmModalTitle" data-i18n="confirm_title">Are you sure?</h3>
       <p id="confirmModalText" data-i18n="confirm_desc">This action cannot be undone.</p>
@@ -5664,13 +5669,13 @@
   </div>
 
   <!-- Tutorial First Boot Prompt Modal -->
-  <div id="tutorialPromptModal" class="confirm-modal-overlay">
+  <div id="tutorialPromptModal" class="confirm-modal-overlay hidden">
     <div class="confirm-modal-box stack" style="text-align:center">
       <div style="font-size:36px;line-height:1;margin-bottom:2px">🚀</div>
       <h3 id="tutorialPromptTitle" data-i18n="tut_prompt_title">Start Interactive Tutorial?</h3>
       <p id="tutorialPromptDesc" class="muted small" style="margin-bottom:8px" data-i18n="tut_prompt_desc">Welcome to Keto Planner! Would you like a quick step-by-step tour of the features, screens, and workflows?</p>
       <div class="confirm-modal-actions" style="justify-content:center;gap:10px">
-        <button id="tutorialPromptNoBtn" class="act-btn" type="button" data-i18n="tut_prompt_no">Skip for now</button>
+        <button id="tutorialPromptNoBtn" class="act-btn" type="button" data-i18n="tut_prompt_no" onclick="closeTutorialPrompt()">Skip for now</button>
         <button id="tutorialPromptYesBtn" class="act-btn primary" type="button" data-i18n="tut_prompt_yes">Yes, Start Tour ✨</button>
       </div>
     </div>
@@ -5697,7 +5702,7 @@
   </div>
 
   <!-- App In-App Update Modal -->
-  <div id="appUpdateModal" class="confirm-modal-overlay">
+  <div id="appUpdateModal" class="confirm-modal-overlay hidden">
     <div class="confirm-modal-box stack" style="max-width:380px;text-align:left">
       <div style="display:flex;align-items:center;justify-content:space-between">
         <div style="display:flex;align-items:center;gap:8px">
@@ -5707,7 +5712,7 @@
             <span id="updateModalVer" class="tiny" style="color:var(--color-primary);font-weight:700">v1.0.1</span>
           </div>
         </div>
-        <button id="updateModalCloseBtn" class="x-btn" type="button" aria-label="Close">✕</button>
+        <button id="updateModalCloseBtn" class="x-btn" type="button" aria-label="Close" onclick="closeUpdateModal()">✕</button>
       </div>
       <div id="updateModalNotes" class="small muted" style="max-height:160px;overflow-y:auto;background:var(--color-surface-2);padding:10px 12px;border-radius:var(--radius-md);line-height:1.45;white-space:pre-wrap"></div>
       
@@ -5723,14 +5728,14 @@
       </div>
 
       <div class="confirm-modal-actions" style="margin-top:8px;gap:8px">
-        <button id="updateLaterBtn" class="act-btn" type="button" data-i18n="update_btn_later">Later</button>
+        <button id="updateLaterBtn" class="act-btn" type="button" data-i18n="update_btn_later" onclick="closeUpdateModal()">Later</button>
         <button id="updateInstallBtn" class="act-btn primary" type="button" data-i18n="update_btn_install">📥 Download & Install</button>
       </div>
     </div>
   </div>
 
   <!-- What's New / Post-Update Changelog Modal -->
-  <div id="appChangelogModal" class="confirm-modal-overlay">
+  <div id="appChangelogModal" class="confirm-modal-overlay hidden">
     <div class="confirm-modal-box stack" style="max-width:420px;text-align:left;max-height:85vh;display:flex;flex-direction:column">
       <div style="display:flex;align-items:center;justify-content:space-between;padding-bottom:8px;border-bottom:1px solid var(--color-border)">
         <div style="display:flex;align-items:center;gap:8px">
@@ -5740,7 +5745,7 @@
             <span id="changelogModalSub" class="tiny muted">Release notes</span>
           </div>
         </div>
-        <button id="changelogModalCloseBtn" class="x-btn" type="button" aria-label="Close">✕</button>
+        <button id="changelogModalCloseBtn" class="x-btn" type="button" aria-label="Close" onclick="closeChangelogModal()">✕</button>
       </div>
 
       <div id="changelogModalList" class="stack" style="overflow-y:auto;padding:10px 0;gap:10px;flex:1;max-height:55vh">
@@ -5748,7 +5753,7 @@
       </div>
 
       <div class="confirm-modal-actions" style="margin-top:6px;border-top:1px solid var(--color-border);padding-top:8px">
-        <button id="changelogGotItBtn" class="act-btn primary" type="button" style="width:100%" data-i18n="changelog_btn_got_it">🎉 Super, am înțeles!</button>
+        <button id="changelogGotItBtn" class="act-btn primary" type="button" style="width:100%" data-i18n="changelog_btn_got_it" onclick="closeChangelogModal()">🎉 Super, am înțeles!</button>
       </div>
     </div>
   </div>
@@ -11223,6 +11228,7 @@ const CUP_DENSITY = {
       const modal = document.getElementById('confirmModal');
       document.getElementById('confirmModalTitle').textContent = title;
       document.getElementById('confirmModalText').textContent = text;
+      modal.classList.remove('hidden');
       modal.classList.add('show');
       document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
@@ -11240,6 +11246,7 @@ const CUP_DENSITY = {
       }
 
       const closeConfirm = () => {
+        modal.classList.add('hidden');
         modal.classList.remove('show');
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
@@ -13449,8 +13456,14 @@ const CUP_DENSITY = {
         recipeDetail.classList.add('hidden');
         return true;
       }
+      const tutPrompt = document.getElementById('tutorialPromptModal');
+      if (tutPrompt && (!tutPrompt.classList.contains('hidden') || tutPrompt.classList.contains('show'))) {
+        closeTutorialPrompt();
+        return true;
+      }
       const confirmModal = document.getElementById('confirmModal');
-      if (confirmModal && confirmModal.classList.contains('show')) {
+      if (confirmModal && (!confirmModal.classList.contains('hidden') || confirmModal.classList.contains('show'))) {
+        confirmModal.classList.add('hidden');
         confirmModal.classList.remove('show');
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
@@ -19177,6 +19190,7 @@ const CUP_DENSITY = {
     function showTutorialPrompt() {
       const modal = document.getElementById('tutorialPromptModal');
       if (!modal) return;
+      modal.classList.remove('hidden');
       modal.classList.add('show');
       document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
@@ -19184,7 +19198,10 @@ const CUP_DENSITY = {
 
     function closeTutorialPrompt() {
       const modal = document.getElementById('tutorialPromptModal');
-      if (modal) modal.classList.remove('show');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('show');
+      }
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
@@ -19317,7 +19334,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.9';
+    const FALLBACK_APP_VERSION = '1.2.0';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -19422,6 +19439,7 @@ const CUP_DENSITY = {
         installBtn.textContent = isRo ? '📥 Descarcă și Instalează' : '📥 Download & Install';
       }
       if (modal) {
+        modal.classList.remove('hidden');
         modal.classList.add('show');
         document.documentElement.classList.add('modal-open');
         document.body.classList.add('modal-open');
@@ -19430,7 +19448,10 @@ const CUP_DENSITY = {
 
     function closeUpdateModal() {
       const modal = document.getElementById('appUpdateModal');
-      if (modal) modal.classList.remove('show');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('show');
+      }
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
@@ -19485,6 +19506,20 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.2.0',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '🚀 Remediere blocare ecran la pornire: rezolvată afișarea automată a ferestrei de noutăți și deblocarea definitivă a butoanelor de închidere',
+            '🔒 Toate ferestrele modale au fost izolate cu starea ascunsă garantată (hidden) și afișare strict controlată prin comenzi'
+          ],
+          en: [
+            '🚀 Fixed modal lockup on startup: resolved unpopulated changelog popup and unlocked Got It button',
+            '🔒 All overlay modals now strictly default to hidden with bulletproof close handlers'
+          ]
+        }
+      },
       {
         version: '1.1.9',
         date: '20 Oct 2026',
@@ -19967,6 +20002,7 @@ const CUP_DENSITY = {
       });
 
       if (modal) {
+        modal.classList.remove('hidden');
         modal.classList.add('show');
         document.documentElement.classList.add('modal-open');
         document.body.classList.add('modal-open');
@@ -19975,7 +20011,10 @@ const CUP_DENSITY = {
 
     function closeChangelogModal() {
       const modal = document.getElementById('appChangelogModal');
-      if (modal) modal.classList.remove('show');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('show');
+      }
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       // Mark current version as seen so it will NOT pop up again until a new update is installed
