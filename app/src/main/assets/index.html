@@ -499,19 +499,22 @@
 
     /* Layout Containers */
     .main-content {
-      padding: var(--space-4);
+      padding: 12px 14px;
       max-width: 800px;
       margin: 0 auto;
       width: 100%;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
     .panel {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
       box-shadow: var(--shadow-sm);
-      padding: var(--space-4);
+      padding: 12px 14px;
       min-width: 0;
       max-width: 100%;
+      width: 100%;
       box-sizing: border-box;
       overflow-x: hidden;
     }
@@ -519,14 +522,14 @@
       overflow: visible;
       overflow-x: visible;
     }
-    .stack { display: grid; gap: var(--space-4); min-width: 0; max-width: 100%; }
-    .main-content {
-      padding: var(--space-4);
-      max-width: 800px;
-      margin: 0 auto;
+    .stack {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr);
+      gap: var(--space-4);
+      min-width: 0;
+      max-width: 100%;
       width: 100%;
       box-sizing: border-box;
-      overflow-x: clip;
     }
     section[data-tab="fasting"] {
       width: 100%;
@@ -2895,83 +2898,117 @@
 
     /* Health & Evolution Tracker Styles */
     section[data-tab="health"] {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      display: block !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      overflow-x: hidden !important;
+      box-sizing: border-box !important;
     }
-    section[data-tab="health"] .panel {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-      overflow-x: hidden;
-      padding: 12px 14px;
+    section[data-tab="health"] .panel,
+    .health-panel {
+      display: flex !important;
+      flex-direction: column !important;
+      gap: 12px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow-x: hidden !important;
+      padding: 12px 14px !important;
+    }
+    section[data-tab="health"] .panel > * {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
     }
     .health-summary-row {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 8px;
-      margin-bottom: 12px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      display: grid !important;
+      grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+      gap: 8px !important;
+      margin-bottom: 2px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
     }
     @media (min-width: 600px) {
       .health-summary-row {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
       }
     }
     .health-kpi-chip {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
-      padding: 10px 12px;
+      padding: 8px 10px;
       display: flex;
       flex-direction: column;
       gap: 2px;
       box-shadow: var(--shadow-sm);
-      min-width: 0;
-      box-sizing: border-box;
+      min-width: 0 !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
     }
     .health-kpi-chip .kpi-label {
-      font-size: 11px;
-      font-weight: 600;
+      font-size: 10px;
+      font-weight: 700;
       color: var(--color-text-muted);
       text-transform: uppercase;
-      letter-spacing: 0.4px;
+      letter-spacing: 0.3px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      min-width: 0;
+      display: block;
+      width: 100%;
     }
     .health-kpi-chip .kpi-val {
-      font-size: 1.25rem;
+      font-size: 1.15rem;
       font-weight: 800;
       color: var(--color-text);
       font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      min-width: 0;
+      display: block;
+      width: 100%;
     }
     .health-form-panel {
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       padding: 12px 14px;
-      margin-bottom: 12px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      margin-bottom: 2px;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
     }
     .health-form-grid {
-      display: grid;
-      grid-template-columns: 1fr;
-      gap: 10px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      display: grid !important;
+      grid-template-columns: minmax(0, 1fr) !important;
+      gap: 10px !important;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
     }
     @media (min-width: 600px) {
       .health-form-grid {
-        grid-template-columns: 1fr 1fr;
+        grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
       }
+    }
+    .health-input-group {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
     }
     .health-input-group label {
       display: block;
@@ -2982,8 +3019,9 @@
     }
     .health-input-group input,
     .health-input-group select {
-      width: 100%;
-      box-sizing: border-box;
+      width: 100% !important;
+      max-width: 100% !important;
+      box-sizing: border-box !important;
       background: var(--color-surface);
       color: var(--color-text);
       border: 1px solid var(--color-border);
@@ -3023,47 +3061,58 @@
       border: 1px solid rgba(37,99,235,0.3);
       border-radius: var(--radius-lg);
       padding: 10px 14px;
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-      margin-bottom: 12px;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      margin-bottom: 2px;
+      overflow: hidden !important;
     }
     .health-controls-row {
       display: flex;
-      flex-wrap: wrap;
-      justify-content: space-between;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
+      flex-direction: column;
+      gap: 8px;
+      align-items: stretch;
+      padding: 8px 10px;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      margin-bottom: 12px;
+      margin-bottom: 2px;
       box-shadow: var(--shadow-sm);
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
+    @media (min-width: 520px) {
+      .health-controls-row {
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
     .health-chart-container {
       position: relative;
-      height: 330px;
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
+      height: 280px;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 10px 12px;
-      box-sizing: border-box;
-      margin-bottom: 12px;
+      padding: 8px 10px;
+      box-sizing: border-box !important;
+      margin-bottom: 2px;
       box-shadow: var(--shadow-sm);
+      overflow: hidden !important;
     }
     .health-chart-container canvas {
       max-width: 100% !important;
       max-height: 100% !important;
       width: 100% !important;
-      display: block;
-      box-sizing: border-box;
+      display: block !important;
+      box-sizing: border-box !important;
     }
 
     .health-forecast-box {
@@ -3071,12 +3120,14 @@
       color: #f8fafc;
       border: 1px solid #312e81;
       border-radius: var(--radius-lg);
-      padding: 14px 16px;
-      margin-bottom: 12px;
+      padding: 12px 14px;
+      margin-bottom: 2px;
       box-shadow: var(--shadow-md);
-      width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
     }
     [data-theme="dark"] .health-forecast-box {
       background: linear-gradient(135deg, #17153a 0%, #090d16 100%);
@@ -3089,21 +3140,30 @@
       letter-spacing: 0.5px;
       font-variant-numeric: tabular-nums;
     }
+    section[data-tab="health"] details {
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow: hidden !important;
+    }
     .health-table-wrap {
-      width: 100%;
-      max-width: 100%;
-      min-width: 0;
-      box-sizing: border-box;
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch;
+      width: 100% !important;
+      max-width: 100% !important;
+      min-width: 0 !important;
+      box-sizing: border-box !important;
+      overflow-x: auto !important;
+      -webkit-overflow-scrolling: touch !important;
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
       margin-top: 8px;
+      display: block !important;
     }
 
     .health-history-table {
-      width: 100%;
-      border-collapse: collapse;
+      width: 100% !important;
+      min-width: 520px !important;
+      border-collapse: collapse !important;
       font-size: var(--text-xs);
       text-align: left;
     }
@@ -3398,8 +3458,8 @@
     </section>
 
     <!-- HEALTH & EVOLUTION TRACKER -->
-    <section data-tab="health" class="hidden stack">
-      <div class="panel stack">
+    <section data-tab="health" class="hidden">
+      <div class="panel health-panel">
         <div class="section-title">
           <div>
             <h2 style="font-size:var(--text-lg)" data-i18n="health_title">📈 Monitorizare Sănătate & Evoluție</h2>
@@ -3571,9 +3631,6 @@
             </table>
           </div>
         </details>
-      </div>
-    </section>
-
       </div>
     </section>
 
@@ -11489,8 +11546,8 @@ const CUP_DENSITY = {
         : (isRo ? 'Fără efort' : 'None');
 
       resDiv.innerHTML = `
-        <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:12px">
-          <div style="flex:1;min-width:220px">
+        <div style="display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box">
+          <div style="width:100%">
             <div style="color:#4ade80;font-weight:700;font-size:var(--text-sm);margin-bottom:6px;display:flex;align-items:center;gap:6px">
               <span>✓</span> ${isRo ? 'Analiză Calculată cu Succes' : 'Simulation Calculated'}
             </div>
@@ -11509,7 +11566,7 @@ const CUP_DENSITY = {
               </div>
             </div>
           </div>
-          <div style="background:rgba(2,6,23,0.85);border:1px solid #334155;border-radius:var(--radius-md);padding:14px 18px;text-align:center;min-width:160px">
+          <div style="background:rgba(2,6,23,0.85);border:1px solid #334155;border-radius:var(--radius-md);padding:12px 14px;text-align:center;width:100%;box-sizing:border-box">
             <span style="font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:700;letter-spacing:0.5px;display:block">
               ${isRo ? 'Greutate Estimată (4 Săpt)' : 'Est. Weight (4 Weeks)'}
             </span>
@@ -17195,7 +17252,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.0';
+    const FALLBACK_APP_VERSION = '1.1.1';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -17357,6 +17414,24 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.1',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '📱 Încadrare ecran rezolvată definitiv: lățime 100% fluidă și eliminarea oricărei revărsări orizontale a cardurilor',
+            '📐 Structură flex-column pentru secțiunea de sănătate ce previne blocarea lățimii din tabele mari',
+            '📊 KPI chips auto-ajustabile cu etichete truncate elegant și ecran optimizat pentru mobile',
+            '🧹 Îndepărtat etichete DOM duplicate care puteau întrerupe containerul principal'
+          ],
+          en: [
+            '📱 Fixed mobile screen framing: cards and panels now fit cleanly within 100% viewport width without horizontal blowout',
+            '📐 Flexible column architecture for Health tracker preventing table content from expanding container',
+            '📊 Fluid KPI chips with clean text containment designed for all smartphone screen sizes',
+            '🧹 Removed duplicate DOM tags to maintain structural layout integrity'
+          ]
+        }
+      },
       {
         version: '1.1.0',
         date: '20 Oct 2026',
