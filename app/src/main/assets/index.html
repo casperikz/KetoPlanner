@@ -3609,7 +3609,8 @@
           </summary>
           <div style="display:flex;justify-content:space-between;align-items:center;margin:8px 0;gap:8px;flex-wrap:wrap">
             <span class="tiny muted" data-i18n="health_history_hint">Istoricul măsurătorilor biometrice</span>
-            <div style="display:flex;gap:6px">
+            <div style="display:flex;gap:6px;flex-wrap:wrap">
+              <button id="healthImportTableBtn" class="act-btn primary small" type="button"><span data-i18n="health_btn_import_photo">📷 Importă Tabel / Poză</span></button>
               <button id="healthSeedDemoBtn" class="act-btn small" type="button" data-i18n="health_btn_restore_demo">📥 Încarcă demo</button>
               <button id="healthClearDemoBtn" class="act-btn danger small" type="button" data-i18n="health_btn_clear_demo">🗑️ Șterge datele demo</button>
             </div>
@@ -4076,6 +4077,15 @@
       <div class="panel stack">
         <h3 data-i18n="settings_store_title">Store / Brand Notes</h3>
         <p class="muted tiny" data-i18n="settings_store_desc">Notes shown next to items on shopping list.</p>
+        <div style="display:flex;gap:6px;flex-direction:column;margin-bottom:8px">
+          <input type="text" id="storeNoteSearchFilter" class="search" placeholder="Search / filter store notes..." autocomplete="off">
+          <div style="display:flex;gap:6px;align-items:center">
+            <input type="text" id="storeQuickAddName" class="search" list="macroIngredientsList" placeholder="Ingredient from Macro DB..." style="flex:1" autocomplete="off">
+            <input type="text" id="storeQuickAddVal" class="search" placeholder="Store / Note (e.g. Lidl)..." style="flex:1" autocomplete="off">
+            <button id="storeQuickAddBtn" class="act-btn primary small" type="button" style="white-space:nowrap">+ Add</button>
+          </div>
+        </div>
+        <datalist id="macroIngredientsList"></datalist>
         <div id="storeRows" class="stack"></div>
         <button id="storeAddBtn" class="act-btn" type="button"><span data-i18n="settings_store_add">+ Add store note</span></button>
       </div>
@@ -5216,6 +5226,73 @@
     </div>
   </div>
 
+  <!-- Health Biometric Photo & Table Import Modal -->
+  <div id="healthTableImportModal" class="barcode-modal hidden">
+    <div class="pantry-backdrop" id="healthImportBackdrop"></div>
+    <div class="pantry-dialog" style="max-width:540px;max-height:92vh;display:flex;flex-direction:column">
+      <div class="pantry-dialog-header">
+        <div>
+          <h3 style="margin:0;font-size:var(--text-lg)" data-i18n="health_import_title">📷 Import Biometric Data from Photo / Excel</h3>
+          <span class="muted tiny" data-i18n="health_import_sub">Scan Excel screenshot, printed sheet, or paste spreadsheet text</span>
+        </div>
+        <button id="healthImportCloseBtn" class="x-btn" type="button">✕</button>
+      </div>
+      <div class="pantry-dialog-body" style="overflow-y:auto;flex:1;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:center">
+          <div style="display:flex;gap:6px;flex-wrap:wrap;flex:1">
+            <button id="healthPhotoCamBtn" class="act-btn small primary" type="button">
+              <span>📷 Camera</span>
+            </button>
+            <button id="healthPhotoGalleryBtn" class="act-btn small" type="button">
+              <span>🖼️ Gallery / Screenshot</span>
+            </button>
+          </div>
+          <input id="healthPhotoCamInput" type="file" accept="image/*" capture="environment" style="display:none">
+          <input id="healthPhotoGalleryInput" type="file" accept="image/*" style="display:none">
+        </div>
+        <div id="healthImportOcrStatus" class="tiny muted" style="min-height:16px" data-i18n="health_import_ocr_ready">Select photo or paste spreadsheet text</div>
+
+        <details id="healthRawTextDetails">
+          <summary class="small font-bold" style="cursor:pointer;color:var(--color-primary);margin-bottom:4px">
+            📋 Raw OCR Text / Paste Spreadsheet Rows (Tap to expand)
+          </summary>
+          <textarea id="healthImportRawText" class="search" rows="4" placeholder="Paste rows from Excel (e.g. 29.09 Tuesday 0.6 74 6.83 83)..." style="width:100%;font-family:monospace;font-size:11px"></textarea>
+          <div style="display:flex;justify-content:flex-end;margin-top:4px">
+            <button id="healthImportReparseBtn" class="act-btn small" type="button">🔄 Parse Text</button>
+          </div>
+        </details>
+
+        <div>
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:4px">
+            <strong class="small">Parsed Entries (<span id="healthImportParsedCount">0</span>)</strong>
+            <button id="healthImportAddManualRowBtn" class="act-btn small" type="button" style="font-size:10px;padding:2px 6px">+ Add row</button>
+          </div>
+          <div style="max-height:240px;overflow-y:auto;border:1px solid var(--color-border);border-radius:var(--radius-md)">
+            <table class="health-history-table" style="font-size:11px;margin:0">
+              <thead>
+                <tr>
+                  <th style="min-width:90px">Date</th>
+                  <th>Weight (kg)</th>
+                  <th>Glucose</th>
+                  <th>Ketones</th>
+                  <th>GKI</th>
+                  <th style="width:24px"></th>
+                </tr>
+              </thead>
+              <tbody id="healthImportParsedRowsBody">
+                <tr><td colspan="6" class="muted tiny" style="text-align:center;padding:12px">No parsed rows yet. Take photo or paste text above.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="pantry-dialog-footer" style="padding:10px;border-top:1px solid var(--color-border);display:flex;justify-content:flex-end;gap:8px">
+        <button id="healthImportCancelBtn" class="panel small" type="button">Cancel</button>
+        <button id="healthImportCommitBtn" class="act-btn primary small" type="button" data-i18n="health_import_btn">📥 Import Entries</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Recipe Photo Import Modal -->
   <div id="recipePhotoImportModal" class="barcode-modal hidden">
     <div class="pantry-backdrop" id="photoImportBackdrop"></div>
@@ -5641,6 +5718,11 @@ const I18N = {
     health_btn_restore_demo: "Restore Demo Data",
     health_btn_clear_demo: "Clear Demo Data",
     health_btn_clear_all: "Clear History",
+    health_btn_import_photo: "📷 Import Table / Photo",
+    health_import_title: "📷 Import Biometric Data from Photo / Excel",
+    health_import_sub: "Scan Excel screenshot, printed sheet, or paste spreadsheet text",
+    health_import_ocr_ready: "Select photo or paste spreadsheet text",
+    health_import_btn: "📥 Import Entries",
     settings_theme_card_title: "Theme & Appearance",
     settings_theme_card_desc: "Choose Light or Dark mode:",
     settings_theme_light: "Light (Luminos)",
@@ -6149,6 +6231,11 @@ const I18N = {
     health_btn_restore_demo: "Încarcă date demo",
     health_btn_clear_demo: "Șterge datele demo",
     health_btn_clear_all: "Șterge tot istoricul",
+    health_btn_import_photo: "📷 Importă Tabel / Poză",
+    health_import_title: "📷 Importă Date Biometrice din Poză / Excel",
+    health_import_sub: "Scanează tabel din Excel, foaie tipărită sau lipește text direct",
+    health_import_ocr_ready: "Selectează o poză sau lipește text din Excel",
+    health_import_btn: "📥 Importă în Istoric",
     settings_theme_card_title: "Aspect Vizual (Temă)",
     settings_theme_card_desc: "Alege modul luminos sau întunecat:",
     settings_theme_light: "Mod Luminos",
@@ -9241,10 +9328,35 @@ const EN_TO_RO_ING = {
     "eggs (fresh)":  "oua (proaspete)",
     "milbona skyr":  "skyr milbona",
     "butter (82%)":  "unt (82%)",
-    "cheddar cheese":  "branza cheddar"
+    "cheddar cheese":  "branza cheddar",
+    "milk": "lapte",
+    "whole milk": "lapte integral",
+    "cow's milk": "lapte de vaca",
+    "almond milk": "lapte de migdale",
+    "coconut milk": "lapte de cocos",
+    "soy milk": "lapte de soia",
+    "oat milk": "lapte de ovaz",
+    "cashew milk": "lapte de caju",
+    "plant milk": "lapte vegetal",
+    "sour cream": "smantana",
+    "butter": "unt",
+    "cottage cheese": "branza cottage"
 };
 
 const RO_TO_EN_ING = {
+    "lapte": "milk",
+    "lapte integral": "whole milk",
+    "lapte de vaca": "milk",
+    "lapte de migdale": "almond milk",
+    "lapte de cocos": "coconut milk",
+    "lapte de soia": "soy milk",
+    "lapte de ovaz": "oat milk",
+    "lapte de caju": "cashew milk",
+    "lapte vegetal": "plant milk",
+    "lapte vegetal neindulcit": "unsweetened plant milk",
+    "smantana": "sour cream",
+    "unt": "butter",
+    "branza cottage": "cottage cheese",
     "esenta de vanilie":  "vanilla",
     "fulgi de chili optional":  "chili flakes optional",
     "jumari crocante de porc":  "pork rinds",
@@ -9585,7 +9697,7 @@ const DEFAULT_N = {
       "coconut oil": [862, 0, 100, 0], "coconut butter": [660, 6, 65, 8], "mayonnaise": [680, 1, 75, 1], "cream": [335, 2.2, 35, 2.8],
       "cream 35%": [335, 2.2, 35, 2.8], "heavy cream": [340, 2.8, 36, 2.7], "cooking cream": [195, 3, 19, 4],
       "sour cream": [290, 2.4, 30, 2.8], "sour cream 30%": [290, 2.4, 30, 2.8],
-      "coconut milk": [230, 2, 24, 3], "almond milk": [15, 0.5, 1.2, 0.3],
+      "coconut milk": [230, 2, 24, 3], "almond milk": [15, 0.5, 1.2, 0.3], "milk": [62, 3.3, 3.3, 4.8], "whole milk": [62, 3.3, 3.3, 4.8], "soy milk": [33, 2.8, 1.8, 1.6], "oat milk": [45, 1.0, 1.5, 6.5], "plant milk": [25, 0.8, 1.5, 1.0],
       "almonds": [579, 21, 50, 10], "walnuts": [654, 15, 65, 7], "pecans": [691, 9, 72, 4], "macadamias": [718, 8, 76, 5],
       "flaked almonds": [579, 21, 50, 10], "almond butter": [614, 21, 56, 10], "peanut butter": [588, 25, 50, 8], "almond flour": [580, 21, 50, 10],
       "coconut flour": [400, 18, 14, 20], "lupin flour": [320, 40, 9, 12], "chia seeds": [486, 17, 31, 8], "flaxseed": [534, 18, 42, 2],
@@ -11194,6 +11306,8 @@ const CUP_DENSITY = {
       }
     }
 
+    let activeEditingHealthId = null;
+
     function saveHealthData() {
       const dateInp = document.getElementById('healthDatePicker');
       const weightInp = document.getElementById('healthWeight');
@@ -11218,7 +11332,13 @@ const CUP_DENSITY = {
       const exInt = (exType && intSel) ? intSel.value : '';
       const isRo = ((settings && settings.lang) === 'ro');
 
-      const existingIdx = healthLog.findIndex(e => e.date === date);
+      let existingIdx = -1;
+      if (activeEditingHealthId) {
+        existingIdx = healthLog.findIndex(e => e.id === activeEditingHealthId);
+      }
+      if (existingIdx < 0) {
+        existingIdx = healthLog.findIndex(e => e.date === date);
+      }
       const existing = existingIdx >= 0 ? healthLog[existingIdx] : null;
 
       const finalWeight = (inputWeight !== null) ? inputWeight : (existing ? existing.weight : null);
@@ -11259,6 +11379,10 @@ const CUP_DENSITY = {
         healthLog[existingIdx] = entry;
       } else {
         healthLog.push(entry);
+      }
+
+      if (activeEditingHealthId) {
+        cancelEditHealthEntry();
       }
 
       healthLog.sort((a, b) => new Date(a.date) - new Date(b.date));
@@ -11320,6 +11444,15 @@ const CUP_DENSITY = {
       const showKetones = document.getElementById('healthShowKetones')?.checked !== false;
       const showGki = document.getElementById('healthShowGki')?.checked !== false;
 
+      const hasWeights = weights.some(w => typeof w === 'number' && !isNaN(w));
+      const hasGlucoses = glucoses.some(g => typeof g === 'number' && !isNaN(g));
+      const hasKetones = ketones.some(k => typeof k === 'number' && !isNaN(k));
+      const hasGkis = gkis.some(g => typeof g === 'number' && !isNaN(g));
+
+      const dispWeight = showWeight && hasWeights;
+      const dispGlucose = showGlucose && hasGlucoses;
+      const dispKetones = (showKetones || showGki) && (hasKetones || hasGkis);
+
       if (healthChartInstance) {
         healthChartInstance.data.labels = labels;
         healthChartInstance.data.datasets[0].data = weights;
@@ -11336,10 +11469,14 @@ const CUP_DENSITY = {
         healthChartInstance.data.datasets[3].spanGaps = true;
 
         healthChartInstance.options.scales.x.ticks.color = textColor;
-        healthChartInstance.options.scales.yWeight.ticks.color = textColor;
+        healthChartInstance.options.scales.yWeight.display = dispWeight;
+        healthChartInstance.options.scales.yWeight.ticks.color = '#2563eb';
         healthChartInstance.options.scales.yWeight.grid.color = gridColor;
-        healthChartInstance.options.scales.yGlucose.ticks.color = textColor;
-        healthChartInstance.options.scales.yKetones.ticks.color = textColor;
+        healthChartInstance.options.scales.yGlucose.display = dispGlucose;
+        healthChartInstance.options.scales.yGlucose.ticks.color = '#dc2626';
+        healthChartInstance.options.scales.yGlucose.position = (!dispWeight && dispGlucose) ? 'left' : 'right';
+        healthChartInstance.options.scales.yKetones.display = dispKetones;
+        healthChartInstance.options.scales.yKetones.ticks.color = '#16a34a';
 
         healthChartInstance.update();
         return;
@@ -11410,6 +11547,9 @@ const CUP_DENSITY = {
           responsive: true,
           maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
+          layout: {
+            padding: { left: 4, right: 6, top: 12, bottom: 4 }
+          },
           plugins: {
             legend: { display: false },
             tooltip: {
@@ -11423,30 +11563,51 @@ const CUP_DENSITY = {
           scales: {
             x: {
               grid: { display: false },
-              ticks: { color: textColor, font: { size: 11 } }
+              ticks: { color: textColor, font: { size: 10 } }
             },
             yWeight: {
               type: 'linear',
-              display: true,
+              display: dispWeight,
               position: 'left',
-              title: { display: true, text: 'Greutate (kg)', color: '#2563eb', font: { weight: 'bold', size: 11 } },
-              ticks: { color: textColor, font: { size: 11 } },
+              title: { display: false },
+              beginAtZero: false,
+              grace: '8%',
+              ticks: {
+                color: '#2563eb',
+                font: { size: 10, weight: 'bold' },
+                maxTicksLimit: 5,
+                callback: v => `${v} kg`
+              },
               grid: { color: gridColor }
             },
             yGlucose: {
               type: 'linear',
-              display: true,
-              position: 'right',
-              title: { display: true, text: 'Glicemie (mg/dL)', color: '#dc2626', font: { weight: 'bold', size: 11 } },
-              ticks: { color: textColor, font: { size: 11 } },
+              display: dispGlucose,
+              position: (!dispWeight && dispGlucose) ? 'left' : 'right',
+              title: { display: false },
+              beginAtZero: false,
+              grace: '8%',
+              ticks: {
+                color: '#dc2626',
+                font: { size: 10, weight: 'bold' },
+                maxTicksLimit: 4,
+                callback: v => `${v} mg`
+              },
               grid: { drawOnChartArea: false }
             },
             yKetones: {
               type: 'linear',
-              display: true,
+              display: dispKetones,
               position: 'right',
-              title: { display: true, text: 'Cetoză / GKI', color: '#16a34a', font: { weight: 'bold', size: 11 } },
-              ticks: { color: textColor, font: { size: 11 } },
+              title: { display: false },
+              beginAtZero: true,
+              grace: '10%',
+              ticks: {
+                color: '#16a34a',
+                font: { size: 10, weight: 'bold' },
+                maxTicksLimit: 4,
+                callback: v => `${v}`
+              },
               grid: { drawOnChartArea: false }
             }
           }
@@ -11460,10 +11621,10 @@ const CUP_DENSITY = {
       const textColor = isDark ? '#cbd5e1' : '#475569';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
       healthChartInstance.options.scales.x.ticks.color = textColor;
-      healthChartInstance.options.scales.yWeight.ticks.color = textColor;
+      healthChartInstance.options.scales.yWeight.ticks.color = '#2563eb';
       healthChartInstance.options.scales.yWeight.grid.color = gridColor;
-      healthChartInstance.options.scales.yGlucose.ticks.color = textColor;
-      healthChartInstance.options.scales.yKetones.ticks.color = textColor;
+      healthChartInstance.options.scales.yGlucose.ticks.color = '#dc2626';
+      healthChartInstance.options.scales.yKetones.ticks.color = '#16a34a';
       healthChartInstance.update();
     }
 
@@ -11612,11 +11773,16 @@ const CUP_DENSITY = {
           <td>${ketStr}</td>
           <td>${gkiStr}</td>
           <td class="tiny muted">${exText}</td>
-          <td style="text-align:right">
-            <button class="x-btn" type="button" title="Delete" style="font-size:12px;padding:2px 6px">✕</button>
+          <td style="text-align:right;white-space:nowrap">
+            <button class="act-btn small health-edit-btn" data-edit-id="${entry.id}" type="button" title="${isRo ? 'Editează' : 'Edit'}" style="font-size:11px;padding:3px 7px;margin-right:4px">✏️</button>
+            <button class="x-btn" data-del-id="${entry.id}" type="button" title="${isRo ? 'Șterge' : 'Delete'}" style="font-size:12px;padding:3px 6px">✕</button>
           </td>
         `;
 
+        tr.querySelector('.health-edit-btn')?.addEventListener('click', (e) => {
+          e.stopPropagation();
+          editHealthEntry(entry.id);
+        });
         tr.querySelector('.x-btn')?.addEventListener('click', (e) => {
           e.stopPropagation();
           deleteHealthEntry(entry.id);
@@ -11624,6 +11790,371 @@ const CUP_DENSITY = {
 
         tbody.appendChild(tr);
       });
+    }
+
+    function editHealthEntry(id) {
+      const entry = healthLog.find(e => e.id === id);
+      if (!entry) return;
+      const isRo = ((settings && settings.lang) === 'ro');
+      activeEditingHealthId = id;
+
+      const dateInp = document.getElementById('healthDatePicker');
+      if (dateInp) dateInp.value = entry.date || '';
+      const wInp = document.getElementById('healthWeight');
+      if (wInp) wInp.value = (entry.weight != null) ? entry.weight : '';
+      const gInp = document.getElementById('healthGlucose');
+      if (gInp) gInp.value = (entry.glucose != null) ? entry.glucose : '';
+      const kInp = document.getElementById('healthKetones');
+      if (kInp) kInp.value = (entry.ketones != null) ? entry.ketones : '';
+      const exType = document.getElementById('healthExerciseType');
+      if (exType) {
+        exType.value = entry.exerciseType || '';
+        updateExerciseIntensities();
+      }
+      const exInt = document.getElementById('healthExerciseIntensity');
+      if (exInt) exInt.value = entry.exerciseIntensity || '';
+      const exDur = document.getElementById('healthExerciseDuration');
+      if (exDur) exDur.value = (entry.duration != null) ? entry.duration : '';
+
+      calculateLiveGKI();
+
+      const saveBtn = document.getElementById('healthSaveBtn');
+      if (saveBtn) {
+        saveBtn.innerHTML = `💾 <span>${isRo ? 'Salvează Modificările' : 'Update Entry'}</span>`;
+      }
+      let cancelBtn = document.getElementById('healthCancelEditBtn');
+      if (!cancelBtn && saveBtn && saveBtn.parentElement) {
+        cancelBtn = document.createElement('button');
+        cancelBtn.id = 'healthCancelEditBtn';
+        cancelBtn.className = 'act-btn small';
+        cancelBtn.type = 'button';
+        cancelBtn.style.marginLeft = '6px';
+        cancelBtn.textContent = isRo ? 'Anulează' : 'Cancel';
+        cancelBtn.onclick = cancelEditHealthEntry;
+        saveBtn.parentElement.appendChild(cancelBtn);
+      } else if (cancelBtn) {
+        cancelBtn.classList.remove('hidden');
+      }
+
+      document.getElementById('healthDatePicker')?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      showAppToast(isRo ? `Editare intrare din ${entry.date}` : `Editing entry for ${entry.date}`);
+    }
+
+    function cancelEditHealthEntry() {
+      activeEditingHealthId = null;
+      const isRo = ((settings && settings.lang) === 'ro');
+      const saveBtn = document.getElementById('healthSaveBtn');
+      if (saveBtn) {
+        saveBtn.innerHTML = `💾 <span data-i18n="health_btn_save">${isRo ? 'Salvează Datele Zilei' : 'Save Health Entry'}</span>`;
+      }
+      const cancelBtn = document.getElementById('healthCancelEditBtn');
+      if (cancelBtn) cancelBtn.remove();
+    }
+
+    let parsedHealthImportRows = [];
+
+    function openHealthImportModal() {
+      const modal = document.getElementById('healthTableImportModal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      document.body.classList.add('modal-open');
+      const isRo = ((settings && settings.lang) === 'ro');
+      const statusEl = document.getElementById('healthImportOcrStatus');
+      if (statusEl) statusEl.textContent = isRo ? 'Selectează o poză sau lipește text din Excel' : 'Select photo or paste spreadsheet text';
+      parsedHealthImportRows = [];
+      renderHealthImportRows();
+    }
+
+    function closeHealthImportModal() {
+      const modal = document.getElementById('healthTableImportModal');
+      if (!modal) return;
+      modal.classList.add('hidden');
+      document.body.classList.remove('modal-open');
+    }
+
+    function handleHealthPhotoSelect(file) {
+      if (!file) return;
+      const isRo = ((settings && settings.lang) === 'ro');
+      const statusEl = document.getElementById('healthImportOcrStatus');
+      if (statusEl) statusEl.textContent = isRo ? 'Procesare imagine pentru OCR... ⏳' : 'Preprocessing image for OCR... ⏳';
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const img = new Image();
+        img.onload = () => {
+          const maxDim = 2400;
+          let w = img.width, h = img.height;
+          if (w > maxDim || h > maxDim) {
+            if (w > h) { h = Math.round((h * maxDim) / w); w = maxDim; }
+            else { w = Math.round((w * maxDim) / h); h = maxDim; }
+          }
+          const canvas = document.createElement('canvas');
+          canvas.width = w; canvas.height = h;
+          const ctx = canvas.getContext('2d');
+          ctx.drawImage(img, 0, 0, w, h);
+
+          const imgData = ctx.getImageData(0, 0, w, h);
+          const data = imgData.data;
+          let darkCount = 0, totalSamples = 0;
+          const step = Math.max(4, Math.floor(data.length / (8000 * 4))) * 4;
+          for (let i = 0; i < data.length; i += step) {
+            const lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+            if (lum < 125) darkCount++;
+            totalSamples++;
+          }
+          const isDark = (darkCount / totalSamples) > 0.52;
+          const contrast = 1.45;
+          for (let i = 0; i < data.length; i += 4) {
+            let lum = 0.299 * data[i] + 0.587 * data[i + 1] + 0.114 * data[i + 2];
+            if (isDark) lum = 255 - lum;
+            lum = ((lum - 128) * contrast) + 128;
+            lum = Math.max(0, Math.min(255, Math.round(lum)));
+            data[i] = lum; data[i + 1] = lum; data[i + 2] = lum;
+          }
+          ctx.putImageData(imgData, 0, 0);
+
+          if (typeof Tesseract === 'undefined') {
+            if (statusEl) statusEl.textContent = isRo ? 'OCR indisponibil offline. Lipește textul mai jos:' : 'OCR unavailable offline. Paste spreadsheet text below:';
+            document.getElementById('healthRawTextDetails')?.setAttribute('open', '');
+            document.getElementById('healthImportRawText')?.focus();
+            return;
+          }
+
+          if (statusEl) statusEl.textContent = isRo ? 'Scanare tabel biometric cu OCR... ⏳' : 'Scanning biometric table with OCR... ⏳';
+          Tesseract.recognize(canvas, 'eng', {
+            logger: m => {
+              if (m.status === 'recognizing text' && statusEl) {
+                statusEl.textContent = `${isRo ? 'Scanare text' : 'Scanning'}: ${Math.round((m.progress || 0) * 100)}%`;
+              }
+            }
+          }).then(res => {
+            const text = res?.data?.text || '';
+            if (statusEl) statusEl.textContent = isRo ? '✓ Text extras! Verifică rândurile detectate:' : '✓ Text recognized! Review detected entries:';
+            const rawEl = document.getElementById('healthImportRawText');
+            if (rawEl) rawEl.value = text;
+            parsedHealthImportRows = parseHealthTableText(text);
+            renderHealthImportRows();
+          }).catch(err => {
+            console.warn('Health table OCR error:', err);
+            if (statusEl) statusEl.textContent = isRo ? 'Scanare eșuată. Lipește textul mai jos:' : 'Scan failed. Paste text below:';
+            document.getElementById('healthRawTextDetails')?.setAttribute('open', '');
+          });
+        };
+        img.src = e.target.result;
+      };
+      reader.readAsDataURL(file);
+    }
+
+    function parseHealthTableText(text) {
+      if (!text) return [];
+      const lines = text.split(/\r?\n/);
+      const results = [];
+      const curYear = new Date().getFullYear();
+      let lastDateObj = null;
+
+      for (let i = 0; i < lines.length; i++) {
+        const rawLine = lines[i].trim();
+        if (!rawLine || rawLine.length < 3) continue;
+
+        if (/^(date|data|ketone|cetoza|cetoză|glucose|glicemie|gki|kg|weight|greutate|day|zi)/i.test(rawLine)) {
+          continue;
+        }
+
+        let parsedDate = null;
+        const isoMatch = rawLine.match(/\b(20\d\d)[-/.](0?[1-9]|1[0-2])[-/.](0?[1-9]|[12]\d|3[01])\b/);
+        if (isoMatch) {
+          parsedDate = `${isoMatch[1]}-${isoMatch[2].padStart(2, '0')}-${isoMatch[3].padStart(2, '0')}`;
+        } else {
+          const dmMatch = rawLine.match(/\b(0?[1-9]|[12]\d|3[01])\s*[,./]\s*(0?[1-9]|1[0-2])(?:\s*[,./]\s*(20\d\d|\d\d))?\b/);
+          if (dmMatch) {
+            const d = dmMatch[1].padStart(2, '0');
+            const m = dmMatch[2].padStart(2, '0');
+            const y = dmMatch[3] ? (dmMatch[3].length === 2 ? '20' + dmMatch[3] : dmMatch[3]) : curYear;
+            parsedDate = `${y}-${m}-${d}`;
+          }
+        }
+
+        if (parsedDate) {
+          lastDateObj = new Date(parsedDate);
+        } else if (lastDateObj) {
+          const dayMatch = rawLine.match(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|luni|marti|marți|miercuri|joi|vineri|sambata|sâmbătă|duminica)\b/i);
+          if (dayMatch) {
+            lastDateObj = new Date(lastDateObj.getTime() + 86400000);
+            const y = lastDateObj.getFullYear();
+            const m = String(lastDateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(lastDateObj.getDate()).padStart(2, '0');
+            parsedDate = `${y}-${m}-${d}`;
+          }
+        }
+
+        if (!parsedDate) {
+          if (lastDateObj) {
+            lastDateObj = new Date(lastDateObj.getTime() + 86400000);
+            const y = lastDateObj.getFullYear();
+            const m = String(lastDateObj.getMonth() + 1).padStart(2, '0');
+            const d = String(lastDateObj.getDate()).padStart(2, '0');
+            parsedDate = `${y}-${m}-${d}`;
+          } else {
+            const now = new Date();
+            const y = now.getFullYear();
+            const m = String(now.getMonth() + 1).padStart(2, '0');
+            const d = String(now.getDate()).padStart(2, '0');
+            parsedDate = `${y}-${m}-${d}`;
+          }
+        }
+
+        let lineForNumbers = rawLine;
+        if (isoMatch) lineForNumbers = lineForNumbers.replace(isoMatch[0], ' ');
+        lineForNumbers = lineForNumbers
+          .replace(/\b(0?[1-9]|[12]\d|3[01])\s*[,./]\s*(0?[1-9]|1[0-2])(?:\s*[,./]\s*(20\d\d|\d\d))?\b/, ' ')
+          .replace(/\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday|luni|marti|marți|miercuri|joi|vineri|sambata|sâmbătă|duminica)\b/gi, ' ')
+          .replace(/,/g, '.');
+
+        const nums = (lineForNumbers.match(/-?\d+(?:\.\d+)?/g) || []).map(v => parseFloat(v)).filter(v => !isNaN(v));
+        if (nums.length === 0) continue;
+
+        let weight = null;
+        let glucose = null;
+        let ketones = null;
+        let gki = null;
+
+        if (nums.length >= 4) {
+          if (nums[0] < 10 && nums[1] > 30) {
+            ketones = nums[0]; glucose = nums[1]; gki = nums[2]; weight = nums[3];
+          } else if (nums[0] > 30 && nums[1] > 30) {
+            weight = nums[0]; glucose = nums[1]; ketones = nums[2]; gki = nums[3];
+          }
+        } else if (nums.length === 3) {
+          if (nums[0] < 10 && nums[1] > 30) {
+            ketones = nums[0]; glucose = nums[1]; gki = nums[2];
+          } else if (nums[0] > 30 && nums[1] < 10) {
+            weight = nums[0]; ketones = nums[1]; gki = nums[2];
+          }
+        } else if (nums.length === 2) {
+          if (nums[0] > 30 && nums[1] < 10) {
+            weight = nums[0]; ketones = nums[1];
+          } else if (nums[0] > 30 && nums[1] > 30) {
+            weight = nums[0]; glucose = nums[1];
+          } else if (nums[0] < 10 && nums[1] > 30) {
+            ketones = nums[0]; glucose = nums[1];
+          }
+        } else if (nums.length === 1) {
+          if (nums[0] > 40 && nums[0] < 250) weight = nums[0];
+          else if (nums[0] <= 10) ketones = nums[0];
+          else if (nums[0] > 40) glucose = nums[0];
+        }
+
+        if (gki === null && glucose !== null && ketones !== null && ketones > 0) {
+          gki = parseFloat(((glucose / 18.0182) / ketones).toFixed(2));
+        }
+
+        results.push({
+          id: 'imp_' + Date.now() + '_' + i,
+          date: parsedDate,
+          weight: (weight != null) ? parseFloat(weight.toFixed(1)) : null,
+          glucose: (glucose != null) ? Math.round(glucose) : null,
+          ketones: (ketones != null) ? parseFloat(ketones.toFixed(2)) : null,
+          gki: (gki != null) ? parseFloat(gki.toFixed(2)) : null
+        });
+      }
+
+      return results;
+    }
+
+    function renderHealthImportRows() {
+      const tbody = document.getElementById('healthImportParsedRowsBody');
+      const countEl = document.getElementById('healthImportParsedCount');
+      if (!tbody) return;
+      if (countEl) countEl.textContent = parsedHealthImportRows.length;
+
+      if (parsedHealthImportRows.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="muted tiny" style="text-align:center;padding:14px">Nicio înregistrare detectată încă. Încarcă o poză sau lipește textul mai sus.</td></tr>`;
+        return;
+      }
+
+      tbody.innerHTML = parsedHealthImportRows.map((r, idx) => `
+        <tr data-row-idx="${idx}">
+          <td><input type="date" class="search health-imp-date" value="${r.date || ''}" style="width:100%;font-size:11px;padding:2px 4px"></td>
+          <td><input type="number" step="0.1" class="search health-imp-weight" value="${r.weight != null ? r.weight : ''}" placeholder="kg" style="width:100%;font-size:11px;padding:2px 4px"></td>
+          <td><input type="number" step="1" class="search health-imp-glucose" value="${r.glucose != null ? r.glucose : ''}" placeholder="mg" style="width:100%;font-size:11px;padding:2px 4px"></td>
+          <td><input type="number" step="0.1" class="search health-imp-ketones" value="${r.ketones != null ? r.ketones : ''}" placeholder="mmol" style="width:100%;font-size:11px;padding:2px 4px"></td>
+          <td><input type="number" step="0.01" class="search health-imp-gki" value="${r.gki != null ? r.gki : ''}" placeholder="GKI" style="width:100%;font-size:11px;padding:2px 4px"></td>
+          <td><button class="x-btn health-imp-del" data-row-idx="${idx}" type="button" title="Remove" style="padding:2px 6px">✕</button></td>
+        </tr>
+      `).join('');
+
+      tbody.querySelectorAll('.health-imp-del').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const idx = parseInt(btn.dataset.rowIdx, 10);
+          parsedHealthImportRows.splice(idx, 1);
+          renderHealthImportRows();
+        });
+      });
+    }
+
+    function commitHealthImport() {
+      const tbody = document.getElementById('healthImportParsedRowsBody');
+      if (!tbody) return;
+      const isRo = ((settings && settings.lang) === 'ro');
+
+      const trs = tbody.querySelectorAll('tr[data-row-idx]');
+      const itemsToImport = [];
+
+      trs.forEach(tr => {
+        const d = tr.querySelector('.health-imp-date')?.value;
+        const wVal = tr.querySelector('.health-imp-weight')?.value.trim();
+        const gVal = tr.querySelector('.health-imp-glucose')?.value.trim();
+        const kVal = tr.querySelector('.health-imp-ketones')?.value.trim();
+        const gkiVal = tr.querySelector('.health-imp-gki')?.value.trim();
+
+        const w = (wVal !== '' && !isNaN(parseFloat(wVal))) ? parseFloat(wVal) : null;
+        const g = (gVal !== '' && !isNaN(parseFloat(gVal))) ? parseFloat(gVal) : null;
+        const k = (kVal !== '' && !isNaN(parseFloat(kVal))) ? parseFloat(kVal) : null;
+        let gki = (gkiVal !== '' && !isNaN(parseFloat(gkiVal))) ? parseFloat(gkiVal) : null;
+
+        if (gki === null && g !== null && k !== null && k > 0) {
+          gki = parseFloat(((g / 18.0182) / k).toFixed(2));
+        }
+
+        if (d && (w !== null || g !== null || k !== null)) {
+          itemsToImport.push({ date: d, weight: w, glucose: g, ketones: k, gki: gki });
+        }
+      });
+
+      if (itemsToImport.length === 0) {
+        showAppToast(isRo ? 'Nicio înregistrare validă de importat!' : 'No valid entries to import!');
+        return;
+      }
+
+      itemsToImport.forEach(item => {
+        const idx = healthLog.findIndex(e => e.date === item.date);
+        if (idx >= 0) {
+          healthLog[idx] = Object.assign({}, healthLog[idx], {
+            weight: (item.weight !== null) ? item.weight : healthLog[idx].weight,
+            glucose: (item.glucose !== null) ? item.glucose : healthLog[idx].glucose,
+            ketones: (item.ketones !== null) ? item.ketones : healthLog[idx].ketones,
+            gki: (item.gki !== null) ? item.gki : healthLog[idx].gki
+          });
+        } else {
+          healthLog.push({
+            id: 'hl_' + Date.now() + '_' + Math.random().toString(36).substr(2, 5),
+            date: item.date,
+            weight: item.weight,
+            glucose: item.glucose,
+            ketones: item.ketones,
+            gki: item.gki,
+            exerciseType: '',
+            exerciseIntensity: '',
+            duration: null
+          });
+        }
+      });
+
+      healthLog.sort((a, b) => new Date(a.date) - new Date(b.date));
+      saveState();
+      renderHealthPage();
+      closeHealthImportModal();
+      showAppToast(isRo ? `✓ ${itemsToImport.length} înregistrări importate cu succes!` : `✓ ${itemsToImport.length} entries successfully imported!`);
     }
 
     function renderHealthPage() {
@@ -12053,6 +12584,11 @@ const CUP_DENSITY = {
         closePhotoImportModal();
         return true;
       }
+      const healthImportModal = document.getElementById('healthTableImportModal');
+      if (healthImportModal && !healthImportModal.classList.contains('hidden')) {
+        closeHealthImportModal();
+        return true;
+      }
       const macroModal = document.getElementById('macroEditModal');
       if (macroModal && !macroModal.classList.contains('hidden')) {
         closeMacroEditModal();
@@ -12061,6 +12597,16 @@ const CUP_DENSITY = {
       const batchModal = document.getElementById('batchPrepModal');
       if (batchModal && !batchModal.classList.contains('hidden')) {
         closeBatchPrepModal();
+        return true;
+      }
+      const updateModal = document.getElementById('appUpdateModal');
+      if (updateModal && !updateModal.classList.contains('hidden')) {
+        closeUpdateModal();
+        return true;
+      }
+      const changelogModal = document.getElementById('changelogModal');
+      if (changelogModal && !changelogModal.classList.contains('hidden')) {
+        closeChangelogModal();
         return true;
       }
       const recipeDetail = document.getElementById('recipeDetailContainer');
@@ -13976,7 +14522,7 @@ const CUP_DENSITY = {
       const ingsHtml = (r.ingredients || []).map((ing, idx) => {
         return `<label class="focus-ing-check-item" data-idx="${idx}">
           <input type="checkbox" onchange="this.closest('.focus-ing-check-item').classList.toggle('done', this.checked)">
-          <span>${escapeHtml(ing)}</span>
+          <span>${escapeHtml(formatDisplayIngredient(ing, settings?.lang))}</span>
         </label>`;
       }).join('');
 
@@ -14348,7 +14894,7 @@ const CUP_DENSITY = {
           <path d="M50 36 C46 30 52 26 56 31 C53 35 50 36 50 36 Z" fill="#22c55e"/>
           <circle cx="36" cy="32" r="1.5" fill="#fbcfe8" opacity="0.8"/>
           <circle cx="86" cy="48" r="1.2" fill="#fbcfe8" opacity="0.8"/>
-          <text x="60" y="112" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#f0abfc" font-family="sans-serif">🥤 Protein Smoothie & Bowl</text>
+          <text x="60" y="112" font-size="10.5" font-weight="bold" text-anchor="middle" fill="#f0abfc" font-family="sans-serif">🥤 Protein Smoothie &amp; Bowl</text>
         </svg>`);
       }
 
@@ -14411,7 +14957,7 @@ const CUP_DENSITY = {
       }
 
       // Desserts & Sweets
-      if (/dessert|sweet|fat bomb|muffin|cake|chocolate|berry|pancake|waffle/.test(text) || meal === 'snack') {
+      if (/dessert|sweet|fat bomb|muffin|cake|chocolate|berry|pancake|waffle/.test(text)) {
         return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
           <defs>
             <radialGradient id="bg_ds" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3d182b"/><stop offset="100%" stop-color="#1a0711"/></radialGradient>
@@ -14424,6 +14970,27 @@ const CUP_DENSITY = {
           <circle cx="58" cy="36" r="2" fill="#fecdd3"/>
           <path d="M62 33 Q68 28 64 26" stroke="#22c55e" stroke-width="2" fill="none"/>
           <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#f43f5e" font-family="sans-serif">🧁 Keto Treat</text>
+        </svg>`);
+      }
+
+      // Savory Keto Snacks & Bites
+      if (meal === 'snack' || /snack|bites|almonds|walnuts|nuts|olives|cheese cubes|cucumber.*bites|jerky|beef stick|chips|crackers|chicharron|seminte/.test(text)) {
+        return 'data:image/svg+xml,' + encodeURIComponent(`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+          <defs>
+            <radialGradient id="bg_snk" cx="50%" cy="50%" r="70%"><stop offset="0%" stop-color="#3d2812"/><stop offset="100%" stop-color="#190e04"/></radialGradient>
+          </defs>
+          <rect width="120" height="120" rx="16" fill="url(#bg_snk)"/>
+          <ellipse cx="60" cy="85" rx="40" ry="14" fill="#0d0702" opacity="0.6"/>
+          <polygon points="34,60 48,50 62,56 48,66" fill="#facc15"/>
+          <polygon points="34,60 48,66 48,80 34,74" fill="#eab308"/>
+          <polygon points="62,56 48,66 48,80 62,70" fill="#ca8a04"/>
+          <ellipse cx="76" cy="62" rx="11" ry="6" fill="#78350f" transform="rotate(-25 76 62)"/>
+          <ellipse cx="74" cy="61" rx="9" ry="4" fill="#92400e" transform="rotate(-25 74 61)"/>
+          <ellipse cx="68" cy="74" rx="11" ry="6" fill="#78350f" transform="rotate(35 68 74)"/>
+          <ellipse cx="66" cy="73" rx="9" ry="4" fill="#92400e" transform="rotate(35 66 73)"/>
+          <circle cx="85" cy="74" r="5" fill="#15803d"/>
+          <circle cx="83" cy="72" r="1.5" fill="#4ade80"/>
+          <text x="60" y="112" font-size="11" font-weight="bold" text-anchor="middle" fill="#facc15" font-family="sans-serif">🧀 Keto Snack</text>
         </svg>`);
       }
 
@@ -14540,6 +15107,120 @@ const CUP_DENSITY = {
       }
     }
 
+    function formatDisplayIngredient(ing, lang) {
+      if (!ing) return '';
+      const isRo = (lang === 'ro');
+      const p = parseQty(ing);
+      if (!p || !p.name) return ing;
+      let translatedName = p.name;
+      if (isRo) {
+        translatedName = tIng(p.name);
+      } else {
+        const lower = p.name.toLowerCase().trim();
+        if (typeof RO_TO_EN_ING !== 'undefined' && RO_TO_EN_ING[lower]) {
+          translatedName = RO_TO_EN_ING[lower];
+        } else {
+          const stripped = (typeof stripRo === 'function') ? stripRo(lower) : lower;
+          if (typeof RO_TO_EN_ING !== 'undefined' && RO_TO_EN_ING[stripped]) {
+            translatedName = RO_TO_EN_ING[stripped];
+          } else {
+            translatedName = lower
+              .replace(/\blapte de cocos sau smantana de gatit\b/g, 'coconut milk or cooking cream')
+              .replace(/\blapte de migdale\b/g, 'almond milk')
+              .replace(/\blapte de cocos\b/g, 'coconut milk')
+              .replace(/\blapte vegetal neindulcit\b/g, 'unsweetened plant milk')
+              .replace(/\blapte vegetal\b/g, 'plant milk')
+              .replace(/\blapte de soia\b/g, 'soy milk')
+              .replace(/\blapte de ovaz\b/g, 'oat milk')
+              .replace(/\blapte de caju\b/g, 'cashew milk')
+              .replace(/\blapte\b/g, 'milk')
+              .replace(/\bunt 82%\b/g, 'butter 82%')
+              .replace(/\bunt\b/g, 'butter')
+              .replace(/\biaurt\b/g, 'yogurt')
+              .replace(/\bsmantana\b/g, 'sour cream')
+              .replace(/\bsmântână\b/g, 'sour cream')
+              .replace(/\bbranza\b/g, 'cheese')
+              .replace(/\bbrânză\b/g, 'cheese')
+              .replace(/\bciuperci\b/g, 'mushrooms')
+              .replace(/\boua\b/g, 'eggs')
+              .replace(/\bou\b/g, 'egg');
+          }
+        }
+      }
+      const qtyPart = (p.qty != null && !isNaN(p.qty)) ? `${p.qty}${p.unit ? ' ' + p.unit : ''} ` : '';
+      return `${qtyPart}${translatedName}`.trim();
+    }
+
+    function getRecipePrepTimers(r, isRo) {
+      if (!r) return [];
+      const method = (r.method || '').toLowerCase();
+      const batch = (r.batch || '').toLowerCase();
+      const text = method + ' ' + batch;
+
+      // Cold / No-cook recipes have zero prep timers
+      const isColdNoCook = /stir and eat cold|mix and keep chilled|assemble fresh|eat cold|no cook|serve cold|raw|keep components separate|rest overnight/i.test(text)
+        && !/bake|roast|simmer|sear|fry|boil|air-?fry|heat pan|over medium heat|cook until/i.test(method);
+      if (isColdNoCook && !/pancake|omelet|egg|bacon|chicken|beef|meat|chops/i.test(r.name)) {
+        return [];
+      }
+
+      if (!COOK_RE.test(text) && !/cook|pan|heat|oven|skillet|bake|sear|fry|boil/i.test(text)) {
+        return [];
+      }
+
+      const timers = [];
+
+      // 1. Searing / Sauteing / Frying / Browning
+      if (/sear|saute|saut|pan-fry|fry|brown|caleste|rumen/i.test(method)) {
+        let sec = 180;
+        const m = method.match(/(?:sear|saute|saut|fry|brown|caleste|rumen)\D{0,25}?(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/i);
+        if (m) sec = parseInt(m[2] || m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m ${isRo ? 'Rumenire' : 'Sear'}` });
+      }
+
+      // 2. Steaming
+      if (/steam|abur/i.test(method)) {
+        let sec = 300;
+        const m = method.match(/(?:steam|abur)\D{0,25}?(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/i);
+        if (m) sec = parseInt(m[2] || m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m ${isRo ? 'Abur' : 'Steam'}` });
+      }
+
+      // 3. Simmering / Boiling / Poaching
+      if (/simmer|boil|poach|fierbe|fierb/i.test(method)) {
+        let sec = 900;
+        const m = method.match(/(?:simmer|boil|poach|fierbe|fierb)\D{0,25}?(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/i);
+        if (m) sec = parseInt(m[2] || m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m ${isRo ? 'Fierbere' : 'Simmer'}` });
+      }
+
+      // 4. Baking / Roasting
+      if (/bake|roast|oven|coace|cuptor/i.test(method)) {
+        let sec = 1500;
+        const m = method.match(/(?:bake|roast|oven|coace|cuptor)\D{0,25}?(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/i);
+        if (m) sec = parseInt(m[2] || m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m ${isRo ? 'Coacere' : 'Bake'}` });
+      }
+
+      // 5. Air Frying
+      if (/air-?fry/i.test(method)) {
+        let sec = 720;
+        const m = method.match(/air-?fry\D{0,25}?(\d+)\s*(?:-|to)?\s*(\d+)?\s*min/i);
+        if (m) sec = parseInt(m[2] || m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m Air Fry` });
+      }
+
+      // 6. Generic cooking fallback if cooking required but none of above specifically matched
+      if (timers.length === 0 && COOK_RE.test(method)) {
+        let sec = (r.meal === 'Breakfast' ? 600 : (r.meal === 'Snack' ? 600 : 1200));
+        const m = method.match(/(\d+)\s*min/);
+        if (m) sec = parseInt(m[1], 10) * 60;
+        timers.push({ sec, label: `${Math.round(sec / 60)}m ${isRo ? 'Gătit' : 'Cook'}` });
+      }
+
+      return timers;
+    }
+
     function getRecipeDetailHtml(r) {
       const stats = recipeRatioStats(r);
       const isRo = ((settings && settings.lang) === 'ro');
@@ -14551,6 +15232,24 @@ const CUP_DENSITY = {
       const dispName = getRecipeDisplayName(r, settings?.lang);
       const isFocused = (focusRecipeId === r.id);
       const tips = getRecipeTips(r, isRo);
+      const prepTimers = getRecipePrepTimers(r, isRo);
+
+      const timersBoxHtml = prepTimers.length > 0 ? `
+        <!-- Kitchen Prep Timers (Tailored to Recipe) -->
+        <div style="background:var(--color-surface-offset);border:1px solid var(--color-border);padding:10px;border-radius:var(--radius-md);margin-bottom:12px">
+          <div style="display:flex;align-items:center;justify-content:space-between">
+            <strong class="small">${isRo ? '⏱️ Cronometre Bucătărie' : '⏱️ Kitchen Prep Timers'}</strong>
+            <span id="activeTimerDisplay_${r.id}" style="font-size:12px;font-weight:700;color:var(--color-primary)"></span>
+          </div>
+          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
+            ${prepTimers.map(t => `<button class="timer-pill" data-timer-sec="${t.sec}" type="button">${escapeHtml(t.label)}</button>`).join('')}
+          </div>
+          <div id="timerControls_${r.id}" style="display:none;align-items:center;gap:8px;margin-top:8px">
+            <span id="timerCountdown_${r.id}" style="font-size:16px;font-weight:800;color:var(--color-primary);font-variant-numeric:tabular-nums">00:00</span>
+            <button id="timerStopBtn_${r.id}" class="act-btn danger small" type="button" style="padding:2px 8px;font-size:11px">${isRo ? 'Oprește' : 'Stop'}</button>
+          </div>
+        </div>
+      ` : '';
 
       return `
         <!-- Focus Mode Header Toggle -->
@@ -14574,7 +15273,7 @@ const CUP_DENSITY = {
         </div>
         <div style="margin-bottom:10px">
           <strong class="small">${isRo ? 'Ingrediente:' : 'Ingredients:'}</strong>
-          <ul style="padding-left:18px;margin-top:4px" class="small">${(r.ingredients || []).map(i => `<li>${escapeHtml(i)}</li>`).join('')}</ul>
+          <ul style="padding-left:18px;margin-top:4px" class="small">${(r.ingredients || []).map(i => `<li>${escapeHtml(formatDisplayIngredient(i, settings?.lang))}</li>`).join('')}</ul>
         </div>
         <div style="margin-bottom:12px">
           <strong class="small">${isRo ? 'Mod de preparare:' : 'Method:'}</strong>
@@ -14592,32 +15291,19 @@ const CUP_DENSITY = {
           </ul>
         </div>
 
-        <!-- Kitchen Prep Timers -->
-        <div style="background:var(--color-surface-offset);border:1px solid var(--color-border);padding:10px;border-radius:var(--radius-md);margin-bottom:12px">
-          <div style="display:flex;align-items:center;justify-content:space-between">
-            <strong class="small">${isRo ? '⏱️ Cronometre Bucatarie' : '⏱️ Kitchen Prep Timers'}</strong>
-            <span id="activeTimerDisplay_${r.id}" style="font-size:12px;font-weight:700;color:var(--color-primary)"></span>
-          </div>
-          <div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:6px">
-            <button class="timer-pill" data-timer-sec="180" type="button">${isRo ? '3m Rumenire' : '3m Sear'}</button>
-            <button class="timer-pill" data-timer-sec="300" type="button">${isRo ? '5m Abur' : '5m Steam'}</button>
-            <button class="timer-pill" data-timer-sec="900" type="button">${isRo ? '15m Fierbere' : '15m Simmer'}</button>
-            <button class="timer-pill" data-timer-sec="1500" type="button">${isRo ? '25m Coacere' : '25m Bake'}</button>
-          </div>
-          <div id="timerControls_${r.id}" style="display:none;align-items:center;gap:8px;margin-top:8px">
-            <span id="timerCountdown_${r.id}" style="font-size:16px;font-weight:800;color:var(--color-primary);font-variant-numeric:tabular-nums">00:00</span>
-            <button id="timerStopBtn_${r.id}" class="act-btn danger small" type="button" style="padding:2px 8px;font-size:11px">${isRo ? 'Opreste' : 'Stop'}</button>
-          </div>
-        </div>
+        ${timersBoxHtml}
 
-        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-          <select id="planDaySelect_${r.id}" class="slot-select" style="width:auto">${DAYS.map(d => `<option value="${d}">${isRo ? d.replace('Day', 'Ziua') : d}</option>`).join('')}</select>
-          <select id="planSlotSelect_${r.id}" class="slot-select" style="width:auto">
-            ${isRo ? (r.meal === 'Breakfast' ? '<option value="Breakfast">Mic dejun</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Pranz</option><option value="Dinner">Cina</option>' : (r.meal === 'Side' ? '<option value="Lunch">Pranz (Garnitura)</option><option value="Dinner">Cina (Garnitura)</option><option value="Breakfast">Mic dejun</option><option value="Snack 1">Gustare 1</option>' : '<option value="Snack 1">Gustare 1</option><option value="Snack 2">Gustare 2</option>'))) : (r.meal === 'Breakfast' ? '<option value="Breakfast">Breakfast</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Lunch</option><option value="Dinner">Dinner</option>' : (r.meal === 'Side' ? '<option value="Lunch">Lunch (Side)</option><option value="Dinner">Dinner (Side)</option><option value="Breakfast">Breakfast</option><option value="Snack 1">Snack 1</option>' : '<option value="Snack 1">Snack 1</option><option value="Snack 2">Snack 2</option>')))}
+        <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-bottom:8px">
+          <select id="planDaySelect_${r.id}" class="slot-select" style="flex:1;min-width:90px">${DAYS.map(d => `<option value="${d}">${isRo ? d.replace('Day', 'Ziua') : d}</option>`).join('')}</select>
+          <select id="planSlotSelect_${r.id}" class="slot-select" style="flex:1;min-width:110px">
+            ${isRo ? (r.meal === 'Breakfast' ? '<option value="Breakfast">Mic dejun</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Prânz</option><option value="Dinner">Cină</option>' : (r.meal === 'Side' ? '<option value="Lunch">Prânz (Garnitură)</option><option value="Dinner">Cină (Garnitură)</option><option value="Breakfast">Mic dejun</option><option value="Snack 1">Gustare 1</option>' : '<option value="Snack 1">Gustare 1</option><option value="Snack 2">Gustare 2</option>'))) : (r.meal === 'Breakfast' ? '<option value="Breakfast">Breakfast</option>' : (r.meal === 'Lunch/Dinner' ? '<option value="Lunch">Lunch</option><option value="Dinner">Dinner</option>' : (r.meal === 'Side' ? '<option value="Lunch">Lunch (Side)</option><option value="Dinner">Dinner (Side)</option><option value="Breakfast">Breakfast</option><option value="Snack 1">Snack 1</option>' : '<option value="Snack 1">Snack 1</option><option value="Snack 2">Snack 2</option>')))}
           </select>
-          <button id="addPlanBtn_${r.id}" class="act-btn primary" type="button">${isRo ? 'Adauga in plan' : 'Add to planner'}</button>
-          <button id="editInBuilderBtn_${r.id}" class="act-btn small" type="button" style="margin-left:auto" title="Customize this recipe in Recipe Builder">✏️ ${r.custom ? (isRo ? 'Editeaza in Builder' : 'Edit in Builder') : (isRo ? 'Personalizeaza Reteta' : 'Customize Recipe')}</button>
-          <button id="deleteRecipeBtn_${r.id}" class="act-btn danger" type="button">${isRo ? '🗑️ Elimina Reteta' : '🗑️ Remove Recipe'}</button>
+          <button id="addPlanBtn_${r.id}" class="act-btn primary" type="button" style="flex:1;min-width:130px;justify-content:center">${isRo ? 'Adaugă în plan' : 'Add to planner'}</button>
+        </div>
+        <!-- Customize Recipe and Remove Recipe on the exact same line -->
+        <div style="display:flex;gap:8px;align-items:center;width:100%">
+          <button id="editInBuilderBtn_${r.id}" class="act-btn small" type="button" style="flex:1;text-align:center;justify-content:center" title="${isRo ? 'Personalizează această rețetă în Recipe Builder' : 'Customize this recipe in Recipe Builder'}">✏️ ${r.custom ? (isRo ? 'Editează în Builder' : 'Edit in Builder') : (isRo ? 'Personalizează Rețeta' : 'Customize Recipe')}</button>
+          <button id="deleteRecipeBtn_${r.id}" class="act-btn danger small" type="button" style="flex:1;text-align:center;justify-content:center">${isRo ? '🗑️ Elimină Rețeta' : '🗑️ Remove Recipe'}</button>
         </div>
         <span id="recipeActionMsg_${r.id}" class="tiny good" style="display:block;margin-top:6px"></span>
       `;
@@ -15371,7 +16057,9 @@ const CUP_DENSITY = {
 
         if (matched) {
           const displayName = isRo ? (roName || enKey) : enKey;
-          const subName = isRo && (roName !== enKey) ? enKey : '';
+          const subName = isRo
+            ? ((roName && roName.toLowerCase() !== enKey.toLowerCase()) ? enKey : '')
+            : ((roName && roName.toLowerCase() !== enKey.toLowerCase()) ? roName : '');
           const normKey = displayName.toLowerCase();
           if (!seen.has(normKey)) {
             seen.add(normKey);
@@ -16888,19 +17576,51 @@ const CUP_DENSITY = {
       });
       saveState();
     }
+    function updateStoreMacroDatalist() {
+      const dl = document.getElementById('macroIngredientsList');
+      if (!dl) return;
+      const isRo = ((settings.lang || 'en') === 'ro');
+      const seen = new Set();
+      const opts = [];
+      const keys = Object.keys(N || {}).sort();
+      keys.forEach(k => {
+        const ro = (typeof tIng === 'function') ? tIng(k) : k;
+        const name = isRo ? (ro || k) : k;
+        const norm = name.toLowerCase();
+        if (!seen.has(norm)) {
+          seen.add(norm);
+          opts.push(`<option value="${escapeHtml(name)}">`);
+        }
+      });
+      dl.innerHTML = opts.join('');
+    }
+
     function renderStoreRows() {
       const wrap = document.getElementById('storeRows'); if (!wrap) return;
-      const keys = Object.keys(stores);
+      updateStoreMacroDatalist();
       const isRo = ((settings.lang || 'en') === 'ro');
-      const emptyMsg = isRo ? 'Nicio notiță de magazin.' : 'No store notes.';
-      wrap.innerHTML = keys.length ? keys.map(k => `<div class="store-row"><input class="search st-name" value="${k}"><input class="search st-val" value="${stores[k]}"><button class="x-btn st-del">×</button></div>`).join('') : `<p class="muted tiny">${emptyMsg}</p>`;
+      const filter = (document.getElementById('storeNoteSearchFilter')?.value || '').trim().toLowerCase();
+      let keys = Object.keys(stores);
+      if (filter) {
+        keys = keys.filter(k => k.toLowerCase().includes(filter) || (stores[k] && stores[k].toLowerCase().includes(filter)));
+      }
+      const emptyMsg = filter
+        ? (isRo ? 'Niciun rezultat pentru căutare.' : 'No matching store notes.')
+        : (isRo ? 'Nicio notiță de magazin.' : 'No store notes.');
+      wrap.innerHTML = keys.length ? keys.map(k => `
+        <div class="store-row" style="display:flex;gap:6px;align-items:center;margin-bottom:6px">
+          <input class="search st-name" list="macroIngredientsList" value="${escapeHtml(k)}" placeholder="${isRo ? 'Ingredient (din Macro DB)' : 'Ingredient (from Macro DB)'}" style="flex:1" autocomplete="off">
+          <input class="search st-val" value="${escapeHtml(stores[k])}" placeholder="${isRo ? 'Magazin / Notă' : 'Store / Note'}" style="flex:1" autocomplete="off">
+          <button class="x-btn st-del" type="button" title="Delete">×</button>
+        </div>`).join('') : `<p class="muted tiny">${emptyMsg}</p>`;
       wrap.querySelectorAll('.st-del').forEach(b => b.addEventListener('click', e => { e.target.parentElement.remove(); commitStoreRows(); }));
     }
     function commitStoreRows() {
       stores = {};
       document.querySelectorAll('#storeRows .store-row').forEach(row => {
-        const n = canon(row.querySelector('.st-name').value.trim());
-        const v = row.querySelector('.st-val').value.trim();
+        const raw = row.querySelector('.st-name')?.value.trim();
+        const n = canon(raw);
+        const v = row.querySelector('.st-val')?.value.trim();
         if (n && v) stores[n] = v;
       });
       saveState();
@@ -17252,7 +17972,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.1';
+    const FALLBACK_APP_VERSION = '1.1.2';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -17414,6 +18134,30 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.2',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '🖼️ Reparare imagini gustări: rezolvat eroarea de parsare XML SVG pentru boluri și adăugată ilustrație dedicată pentru gustări sărate',
+            '🍳 Cronometre de bucătărie adaptive: cronometrele se afișează doar dacă rețeta necesită gătire (searing, coacere etc.), cu timpi extrași din instrucțiuni',
+            '↔️ Butoane alăturate: „Personalizează rețeta” și „Șterge rețeta” sunt acum grupate elegant pe un singur rând',
+            '🥛 Căutare bilingvă la cumpărături: căutarea în română (ex: „lapte”) găsește automat lapte de migdale/cocos, păstrând denumirile din rețete strict într-o singură limbă',
+            '🏪 Autocompletare din baza de macronutrienți pentru notițele de magazin/brand în Setări',
+            '📈 Grafic Sănătate & Evoluție curățat: ascundere axe neutilizate, eliminare titluri verticale aglomerate și etichetare directă cu unități de măsură',
+            '📷 Importator biometric foto & tabel: importă automat glicemia, cetonele, GKI și greutatea din foi Excel sau fotografii cu OCR, plus editare directă în istoric'
+          ],
+          en: [
+            '🖼️ Fixed snack image rendering: escaped SVG ampersands for smoothie bowls and added savory keto snack illustration',
+            '🍳 Adaptive kitchen prep timers: prep timers now appear only when cooking is needed, tailored dynamically to recipe method instructions',
+            '↔️ Side-by-side recipe action buttons: "Customize Recipe" and "Remove Recipe" now sit cleanly on the same line',
+            '🥛 Bilingual shopping search with monolingual recipes: search in Romanian (e.g., "lapte") to find milk variants while keeping recipes strictly single-language',
+            '🏪 Store/brand note autocomplete wired directly to the Macronutrients DB in Settings',
+            '📈 Polished health evolution chart: hidden unused axes, removed bulky axis titles, and added clean units directly on tick labels',
+            '📷 Biometric photo & spreadsheet importer: scan Excel tables or photos via OCR into health logs, plus live history entry editing'
+          ]
+        }
+      },
       {
         version: '1.1.1',
         date: '20 Oct 2026',
@@ -18665,10 +19409,28 @@ const CUP_DENSITY = {
       });
 
       document.getElementById('storeRows')?.addEventListener('change', commitStoreRows);
+      document.getElementById('storeNoteSearchFilter')?.addEventListener('input', renderStoreRows);
+      document.getElementById('storeQuickAddBtn')?.addEventListener('click', () => {
+        const nameInp = document.getElementById('storeQuickAddName');
+        const valInp = document.getElementById('storeQuickAddVal');
+        const rawName = nameInp?.value.trim();
+        const note = valInp?.value.trim();
+        if (!rawName || !note) {
+          showAppToast(((settings.lang || 'en') === 'ro') ? 'Completează ingredientul și magazinul/brandul!' : 'Enter both ingredient and store note!');
+          return;
+        }
+        const key = canon(rawName);
+        stores[key] = note;
+        if (nameInp) nameInp.value = '';
+        if (valInp) valInp.value = '';
+        saveState();
+        renderStoreRows();
+        showAppToast(((settings.lang || 'en') === 'ro') ? `✓ Notiță adăugată: ${key} ➔ ${note}` : `✓ Store note added: ${key} ➔ ${note}`);
+      });
       document.getElementById('storeAddBtn')?.addEventListener('click', () => {
         const wrap = document.getElementById('storeRows');
-        if (wrap.querySelector('p.muted')) wrap.innerHTML = ''; // clear empty state
-        wrap.insertAdjacentHTML('beforeend', `<div class="store-row"><input class="search st-name" placeholder="Ingredient"><input class="search st-val" placeholder="Store"><button class="x-btn st-del" type="button">×</button></div>`);
+        if (wrap.querySelector('p.muted')) wrap.innerHTML = '';
+        wrap.insertAdjacentHTML('beforeend', `<div class="store-row" style="display:flex;gap:6px;align-items:center;margin-bottom:6px"><input class="search st-name" list="macroIngredientsList" placeholder="Ingredient"><input class="search st-val" placeholder="Store"><button class="x-btn st-del" type="button">×</button></div>`);
         wrap.lastElementChild.querySelector('.st-del').addEventListener('click', e => { e.target.parentElement.remove(); commitStoreRows(); });
       });
 
@@ -18926,6 +19688,46 @@ const CUP_DENSITY = {
       };
       document.getElementById('healthClearDemoBtn')?.addEventListener('click', clearHealthLogs);
       document.getElementById('healthClearAllBtn')?.addEventListener('click', clearHealthLogs);
+
+      // Health Photo & Spreadsheet Table Importer Wiring
+      document.getElementById('healthImportTableBtn')?.addEventListener('click', openHealthImportModal);
+      document.getElementById('healthPhotoCamBtn')?.addEventListener('click', () => {
+        document.getElementById('healthPhotoCamInput')?.click();
+      });
+      document.getElementById('healthPhotoGalleryBtn')?.addEventListener('click', () => {
+        document.getElementById('healthPhotoGalleryInput')?.click();
+      });
+      document.getElementById('healthPhotoCamInput')?.addEventListener('change', e => {
+        if (e.target.files && e.target.files[0]) {
+          handleHealthPhotoSelect(e.target.files[0]);
+          e.target.value = '';
+        }
+      });
+      document.getElementById('healthPhotoGalleryInput')?.addEventListener('change', e => {
+        if (e.target.files && e.target.files[0]) {
+          handleHealthPhotoSelect(e.target.files[0]);
+          e.target.value = '';
+        }
+      });
+      document.getElementById('healthImportReparseBtn')?.addEventListener('click', () => {
+        parseHealthTableText(document.getElementById('healthImportRawText')?.value || '');
+      });
+      document.getElementById('healthImportAddManualRowBtn')?.addEventListener('click', () => {
+        parsedHealthImportRows.push({
+          date: new Date().toISOString().slice(0, 10),
+          time: new Date().toTimeString().slice(0, 5),
+          weight: null,
+          ketones: null,
+          glucose: null,
+          gki: null,
+          notes: ''
+        });
+        renderHealthImportRows();
+      });
+      document.getElementById('healthImportCommitBtn')?.addEventListener('click', commitHealthImport);
+      document.getElementById('healthImportCloseBtn')?.addEventListener('click', closeHealthImportModal);
+      document.getElementById('healthImportBackdrop')?.addEventListener('click', closeHealthImportModal);
+      document.getElementById('healthImportCancelBtn')?.addEventListener('click', closeHealthImportModal);
 
       applyLanguage(settings.lang || 'en');
       switchTab('home');
