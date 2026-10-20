@@ -189,19 +189,41 @@
       position: relative;
       width: 100%;
     }
-    .cloud-status-dot-btn {
+    .header-top-right-group {
       position: absolute;
       right: 0;
       top: 50%;
       transform: translateY(-50%);
+      display: inline-flex;
+      align-items: center;
+      gap: 2px;
+    }
+    .cloud-status-dot-btn {
       background: transparent;
       border: none;
-      padding: 6px 8px;
+      padding: 6px;
       cursor: pointer;
       display: inline-flex;
       align-items: center;
       justify-content: center;
       line-height: 1;
+    }
+    .header-icon-btn {
+      background: transparent;
+      border: none;
+      padding: 4px 6px;
+      font-size: 18px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: var(--radius-md);
+      transition: background 0.15s ease, transform 0.1s ease;
+    }
+    .header-icon-btn:active {
+      transform: scale(0.92);
+      background: var(--color-surface-2);
     }
     .header-title-row strong {
       font-size: 1.15rem;
@@ -3523,9 +3545,14 @@
       <div class="header-title-row">
         <img src="icon.png" class="brand-icon" alt="">
         <strong>Keto Planner</strong>
-        <button id="cloudDotHeaderBtn" class="cloud-status-dot-btn" data-tab-btn="sync" aria-label="Cloud sync" type="button" title="Live Cloud Share & Sync">
-          <span class="cloud-dot" id="cloudDot"></span>
-        </button>
+        <div class="header-top-right-group">
+          <button id="cloudDotHeaderBtn" class="cloud-status-dot-btn" data-tab-btn="sync" aria-label="Cloud sync" type="button" title="Live Cloud Share & Sync">
+            <span class="cloud-dot" id="cloudDot"></span>
+          </button>
+          <button id="headerSettingsBtn" class="header-icon-btn" data-tab-btn="settings" type="button" aria-label="Settings" title="Settings & Backup">
+            ⚙️
+          </button>
+        </div>
       </div>
       <div class="header-actions-row">
         <button id="headerFastTimerBtn" class="fast-header-pill" data-tab-btn="fasting" type="button" title="View Fasting Tracker">
@@ -3543,6 +3570,9 @@
       <button id="innerCloudHeaderBtn" class="cloud-pill" data-tab-btn="sync" aria-label="Cloud sync" type="button">
         <span class="cloud-dot" id="innerCloudDot"></span>
         <span id="innerCloudLabel">Local</span>
+      </button>
+      <button id="innerSettingsHeaderBtn" class="header-icon-btn" data-tab-btn="settings" type="button" aria-label="Settings" title="Settings & Backup">
+        ⚙️
       </button>
     </div>
 
@@ -3700,15 +3730,6 @@
             <span id="homeFastSubtitle"><span data-i18n="home_card_fasting_desc">16:8 LeanGains • Tap to track or change protocol</span></span>
           </div>
           <div class="menu-arrow" style="color:var(--color-primary)">›</div>
-        </button>
-
-        <button class="menu-card" data-tab-btn="settings">
-          <div class="menu-icon-wrap">⚙️</div>
-          <div class="menu-card-info">
-            <strong><span data-i18n="title_settings">Settings & Backup</span></strong>
-            <span><span data-i18n="home_card_settings_desc">Personal targets, pack sizes, store notes & export backup</span></span>
-          </div>
-          <div class="menu-arrow">›</div>
         </button>
       </div>
     </section>
@@ -4474,6 +4495,32 @@
           </label>
         </div>
       </div>
+
+      <!-- Fasting & App Notifications -->
+      <div class="panel stack">
+        <div class="section-title">
+          <div>
+            <h2 style="font-size:var(--text-lg)" data-i18n="settings_notif_title">🔔 Fasting Notifications & Reminders</h2>
+            <p class="muted small" data-i18n="settings_notif_desc">Configure notifications for fasting start and goal completion.</p>
+          </div>
+        </div>
+        <div class="stack" style="gap:10px;margin-top:4px">
+          <label class="small" style="display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:600;padding:10px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+            <input type="checkbox" id="fastNotifStartCheck">
+            <div>
+              <strong style="display:block" data-i18n="fasting_notif_start_label">When fasting starts</strong>
+              <span class="tiny muted" data-i18n="fasting_notif_start_desc">Receive an alert when your daily fasting window begins.</span>
+            </div>
+          </label>
+          <label class="small" style="display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:600;padding:10px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+            <input type="checkbox" id="fastNotifEndCheck">
+            <div>
+              <strong style="display:block" data-i18n="fasting_notif_end_label">When fasting ends / goal met</strong>
+              <span class="tiny muted" data-i18n="fasting_notif_end_desc">Receive an alert when you hit your target fasting hours.</span>
+            </div>
+          </label>
+        </div>
+      </div>
       <div class="panel stack">
         <div class="section-title">
           <div>
@@ -5235,13 +5282,6 @@
     <!-- 10. INTERMITTENT FASTING -->
     <section data-tab="fasting" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="fasting_title">⏱️ Intermittent Fasting Tracker</h2>
-            <p class="muted small" data-i18n="fasting_desc">Scientifically-backed fasting protocols to accelerate ketosis, autophagy & metabolic flexibility.</p>
-          </div>
-        </div>
-
         <!-- Fasting Card Widget -->
         <div class="fasting-card" id="fastingTrackerCard" style="margin-top:0">
           <div class="fasting-header">
@@ -5255,19 +5295,26 @@
           <div class="fasting-progress-wrap">
             <div class="fasting-progress-bar" id="fastingProgressBar" style="width:0%"></div>
           </div>
-          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-muted);margin-bottom:6px">
+          <div style="display:flex;justify-content:space-between;font-size:11px;color:var(--color-text-muted);margin-bottom:8px">
             <span id="fastingStartTimeLabel" data-i18n="fasting_not_started">Not started</span>
             <span id="fastingTargetTimeLabel" data-i18n="fasting_goal_16h">Goal: 16h</span>
           </div>
-          <div class="fasting-presets-bar">
-            <button class="chip-btn active" data-fast-style="16:8" type="button" data-i18n="fast_preset_16_8">16:8 LeanGains</button>
-            <button class="chip-btn" data-fast-style="18:6" type="button" data-i18n="fast_preset_18_6">18:6 Daily</button>
-            <button class="chip-btn" data-fast-style="20:4" type="button" data-i18n="fast_preset_20_4">20:4 Warrior</button>
-            <button class="chip-btn" data-fast-style="OMAD" type="button" data-i18n="fast_preset_omad">23:1 OMAD</button>
-            <button class="chip-btn" data-fast-style="24h" type="button" data-i18n="fast_preset_24h">24h Monk</button>
-            <button class="chip-btn" data-fast-style="36h" type="button" data-i18n="fast_preset_36h">36h Extended</button>
-            <button class="chip-btn" data-fast-style="custom" type="button"><span data-i18n="fasting_custom_hours">⚙️ Custom Fast</span></button>
+
+          <!-- Select Fasting Type: Dropdown -->
+          <div style="margin-top:6px">
+            <label for="fastTypeSelect" class="small font-bold" style="display:block;margin-bottom:4px" data-i18n="fasting_select_type_label">Select your fasting type:</label>
+            <select id="fastTypeSelect" class="slot-select" style="width:100%;padding:8px 12px;font-size:var(--text-sm);font-weight:600;border-radius:var(--radius-md)">
+              <option value="16:8" data-i18n="fast_opt_16_8">16:8 LeanGains (16h Fast / 8h Eating)</option>
+              <option value="18:6" data-i18n="fast_opt_18_6">18:6 Daily (18h Fast / 6h Eating)</option>
+              <option value="20:4" data-i18n="fast_opt_20_4">20:4 Warrior (20h Fast / 4h Eating)</option>
+              <option value="OMAD" data-i18n="fast_opt_omad">23:1 OMAD (One Meal A Day)</option>
+              <option value="24h" data-i18n="fast_opt_24h">24h Monk Fast</option>
+              <option value="36h" data-i18n="fast_opt_36h">36h Extended Reset</option>
+              <option value="custom" data-i18n="fast_opt_custom">⚙️ Custom Hours...</option>
+            </select>
           </div>
+
+          <!-- Custom Fast Inputs Row -->
           <div id="customFastInputsRow" class="hidden" style="margin-top:8px;display:flex;gap:6px;align-items:center;background:var(--color-surface-offset);padding:8px;border-radius:var(--radius-md);flex-wrap:wrap">
             <label class="tiny" style="flex:1;min-width:110px"><span data-i18n="fasting_custom_fast_lbl">Fasting (hours):</span>
               <input id="customFastHoursInp" class="search" type="number" min="1" max="168" value="16" style="padding:4px 8px;font-size:12px;margin-top:2px">
@@ -5278,81 +5325,33 @@
             <button id="applyCustomFastBtn" class="act-btn small primary" type="button" style="align-self:flex-end;padding:6px 12px;margin-top:auto"><span data-i18n="fasting_set_btn">Set</span></button>
           </div>
 
-          <!-- Daily Schedule & Auto-Start Configuration -->
-          <div style="margin-top:10px;padding:12px;border-radius:var(--radius-md);background:var(--color-surface-offset);border:1px solid var(--color-border);display:flex;flex-direction:column;gap:8px">
-            <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
-              <div>
-                <strong class="small" data-i18n="fasting_daily_sched_title">⏰ Daily Schedule & Window</strong>
-                <p class="tiny muted" style="margin:2px 0 0" data-i18n="fasting_daily_sched_desc">Automatically start your fasting window every day and receive alerts.</p>
-              </div>
-              <label class="small" style="display:flex;align-items:center;gap:6px;cursor:pointer;font-weight:700">
-                <input type="checkbox" id="fastAutoStartCheck">
-                <span data-i18n="fasting_auto_start_label">Auto-Start</span>
-              </label>
+          <!-- When to start fasting & auto-start -->
+          <div style="margin-top:12px;padding:12px;border-radius:var(--radius-md);background:var(--color-surface-offset);border:1px solid var(--color-border);display:flex;flex-direction:column;gap:8px">
+            <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap">
+              <label for="fastStartHourInp" class="small font-bold" data-i18n="fasting_when_to_start">When to start fasting:</label>
+              <input id="fastStartHourInp" type="time" class="search" value="18:00" style="width:auto;padding:6px 12px;font-weight:700;font-size:var(--text-sm)">
             </div>
-            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
-              <label class="tiny" for="fastStartHourInp" style="font-weight:600" data-i18n="fasting_start_every_day_at">Start Fast Every Day At:</label>
-              <input id="fastStartHourInp" type="time" class="search" value="18:00" style="width:auto;padding:4px 10px;font-weight:700">
-              <span id="fastScheduleStatus" class="tiny muted" style="margin-left:auto"></span>
-            </div>
-
-            <!-- Fasting Window End Calculation Summary -->
-            <div style="background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md);padding:8px 12px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:6px">
-              <div style="display:flex;align-items:center;gap:8px">
-                <span style="font-size:18px">🎯</span>
-                <div>
-                  <div class="tiny muted font-bold" style="letter-spacing:0.4px" data-i18n="fasting_sched_window_badge">SCHEDULED WINDOW</div>
-                  <div class="small" id="fastScheduleWindowSummary" style="font-weight:700;color:var(--color-primary)">
-                    Starts 18:00 ➔ Ends 10:00 next day (16h fast)
-                  </div>
-                </div>
-              </div>
-              <div class="tiny muted" id="fastScheduleEatingSummary" style="font-weight:600">
-                🍽️ Eating window: 10:00 – 18:00 (8h)
-              </div>
-            </div>
-
-            <!-- Notification Reminders -->
-            <div style="display:flex;flex-direction:column;gap:6px;padding-top:4px;border-top:1px dashed var(--color-divider)">
-              <div class="tiny muted font-bold" style="letter-spacing:0.4px" data-i18n="fasting_notif_section_title">🔔 NOTIFICATIONS / REMINDERS</div>
-              <div style="display:flex;flex-wrap:wrap;gap:14px">
-                <label class="small" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600">
-                  <input type="checkbox" id="fastNotifStartCheck">
-                  <span data-i18n="fasting_notif_start_label">When fasting starts</span>
-                </label>
-                <label class="small" style="display:inline-flex;align-items:center;gap:6px;cursor:pointer;font-weight:600">
-                  <input type="checkbox" id="fastNotifEndCheck">
-                  <span data-i18n="fasting_notif_end_label">When fasting ends</span>
-                </label>
-              </div>
-            </div>
+            <label class="small" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600">
+              <input type="checkbox" id="fastAutoStartCheck">
+              <span data-i18n="fasting_auto_start_simple">Auto-start daily at this hour</span>
+            </label>
           </div>
-        </div>
 
-        <!-- Autophagy & Metabolic Stages Guide Card -->
-        <div class="note small stack" style="gap:10px;padding:14px">
-          <strong data-i18n="fasting_bio_title">🧬 Fasting & Ketosis Biology Stages</strong>
-          <div style="display:grid;grid-template-columns:1fr;gap:8px" class="tiny">
-            <div style="background:var(--color-surface);padding:8px 10px;border-radius:var(--radius-md);border-left:3px solid var(--color-primary)">
-              <strong data-i18n="fasting_stage1_title">12 Hours: Glycogen Depletion</strong>
-              <p class="muted" style="margin-top:2px" data-i18n="fasting_stage1_desc">Liver glycogen levels drop significantly. Blood glucose drops and insulin levels decrease, preparing the liver to burn body fat.</p>
+          <!-- Collapsible: Details about fasting protocols & biology -->
+          <details class="more-filters" style="margin-top:12px">
+            <summary class="small font-semibold" style="cursor:pointer;padding:6px 0;user-select:none" data-i18n="fasting_types_details_summary">📖 Details about fasting protocols & biology</summary>
+            <div class="note small stack" style="margin-top:8px;gap:8px;padding:10px;line-height:1.4">
+              <div><strong>16:8 LeanGains:</strong> 16h fast, 8h eating window. The most sustainable keto protocol for fat loss and steady energy.</div>
+              <div><strong>18:6 Daily:</strong> 18h fast, 6h eating window. Deeper fat oxidation and enhanced ketone levels.</div>
+              <div><strong>20:4 Warrior:</strong> 20h fast, 4h eating window (1–2 meals). Triggers early autophagy and growth hormone.</div>
+              <div><strong>23:1 OMAD:</strong> One Meal A Day. 23h fast, 1h feast. Peak insulin reset and metabolic simplicity.</div>
+              <div><strong>24h Monk:</strong> Single full 24-hour fast once or twice a week (dinner-to-dinner). Full cellular reset.</div>
+              <div><strong>36h Extended:</strong> 36 hours. Maximum autophagy, immune renewal, and deep therapeutic ketosis.</div>
+              <div style="border-top:1px dashed var(--color-divider);padding-top:6px;margin-top:2px" class="tiny muted">
+                💡 <strong>Tip:</strong> Drink plenty of water with electrolytes (sodium, potassium, magnesium) during fasting windows.
+              </div>
             </div>
-            <div style="background:var(--color-surface);padding:8px 10px;border-radius:var(--radius-md);border-left:3px solid #ff9800">
-              <strong data-i18n="fasting_stage2_title">14–16 Hours: Accelerated Ketone Production</strong>
-              <p class="muted" style="margin-top:2px" data-i18n="fasting_stage2_desc">Fatty acids are oxidized into Acetoacetate & Beta-Hydroxybutyrate (BHB). Ketone levels rise, providing stable mental focus.</p>
-            </div>
-            <div style="background:var(--color-surface);padding:8px 10px;border-radius:var(--radius-md);border-left:3px solid #2e7d32">
-              <strong data-i18n="fasting_stage3_title">18–24 Hours: Cellular Autophagy</strong>
-              <p class="muted" style="margin-top:2px" data-i18n="fasting_stage3_desc">Cellular recycling activates (clearing damaged proteins and senescent cell components) via AMPK activation and mTOR downregulation.</p>
-            </div>
-            <div style="background:var(--color-surface);padding:8px 10px;border-radius:var(--radius-md);border-left:3px solid #7b1fa2">
-              <strong data-i18n="fasting_stage4_title">24+ Hours: Deep Reset & Maximum Insulin Sensitivity</strong>
-              <p class="muted" style="margin-top:2px" data-i18n="fasting_stage4_desc">Maximum insulin reset and peak human growth hormone (HGH) secretion. Maintain adequate salt and electrolyte intake.</p>
-            </div>
-          </div>
-          <div class="tiny muted" style="border-top:1px dashed var(--color-divider);padding-top:8px">
-            💡 <strong data-i18n="fasting_tip_title">Keto Fasting Tip:</strong> <span data-i18n="fasting_tip_desc">Unlike high-carb diets, low-carb keto preserves electrolytes differently. Always drink plenty of water with a pinch of sea salt, sodium, potassium, or magnesium during extended fasting windows.</span>
-          </div>
+          </details>
         </div>
       </div>
     </section>
@@ -6503,6 +6502,21 @@ const I18N = {
     aisle_oils: "🧂 Oils, Sauces & Spices",
     aisle_supplements: "💊 Supplements & Snacks",
     aisle_other: "📦 General / Other",
+    fasting_select_type_label: "Select your fasting type:",
+    fasting_when_to_start: "When to start fasting:",
+    fasting_auto_start_simple: "Auto-start daily at this hour",
+    fasting_types_details_summary: "📖 Fasting Protocols & Biology Details",
+    settings_notif_title: "Fasting Notifications & Reminders",
+    settings_notif_desc: "Configure notifications for fasting start and goal completion.",
+    fasting_notif_start_desc: "Receive an alert when your daily fasting window begins.",
+    fasting_notif_end_desc: "Receive an alert when you hit your target fasting hours.",
+    fast_opt_16_8: "16:8 LeanGains (16h Fast / 8h Eating)",
+    fast_opt_18_6: "18:6 Daily (18h Fast / 6h Eating)",
+    fast_opt_20_4: "20:4 Warrior (20h Fast / 4h Eating)",
+    fast_opt_omad: "23:1 OMAD (One Meal A Day)",
+    fast_opt_24h: "24h Monk Fast",
+    fast_opt_36h: "36h Extended Reset",
+    fast_opt_custom: "⚙️ Custom Hours...",
     fast_preset_16_8: "16:8 LeanGains",
     fast_preset_18_6: "18:6 Daily",
     fast_preset_20_4: "20:4 Warrior",
@@ -7037,6 +7051,21 @@ const I18N = {
     aisle_oils: "🧂 Uleiuri, Sosuri si Condimente",
     aisle_supplements: "💊 Suplimente si Gustari",
     aisle_other: "📦 Diverse / Altele",
+    fasting_select_type_label: "Alege tipul de post:",
+    fasting_when_to_start: "Când începe postul:",
+    fasting_auto_start_simple: "Pornire automată zilnic la această oră",
+    fasting_types_details_summary: "📖 Detalii Protocoale de Post & Biologie",
+    settings_notif_title: "Notificări & Mementouri Post",
+    settings_notif_desc: "Configurează alerte pentru începerea și finalizarea postului.",
+    fasting_notif_start_desc: "Primești o notificare când începe intervalul zilnic de post.",
+    fasting_notif_end_desc: "Primești o alertă când atingi orele țintă de post.",
+    fast_opt_16_8: "16:8 LeanGains (16h Post / 8h Masă)",
+    fast_opt_18_6: "18:6 Zilnic (18h Post / 6h Masă)",
+    fast_opt_20_4: "20:4 Războinic (20h Post / 4h Masă)",
+    fast_opt_omad: "23:1 OMAD (O Singură Masă pe Zi)",
+    fast_opt_24h: "24h Călugăr",
+    fast_opt_36h: "36h Resetare Prelungită",
+    fast_opt_custom: "⚙️ Ore Personalizate...",
     fast_preset_16_8: "16:8 LeanGains",
     fast_preset_18_6: "18:6 Zilnic",
     fast_preset_20_4: "20:4 Războinic",
@@ -11335,6 +11364,10 @@ const CUP_DENSITY = {
       const startLabel = document.getElementById('fastingStartTimeLabel');
       const targetLabel = document.getElementById('fastingTargetTimeLabel');
       const customInputsRow = document.getElementById('customFastInputsRow');
+      const fastTypeSel = document.getElementById('fastTypeSelect');
+      if (fastTypeSel && fasting.style) {
+        fastTypeSel.value = fasting.style;
+      }
 
       // Daily Schedule elements
       const autoStartCheck = document.getElementById('fastAutoStartCheck');
@@ -12903,6 +12936,7 @@ const CUP_DENSITY = {
         title = (selectEl.dataset.day || '') + ' • ' + selectEl.dataset.slot;
       }
       if (!title && selectEl.id === 'sortRule') title = 'Sort Recipes';
+      if (!title && selectEl.id === 'fastTypeSelect') title = (settings && settings.lang === 'ro' ? 'Alege tipul de post' : 'Select Fasting Protocol');
       if (!title && selectEl.id === 'convIngredient') title = 'Select Ingredient';
       if (!title && selectEl.id === 'convUnit') title = 'Select Unit';
       if (!title && selectEl.id === 'builderMeal') title = 'Select Meal Type';
@@ -18772,7 +18806,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.5';
+    const FALLBACK_APP_VERSION = '1.1.6';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -18934,6 +18968,30 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.6',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '⚙️ Butonul de Setări mutat din partea de jos a paginii ca iconiță rapidă ⚙️ în colțul din dreapta sus al antetului',
+            '⏱️ Design curat și simplificat pentru Postul Intermitent: eliminat titlul duplicat și descrierea redundantă',
+            '🔽 Meniu dropdown simplu pentru alegerea tipului de post (16:8, 18:6, 20:4, OMAD, etc.)',
+            '⏰ Secțiune intuitivă „Când începe postul” cu bifă directă pentru pornire automată zilnică',
+            '🧹 Eliminat blocul aglomerat „Scheduled Window” pentru o experiență mult mai curată',
+            '🔔 Opțiunile de notificări de post mutate pe pagina de Setări',
+            '📖 Detaliile despre protocoalele de post grupate într-un meniu derulant compact'
+          ],
+          en: [
+            '⚙️ Settings moved from the bottom of the page to a quick-access ⚙️ gear icon shortcut in the top-right header',
+            '⏱️ Clean, noise-free Intermittent Fasting redesign: removed duplicated title and redundant header text',
+            '🔽 Streamlined dropdown menu for selecting fasting protocol (16:8, 18:6, 20:4, OMAD, etc.)',
+            '⏰ Direct "When to start fasting" time setting with immediate auto-start checkbox',
+            '🧹 Removed noisy "Scheduled Window" section for maximum clarity',
+            '🔔 Fasting notification toggles moved to the Settings page',
+            '📖 Fasting protocol and biology details tucked neatly into a collapsible dropdown'
+          ]
+        }
+      },
       {
         version: '1.1.5',
         date: '20 Oct 2026',
@@ -20409,6 +20467,7 @@ const CUP_DENSITY = {
       // Fasting Tracker Wiring
       initFastingTimer();
       document.getElementById('fastingToggleBtn')?.addEventListener('click', toggleFasting);
+      document.getElementById('fastTypeSelect')?.addEventListener('change', e => selectFastPreset(e.target.value));
       document.querySelectorAll('[data-fast-style]').forEach(btn => {
         btn.addEventListener('click', () => selectFastPreset(btn.dataset.fastStyle));
       });
