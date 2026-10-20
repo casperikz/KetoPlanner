@@ -507,6 +507,17 @@ class MainActivity : ComponentActivity() {
         }
 
         @JavascriptInterface
+        fun wasAlarmFiredRecently(type: String, windowMillis: Long): Boolean {
+            return try {
+                val prefs = activity.getSharedPreferences("fasting_alarm_prefs", Context.MODE_PRIVATE)
+                val lastFired = prefs.getLong("last_fired_$type", 0L)
+                (System.currentTimeMillis() - lastFired) < windowMillis
+            } catch (e: Exception) {
+                false
+            }
+        }
+
+        @JavascriptInterface
         fun showNotification(title: String, message: String) {
             activity.runOnUiThread {
                 try {

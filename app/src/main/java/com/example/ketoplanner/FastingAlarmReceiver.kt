@@ -18,6 +18,11 @@ class FastingAlarmReceiver : BroadcastReceiver() {
         val message = intent.getStringExtra("message") ?: if (type == "start") "Your fasting window has begun." else "You reached your fasting goal!"
         val notifId = if (type == "start") 2001 else 2002
 
+        try {
+            val prefs = context.getSharedPreferences("fasting_alarm_prefs", Context.MODE_PRIVATE)
+            prefs.edit().putLong("last_fired_$type", System.currentTimeMillis()).apply()
+        } catch (e: Exception) {}
+
         createNotificationChannel(context)
 
         val tapIntent = Intent(context, MainActivity::class.java).apply {
