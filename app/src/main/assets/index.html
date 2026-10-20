@@ -63,7 +63,7 @@
 
     :root, [data-theme="light"] {
       color-scheme: light;
-      --text-xs: .75rem;
+      --text-xs: 0.85rem;
       --text-sm: .875rem;
       --text-base: 1rem;
       --text-lg: 1.25rem;
@@ -726,20 +726,32 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: .4rem;
-      padding: .6rem 1rem;
+      gap: 6px;
+      padding: 8px 14px;
+      min-height: 42px;
+      box-sizing: border-box;
       border: 1px solid var(--color-primary);
       border-radius: var(--radius-md);
       background: var(--color-primary-highlight);
       color: var(--color-text);
       font-size: var(--text-sm);
       font-weight: 600;
+      touch-action: manipulation;
+      cursor: pointer;
+    }
+    .act-btn.small {
+      padding: 6px 12px;
+      min-height: 40px;
+      font-size: var(--text-xs);
     }
     .act-btn:active { background: color-mix(in oklab, var(--color-primary-highlight) 60%, var(--color-primary)); }
     .act-btn.primary { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
     .x-btn {
-      width: 32px;
-      height: 32px;
+      width: 40px;
+      height: 40px;
+      min-width: 40px;
+      min-height: 40px;
+      box-sizing: border-box;
       border-radius: var(--radius-sm);
       background: var(--color-surface-offset);
       border: 1px solid var(--color-border);
@@ -747,15 +759,16 @@
       align-items: center;
       justify-content: center;
       color: var(--color-text-muted);
-      font-size: 15px;
+      font-size: 18px;
       flex-shrink: 0;
       position: relative;
       touch-action: manipulation;
+      cursor: pointer;
     }
     .x-btn::after {
       content: '';
       position: absolute;
-      inset: -6px;
+      inset: -4px;
     }
     .x-btn:active { background: var(--color-danger); color: #fff; }
     .search, .slot-select {
@@ -777,7 +790,7 @@
     .kpis {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
-      gap: var(--space-2);
+      gap: 12px;
     }
     @media (min-width: 600px) { .kpis { grid-template-columns: repeat(4, 1fr); } }
     .kpi {
@@ -804,13 +817,20 @@
     .day-pills-bar::-webkit-scrollbar { display: none; }
     .day-pill {
       flex: 0 0 auto;
-      padding: 6px 12px;
+      padding: 8px 14px;
+      min-height: 40px;
+      box-sizing: border-box;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       border-radius: 999px;
       font-size: var(--text-xs);
       font-weight: 600;
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       color: var(--color-text-muted);
+      touch-action: manipulation;
+      cursor: pointer;
     }
     .day-pill.active {
       background: var(--color-primary);
@@ -876,7 +896,7 @@
       border: none;
       padding: 0;
       display: grid;
-      gap: 10px;
+      gap: 16px;
       box-shadow: none;
     }
     .day-card-header {
@@ -889,16 +909,18 @@
       background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-xl);
-      padding: 12px 14px;
+      padding: 14px 16px;
       display: flex;
       flex-direction: column;
-      gap: 8px;
+      gap: 12px;
       box-shadow: var(--shadow-sm);
     }
     .slot-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      flex-wrap: wrap;
+      gap: 8px;
     }
     .slot-badge {
       font-size: 13px;
@@ -910,10 +932,11 @@
     }
     .slot-actions {
       display: inline-flex;
+      flex-wrap: wrap;
       align-items: center;
-      gap: 6px;
+      gap: 8px;
     }
-    .slot-control { display: flex; gap: 10px; align-items: center; width: 100%; }
+    .slot-control { display: flex; gap: 12px; align-items: center; width: 100%; }
     .slot-thumb { width: 44px; height: 44px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: var(--color-surface-offset); border: 1px solid var(--color-border); }
     .slot-control select { flex: 1; min-width: 0; }
     .slot-macros-bar {
@@ -1305,16 +1328,23 @@
     .macro-sort-chips::-webkit-scrollbar { display: none; }
     .chip-btn {
       flex: 0 0 auto;
-      padding: 4px 10px;
-      font-size: 11px;
+      padding: 8px 14px;
+      min-height: 40px;
+      box-sizing: border-box;
+      font-size: var(--text-xs);
       font-weight: 600;
       border-radius: 999px;
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       color: var(--color-text-muted);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      touch-action: manipulation;
     }
     .chip-btn.active { background: var(--color-primary); color: #fff; border-color: var(--color-primary); }
-    .macro-cards-wrap { display: grid; gap: 6px; }
+    .macro-cards-wrap { display: grid; gap: 12px; }
     .macro-card {
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
@@ -1549,7 +1579,53 @@
     .small { font-size: var(--text-sm); }
     .muted { color: var(--color-text-muted); }
     .section-title { display: flex; justify-content: space-between; align-items: flex-start; gap: var(--space-2); margin-bottom: var(--space-2); }
-    .filters { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .filters {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin: var(--space-2) 0;
+    }
+    .filters label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: var(--text-sm);
+      cursor: pointer;
+      user-select: none;
+    }
+    .more-filters {
+      background: var(--color-surface-2);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      margin-top: 8px;
+    }
+    .more-filters summary {
+      cursor: pointer;
+      font-size: var(--text-sm);
+      font-weight: 700;
+      color: var(--color-text);
+      user-select: none;
+    }
+    .filter-body {
+      padding: 16px 0 4px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+    .filter-slider-row {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      width: 100%;
+    }
+    .filter-slider-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: var(--text-xs);
+      font-weight: 600;
+    }
     /* Shopping List Page Styling */
     .shop-header-actions {
       display: flex;
@@ -2056,6 +2132,7 @@
       background: rgba(0, 0, 0, 0.65);
       backdrop-filter: blur(2px);
       -webkit-backdrop-filter: blur(2px);
+      cursor: pointer;
     }
     html.modal-open, body.modal-open {
       overflow: hidden !important;
@@ -2191,7 +2268,7 @@
       position: fixed;
       inset: 0;
       background: rgba(0,0,0,0.5);
-      z-index: 2000;
+      z-index: 10000;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -2199,8 +2276,10 @@
       opacity: 0;
       pointer-events: none;
       transition: opacity .2s ease;
+      cursor: pointer;
     }
-    .confirm-modal-overlay.show {
+    .confirm-modal-overlay.show,
+    .confirm-modal-overlay:not(.hidden) {
       opacity: 1;
       pointer-events: auto;
     }
@@ -2212,6 +2291,7 @@
       width: 100%;
       box-shadow: var(--shadow-md);
       text-align: center;
+      cursor: default;
     }
     .confirm-modal-box h3 {
       font-size: var(--text-lg);
@@ -2472,51 +2552,59 @@
       white-space: nowrap;
     }
 
-    /* Floating Recipe Family Sub-navigation Bar */
+    /* Sticky Recipe Family Sub-navigation Bar */
     .recipe-subnav-bar {
-      position: fixed;
-      bottom: 58px;
-      left: 50%;
-      transform: translateX(-50%);
+      position: sticky;
+      top: 56px;
+      left: 0;
+      right: 0;
+      width: 100%;
       z-index: 95;
-      pointer-events: none;
-      width: max-content;
-      max-width: calc(100vw - 32px);
-      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      background: var(--color-surface);
+      border-bottom: 1px solid var(--color-border);
+      padding: 6px 12px;
+      box-sizing: border-box;
+      display: flex;
+      justify-content: center;
+      box-shadow: var(--shadow-sm);
     }
     .recipe-subnav-bar.hidden {
       display: none !important;
     }
     .recipe-subnav-inner {
-      pointer-events: auto;
       display: flex;
       align-items: center;
-      gap: 4px;
-      padding: 4px 6px;
-      background: var(--color-surface);
-      border: 1.5px solid var(--color-primary);
-      border-radius: 999px;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.18), 0 1px 3px rgba(0,0,0,0.1);
-      backdrop-filter: blur(8px);
+      justify-content: center;
+      gap: 6px;
+      width: 100%;
+      max-width: 480px;
+      background: var(--color-surface-offset);
+      padding: 3px;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--color-border);
     }
     .recipe-subnav-btn {
+      flex: 1;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
-      padding: 6px 14px;
-      border-radius: 999px;
+      justify-content: center;
+      gap: 6px;
+      padding: 8px 12px;
+      min-height: 40px;
+      border-radius: var(--radius-sm);
       border: none;
       background: transparent;
       color: var(--color-text-muted);
-      font-size: 12px;
+      font-size: var(--text-xs);
       font-weight: 700;
       cursor: pointer;
       transition: all 0.15s ease;
       white-space: nowrap;
+      touch-action: manipulation;
     }
     .recipe-subnav-btn:hover {
       color: var(--color-text);
-      background: var(--color-surface-2);
+      background: var(--color-surface);
     }
     .recipe-subnav-btn.active {
       background: var(--color-primary);
@@ -3324,15 +3412,19 @@
     .batch-prep-pill {
       display: inline-flex;
       align-items: center;
+      justify-content: center;
       gap: 4px;
       background: rgba(1, 105, 111, 0.12);
       color: var(--color-primary);
       border: 1px solid var(--color-primary);
-      padding: 2px 7px;
-      border-radius: 999px;
-      font-size: 10px;
+      padding: 6px 12px;
+      min-height: 40px;
+      box-sizing: border-box;
+      border-radius: var(--radius-md);
+      font-size: var(--text-xs);
       font-weight: 700;
       cursor: pointer;
+      touch-action: manipulation;
     }
     .batch-prep-pill:hover {
       background: var(--color-primary);
@@ -3771,6 +3863,24 @@
     </nav>
   </header>
 
+  <!-- Sticky Shortcut Bar for Recipe Family (Library, Builder, Nutrients) -->
+  <div id="recipeSubnavBar" class="recipe-subnav-bar hidden" role="navigation" aria-label="Recipe Navigation">
+    <div class="recipe-subnav-inner">
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="recipes">
+        <span>📖</span>
+        <span data-i18n="subnav_recipe_library">Library</span>
+      </button>
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="builder">
+        <span>⚡</span>
+        <span data-i18n="subnav_recipe_builder">Builder</span>
+      </button>
+      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="macros">
+        <span>🥑</span>
+        <span data-i18n="subnav_recipe_macros">Nutrients</span>
+      </button>
+    </div>
+  </div>
+
   <!-- Focus Mode Floating Window (Draggable, Collapsible, Expandable 80vw x 50vh window) -->
   <div id="focusRecipeWindow" class="focus-recipe-window hidden" role="dialog" aria-label="Cooking Focus Window">
     <div class="focus-win-header" id="focusWinHeader">
@@ -3964,12 +4074,7 @@
     <!-- HEALTH & EVOLUTION TRACKER -->
     <section data-tab="health" class="hidden">
       <div class="panel health-panel">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="health_title">📈 Monitorizare Sănătate & Evoluție</h2>
-            <p class="muted small" data-i18n="health_subtitle">Urmărește greutatea, glicemia, cetoza, indicele GKI și prognoza metabolică pe 4 săptămâni.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="health_subtitle">Urmărește greutatea, glicemia, cetoza, indicele GKI și prognoza metabolică pe 4 săptămâni.</p>
 
         <!-- Quick Summary KPI Chips -->
         <div class="health-summary-row">
@@ -4142,11 +4247,9 @@
     <!-- 3. RECIPES LIBRARY -->
     <section data-tab="recipes" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)"><span data-i18n="title_recipes">Recipe Library</span> (<span id="recipeCount">0</span>)</h2>
-            <p class="muted small" data-i18n="recipes_subtitle">High-protein keto meal library.</p>
-          </div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
+          <p class="tiny muted" style="margin:0" data-i18n="recipes_subtitle">High-protein keto meal library.</p>
+          <span style="font-size:var(--text-xs);font-weight:700;color:var(--color-primary);background:var(--color-surface-offset);padding:2px 8px;border-radius:999px;border:1px solid var(--color-border)"><span id="recipeCount">0</span> <span data-i18n="recipes_count_label">rețete</span></span>
         </div>
 
         <!-- SortingDropdown ONLY for Recipes -->
@@ -4193,22 +4296,30 @@
             </div>
           </div>
           <div class="filters">
-            <label class="small"><input type="checkbox" id="filterBreakfast" checked> <span data-i18n="recipes_filter_breakfast">Breakfast</span></label>
-            <label class="small"><input type="checkbox" id="filterMain" checked> <span data-i18n="recipes_filter_main">Main Course</span></label>
-            <label class="small"><input type="checkbox" id="filterSnack" checked> <span data-i18n="recipes_filter_snack">Snack/Dessert</span></label>
-            <label class="small"><input type="checkbox" id="filterSide" checked> <span data-i18n="recipes_filter_side">Sides & Balancers</span></label>
-            <label class="small" style="font-weight:600"><input type="checkbox" id="filterNoDairy"> <span data-i18n="recipes_filter_no_dairy">🥛🚫 No Dairy</span></label>
+            <label><input type="checkbox" id="filterBreakfast" checked> <span data-i18n="recipes_filter_breakfast">Breakfast</span></label>
+            <label><input type="checkbox" id="filterMain" checked> <span data-i18n="recipes_filter_main">Main Course</span></label>
+            <label><input type="checkbox" id="filterSnack" checked> <span data-i18n="recipes_filter_snack">Snack/Dessert</span></label>
+            <label><input type="checkbox" id="filterSide" checked> <span data-i18n="recipes_filter_side">Sides & Balancers</span></label>
+            <label style="font-weight:600"><input type="checkbox" id="filterNoDairy"> <span data-i18n="recipes_filter_no_dairy">🥛🚫 No Dairy</span></label>
           </div>
 
           <details class="more-filters">
-            <summary class="small"><strong data-i18n="recipes_adv_filters">Advanced nutrient & tag filters</strong></summary>
-            <div class="filter-body" style="padding-top:8px">
-              <label class="small"><span data-i18n="recipes_min_prot">Min protein:</span> <span id="fProteinV">0 g</span>
-                <input id="fProtein" type="range" min="0" max="60" value="0" step="5">
-              </label>
-              <label class="small"><span data-i18n="recipes_max_carbs">Max net carbs:</span> <span id="fCarbsV">30 g</span>
-                <input id="fCarbs" type="range" min="0" max="30" value="30" step="2">
-              </label>
+            <summary><strong data-i18n="recipes_adv_filters">Advanced nutrient & tag filters</strong></summary>
+            <div class="filter-body">
+              <div class="filter-slider-row">
+                <div class="filter-slider-header">
+                  <span data-i18n="recipes_min_prot">Min protein:</span>
+                  <strong id="fProteinV" style="color:var(--color-primary)">0 g</strong>
+                </div>
+                <input id="fProtein" type="range" min="0" max="60" value="0" step="5" style="width:100%;margin:4px 0">
+              </div>
+              <div class="filter-slider-row">
+                <div class="filter-slider-header">
+                  <span data-i18n="recipes_max_carbs">Max net carbs:</span>
+                  <strong id="fCarbsV" style="color:var(--color-primary)">30 g</strong>
+                </div>
+                <input id="fCarbs" type="range" min="0" max="30" value="30" step="2" style="width:100%;margin:4px 0">
+              </div>
               <input id="fInclude" class="search" placeholder="Must include ingredient..." data-i18n-ph="recipes_f_include_ph">
               <input id="fExclude" class="search" placeholder="Exclude ingredient..." data-i18n-ph="recipes_f_exclude_ph">
               <div id="tagFilters" class="tag-filter-row"></div>
@@ -4231,12 +4342,7 @@
     <!-- 4. STOCK (PANTRY, FRIDGE, FREEZER) -->
     <section data-tab="stock" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="stock_title">Stock Manager</h2>
-            <p class="muted small" data-i18n="stock_desc">Track your pantry, fridge, and freezer inventory.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="stock_desc">Track your pantry, fridge, and freezer inventory.</p>
 
         <!-- Sub-menu Category Tabs -->
         <div class="stock-subnav">
@@ -4279,12 +4385,7 @@
     <!-- 4. SHOPPING LIST (SAMSUNG FOOD STYLE) -->
     <section data-tab="shopping" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="shop_title">Shopping List</h2>
-            <p class="muted small"><span id="shopSummaryCount">0 items</span> • Tap to mark bought, swipe left to delete.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0"><span id="shopSummaryCount">0 items</span> • <span data-i18n="shop_subtitle">Tap to mark bought, swipe left to delete.</span></p>
 
         <!-- Add Item Bar with Drop-Up linked to Macro DB -->
         <div class="shop-add-bar">
@@ -4326,12 +4427,7 @@
     <!-- 5. RECIPE BUILDER -->
     <section data-tab="builder" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="builder_title">Recipe Builder</h2>
-            <p class="muted small" data-i18n="builder_desc">Create custom low-carb meals with instant automatic macro math.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="builder_desc">Create custom low-carb meals with instant automatic macro math.</p>
 
         <div class="stack" style="gap:var(--space-2)">
           <input id="builderName" class="search" placeholder="Recipe name (e.g., Avocado Salmon Bowl)" data-i18n-ph="builder_name_ph">
@@ -4394,12 +4490,7 @@
     <!-- 6. MACRONUTRIENTS (MOBILE CARDS) -->
     <section data-tab="macros" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="macros_title">Macronutrients Database</h2>
-            <p class="muted small" data-i18n="macros_desc">Per 100g database for all ingredients. Edit values or add custom items.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="macros_desc">Per 100g database for all ingredients. Edit values or add custom items.</p>
 
         <!-- Add Custom Ingredient Form (Positioned at Top) -->
         <details class="more-filters" id="customIngDetails" style="margin-bottom:8px">
@@ -4475,12 +4566,7 @@
     <!-- 7. UNIT CONVERTER -->
     <section data-tab="convert" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="convert_title">Unit Converter</h2>
-            <p class="muted small" data-i18n="convert_desc">Cups to grams, spoons to ml with kitchen density tables.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="convert_desc">Cups to grams, spoons to ml with kitchen density tables.</p>
 
         <div class="convert-stack">
           <label class="small"><span data-i18n="convert_ing_label">Ingredient</span>
@@ -4516,12 +4602,7 @@
     <!-- PERSONAL GOALS & TARGETS (DEDICATED PAGE) -->
     <section data-tab="goals" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="goals_page_title">🎯 Personal Goals & Targets</h2>
-            <p class="muted small" data-i18n="goals_page_subtitle">Set your body measurements, keto macros, and daily nutrition targets.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="goals_page_subtitle">Set your body measurements, keto macros, and daily nutrition targets.</p>
 
         <!-- Body Measurements Card -->
         <div class="goals-card stack">
@@ -4768,12 +4849,7 @@
     <!-- 8. CLOUD SHARE & LIVE SYNC -->
     <section data-tab="sync" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="sync_title">Live Cloud Sync</h2>
-            <p class="muted small" data-i18n="sync_desc">Share your weekly planner, pantry, fridge & freezer in real time with another person.</p>
-          </div>
-        </div>
+        <p class="tiny muted" style="margin:0 0 10px 0" data-i18n="sync_desc">Share your weekly planner, pantry, fridge & freezer in real time with another person.</p>
 
         <!-- Connection Status Card -->
         <div class="sync-status-card" id="syncStatusCard">
@@ -4845,12 +4921,9 @@
     <!-- 9. LEARNING ABOUT KETO GUIDE -->
     <section data-tab="learn" class="hidden stack">
       <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <span class="home-badge" style="background:rgba(46,125,50,0.15);color:#2e7d32;border:1px solid rgba(46,125,50,0.3)">📚 EVIDENCE-INFORMED GUIDE</span>
-            <h2 style="font-size:var(--text-lg);margin-top:4px">Learning About Keto</h2>
-            <p class="muted small">Safety, metabolism, testing, nutrients & clinical guidance (Evidence through Oct 2026)</p>
-          </div>
+        <div style="margin:0 0 10px 0;display:flex;align-items:center;gap:8px;flex-wrap:wrap">
+          <span class="home-badge" style="background:rgba(46,125,50,0.15);color:#2e7d32;border:1px solid rgba(46,125,50,0.3)">📚 EVIDENCE-INFORMED GUIDE</span>
+          <span class="tiny muted">Safety, metabolism, testing, nutrients & clinical guidance (Evidence through Oct 2026)</span>
         </div>
 
         <!-- Medical Notice Warning Box -->
@@ -5497,24 +5570,6 @@
     </section>
   </main>
 
-  <!-- Floating Shortcut Bar for Recipe Family (Library, Builder, Nutrients) -->
-  <div id="recipeSubnavBar" class="recipe-subnav-bar hidden" role="navigation" aria-label="Recipe Navigation">
-    <div class="recipe-subnav-inner">
-      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="recipes">
-        <span>📖</span>
-        <span data-i18n="subnav_recipe_library">Library</span>
-      </button>
-      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="builder">
-        <span>⚡</span>
-        <span data-i18n="subnav_recipe_builder">Builder</span>
-      </button>
-      <button type="button" class="recipe-subnav-btn" data-recipe-subtab="macros">
-        <span>🥑</span>
-        <span data-i18n="subnav_recipe_macros">Nutrients</span>
-      </button>
-    </div>
-  </div>
-
   <!-- Bottom Navigation Bar -->
   <nav class="bottom-nav">
     <button class="nav-item" data-tab-btn="planner">
@@ -5559,7 +5614,7 @@
   </div>
 
   <!-- Customize Recipe Locally for Planner Modal -->
-  <div id="customizeMealModal" class="confirm-modal-overlay hidden" style="z-index:120">
+  <div id="customizeMealModal" class="confirm-modal-overlay hidden">
     <div class="confirm-modal-box stack" style="max-width:540px;width:94%;max-height:88vh;display:flex;flex-direction:column;padding:16px;overflow:hidden">
       <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--color-border);padding-bottom:10px">
         <div>
@@ -11169,6 +11224,8 @@ const CUP_DENSITY = {
       document.getElementById('confirmModalTitle').textContent = title;
       document.getElementById('confirmModalText').textContent = text;
       modal.classList.add('show');
+      document.documentElement.classList.add('modal-open');
+      document.body.classList.add('modal-open');
       
       const noBtn = document.getElementById('confirmModalNo');
       const yesBtn = document.getElementById('confirmModalYes');
@@ -11182,16 +11239,27 @@ const CUP_DENSITY = {
         yesBtn.textContent = yesLabel || 'Confirm';
       }
 
+      const closeConfirm = () => {
+        modal.classList.remove('show');
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      };
+
       // Remove old listeners by cloning
       const newNoBtn = noBtn.cloneNode(true);
       const newYesBtn = yesBtn.cloneNode(true);
       noBtn.parentNode.replaceChild(newNoBtn, noBtn);
       yesBtn.parentNode.replaceChild(newYesBtn, yesBtn);
       
-      newNoBtn.onclick = () => modal.classList.remove('show');
+      newNoBtn.onclick = closeConfirm;
       newYesBtn.onclick = () => {
-        modal.classList.remove('show');
+        closeConfirm();
         if (onConfirm) onConfirm();
+      };
+      modal.onclick = (e) => {
+        if (e.target === modal) {
+          closeConfirm();
+        }
       };
     }
 
@@ -12559,6 +12627,7 @@ const CUP_DENSITY = {
       const modal = document.getElementById('healthTableImportModal');
       if (!modal) return;
       modal.classList.remove('hidden');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
       const isRo = ((settings && settings.lang) === 'ro');
       const statusEl = document.getElementById('healthImportOcrStatus');
@@ -12571,6 +12640,7 @@ const CUP_DENSITY = {
       const modal = document.getElementById('healthTableImportModal');
       if (!modal) return;
       modal.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
 
@@ -13263,6 +13333,7 @@ const CUP_DENSITY = {
     document.addEventListener('touchend', (e) => {
       const sel = e.target.closest('select');
       if (sel) {
+        if (sel.closest('#customizeMealModal')) return;
         const currentScroll = window.scrollY || document.documentElement.scrollTop || document.body.scrollTop || 0;
         const dScroll = Math.abs(currentScroll - touchScrollStartY);
         if (dScroll > 3) {
@@ -13282,6 +13353,7 @@ const CUP_DENSITY = {
     document.addEventListener('click', (e) => {
       const sel = e.target.closest('select');
       if (sel) {
+        if (sel.closest('#customizeMealModal')) return;
         e.preventDefault();
         e.stopPropagation();
         if (Date.now() - lastTouchOpenTime > 400) {
@@ -13328,6 +13400,7 @@ const CUP_DENSITY = {
       const pantryModal = document.getElementById('pantrySuggestModal');
       if (pantryModal && !pantryModal.classList.contains('hidden')) {
         pantryModal.classList.add('hidden');
+        document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
         return true;
       }
@@ -13356,13 +13429,18 @@ const CUP_DENSITY = {
         closeBatchPrepModal();
         return true;
       }
+      const custMealModal = document.getElementById('customizeMealModal');
+      if (custMealModal && (!custMealModal.classList.contains('hidden') || custMealModal.classList.contains('show'))) {
+        closeCustomizeMealModal();
+        return true;
+      }
       const updateModal = document.getElementById('appUpdateModal');
-      if (updateModal && !updateModal.classList.contains('hidden')) {
+      if (updateModal && (updateModal.classList.contains('show') || !updateModal.classList.contains('hidden'))) {
         closeUpdateModal();
         return true;
       }
-      const changelogModal = document.getElementById('changelogModal');
-      if (changelogModal && !changelogModal.classList.contains('hidden')) {
+      const changelogModal = document.getElementById('appChangelogModal');
+      if (changelogModal && (changelogModal.classList.contains('show') || !changelogModal.classList.contains('hidden'))) {
         closeChangelogModal();
         return true;
       }
@@ -13374,6 +13452,8 @@ const CUP_DENSITY = {
       const confirmModal = document.getElementById('confirmModal');
       if (confirmModal && confirmModal.classList.contains('show')) {
         confirmModal.classList.remove('show');
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
         return true;
       }
       if (currentTab !== 'home') {
@@ -13447,8 +13527,8 @@ const CUP_DENSITY = {
                   ${isLeftover ? `<span class="tiny" style="font-size:10px;font-weight:700;color:var(--color-primary);background:rgba(1,105,111,0.1);padding:1px 6px;border-radius:6px">🍱 Leftover</span>` : ''}
                 </div>
                 <div class="slot-actions">
-                  ${cur ? `<button class="act-btn small cust-rec-btn" type="button" data-cust-day="${day}" data-cust-slot="${slot}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${isRo ? 'Personalizează ingredientele doar pentru această zi' : 'Customize ingredients only for this day'}">✏️ ${isRo ? 'Modifică' : 'Edit'}</button>` : ''}
-                  ${cur ? `<button class="act-btn small view-rec-btn" type="button" data-view-recipe="${cur}" style="padding:4px 8px;font-size:11px;white-space:nowrap" title="${isRo ? 'Deschide rețeta' : 'View recipe page'}">🔍 ${isRo ? 'Vezi' : 'View'}</button>` : ''}
+                  ${cur ? `<button class="act-btn small cust-rec-btn" type="button" data-cust-day="${day}" data-cust-slot="${slot}" title="${isRo ? 'Personalizează ingredientele doar pentru această zi' : 'Customize ingredients only for this day'}">✏️ ${isRo ? 'Modifică' : 'Edit'}</button>` : ''}
+                  ${cur ? `<button class="act-btn small view-rec-btn" type="button" data-view-recipe="${cur}" title="${isRo ? 'Deschide rețeta' : 'View recipe page'}">🔍 ${isRo ? 'Vezi' : 'View'}</button>` : ''}
                   ${cur ? `<button class="batch-prep-pill" type="button" data-batch-day="${day}" data-batch-slot="${slot}" title="Auto-fill meal into subsequent days as leftovers">🍱 Batch</button>` : ''}
                   ${cur ? `<button class="x-btn" type="button" data-clear-day="${day}" data-clear-slot="${slot}" title="Clear slot">×</button>` : ''}
                 </div>
@@ -13570,13 +13650,21 @@ const CUP_DENSITY = {
       renderCustomizeMealRows();
       recalcCustomizeMealMacros();
 
-      modal?.classList.remove('hidden');
+      if (modal) {
+        modal.classList.remove('hidden');
+        modal.classList.add('show');
+      }
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
     }
 
     function closeCustomizeMealModal() {
       const modal = document.getElementById('customizeMealModal');
-      if (modal) modal.classList.add('hidden');
+      if (modal) {
+        modal.classList.add('hidden');
+        modal.classList.remove('show');
+      }
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       customizeMealState = { day: null, slot: null, workingRecipe: null };
     }
@@ -13725,11 +13813,13 @@ const CUP_DENSITY = {
       }
 
       modal?.classList.remove('hidden');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
     }
 
     function closeBatchPrepModal() {
       document.getElementById('batchPrepModal')?.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       batchPrepState = { srcDay: null, srcSlot: null, recipeId: null };
     }
@@ -14579,11 +14669,13 @@ const CUP_DENSITY = {
       if (msg) { msg.textContent = ''; msg.className = 'tiny'; }
 
       document.getElementById('macroEditModal')?.classList.remove('hidden');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
     }
 
     function closeMacroEditModal() {
       document.getElementById('macroEditModal')?.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       currentEditingMacro = null;
     }
@@ -17036,6 +17128,7 @@ const CUP_DENSITY = {
 
       if (modal) {
         modal.classList.remove('hidden');
+        document.documentElement.classList.add('modal-open');
         document.body.classList.add('modal-open');
       }
     }
@@ -17043,6 +17136,7 @@ const CUP_DENSITY = {
     function closeShoppingItemDetailModal() {
       const modal = document.getElementById('shopItemModal');
       if (modal) modal.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       activeModalShopItemId = null;
     }
@@ -17794,6 +17888,7 @@ const CUP_DENSITY = {
       const modal = document.getElementById('recipePhotoImportModal');
       if (!modal) return;
       modal.classList.remove('hidden');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
     }
 
@@ -17801,6 +17896,7 @@ const CUP_DENSITY = {
       stopLivePhotoCamera();
       const modal = document.getElementById('recipePhotoImportModal');
       if (modal) modal.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
 
@@ -19082,12 +19178,14 @@ const CUP_DENSITY = {
       const modal = document.getElementById('tutorialPromptModal');
       if (!modal) return;
       modal.classList.add('show');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
     }
 
     function closeTutorialPrompt() {
       const modal = document.getElementById('tutorialPromptModal');
       if (modal) modal.classList.remove('show');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
 
@@ -19219,7 +19317,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.8';
+    const FALLBACK_APP_VERSION = '1.1.9';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -19323,12 +19421,18 @@ const CUP_DENSITY = {
         installBtn.disabled = false;
         installBtn.textContent = isRo ? '📥 Descarcă și Instalează' : '📥 Download & Install';
       }
-      if (modal) modal.classList.add('show');
+      if (modal) {
+        modal.classList.add('show');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      }
     }
 
     function closeUpdateModal() {
       const modal = document.getElementById('appUpdateModal');
       if (modal) modal.classList.remove('show');
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
     }
 
     function startAppUpdate() {
@@ -19381,6 +19485,28 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.9',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '👑 Ierarhie vizuală curățată: eliminat titlurile duplicate h2 din corpul paginilor, păstrând doar titlul curat din antet și subtitluri discrete',
+            '🔒 Remediere completă a blocării ecranului (modal trap): clasa modal-open este eliminată garantat de pe html și body, prevenind înghețarea atingerilor la închiderea ferestrelor sau a selectorului de unități',
+            '🎯 Rețea CSS Grid pe 2 coloane pentru filtrele de rețete cu rânduri dedicate și glisante pe toată lățimea pentru Proteine și Carbohidrați neți',
+            '📌 Bară de sub-navigare rețete poziționată sticky în partea superioară a ecranului (sub antet), eliminând suprapunerea cu conținutul și bara de jos',
+            '👆 Ținte tactile mobile extinse (≥40-42px) pentru toate butoanele („Modifică”, „Vezi”, „Batch”, „✕”, pastile de zile) și text mai lizibil',
+            '📐 Spațiere aerisită (gap 12-16px) pentru cardurile de zile, mese, rezumate macronutrienți și indicatori'
+          ],
+          en: [
+            '👑 Clean title hierarchy: eliminated duplicated h2 titles across pages in favor of the Top App Bar and discrete contextual subtitles',
+            '🔒 Solved modal trap and touch freezing: modal-open is strictly cleared from both html and body tags across all modals, and edit dropdowns no longer freeze touches',
+            '🎯 2-Column CSS Grid recipe filters with dedicated, full-width rows and headers for Protein and Net-Carb range sliders',
+            '📌 Sticky top recipe sub-navigation bar immediately beneath top app header, eliminating bottom floating overlap',
+            '👆 Enlarged mobile touch targets (≥40-42px) for meal action buttons ("Edit", "View", "Batch", "✕", day pills) and bumped readability',
+            '📐 Standardized spacing scale (12-16px gaps) for day cards, meal slots, macro summaries, and metric KPIs'
+          ]
+        }
+      },
       {
         version: '1.1.8',
         date: '20 Oct 2026',
@@ -19840,12 +19966,18 @@ const CUP_DENSITY = {
         listEl.appendChild(card);
       });
 
-      if (modal) modal.classList.add('show');
+      if (modal) {
+        modal.classList.add('show');
+        document.documentElement.classList.add('modal-open');
+        document.body.classList.add('modal-open');
+      }
     }
 
     function closeChangelogModal() {
       const modal = document.getElementById('appChangelogModal');
       if (modal) modal.classList.remove('show');
+      document.documentElement.classList.remove('modal-open');
+      document.body.classList.remove('modal-open');
       // Mark current version as seen so it will NOT pop up again until a new update is installed
       const currentVer = getLocalAppVersion();
       localStorage.setItem('keto_last_seen_version', currentVer);
@@ -20054,6 +20186,7 @@ const CUP_DENSITY = {
           buildCustom();
           afterPlannerChange();
           modal.classList.add('hidden');
+          document.documentElement.classList.remove('modal-open');
           document.body.classList.remove('modal-open');
           showAppToast(isRo ? `Adăugat ${r.name} în ${day} (${slot})!` : `Added ${r.name} to ${day} (${slot})!`);
         });
@@ -20100,6 +20233,7 @@ const CUP_DENSITY = {
       }
 
       renderPantrySuggestionsList();
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
       modal.classList.remove('hidden');
     }
@@ -20121,6 +20255,7 @@ const CUP_DENSITY = {
       if (input) input.value = '';
       if (statusMsg) statusMsg.textContent = '';
       if (resCard) resCard.classList.add('hidden');
+      document.documentElement.classList.add('modal-open');
       document.body.classList.add('modal-open');
       modal.classList.remove('hidden');
       input?.focus();
@@ -20130,6 +20265,7 @@ const CUP_DENSITY = {
       stopBarcodeCamera();
       const modal = document.getElementById('barcodeModal');
       if (modal) modal.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
     }
 
@@ -20351,6 +20487,7 @@ const CUP_DENSITY = {
       if (!lastBarcodeProduct) return;
       const modal = document.getElementById('barcodeModal');
       if (modal) modal.classList.add('hidden');
+      document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
 
       if (barcodeTargetContext === 'builder') {
@@ -20869,10 +21006,12 @@ const CUP_DENSITY = {
       document.getElementById('stockSuggestMealsBtn')?.addEventListener('click', openPantrySuggestions);
       document.getElementById('pantryCloseBtn')?.addEventListener('click', () => {
         document.getElementById('pantrySuggestModal')?.classList.add('hidden');
+        document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
       });
       document.getElementById('pantryBackdrop')?.addEventListener('click', () => {
         document.getElementById('pantrySuggestModal')?.classList.add('hidden');
+        document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
       });
 
@@ -21140,6 +21279,12 @@ const CUP_DENSITY = {
         renderCustomizeMealRows();
         recalcCustomizeMealMacros();
       });
+      document.getElementById('customizeMealModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'customizeMealModal') closeCustomizeMealModal();
+      });
+      document.getElementById('tutorialPromptModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'tutorialPromptModal') closeTutorialPrompt();
+      });
 
       applyLanguage(settings.lang || 'en');
       switchTab('home');
@@ -21150,6 +21295,9 @@ const CUP_DENSITY = {
       document.getElementById('updateInstallBtn')?.addEventListener('click', startAppUpdate);
       document.getElementById('updateLaterBtn')?.addEventListener('click', closeUpdateModal);
       document.getElementById('updateModalCloseBtn')?.addEventListener('click', closeUpdateModal);
+      document.getElementById('appUpdateModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'appUpdateModal') closeUpdateModal();
+      });
       const appVerLbl = document.getElementById('currentAppVersionLabel');
       if (appVerLbl) appVerLbl.textContent = 'v' + getLocalAppVersion().replace(/^v/i, '');
 
@@ -21157,6 +21305,9 @@ const CUP_DENSITY = {
       document.getElementById('viewChangelogBtn')?.addEventListener('click', () => showChangelogModal(null));
       document.getElementById('changelogGotItBtn')?.addEventListener('click', closeChangelogModal);
       document.getElementById('changelogModalCloseBtn')?.addEventListener('click', closeChangelogModal);
+      document.getElementById('appChangelogModal')?.addEventListener('click', (e) => {
+        if (e.target.id === 'appChangelogModal') closeChangelogModal();
+      });
       checkPostUpdateChangelog();
 
       setTimeout(() => checkForUpdates(false), 2500);
