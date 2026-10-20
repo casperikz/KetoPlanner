@@ -3619,7 +3619,7 @@
     }
     .health-chart-container {
       position: relative;
-      height: 280px;
+      height: 300px;
       width: 100% !important;
       max-width: 100% !important;
       min-width: 0 !important;
@@ -3641,9 +3641,9 @@
     }
 
     .health-forecast-box {
-      background: linear-gradient(135deg, #1e1b4b 0%, #0f172a 100%);
-      color: #f8fafc;
-      border: 1px solid #312e81;
+      background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-surface-offset) 100%);
+      color: var(--color-text);
+      border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
       padding: 12px 14px;
       margin-bottom: 2px;
@@ -3655,13 +3655,14 @@
       overflow: hidden !important;
     }
     [data-theme="dark"] .health-forecast-box {
-      background: linear-gradient(135deg, #17153a 0%, #090d16 100%);
-      border-color: #3730a3;
+      background: linear-gradient(135deg, var(--color-primary-hover) 0%, var(--color-surface-offset) 100%);
+      color: var(--color-text);
+      border-color: var(--color-border);
     }
     .health-forecast-highlight {
       font-size: 2.25rem;
       font-weight: 800;
-      color: #38bdf8;
+      color: var(--color-primary);
       letter-spacing: 0.5px;
       font-variant-numeric: tabular-nums;
     }
@@ -4095,14 +4096,14 @@
           <h3 style="margin:0 0 6px 0;font-size:var(--text-base);font-weight:800;display:flex;align-items:center;gap:8px">
             <span>🔮</span> <span data-i18n="health_forecast_title">Simulare & Prognoză Evoluție Greutate</span>
           </h3>
-          <p class="tiny" style="color:#94a3b8;margin:0 0 12px 0;line-height:1.5" data-i18n="health_forecast_desc">
+          <p class="tiny" style="color:var(--color-text-muted);margin:0 0 12px 0;line-height:1.5" data-i18n="health_forecast_desc">
             Estimează cum va evolua greutatea ta în următoarele 4 săptămâni pe baza mediei curente de cetoză și a intensității antrenamentului de astăzi.
           </p>
-          <button id="healthRunForecastBtn" class="act-btn primary small" type="button" style="background:#4f46e5;border-color:#4338ca">
+          <button id="healthRunForecastBtn" class="act-btn primary small" type="button">
             ⚡ <span data-i18n="health_forecast_btn">Rulează Simularea</span>
           </button>
 
-          <div id="healthForecastResult" class="hidden" style="margin-top:14px;padding:12px;background:rgba(15,23,42,0.7);border:1px solid #334155;border-radius:var(--radius-md)"></div>
+          <div id="healthForecastResult" class="hidden" style="margin-top:14px;padding:12px;background:var(--color-surface);border:1px solid var(--color-border);border-radius:var(--radius-md)"></div>
         </div>
 
         <!-- Istoric Înregistrări (Log History) -->
@@ -6355,6 +6356,7 @@ const I18N = {
     health_tf_14: "Last 14 days",
     health_tf_30: "Last 30 days",
     health_tf_90: "Last 90 days",
+    health_chart_empty: "Add your first measurement to generate the chart.",
     health_series_weight: "Weight",
     health_series_glucose: "Glucose",
     health_series_ketones: "Ketones",
@@ -6920,6 +6922,7 @@ const I18N = {
     health_tf_14: "Ultimele 14 zile",
     health_tf_30: "Ultimele 30 zile",
     health_tf_90: "Ultimele 90 zile",
+    health_chart_empty: "Adaugă prima măsurătoare pentru a genera graficul.",
     health_series_weight: "Greutate",
     health_series_glucose: "Glicemie",
     health_series_ketones: "Cetoză",
@@ -11355,9 +11358,13 @@ const CUP_DENSITY = {
             if (currentTab === 'health') renderHealthPage();
           }
 
+          if (data.dayOverrides && typeof data.dayOverrides === 'object') {
+            dayOverrides = data.dayOverrides;
+          }
+
           try {
             localStorage.setItem(LS_KEY, JSON.stringify({
-              custom, shopping, shoppingList, customRecipes, deletedBuiltInRecipes: deletedBuiltInRecipeIds,
+              custom, dayOverrides, shopping, shoppingList, customRecipes, deletedBuiltInRecipes: deletedBuiltInRecipeIds,
               editedBuiltInMacros, deletedBuiltInMacros, customIngredients,
               stockCategoryOverrides, cloudMacroDatabase, cloudStockCategories,
               settings, stock, packSizes, stores, ticked, meta,
@@ -11400,6 +11407,7 @@ const CUP_DENSITY = {
           updatedAt: firebase.firestore.FieldValue.serverTimestamp(),
           updatedBy: syncDeviceId,
           custom: custom,
+          dayOverrides: dayOverrides || {},
           stock: stock,
           shoppingList: shoppingList,
           customRecipes: sanitizedRecipes,
@@ -12184,67 +12192,66 @@ const CUP_DENSITY = {
       const canvas = document.getElementById('healthChartCanvas');
       if (!canvas || typeof Chart === 'undefined') return;
 
-      const filtered = getFilteredHealthData();
-      const labels = filtered.map(e => {
-        const parts = e.date.split('-');
-        if (parts.length === 3) return `${parseInt(parts[2], 10)}/${parseInt(parts[1], 10)}`;
-        return e.date;
-      });
+      const container = canvas.parentElement;
+      let emptyOverlay = document.getElementById('healthChartEmptyOverlay');
+      if (!healthLog || healthLog.length === 0) {
+        if (window.healthChartInstance) {
+          window.healthChartInstance.destroy();
+          window.healthChartInstance = null;
+        }
+        if (healthChartInstance) {
+          healthChartInstance.destroy();
+          healthChartInstance = null;
+        }
+        canvas.style.display = 'none';
+        if (!emptyOverlay && container) {
+          emptyOverlay = document.createElement('div');
+          emptyOverlay.id = 'healthChartEmptyOverlay';
+          emptyOverlay.style.cssText = 'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;text-align:center;padding:16px;color:var(--color-text-muted);font-size:var(--text-sm);font-weight:600;';
+          container.appendChild(emptyOverlay);
+        }
+        if (emptyOverlay) {
+          emptyOverlay.style.display = 'flex';
+          const isRo = ((settings && settings.lang) === 'ro');
+          const emptyText = (typeof t === 'function' ? t('health_chart_empty') : null) || (isRo ? 'Adaugă prima măsurătoare pentru a genera graficul.' : 'Add your first measurement to generate the chart.');
+          emptyOverlay.textContent = emptyText;
+        }
+        return;
+      }
 
-      const weights = filtered.map(e => (typeof e.weight === 'number' && !isNaN(e.weight)) ? e.weight : null);
-      const glucoses = filtered.map(e => (typeof e.glucose === 'number' && !isNaN(e.glucose)) ? e.glucose : null);
-      const ketones = filtered.map(e => (typeof e.ketones === 'number' && !isNaN(e.ketones)) ? e.ketones : null);
-      const gkis = filtered.map(e => (typeof e.gki === 'number' && !isNaN(e.gki)) ? e.gki : null);
+      if (emptyOverlay) emptyOverlay.style.display = 'none';
+      canvas.style.display = 'block';
+
+      // 1. Get filtered data based on UI selection
+      const rangeVal = document.getElementById('healthTimeRange')?.value || 'all';
+      let filteredLog = healthLog.slice();
+      if (rangeVal !== 'all') {
+        filteredLog = filteredLog.slice(-parseInt(rangeVal, 10));
+      }
+
+      const labels = filteredLog.map(e => (e.date && e.date.length >= 10) ? e.date.substring(5).replace('-', '/') : (e.date || '')); // MM/DD format
+      const weights = filteredLog.map(e => (typeof e.weight === 'number' && !isNaN(e.weight)) ? e.weight : null);
+      const glucoses = filteredLog.map(e => (typeof e.glucose === 'number' && !isNaN(e.glucose)) ? e.glucose : null);
+      const ketones = filteredLog.map(e => (typeof e.ketones === 'number' && !isNaN(e.ketones)) ? e.ketones : null);
+      const gkis = filteredLog.map(e => (typeof e.gki === 'number' && !isNaN(e.gki)) ? e.gki : null);
+
+      // 2. Fetch Target Weight from Settings
+      const targetWeight = parseFloat(settings.targetWeight) || parseFloat(settings.targetWeightKg) || null;
+      const targetData = targetWeight ? Array(labels.length).fill(targetWeight) : [];
 
       const isDark = (document.documentElement.getAttribute('data-theme') === 'dark');
       const textColor = isDark ? '#cbd5e1' : '#475569';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
 
-      const showWeight = document.getElementById('healthShowWeight')?.checked !== false;
-      const showGlucose = document.getElementById('healthShowGlucose')?.checked !== false;
-      const showKetones = document.getElementById('healthShowKetones')?.checked !== false;
-      const showGki = document.getElementById('healthShowGki')?.checked !== false;
-
-      const hasWeights = weights.some(w => typeof w === 'number' && !isNaN(w));
-      const hasGlucoses = glucoses.some(g => typeof g === 'number' && !isNaN(g));
-      const hasKetones = ketones.some(k => typeof k === 'number' && !isNaN(k));
-      const hasGkis = gkis.some(g => typeof g === 'number' && !isNaN(g));
-
-      const dispWeight = showWeight && hasWeights;
-      const dispGlucose = showGlucose && hasGlucoses;
-      const dispKetones = (showKetones || showGki) && (hasKetones || hasGkis);
-
+      const ctx = canvas.getContext('2d');
+      if (window.healthChartInstance) {
+        window.healthChartInstance.destroy();
+      }
       if (healthChartInstance) {
-        healthChartInstance.data.labels = labels;
-        healthChartInstance.data.datasets[0].data = weights;
-        healthChartInstance.data.datasets[0].hidden = !showWeight;
-        healthChartInstance.data.datasets[0].spanGaps = true;
-        healthChartInstance.data.datasets[1].data = glucoses;
-        healthChartInstance.data.datasets[1].hidden = !showGlucose;
-        healthChartInstance.data.datasets[1].spanGaps = true;
-        healthChartInstance.data.datasets[2].data = ketones;
-        healthChartInstance.data.datasets[2].hidden = !showKetones;
-        healthChartInstance.data.datasets[2].spanGaps = true;
-        healthChartInstance.data.datasets[3].data = gkis;
-        healthChartInstance.data.datasets[3].hidden = !showGki;
-        healthChartInstance.data.datasets[3].spanGaps = true;
-
-        healthChartInstance.options.scales.x.ticks.color = textColor;
-        healthChartInstance.options.scales.yWeight.display = dispWeight;
-        healthChartInstance.options.scales.yWeight.ticks.color = '#2563eb';
-        healthChartInstance.options.scales.yWeight.grid.color = gridColor;
-        healthChartInstance.options.scales.yGlucose.display = dispGlucose;
-        healthChartInstance.options.scales.yGlucose.ticks.color = '#dc2626';
-        healthChartInstance.options.scales.yGlucose.position = (!dispWeight && dispGlucose) ? 'left' : 'right';
-        healthChartInstance.options.scales.yKetones.display = dispKetones;
-        healthChartInstance.options.scales.yKetones.ticks.color = '#16a34a';
-
-        healthChartInstance.update();
-        return;
+        healthChartInstance.destroy();
       }
 
-      const ctx = canvas.getContext('2d');
-      healthChartInstance = new Chart(ctx, {
+      window.healthChartInstance = healthChartInstance = new Chart(ctx, {
         type: 'line',
         data: {
           labels: labels,
@@ -12255,52 +12262,51 @@ const CUP_DENSITY = {
               borderColor: '#2563eb',
               backgroundColor: 'rgba(37, 99, 235, 0.1)',
               yAxisID: 'yWeight',
-              tension: 0.35,
+              tension: 0.4,
               borderWidth: 3,
-              pointRadius: 4,
-              pointBackgroundColor: '#2563eb',
-              spanGaps: true,
-              hidden: !showWeight
+              hidden: !document.getElementById('healthShowWeight')?.checked,
+              spanGaps: true
+            },
+            {
+              label: 'Target (kg)',
+              data: targetData,
+              borderColor: '#eab308',
+              borderDash: [5, 5],
+              yAxisID: 'yWeight',
+              borderWidth: 2,
+              pointRadius: 0,
+              hidden: !document.getElementById('healthShowWeight')?.checked || !targetWeight
             },
             {
               label: 'Glicemie (mg/dL)',
               data: glucoses,
               borderColor: '#dc2626',
-              backgroundColor: 'transparent',
               yAxisID: 'yGlucose',
-              tension: 0.35,
+              tension: 0.4,
               borderWidth: 2,
-              pointRadius: 3,
-              pointBackgroundColor: '#dc2626',
-              spanGaps: true,
-              hidden: !showGlucose
+              hidden: !document.getElementById('healthShowGlucose')?.checked,
+              spanGaps: true
             },
             {
               label: 'Cetoză (mmol/L)',
               data: ketones,
               borderColor: '#16a34a',
-              backgroundColor: 'transparent',
               yAxisID: 'yKetones',
-              tension: 0.35,
+              tension: 0.4,
               borderWidth: 3,
-              pointRadius: 4,
-              pointBackgroundColor: '#16a34a',
-              spanGaps: true,
-              hidden: !showKetones
+              hidden: !document.getElementById('healthShowKetones')?.checked,
+              spanGaps: true
             },
             {
               label: 'GKI',
               data: gkis,
               borderColor: '#9333ea',
-              backgroundColor: 'transparent',
               borderDash: [6, 4],
               yAxisID: 'yKetones',
-              tension: 0.35,
+              tension: 0.4,
               borderWidth: 2,
-              pointRadius: 2,
-              pointBackgroundColor: '#9333ea',
-              spanGaps: true,
-              hidden: !showGki
+              hidden: !document.getElementById('healthShowGki')?.checked,
+              spanGaps: true
             }
           ]
         },
@@ -12308,68 +12314,32 @@ const CUP_DENSITY = {
           responsive: true,
           maintainAspectRatio: false,
           interaction: { mode: 'index', intersect: false },
-          layout: {
-            padding: { left: 4, right: 6, top: 12, bottom: 4 }
-          },
-          plugins: {
-            legend: { display: false },
-            tooltip: {
-              backgroundColor: 'rgba(15, 23, 42, 0.92)',
-              padding: 10,
-              titleFont: { size: 13, weight: 'bold' },
-              bodyFont: { size: 12 },
-              cornerRadius: 8
-            }
-          },
+          plugins: { legend: { display: false } },
           scales: {
             x: {
               grid: { display: false },
-              ticks: { color: textColor, font: { size: 10 } }
+              ticks: { color: textColor }
             },
             yWeight: {
               type: 'linear',
-              display: dispWeight,
+              display: true,
               position: 'left',
-              title: { display: false },
-              beginAtZero: false,
-              grace: '8%',
-              ticks: {
-                color: '#2563eb',
-                font: { size: 10, weight: 'bold' },
-                maxTicksLimit: 5,
-                callback: v => `${v} kg`
-              },
+              ticks: { color: '#2563eb' },
               grid: { color: gridColor }
             },
             yGlucose: {
               type: 'linear',
-              display: dispGlucose,
-              position: (!dispWeight && dispGlucose) ? 'left' : 'right',
-              title: { display: false },
-              beginAtZero: false,
-              grace: '8%',
-              ticks: {
-                color: '#dc2626',
-                font: { size: 10, weight: 'bold' },
-                maxTicksLimit: 4,
-                callback: v => `${v} mg`
-              },
-              grid: { drawOnChartArea: false }
+              display: true,
+              position: 'right',
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#dc2626' }
             },
             yKetones: {
               type: 'linear',
-              display: dispKetones,
+              display: true,
               position: 'right',
-              title: { display: false },
-              beginAtZero: true,
-              grace: '10%',
-              ticks: {
-                color: '#16a34a',
-                font: { size: 10, weight: 'bold' },
-                maxTicksLimit: 4,
-                callback: v => `${v}`
-              },
-              grid: { drawOnChartArea: false }
+              grid: { drawOnChartArea: false },
+              ticks: { color: '#16a34a' }
             }
           }
         }
@@ -12377,125 +12347,96 @@ const CUP_DENSITY = {
     }
 
     function updateHealthChartTheme() {
-      if (!healthChartInstance) return;
+      const inst = window.healthChartInstance || healthChartInstance;
+      if (!inst) return;
       const isDark = (document.documentElement.getAttribute('data-theme') === 'dark');
       const textColor = isDark ? '#cbd5e1' : '#475569';
       const gridColor = isDark ? 'rgba(255, 255, 255, 0.08)' : 'rgba(0, 0, 0, 0.06)';
-      healthChartInstance.options.scales.x.ticks.color = textColor;
-      healthChartInstance.options.scales.yWeight.ticks.color = '#2563eb';
-      healthChartInstance.options.scales.yWeight.grid.color = gridColor;
-      healthChartInstance.options.scales.yGlucose.ticks.color = '#dc2626';
-      healthChartInstance.options.scales.yKetones.ticks.color = '#16a34a';
-      healthChartInstance.update();
+      if (inst.options?.scales?.x?.ticks) inst.options.scales.x.ticks.color = textColor;
+      if (inst.options?.scales?.yWeight?.ticks) inst.options.scales.yWeight.ticks.color = '#2563eb';
+      if (inst.options?.scales?.yWeight?.grid) inst.options.scales.yWeight.grid.color = gridColor;
+      if (inst.options?.scales?.yGlucose?.ticks) inst.options.scales.yGlucose.ticks.color = '#dc2626';
+      if (inst.options?.scales?.yKetones?.ticks) inst.options.scales.yKetones.ticks.color = '#16a34a';
+      inst.update();
     }
 
     function calculateHealthForecast() {
       const resDiv = document.getElementById('healthForecastResult');
-      if (!resDiv) return;
-      const isRo = ((settings && settings.lang) === 'ro');
-
-      if (!healthLog || healthLog.length === 0) {
-        showAppToast(isRo ? 'Nu există date salvate pentru o prognoză!' : 'No saved data to generate forecast!');
+      if (!resDiv || !healthLog.length) {
+        if (resDiv && (!healthLog || !healthLog.length)) {
+          const isRo = ((settings && settings.lang) === 'ro');
+          resDiv.classList.remove('hidden');
+          resDiv.innerHTML = `<div style="text-align:center;padding:12px;color:var(--color-text-muted);font-size:var(--text-xs);font-weight:600;">${isRo ? 'Adaugă prima măsurătoare pentru a genera prognoza.' : 'Add your first measurement to generate forecast.'}</div>`;
+        }
         return;
       }
 
-      // Find the latest non-null weight, or fall back to settings.weightKg
-      let currentWeight = null;
+      // 1. Fetch User Settings & Goals
+      const heightCm = parseFloat(settings.height) || 175;
+      let lastWeight = null;
       for (let i = healthLog.length - 1; i >= 0; i--) {
         if (typeof healthLog[i].weight === 'number' && healthLog[i].weight > 0) {
-          currentWeight = healthLog[i].weight;
+          lastWeight = healthLog[i].weight;
           break;
         }
       }
-      if (!currentWeight) {
-        currentWeight = parseFloat(settings.weightKg) || 75;
+      const currentWeight = lastWeight || parseFloat(settings.weight) || parseFloat(settings.weightKg) || 75;
+      const targetCalories = parseFloat(settings.dailyKcal) || 1500;
+      const targetWeight = parseFloat(settings.targetWeight) || parseFloat(settings.targetWeightKg) || null;
+
+      // 2. Fetch Latest Log Data
+      const latestLog = healthLog[healthLog.length - 1];
+      const exerciseType = document.getElementById('healthExerciseType')?.value || latestLog.exerciseType || '';
+      const exerciseDuration = parseFloat(document.getElementById('healthExerciseDuration')?.value) || latestLog.duration || 0;
+
+      // Calculate average ketones from history
+      const validKetones = healthLog.map(e => e.ketones).filter(k => typeof k === 'number' && k > 0);
+      const avgKetones = validKetones.length > 0 ? (validKetones.reduce((a, b) => a + b, 0) / validKetones.length) : 1.0;
+
+      // 3. Metabolic Math (Mifflin-St Jeor approximation)
+      const bmr = (10 * currentWeight) + (6.25 * heightCm) - 170;
+      let activityMultiplier = 1.2;
+      if (exerciseType) {
+        if (exerciseDuration >= 45) activityMultiplier = 1.55;
+        else activityMultiplier = 1.375;
+      }
+      const tdee = bmr * activityMultiplier;
+
+      let dailyDeficit = tdee - targetCalories;
+      if (dailyDeficit < 0) dailyDeficit = 0; // Assume maintenance if in surplus for forecast purposes
+
+      // Keto Thermogenic Bonus
+      let ketoBonus = 1.0;
+      if (avgKetones >= 1.5 && avgKetones <= 3.0) ketoBonus = 1.10;
+      else if (avgKetones > 3.0) ketoBonus = 1.15;
+
+      const effectiveDeficit = dailyDeficit * ketoBonus;
+      const weeklyLossKg = (effectiveDeficit * 7) / 7700;
+      let projectedWeight = currentWeight - (weeklyLossKg * 4);
+
+      let targetHitHtml = '';
+      const isRo = ((settings && settings.lang) === 'ro');
+      if (targetWeight && projectedWeight <= targetWeight) {
+        projectedWeight = targetWeight;
+        targetHitHtml = `<div style="color:var(--color-success); font-weight:700; margin-top:8px; font-size:12px;">🎉 ${isRo ? 'Vei atinge greutatea țintă!' : 'You will reach your target weight!'}</div>`;
       }
 
-      // Calculate average of valid ketones entries
-      const validKetones = healthLog.map(e => e.ketones).filter(k => typeof k === 'number' && !isNaN(k) && k >= 0);
-      const avgKetones = validKetones.length > 0
-        ? (validKetones.reduce((sum, v) => sum + v, 0) / validKetones.length)
-        : 1.0;
-
-      let projectedLossPerWeek = 0.40;
-
-      if (avgKetones >= 1.5 && avgKetones <= 3.0) {
-        projectedLossPerWeek += 0.30;
-      } else if (avgKetones > 3.0) {
-        projectedLossPerWeek += 0.40;
-      } else if (avgKetones < 0.5) {
-        projectedLossPerWeek -= 0.20;
-      }
-
-      const latest = healthLog[healthLog.length - 1];
-      const exType = document.getElementById('healthExerciseType')?.value || latest.exerciseType || '';
-      const exInt = document.getElementById('healthExerciseIntensity')?.value || latest.exerciseIntensity || '';
-      const durVal = document.getElementById('healthExerciseDuration')?.value;
-      const exDur = (durVal && !isNaN(parseInt(durVal, 10)))
-        ? parseInt(durVal, 10)
-        : (latest.duration || (exType ? 30 : 0));
-
-      let exerciseBoost = 0;
-      if (exType === 'cardio' && exInt === 'hard') {
-        exerciseBoost = 0.30;
-      } else if (exType === 'cardio' && exInt === 'medium') {
-        exerciseBoost = 0.20;
-      } else if (exType === 'cardio' && exInt === 'light') {
-        exerciseBoost = 0.10;
-      } else if (exType === 'strength' && (exInt === 'intense' || exInt === 'hardcore')) {
-        exerciseBoost = 0.25;
-      } else if (exType === 'strength') {
-        exerciseBoost = 0.15;
-      } else if (exType === 'mixed' && exInt === 'hard') {
-        exerciseBoost = 0.35;
-      } else if (exType === 'mixed') {
-        exerciseBoost = 0.20;
-      }
-
-      // Duration factor: scale exercise effect relative to standard 45-min session
-      if (exerciseBoost > 0 && exDur > 0) {
-        const durFactor = Math.min(2.0, Math.max(0.25, exDur / 45));
-        exerciseBoost *= durFactor;
-      }
-
-      projectedLossPerWeek += exerciseBoost;
-      projectedLossPerWeek = Math.max(0.10, projectedLossPerWeek);
-      const futureWeight = (currentWeight - (projectedLossPerWeek * 4)).toFixed(1);
-
+      // 4. Render Output
       resDiv.classList.remove('hidden');
-      const workoutLabel = exType
-        ? `${exType}${exInt ? ' (' + exInt + ')' : ''}${exDur > 0 ? ' • ' + exDur + ' min' : ''}`
-        : (isRo ? 'Fără efort' : 'None');
-
       resDiv.innerHTML = `
-        <div style="display:flex;flex-direction:column;gap:12px;width:100%;box-sizing:border-box">
-          <div style="width:100%">
-            <div style="color:#4ade80;font-weight:700;font-size:var(--text-sm);margin-bottom:6px;display:flex;align-items:center;gap:6px">
-              <span>✓</span> ${isRo ? 'Analiză Calculată cu Succes' : 'Simulation Calculated'}
+        <div style="text-align: center;">
+          <p class="small" style="color:var(--color-text-muted); margin-bottom:4px;">${isRo ? 'Greutate estimată (4 săpt.):' : 'Estimated weight (4 weeks):'}</p>
+          <div style="font-size: 2.25rem; font-weight: 800; color: var(--color-primary);">${projectedWeight.toFixed(1)} kg</div>
+          ${targetHitHtml}
+          <div style="display:flex; justify-content: space-around; margin-top:12px; border-top: 1px solid var(--color-border); padding-top:10px;">
+            <div>
+              <span class="tiny muted" style="display:block">${isRo ? 'Deficit Zilnic' : 'Daily Deficit'}</span>
+              <strong style="color:var(--color-warning)">~${Math.round(effectiveDeficit)} kcal</strong>
             </div>
-            <div style="font-size:var(--text-xs);color:#cbd5e1;line-height:1.6">
-              <div style="display:flex;justify-content:space-between;border-bottom:1px solid #334155;padding:3px 0">
-                <span>${isRo ? 'Cetoză Medie (Istoric):' : 'Avg Ketosis:'}</span>
-                <strong style="color:#86efac">${avgKetones.toFixed(1)} mmol/L</strong>
-              </div>
-              <div style="display:flex;justify-content:space-between;border-bottom:1px solid #334155;padding:3px 0">
-                <span>${isRo ? 'Ritm Pierdere Estimat:' : 'Estimated Loss Rate:'}</span>
-                <strong style="color:#93c5fd">~${projectedLossPerWeek.toFixed(2)} kg / ${isRo ? 'săptămână' : 'week'}</strong>
-              </div>
-              <div style="display:flex;justify-content:space-between;padding:3px 0">
-                <span>${isRo ? 'Factor Efort Fizic:' : 'Workout Factor:'}</span>
-                <strong style="color:#c4b5fd">${workoutLabel}</strong>
-              </div>
+            <div>
+              <span class="tiny muted" style="display:block">${isRo ? 'Ritm Pierdere' : 'Loss Rate'}</span>
+              <strong style="color:var(--color-primary)">${weeklyLossKg.toFixed(2)} ${isRo ? 'kg/săpt' : 'kg/wk'}</strong>
             </div>
-          </div>
-          <div style="background:rgba(2,6,23,0.85);border:1px solid #334155;border-radius:var(--radius-md);padding:12px 14px;text-align:center;width:100%;box-sizing:border-box">
-            <span style="font-size:10px;text-transform:uppercase;color:#94a3b8;font-weight:700;letter-spacing:0.5px;display:block">
-              ${isRo ? 'Greutate Estimată (4 Săpt)' : 'Est. Weight (4 Weeks)'}
-            </span>
-            <div class="health-forecast-highlight">
-              ${futureWeight} <span style="font-size:1.1rem;color:#94a3b8">kg</span>
-            </div>
-            <span class="tiny" style="color:#38bdf8">${isRo ? `Diferență: -${(currentWeight - futureWeight).toFixed(1)} kg` : `Change: -${(currentWeight - futureWeight).toFixed(1)} kg`}</span>
           </div>
         </div>
       `;
@@ -19028,6 +18969,7 @@ const CUP_DENSITY = {
       renderWeeklyMacroChart();
       renderDailyOverview();
       updateHeaderGoalsDisplay();
+      if (typeof renderHealthChart === 'function') renderHealthChart();
 
       const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
       showSyncToast(isRo ? '🎯 Obiectivele personale au fost salvate și aplicate!' : '🎯 Personal goals saved and applied!');
@@ -19277,7 +19219,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.1.7';
+    const FALLBACK_APP_VERSION = '1.1.8';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -19439,6 +19381,26 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.1.8',
+        date: '20 Oct 2026',
+        items: {
+          ro: [
+            '📈 Integrare avansată grafic Tracking: linie de referință pentru greutatea țintă, scalare dinamică multi-axă și stare prietenoasă când nu există măsurători',
+            '🔮 Simulator metabolic Mifflin-St Jeor cu multiplicator de efort și bonus termogenic keto (+10-15%) pe baza cetozei medii',
+            '🎯 Feedback vizual automat la atingerea greutății țintă în prognoza pe 4 săptămâni',
+            '🌓 Design adaptabil la modul întunecat cu variabile CSS pentru caseta de prognoză și grafic',
+            '☁️ Sincronizare Cloud & persistență extinsă pentru istoricul biometric și personalizările locale de rețete'
+          ],
+          en: [
+            '📈 Advanced Tracking chart integration: target weight reference line, dynamic multi-axis scaling, and clean empty state',
+            '🔮 Mifflin-St Jeor metabolic forecasting engine with workout multiplier and keto thermogenic bonus based on ketosis history',
+            '🎯 Visual target milestone badge when projected weight reaches target weight within 4 weeks',
+            '🌓 Full Dark Mode design system alignment using CSS variables for the forecast box and chart',
+            '☁️ Enhanced Cloud Sync and state persistence for health logs and day-specific recipe customizations'
+          ]
+        }
+      },
       {
         version: '1.1.7',
         date: '20 Oct 2026',
