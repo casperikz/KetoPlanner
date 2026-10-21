@@ -4937,7 +4937,7 @@
 
         <!-- Action Bar (Horizontal scrollable pills) -->
         <div class="shop-header-actions">
-          <button id="shopShareBtn" class="act-btn primary small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_whatsapp" style="padding:6px 12px;font-size:15px;line-height:1">💬</button>
+          <button id="shopShareBtn" class="act-btn small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_whatsapp" style="display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-color:color-mix(in srgb, #25D366 35%, var(--color-border));background:color-mix(in srgb, #25D366 10%, var(--color-surface))"><img src="whatsapp.png" alt="WhatsApp" style="width:20px;height:20px;display:block;object-fit:contain"></button>
           <button id="shopCopyListBtn" class="act-btn small" type="button"><span data-i18n="shop_copy_btn">📋 Copy</span></button>
           <button id="shopClearAllBtn" class="panel small" type="button" style="padding:4px 8px;color:var(--color-danger);font-size:var(--text-xs)"><span data-i18n="shop_clear_all">Clear All</span></button>
         </div>
@@ -20213,7 +20213,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.2.5';
+    const FALLBACK_APP_VERSION = '1.2.6';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20385,6 +20385,18 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.2.6',
+        date: '21 Oct 2026',
+        items: {
+          ro: [
+            '💬 Logo oficial WhatsApp integrat în bara de acțiuni a listei de cumpărături pentru o recunoaștere vizuală instantanee'
+          ],
+          en: [
+            '💬 Official WhatsApp logo integrated into the shopping list action bar for instant visual recognition'
+          ]
+        }
+      },
       {
         version: '1.2.5',
         date: '21 Oct 2026',
