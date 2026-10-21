@@ -4025,6 +4025,278 @@
     .health-history-table tr:hover td {
       background: var(--color-surface-2);
     }
+
+    /* ============ FULL SPRINT UI/UX FLATTENING & MODERNIZATION ============ */
+
+    /* 1. RECIPES LIST FLATTENING */
+    .recipe-card-wrap {
+      border: 1px solid var(--color-border) !important;
+      border-radius: var(--radius-md) !important;
+      background: var(--color-surface) !important;
+      margin-bottom: 6px !important;
+      box-shadow: var(--shadow-sm) !important;
+    }
+    .recipe-btn {
+      padding: 8px 10px !important;
+      gap: 10px !important;
+    }
+    .recipe-thumb {
+      width: 48px !important;
+      height: 48px !important;
+      border-radius: var(--radius-md) !important;
+    }
+    .recipe-macros-line {
+      display: flex !important;
+      align-items: center !important;
+      gap: 5px !important;
+      flex-wrap: wrap !important;
+      font-size: var(--text-xs) !important;
+      color: var(--color-text-muted) !important;
+      margin-top: 3px !important;
+      line-height: 1.3 !important;
+    }
+    .recipe-macros-line strong {
+      color: var(--color-text) !important;
+    }
+    .recipe-macros-line .macro-sep {
+      color: var(--color-border) !important;
+      opacity: 0.8 !important;
+    }
+
+    /* 2. STOCK MANAGER FLATTENING */
+    .stock-subnav {
+      display: flex !important;
+      gap: 6px !important;
+      background: var(--color-surface-offset) !important;
+      padding: 4px !important;
+      border-radius: var(--radius-md) !important;
+      border: 1px solid var(--color-border) !important;
+      margin-bottom: 8px !important;
+      overflow-x: auto !important;
+      scrollbar-width: none !important;
+    }
+    .stock-subnav::-webkit-scrollbar { display: none; }
+    .stock-tab-btn {
+      flex: 1 !important;
+      padding: 6px 10px !important;
+      font-size: var(--text-xs) !important;
+      font-weight: 700 !important;
+      border-radius: var(--radius-sm) !important;
+      border: none !important;
+      background: transparent !important;
+      color: var(--color-text-muted) !important;
+      text-align: center !important;
+      white-space: nowrap !important;
+      cursor: pointer !important;
+      transition: all 0.15s ease !important;
+    }
+    .stock-tab-btn.active {
+      background: var(--color-surface) !important;
+      color: var(--color-primary) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.08) !important;
+      border: 1px solid var(--color-border) !important;
+    }
+    .stock-filters-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      margin-bottom: 8px !important;
+      overflow-x: auto !important;
+      scrollbar-width: none !important;
+    }
+    .stock-filters-row::-webkit-scrollbar { display: none; }
+    .stock-add-bar {
+      display: flex !important;
+      gap: 6px !important;
+      margin-bottom: 8px !important;
+      align-items: center !important;
+    }
+    .stock-items-list {
+      width: calc(100% + 28px) !important;
+      margin: 6px -14px 0 -14px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      border-top: 1px solid var(--color-border) !important;
+    }
+    .stock-item-row {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      padding: 8px 14px !important;
+      border-bottom: 1px solid var(--color-border) !important;
+      background: var(--color-surface) !important;
+      gap: 8px !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+    .stock-item-row:hover {
+      background: var(--color-surface-offset) !important;
+    }
+    .stock-item-name {
+      font-weight: 700 !important;
+      font-size: var(--text-sm) !important;
+      color: var(--color-text) !important;
+    }
+    .stock-qty-stepper {
+      display: inline-flex !important;
+      align-items: center !important;
+      border: 1px solid var(--color-border) !important;
+      border-radius: var(--radius-sm) !important;
+      background: var(--color-surface-offset) !important;
+      overflow: hidden !important;
+    }
+    .stock-qty-btn {
+      padding: 3px 8px !important;
+      border: none !important;
+      background: transparent !important;
+      color: var(--color-text) !important;
+      font-weight: 800 !important;
+      cursor: pointer !important;
+      font-size: 14px !important;
+      line-height: 1 !important;
+    }
+    .stock-qty-val {
+      padding: 2px 6px !important;
+      font-size: var(--text-xs) !important;
+      font-weight: 700 !important;
+      min-width: 18px !important;
+      text-align: center !important;
+    }
+
+    /* 3. SHOPPING LIST FLATTENING */
+    .shop-header-actions {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      overflow-x: auto !important;
+      scrollbar-width: none !important;
+      -webkit-overflow-scrolling: touch !important;
+      padding-bottom: 4px !important;
+      margin-bottom: 8px !important;
+      white-space: nowrap !important;
+    }
+    .shop-header-actions::-webkit-scrollbar { display: none; }
+    .shop-items-container {
+      width: calc(100% + 28px) !important;
+      margin: 4px -14px 0 -14px !important;
+      border-top: 1px solid var(--color-border) !important;
+    }
+    .swipe-item-inner {
+      border: none !important;
+      border-bottom: 1px solid var(--color-border) !important;
+      border-radius: 0 !important;
+      padding: 9px 14px !important;
+      background: var(--color-surface) !important;
+    }
+    .swipe-item-inner.is-bought .shop-item-name {
+      text-decoration: line-through !important;
+      opacity: 0.6 !important;
+    }
+
+    /* 4. RECIPE BUILDER FLATTENING */
+    .builder-kpi-bar {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 6px !important;
+      padding: 7px 12px !important;
+      background: linear-gradient(135deg, color-mix(in srgb, var(--color-primary) 8%, var(--color-surface)) 0%, var(--color-surface-offset) 100%) !important;
+      border: 1px solid var(--color-border) !important;
+      border-radius: var(--radius-md) !important;
+      margin-bottom: 8px !important;
+      overflow-x: auto !important;
+      scrollbar-width: none !important;
+      white-space: nowrap !important;
+      font-size: var(--text-xs) !important;
+      font-weight: 700 !important;
+      color: var(--color-text) !important;
+      box-shadow: var(--shadow-sm) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .builder-kpi-bar::-webkit-scrollbar { display: none; }
+    .bld-row {
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+      margin-bottom: 6px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+
+    /* 5. SETTINGS SEGMENTED SWITCHES & DASHBOARD */
+    .settings-group {
+      background: var(--color-surface) !important;
+      border: 1px solid var(--color-border) !important;
+      border-radius: var(--radius-md) !important;
+      padding: 10px 12px !important;
+      margin-bottom: 8px !important;
+      box-shadow: var(--shadow-sm) !important;
+      box-sizing: border-box !important;
+      width: 100% !important;
+    }
+    .settings-group-header {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      margin-bottom: 8px !important;
+    }
+    .settings-group-title {
+      font-size: var(--text-sm) !important;
+      font-weight: 700 !important;
+      color: var(--color-text) !important;
+      display: flex !important;
+      align-items: center !important;
+      gap: 6px !important;
+    }
+    .segmented-control {
+      display: flex !important;
+      background: var(--color-surface-offset) !important;
+      border: 1px solid var(--color-border) !important;
+      border-radius: var(--radius-md) !important;
+      padding: 3px !important;
+      gap: 4px !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+    }
+    .segmented-btn {
+      flex: 1 !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      justify-content: center !important;
+      gap: 6px !important;
+      padding: 6px 10px !important;
+      border-radius: var(--radius-sm) !important;
+      font-size: var(--text-xs) !important;
+      font-weight: 700 !important;
+      cursor: pointer !important;
+      border: 1px solid transparent !important;
+      background: transparent !important;
+      color: var(--color-text-muted) !important;
+      transition: all 0.15s ease !important;
+    }
+    .segmented-btn.active {
+      background: var(--color-surface) !important;
+      color: var(--color-text) !important;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1) !important;
+      border-color: var(--color-border) !important;
+    }
+
+    /* 6. CLOUD SYNC HERO CARD */
+    .sync-status-pill {
+      display: flex !important;
+      align-items: center !important;
+      justify-content: space-between !important;
+      gap: 8px !important;
+      padding: 8px 12px !important;
+      border-radius: var(--radius-md) !important;
+      background: var(--color-surface) !important;
+      border: 1px solid var(--color-border) !important;
+      box-shadow: var(--shadow-sm) !important;
+      width: 100% !important;
+      box-sizing: border-box !important;
+      margin-bottom: 8px !important;
+    }
   </style>
 </head>
 <body>
@@ -4464,16 +4736,16 @@
           <span style="font-size:var(--text-xs);font-weight:700;color:var(--color-primary);background:var(--color-surface-offset);padding:2px 8px;border-radius:999px;border:1px solid var(--color-border)"><span id="recipeCount">0</span> <span data-i18n="recipes_count_label">rețete</span></span>
         </div>
 
-        <!-- SortingDropdown ONLY for Recipes -->
-        <div class="recipes-sort-bar">
-          <label class="small" for="sortRule"><strong data-i18n="recipes_sort_label">Sort recipes:</strong></label>
-          <select id="sortRule" class="slot-select">
+        <!-- Search & Sort Row -->
+        <div style="display:flex;gap:8px;align-items:center">
+          <input id="recipeSearch" class="search" type="search" placeholder="Search recipes, ingredients or tags..." data-i18n-ph="recipes_search_ph" style="flex:1">
+          <select id="sortRule" class="slot-select native-select" style="width:auto;max-width:140px;padding:7px 8px;font-size:var(--text-xs);font-weight:600">
             <option value="protein">🥩 Protein first</option>
             <option value="fat">🥑 Fat first</option>
-            <option value="calories">🔥 Closest to 500-600 kcal</option>
-            <option value="batch">🧊 Best for batch/freezer</option>
+            <option value="calories">🔥 Closest 500-600</option>
+            <option value="batch">🧊 Best batch</option>
             <option value="rating">⭐ Highest rated</option>
-            <option value="time">⏱ Quickest first</option>
+            <option value="time">⏱ Quickest</option>
           </select>
         </div>
 
@@ -4489,7 +4761,6 @@
 
         <!-- Filters -->
         <div class="stack" style="gap:var(--space-2)">
-          <input id="recipeSearch" class="search" type="search" placeholder="Search recipes, ingredients or tags..." data-i18n-ph="recipes_search_ph">
 
           <!-- Cuisine Multi-Select Dropdown Filter -->
           <div class="cuisine-filter-container" id="cuisineFilterContainer" style="position:relative;margin:2px 0">
@@ -4558,9 +4829,9 @@
 
         <!-- Sub-menu Category Tabs -->
         <div class="stock-subnav">
-          <button class="stock-tab-btn active" data-stock-tab="pantry"><span data-i18n="stock_tab_pantry">Pantry</span> (<span id="stockCountPantry">0</span>)</button>
-          <button class="stock-tab-btn" data-stock-tab="fridge"><span data-i18n="stock_tab_fridge">Fridge</span> (<span id="stockCountFridge">0</span>)</button>
-          <button class="stock-tab-btn" data-stock-tab="freezer"><span data-i18n="stock_tab_freezer">Freezer</span> (<span id="stockCountFreezer">0</span>)</button>
+          <button class="stock-tab-btn active" data-stock-tab="pantry">🥫 <span data-i18n="stock_tab_pantry">Pantry</span> (<span id="stockCountPantry">0</span>)</button>
+          <button class="stock-tab-btn" data-stock-tab="fridge">🧀 <span data-i18n="stock_tab_fridge">Fridge</span> (<span id="stockCountFridge">0</span>)</button>
+          <button class="stock-tab-btn" data-stock-tab="freezer">🧊 <span data-i18n="stock_tab_freezer">Freezer</span> (<span id="stockCountFreezer">0</span>)</button>
         </div>
 
         <!-- Stock Filter & Search -->
@@ -4571,16 +4842,14 @@
           <button class="stock-filter-chip" data-stock-filter="need" data-i18n="stock_btn_need">✕ Need</button>
         </div>
 
-        <!-- Add Item Row with Custom Autocomplete -->
+        <!-- Add Item Row with Custom Autocomplete & Browse -->
         <div class="stock-add-bar">
           <div class="stock-add-input-wrap">
             <input id="stockAddInput" class="search" placeholder="Add item (e.g., Butter 82%)..." data-i18n-ph="stock_add_ph" autocomplete="off">
             <div id="stockSuggestions" class="stock-suggestions hidden"></div>
           </div>
           <button id="stockAddBtn" class="act-btn primary" type="button"><span data-i18n="stock_add_btn">+ Add</span></button>
-        </div>
-        <div style="display:flex;justify-content:flex-end;margin-top:2px">
-          <button id="stockBrowseMacrosBtn" class="act-btn small" type="button" title="Browse database to add" style="width:100%;justify-content:center"><span data-i18n="stock_macros_btn">📋 Browse Nutrition Database &gt;</span></button>
+          <button id="stockBrowseMacrosBtn" class="act-btn small" type="button" title="Browse database to add" style="white-space:nowrap;padding:7px 10px"><span data-i18n="stock_macros_btn">📋 DB</span></button>
         </div>
 
         <!-- Items List -->
@@ -4609,14 +4878,14 @@
           <button id="shopAddBtn" class="act-btn primary" type="button"><span data-i18n="shop_add_btn">+ Add</span></button>
         </div>
 
-        <!-- Action Bar -->
-        <div class="shop-header-actions" style="flex-wrap:wrap;gap:6px">
-          <button id="shopShareBtn" class="act-btn primary small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_share_title"><span data-i18n="shop_whatsapp">📤 Share / WhatsApp</span></button>
-          <button id="shopUpdateStockBtn" class="act-btn small primary" type="button" title="Add bought items to Stock Manager"><span data-i18n="shop_update_stock">📥 Add Bought to Stock</span></button>
+        <!-- Action Bar (Horizontal scrollable pills) -->
+        <div class="shop-header-actions">
+          <button id="shopShareBtn" class="act-btn primary small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_share_title"><span data-i18n="shop_whatsapp">📤 Share</span></button>
+          <button id="shopUpdateStockBtn" class="act-btn small primary" type="button" title="Add bought items to Stock Manager"><span data-i18n="shop_update_stock">📥 To Stock</span></button>
           <button id="shopCopyListBtn" class="act-btn small" type="button"><span data-i18n="shop_copy_btn">📋 Copy</span></button>
-          <button id="shopAisleToggleBtn" class="act-btn small" type="button"><span data-i18n="shop_group_aisle">🏷️ By Aisle: ON</span></button>
+          <button id="shopAisleToggleBtn" class="act-btn small" type="button"><span data-i18n="shop_group_aisle">🏷️ By Aisle</span></button>
           <button id="shopClearBoughtBtn" class="act-btn small" type="button"><span data-i18n="shop_clear_bought">🧹 Clear Bought</span></button>
-          <button id="shopClearAllBtn" class="panel small" type="button" style="padding:6px 10px;color:var(--color-danger)"><span data-i18n="shop_clear_all">Clear All</span></button>
+          <button id="shopClearAllBtn" class="panel small" type="button" style="padding:4px 8px;color:var(--color-danger);font-size:var(--text-xs)"><span data-i18n="shop_clear_all">Clear All</span></button>
         </div>
 
         <!-- To Buy Section -->
@@ -4643,43 +4912,37 @@
 
         <div class="stack" style="gap:var(--space-2)">
           <input id="builderName" class="search" placeholder="Recipe name (e.g., Avocado Salmon Bowl)" data-i18n-ph="builder_name_ph">
-          <div style="display:flex;gap:6px">
-            <select id="builderMeal" class="slot-select" style="flex:1">
+          <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
+            <select id="builderMeal" class="slot-select native-select" style="flex:1;min-width:120px">
               <option value="Breakfast">Breakfast</option>
               <option value="Lunch/Dinner" selected>Lunch/Dinner</option>
               <option value="Snack">Snack</option>
             </select>
             <label class="small" style="display:flex;align-items:center;gap:4px">
-              <span data-i18n="builder_servings_label">Servings:</span> <input id="builderServings" class="search" type="number" min="1" value="1" style="width:50px;padding:6px">
+              <span data-i18n="builder_servings_label">Serv:</span> <input id="builderServings" class="search" type="number" min="1" value="1" style="width:48px;padding:6px;text-align:center">
             </label>
-          </div>
-
-          <!-- Meal Photo Upload -->
-          <div class="recipe-photo-upload" style="margin-top:2px">
-            <img id="builderPhotoPreview" class="recipe-photo-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23eeece6'/%3E%3Ctext x='50' y='55' font-size='26' text-anchor='middle' fill='%23888'%3E📷%3C/text%3E%3C/svg%3E" alt="Recipe photo">
-            <div style="display:flex;flex-direction:column;gap:4px">
-              <label class="photo-upload-label" style="cursor:pointer">
-                <span data-i18n="builder_upload_photo_btn">📸 Upload Meal Photo</span>
-                <input id="builderPhotoInput" type="file" accept="image/*" style="display:none">
-              </label>
-              <button id="builderRemovePhotoBtn" class="act-btn small" type="button" style="display:none;padding:2px 8px;font-size:11px"><span data-i18n="builder_remove_photo_btn">✕ Remove photo</span></button>
-            </div>
+            <label class="photo-upload-label" style="cursor:pointer;margin:0;padding:6px 10px;font-size:var(--text-xs)">
+              <span data-i18n="builder_upload_photo_btn">📸 Photo</span>
+              <input id="builderPhotoInput" type="file" accept="image/*" style="display:none">
+            </label>
+            <img id="builderPhotoPreview" class="recipe-photo-preview" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%23eeece6'/%3E%3Ctext x='50' y='55' font-size='26' text-anchor='middle' fill='%23888'%3E📷%3C/text%3E%3C/svg%3E" alt="Recipe photo" style="width:34px;height:34px;border-radius:var(--radius-sm)">
+            <button id="builderRemovePhotoBtn" class="act-btn small" type="button" style="display:none;padding:2px 6px;font-size:10px"><span data-i18n="builder_remove_photo_btn">✕</span></button>
           </div>
         </div>
 
         <div style="display:flex;gap:6px;align-items:center;flex-wrap:wrap">
-          <button id="builderAddRow" class="act-btn" type="button"><span data-i18n="builder_add_row_btn">+ Add ingredient row</span></button>
-          <button id="builderScanBarcodeBtn" class="act-btn small" type="button"><span data-i18n="builder_scan_barcode_btn">📷 Scan Barcode</span></button>
-          <button id="builderImportPhotoBtn" class="act-btn small" type="button"><span data-i18n="builder_import_photo_btn">📸 Import from Photo</span></button>
+          <button id="builderAddRow" class="act-btn primary small" type="button"><span data-i18n="builder_add_row_btn">+ Add Ingredient</span></button>
+          <button id="builderScanBarcodeBtn" class="act-btn small" type="button"><span data-i18n="builder_scan_barcode_btn">📷 Barcode</span></button>
+          <button id="builderImportPhotoBtn" class="act-btn small" type="button"><span data-i18n="builder_import_photo_btn">📸 Photo</span></button>
           <input id="builderPhotoFileInput" type="file" accept="image/*" style="display:none">
         </div>
         <datalist id="builderIngredientsList"></datalist>
         <div id="builderRows" class="stack" style="gap:6px"></div>
 
-        <div class="note" id="builderPreview"></div>
+        <div class="builder-kpi-bar" id="builderPreview"></div>
 
-        <div style="display:flex;gap:6px">
-          <button id="builderSave" class="act-btn primary" type="button"><span data-i18n="builder_save_btn">Save Recipe</span></button>
+        <div style="display:flex;gap:6px;align-items:center">
+          <button id="builderSave" class="act-btn primary" type="button" style="flex:1;justify-content:center"><span data-i18n="builder_save_btn">Save Recipe</span></button>
           <span id="builderMsg" class="tiny good"></span>
         </div>
 
@@ -4893,85 +5156,68 @@
 
     <!-- 8. SETTINGS & BACKUP -->
     <section data-tab="settings" class="hidden stack">
-      <!-- App Language Switcher -->
-      <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_lang_card_title">Language / Limba</h3>
-            <p class="muted small" data-i18n="settings_lang_card_desc">Choose your preferred language / Alege limba preferata:</p>
-          </div>
+      <!-- Appearance & Language Group -->
+      <div class="settings-group">
+        <div class="settings-group-header">
+          <h3 class="settings-group-title" data-i18n="settings_lang_card_title">Language / Limba</h3>
+          <span class="tiny muted" data-i18n="settings_lang_sub">App interface</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:center;margin-top:4px">
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
-            <input type="radio" name="appLangRadio" value="en" id="langRadioEn" checked> English
-          </label>
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
-            <input type="radio" name="appLangRadio" value="ro" id="langRadioRo"> Romana
-          </label>
+        <div class="segmented-control" id="langSegmentedControl">
+          <button type="button" class="segmented-btn active" id="langBtnEn" onclick="document.getElementById('langRadioEn').click()">🇬🇧 English</button>
+          <button type="button" class="segmented-btn" id="langBtnRo" onclick="document.getElementById('langRadioRo').click()">🇷🇴 Română</button>
         </div>
-      </div>
+        <!-- Hidden radios kept for logic compatibility -->
+        <input type="radio" name="appLangRadio" value="en" id="langRadioEn" checked style="display:none">
+        <input type="radio" name="appLangRadio" value="ro" id="langRadioRo" style="display:none">
 
-      <!-- App Theme Switcher -->
-      <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_theme_card_title">Theme & Appearance / Aspect Vizual</h3>
-            <p class="muted small" data-i18n="settings_theme_card_desc">Choose Light or Dark mode / Alege modul luminos sau întunecat:</p>
-          </div>
+        <div class="settings-group-header" style="margin-top:6px">
+          <h3 class="settings-group-title" data-i18n="settings_theme_card_title">Theme / Aspect</h3>
+          <span class="tiny muted" data-i18n="settings_theme_sub">Display mode</span>
         </div>
-        <div style="display:flex;gap:12px;align-items:center;margin-top:4px">
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
-            <input type="radio" name="appThemeRadio" value="light" id="themeRadioLight"> ☀️ <span data-i18n="settings_theme_light">Light (Luminos)</span>
-          </label>
-          <label style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;font-weight:600;font-size:var(--text-sm);padding:8px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
-            <input type="radio" name="appThemeRadio" value="dark" id="themeRadioDark"> 🌙 <span data-i18n="settings_theme_dark">Dark (Întunecat)</span>
-          </label>
+        <div class="segmented-control" id="themeSegmentedControl">
+          <button type="button" class="segmented-btn" id="themeBtnLight" onclick="setAppTheme('light')">☀️ Light</button>
+          <button type="button" class="segmented-btn" id="themeBtnDark" onclick="setAppTheme('dark')">🌙 Dark</button>
         </div>
+        <!-- Hidden radios kept for logic compatibility -->
+        <input type="radio" name="appThemeRadio" value="light" id="themeRadioLight" style="display:none">
+        <input type="radio" name="appThemeRadio" value="dark" id="themeRadioDark" style="display:none">
       </div>
 
       <!-- Fasting & App Notifications -->
-      <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_notif_title">🔔 Fasting Notifications & Reminders</h3>
-            <p class="muted small" data-i18n="settings_notif_desc">Configure notifications for fasting start and goal completion.</p>
-          </div>
+      <div class="settings-group">
+        <div class="settings-group-header">
+          <h3 class="settings-group-title" data-i18n="settings_notif_title">🔔 Fasting Notifications</h3>
+          <span class="tiny muted" data-i18n="settings_notif_sub">Reminders</span>
         </div>
-        <div class="stack" style="gap:10px;margin-top:4px">
-          <label class="small" style="display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:600;padding:10px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
+          <label class="small" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:8px 10px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
             <input type="checkbox" id="fastNotifStartCheck">
-            <div>
-              <strong style="display:block" data-i18n="fasting_notif_start_label">When fasting starts</strong>
-              <span class="tiny muted" data-i18n="fasting_notif_start_desc">Receive an alert when your daily fasting window begins.</span>
-            </div>
+            <span style="font-size:var(--text-xs);font-weight:600" data-i18n="fasting_notif_start_label">Fasting Starts</span>
           </label>
-          <label class="small" style="display:inline-flex;align-items:center;gap:12px;cursor:pointer;font-weight:600;padding:10px 14px;border:1.5px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
+          <label class="small" style="display:inline-flex;align-items:center;gap:8px;cursor:pointer;padding:8px 10px;border:1px solid var(--color-border);border-radius:var(--radius-md);background:var(--color-surface-2)">
             <input type="checkbox" id="fastNotifEndCheck">
-            <div>
-              <strong style="display:block" data-i18n="fasting_notif_end_label">When fasting ends / goal met</strong>
-              <span class="tiny muted" data-i18n="fasting_notif_end_desc">Receive an alert when you hit your target fasting hours.</span>
-            </div>
+            <span style="font-size:var(--text-xs);font-weight:600" data-i18n="fasting_notif_end_label">Goal Reached</span>
           </label>
         </div>
       </div>
-      <div class="panel stack">
-        <div class="section-title">
-          <div>
-            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_targets_title">Personal Targets</h3>
-            <p class="muted small" data-i18n="settings_targets_desc">Your target protein and daily calories.</p>
-          </div>
+
+      <!-- Personal Targets -->
+      <div class="settings-group">
+        <div class="settings-group-header">
+          <h3 class="settings-group-title" data-i18n="settings_targets_title">Personal Targets</h3>
+          <span class="tiny muted" data-i18n="settings_targets_sub">Macro goals</span>
         </div>
         <div class="settings-grid">
-          <label class="small"><span data-i18n="settings_weight_label">Body weight (kg)</span>
+          <label class="small"><span data-i18n="settings_weight_label">Weight (kg)</span>
             <input id="setWeight" type="number" min="0" step="1" class="search">
           </label>
-          <label class="small"><span data-i18n="settings_prot_label">Protein per kg</span>
+          <label class="small"><span data-i18n="settings_prot_label">Prot / kg</span>
             <input id="setPerKg" type="number" min="0" step="0.1" class="search">
           </label>
-          <label class="small"><span data-i18n="settings_kcal_label">Daily calories (kcal)</span>
+          <label class="small"><span data-i18n="settings_kcal_label">Calories</span>
             <input id="setKcal" type="number" min="0" step="50" class="search">
           </label>
-          <label class="small"><span data-i18n="settings_carbs_label">Net-carb cap (g)</span>
+          <label class="small"><span data-i18n="settings_carbs_label">Net Carbs</span>
             <input id="setCarbs" type="number" min="0" step="5" class="search">
           </label>
         </div>
@@ -5069,40 +5315,41 @@
             <span class="sync-badge" id="syncBadge" data-i18n="sync_local_mode">⚪ Local Mode (Not shared)</span>
             <span class="tiny muted" id="syncLastTime"></span>
           </div>
-          <div id="syncActiveDetails" class="hidden" style="margin-top:12px">
-            <label class="tiny muted"><span data-i18n="sync_active_code">Your Active Household Code:</span></label>
-            <div style="display:flex;gap:8px;align-items:center;margin-top:4px">
+          <div id="syncActiveDetails" class="hidden" style="margin-top:10px">
+            <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap">
               <span id="syncCurrentCodeDisplay" class="household-code-tag">KETO-XXXX</span>
               <button id="syncCopyCodeBtn" class="act-btn small" type="button"><span data-i18n="sync_copy_btn">📋 Copy</span></button>
-              <button id="syncShareCodeBtn" class="act-btn primary small" type="button"><span data-i18n="sync_share_btn">📤 Share Code</span></button>
+              <button id="syncShareCodeBtn" class="act-btn primary small" type="button"><span data-i18n="sync_share_btn">📤 Share</span></button>
+              <button id="syncForcePushBtn" class="act-btn small" type="button"><span data-i18n="sync_now_btn">🔄 Sync</span></button>
+              <button id="syncDisconnectBtn" class="panel small" type="button" style="color:var(--color-danger);padding:4px 8px;font-size:var(--text-xs)"><span data-i18n="sync_disconnect_btn">Disconnect</span></button>
             </div>
             <p class="tiny muted" style="margin-top:8px" data-i18n="sync_live_desc">🟢 Live 2-way sync is active. Whenever you or your partner modify meals or check off fridge items, both phones update instantly.</p>
-            <div style="display:flex;gap:8px;margin-top:12px">
-              <button id="syncForcePushBtn" class="act-btn" type="button"><span data-i18n="sync_now_btn">🔄 Sync Now</span></button>
-              <button id="syncDisconnectBtn" class="panel small" type="button" style="color:var(--color-danger);padding:6px 12px"><span data-i18n="sync_disconnect_btn">Disconnect Household</span></button>
-            </div>
           </div>
         </div>
 
         <!-- Join or Create Section (Shown when not connected) -->
-        <div id="syncSetupContainer" class="stack" style="gap:var(--space-3)">
+        <div id="syncSetupContainer" class="stack" style="gap:var(--space-2)">
           <!-- Option A: Create -->
-          <div class="panel stack" style="background:var(--color-surface-2);border:1px dashed var(--color-border)">
-            <h3 data-i18n="sync_opt1_title">Option 1: Create a Shared Household</h3>
-            <p class="muted small" data-i18n="sync_opt1_desc">Generate a shareable code to link with your partner or family. Your current meal plan and stock will be uploaded as the shared starting point.</p>
+          <div class="panel stack" style="background:var(--color-surface);border:1px solid var(--color-border);padding:10px 12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong style="font-size:var(--text-sm)" data-i18n="sync_opt1_title">Create Shared Household</strong>
+            </div>
+            <p class="muted tiny" style="margin:2px 0 6px 0" data-i18n="sync_opt1_desc">Generate a code to link with your partner or family.</p>
             <div style="display:flex;gap:8px;align-items:center">
-              <input id="syncCustomCodeInput" class="search" placeholder="Custom code (optional, e.g. FAMILY)" data-i18n-ph="sync_opt1_ph" style="flex:1">
-              <button id="syncCreateBtn" class="act-btn primary" type="button"><span data-i18n="sync_opt1_btn">🚀 Create Household</span></button>
+              <input id="syncCustomCodeInput" class="search" placeholder="Custom code (optional)" data-i18n-ph="sync_opt1_ph" style="flex:1">
+              <button id="syncCreateBtn" class="act-btn primary small" type="button" style="white-space:nowrap"><span data-i18n="sync_opt1_btn">🚀 Create</span></button>
             </div>
           </div>
 
           <!-- Option B: Join -->
-          <div class="panel stack" style="background:var(--color-surface-2);border:1px dashed var(--color-border)">
-            <h3 data-i18n="sync_opt2_title">Option 2: Join an Existing Household</h3>
-            <p class="muted small" data-i18n="sync_opt2_desc">Did your partner or family member already create a Household Code? Enter it below to join and sync with their planner and stock.</p>
+          <div class="panel stack" style="background:var(--color-surface);border:1px solid var(--color-border);padding:10px 12px">
+            <div style="display:flex;justify-content:space-between;align-items:center">
+              <strong style="font-size:var(--text-sm)" data-i18n="sync_opt2_title">Join Existing Household</strong>
+            </div>
+            <p class="muted tiny" style="margin:2px 0 6px 0" data-i18n="sync_opt2_desc">Enter the Household Code shared by your partner or family member.</p>
             <div style="display:flex;gap:8px;align-items:center">
               <input id="syncJoinCodeInput" class="search" placeholder="Enter code (e.g. KETO-7491)" data-i18n-ph="sync_opt2_ph" style="flex:1">
-              <button id="syncJoinBtn" class="act-btn primary" type="button"><span data-i18n="sync_opt2_btn">🔗 Join & Sync</span></button>
+              <button id="syncJoinBtn" class="act-btn primary small" type="button" style="white-space:nowrap"><span data-i18n="sync_opt2_btn">🔗 Join</span></button>
             </div>
           </div>
         </div>
@@ -16666,13 +16913,31 @@ const CUP_DENSITY = {
         const isFocused = (focusRecipeId === r.id);
         const focusBadge = isFocused ? `<span style="font-size:10px;font-weight:700;color:#f59e0b;background:rgba(245,158,11,0.18);padding:1px 5px;border-radius:4px;margin-left:5px">🍳 FOCUS</span>` : '';
 
+        const kcal = Math.round(r.kcal) || 0;
+        const fat = Math.round(r.fat) || 0;
+        const prot = Math.round(r.protein) || 0;
+        const carbs = Math.round(r.netCarbs) || 0;
+        const fatPct = kcal > 0 ? Math.round((fat * 9 / kcal) * 100) : 0;
+        const protPct = kcal > 0 ? Math.round((prot * 4 / kcal) * 100) : 0;
+        const carbPct = kcal > 0 ? Math.round((carbs * 4 / kcal) * 100) : 0;
+
         return `
           <div class="recipe-card-wrap ${isExpanded ? 'expanded' : ''}" data-card-rid="${r.id}">
             <button class="recipe-btn ${isExpanded ? 'active' : ''}" data-rid="${r.id}" type="button">
               <img class="recipe-thumb" src="${recipeImage(r)}" alt="" loading="lazy">
               <span class="recipe-meta">
-                <strong>${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(dispName)}${focusBadge}${dfBadge}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
-                <div class="tiny muted">${escapeHtml(r.meal)} • ${r.kcal} kcal • P ${r.protein}g • F ${r.fat}g • NC ${r.netCarbs}g • ⏱ ${fmtTime(timeOf(r).total)}</div>
+                <strong style="font-size:var(--text-base);line-height:1.25">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(dispName)}${focusBadge}${dfBadge}${rt ? ` <span class="tiny">${starString(rt)}</span>` : ''}${stats.badge}</strong>
+                <div class="recipe-macros-line">
+                  <span>🔥 <strong>${kcal}</strong> kcal</span>
+                  <span class="macro-sep">•</span>
+                  <span>🥑 <strong>${fat}g</strong> <small>(${fatPct}%)</small></span>
+                  <span class="macro-sep">•</span>
+                  <span>🥩 <strong>${prot}g</strong> <small>(${protPct}%)</small></span>
+                  <span class="macro-sep">•</span>
+                  <span>🥗 <strong>${carbs}g</strong> <small>(${carbPct}%)</small></span>
+                  <span class="macro-sep">•</span>
+                  <span>⏱ ${fmtTime(timeOf(r).total)}</span>
+                </div>
               </span>
               <span class="recipe-chevron">▼</span>
             </button>
@@ -16897,11 +17162,14 @@ const CUP_DENSITY = {
         ${safeImg ? `<img src="${safeImg}" style="width:100%;max-height:220px;object-fit:cover;border-radius:var(--radius-md);margin-bottom:10px" alt="${escapeHtml(dispName)}">` : ''}
         <h3 style="font-size:var(--text-lg);margin-bottom:4px">${flag ? `<span style="margin-right:6px">${flag}</span>` : ''}${escapeHtml(dispName)}${dfBadge}${stats.badge}</h3>
         <p class="muted tiny">${cuisineName ? `${flag ? flag + ' ' : ''}${escapeHtml(cuisineName)} • ` : ''}${escapeHtml(r.meal)} • ${escapeHtml(r.portion)} • <a href="${recipeLink(r)}" target="_blank">${isRo ? 'Caută online ↗' : 'Search online ↗'}</a></p>
-        <div class="macro-chips-row" style="margin:10px 0">
-          <div class="macro-stat-pill"><span>${isRo ? 'Calorii' : 'Calories'}</span><strong>${r.kcal}</strong></div>
-          <div class="macro-stat-pill"><span>${isRo ? 'Grăsimi' : 'Fat'}</span><strong>${r.fat}g</strong> <span class="tiny muted">(${stats.fatPct}%)</span></div>
-          <div class="macro-stat-pill"><span>${isRo ? 'Proteine' : 'Protein'}</span><strong>${r.protein}g</strong> <span class="tiny muted">(${stats.protPct}%)</span></div>
-          <div class="macro-stat-pill"><span>${isRo ? 'Carbohidrați neți' : 'Net Carbs'}</span><strong>${r.netCarbs}g</strong> <span class="tiny muted">(${stats.carbPct}%)</span></div>
+        <div class="health-summary-bar" style="margin:8px 0;background:var(--color-surface-offset)">
+          <span>🔥 <strong>${r.kcal}</strong> kcal</span>
+          <span class="kpi-sep">|</span>
+          <span>🥑 <strong>${r.fat}g</strong> <small>(${stats.fatPct}%)</small></span>
+          <span class="kpi-sep">|</span>
+          <span>🥩 <strong>${r.protein}g</strong> <small>(${stats.protPct}%)</small></span>
+          <span class="kpi-sep">|</span>
+          <span>🥗 <strong>${r.netCarbs}g</strong> <small>(${stats.carbPct}%)</small></span>
         </div>
         <div style="margin-bottom:10px">
           <strong class="small">${isRo ? 'Ingrediente:' : 'Ingredients:'}</strong>
@@ -16980,8 +17248,19 @@ const CUP_DENSITY = {
           }
           custom[day][slot] = r.id;
           afterPlannerChange();
-          const msg = document.getElementById(`recipeActionMsg_${id}`);
-          if (msg) msg.textContent = `Added to ${day} ${slot}!`;
+          const isRo = ((settings && settings.lang) === 'ro');
+          const origHtml = addPlanBtn.innerHTML;
+          const origBg = addPlanBtn.style.background;
+          addPlanBtn.style.background = '#22c55e';
+          addPlanBtn.style.borderColor = '#16a34a';
+          addPlanBtn.style.color = '#fff';
+          addPlanBtn.innerHTML = `✓ ${isRo ? 'Adăugat în plan!' : 'Added to plan!'}`;
+          setTimeout(() => {
+            addPlanBtn.innerHTML = origHtml;
+            addPlanBtn.style.background = origBg;
+            addPlanBtn.style.borderColor = '';
+            addPlanBtn.style.color = '';
+          }, 2500);
         };
       }
 
@@ -18220,7 +18499,26 @@ const CUP_DENSITY = {
       const totals = sumMacros(ingList);
       const perServ = { kcal: totals.kcal / servings, protein: totals.protein / servings, fat: totals.fat / servings, netCarbs: totals.netCarbs / servings };
       const out = document.getElementById('builderPreview');
-      if (out) out.innerHTML = `<strong>Per Serving (${servings} total):</strong> ${fmt(perServ.kcal)} kcal • P ${fmt(perServ.protein)}g • F ${fmt(perServ.fat)}g • NC ${fmt(perServ.netCarbs)}g`;
+      if (out) {
+        const fatCal = (perServ.fat || 0) * 9;
+        const protCal = (perServ.protein || 0) * 4;
+        const carbCal = (perServ.netCarbs || 0) * 4;
+        const totCal = (fatCal + protCal + carbCal) || (perServ.kcal || 1);
+        const fatPct = Math.round((fatCal / totCal) * 100);
+        const protPct = Math.round((protCal / totCal) * 100);
+        const carbPct = Math.max(0, 100 - fatPct - protPct);
+
+        out.className = 'builder-kpi-bar';
+        out.innerHTML = `
+          <div class="kpi-cell"><span>🔥</span><strong>${fmt(perServ.kcal)}</strong> <small>kcal</small></div>
+          <div class="kpi-sep"></div>
+          <div class="kpi-cell"><span>🥑</span><strong>${fmt(perServ.fat)}g</strong> <small>(${fatPct}%)</small></div>
+          <div class="kpi-sep"></div>
+          <div class="kpi-cell"><span>🥩</span><strong>${fmt(perServ.protein)}g</strong> <small>(${protPct}%)</small></div>
+          <div class="kpi-sep"></div>
+          <div class="kpi-cell"><span>🥗</span><strong>${fmt(perServ.netCarbs)}g</strong> <small>(${carbPct}%)</small></div>
+        `;
+      }
     }
 
     let builderEditingRecipeId = null;
@@ -18340,6 +18638,20 @@ const CUP_DENSITY = {
       if (photoIn) photoIn.value = '';
       const msg = document.getElementById('builderMsg');
       if (msg) msg.textContent = isExistingCustom ? (isRo ? 'Rețetă actualizată cu succes!' : 'Recipe updated successfully!') : (isRo ? 'Salvat în biblioteca ta!' : 'Saved to your library!');
+      const saveBtn = document.getElementById('builderSave');
+      if (saveBtn) {
+        const origHtml = saveBtn.innerHTML;
+        saveBtn.style.backgroundColor = '#22c55e';
+        saveBtn.style.borderColor = '#16a34a';
+        saveBtn.style.color = '#ffffff';
+        saveBtn.innerHTML = `✓ ${isRo ? 'Rețetă salvată!' : 'Recipe saved!'}`;
+        setTimeout(() => {
+          saveBtn.style.backgroundColor = '';
+          saveBtn.style.borderColor = '';
+          saveBtn.style.color = '';
+          saveBtn.innerHTML = origHtml;
+        }, 4000);
+      }
     }
 
     function renderBuilderSaved() {
@@ -19076,11 +19388,15 @@ const CUP_DENSITY = {
       // Rebuild recipeMap with localized recipes
       if (typeof rebuildMap === 'function') rebuildMap();
 
-      // Update language radio
+      // Update language radio & segmented buttons
       const radioEn = document.getElementById('langRadioEn');
       const radioRo = document.getElementById('langRadioRo');
       if (radioEn) radioEn.checked = (lang !== 'ro');
       if (radioRo) radioRo.checked = (lang === 'ro');
+      const bEn = document.getElementById('langBtnEn');
+      const bRo = document.getElementById('langBtnRo');
+      if (bEn) bEn.classList.toggle('active', lang !== 'ro');
+      if (bRo) bRo.classList.toggle('active', lang === 'ro');
 
       // Re-render components
       if (typeof buildPlannerDayPills === 'function') buildPlannerDayPills();
@@ -19104,12 +19420,20 @@ const CUP_DENSITY = {
       const radioRo = document.getElementById('langRadioRo');
       if (radioEn) radioEn.checked = ((settings.lang || 'en') !== 'ro');
       if (radioRo) radioRo.checked = ((settings.lang || 'en') === 'ro');
+      const bEn = document.getElementById('langBtnEn');
+      const bRo = document.getElementById('langBtnRo');
+      if (bEn) bEn.classList.toggle('active', (settings.lang || 'en') !== 'ro');
+      if (bRo) bRo.classList.toggle('active', (settings.lang || 'en') === 'ro');
 
       const themeRadioLight = document.getElementById('themeRadioLight');
       const themeRadioDark = document.getElementById('themeRadioDark');
       const curThemeVal = document.documentElement.getAttribute('data-theme') || localStorage.getItem('ketoTheme') || 'light';
       if (themeRadioLight) themeRadioLight.checked = (curThemeVal === 'light');
       if (themeRadioDark) themeRadioDark.checked = (curThemeVal === 'dark');
+      const bLight = document.getElementById('themeBtnLight');
+      const bDark = document.getElementById('themeBtnDark');
+      if (bLight) bLight.classList.toggle('active', curThemeVal === 'light');
+      if (bDark) bDark.classList.toggle('active', curThemeVal === 'dark');
 
       if (radioEn && !radioEn._wired) {
         radioEn._wired = true;
@@ -19814,7 +20138,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.2.3';
+    const FALLBACK_APP_VERSION = '1.2.4';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -19986,6 +20310,30 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.2.4',
+        date: '21 Oct 2026',
+        items: {
+          ro: [
+            '✨ Aplatizare UI completă pe toate paginile: Rețete, Stocuri, Cumpărături, Creator Rețete, Setări și Cloud Sync',
+            '🥑 Rețete cu calcul automat procent caloric (Kcal, Grăsimi %, Proteine %, Carbohidrați %) și bară compactă căutare/sortare',
+            '🥫 Manager Stocuri modernizat: tab-uri cu pictograme (🥫 Cămară, 🧀 Frigider, 🧊 Congelator) și adăugare inline',
+            '🛒 Listă Cumpărături cu bară de acțiuni derulabilă orizontal pe pastile compacte și listă extinsă de la o margine la alta',
+            '🍳 Creator Rețete fluid: bară KPI keto orizontală în timp real cu procente calorice și salvare discretă cu buton verde (4 secunde)',
+            '⚙️ Setări reproiectate: comenzi segmentate moderne pentru Temă & Limbă și ținte personale compacte 2x2',
+            '☁️ Cloud Sync simplificat: indicator compact stare conectare și panouri fluide pentru creare sau alăturare gospodărie'
+          ],
+          en: [
+            '✨ Full-sprint UI flattening & modernization across Recipes, Stock, Shopping, Builder, Settings, and Cloud Sync',
+            '🥑 Recipe library cards with automatic caloric ratio percentages (Kcal, Fat %, Protein %, Net Carbs %) and unified search/sort bar',
+            '🥫 Streamlined Stock Manager: category tabs with emoji icons (🥫 Pantry, 🧀 Fridge, 🧊 Freezer) and inline quick add',
+            '🛒 Shopping List with horizontally scrollable action pills bar and edge-to-edge checklist container',
+            '🍳 Sleek Recipe Builder: real-time horizontal keto KPI bar with caloric percentages and 4-second green save feedback',
+            '⚙️ Redesigned Settings: modern segmented controls for Theme & Language and compact 2x2 personal targets',
+            '☁️ Simplified Cloud Sync: compact connection status pill and clean inline create or join household options'
+          ]
+        }
+      },
       {
         version: '1.2.3',
         date: '21 Oct 2026',
@@ -21551,6 +21899,10 @@ const CUP_DENSITY = {
         const rDark = document.getElementById('themeRadioDark');
         if (rLight) rLight.checked = (curTheme === 'light');
         if (rDark) rDark.checked = (curTheme === 'dark');
+        const bLight = document.getElementById('themeBtnLight');
+        const bDark = document.getElementById('themeBtnDark');
+        if (bLight) bLight.classList.toggle('active', curTheme === 'light');
+        if (bDark) bDark.classList.toggle('active', curTheme === 'dark');
         updateHealthChartTheme();
       };
       setAppTheme(curTheme);
