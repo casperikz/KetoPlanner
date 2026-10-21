@@ -838,49 +838,51 @@
       color: #fff;
     }
 
-    /* Planner Macro Summary Bar (Compact 4-Macro Top Bar) */
+    /* Planner Macro Summary Bar (Single Line Flexbox Spanning Full Width) */
+    .planner-macro-summary-wrap {
+      width: 100%;
+      margin-bottom: 8px;
+      box-sizing: border-box;
+    }
     .planner-macro-bar {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 6px;
-      background: var(--color-surface-2);
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-around;
+      width: 100%;
+      background: var(--color-surface);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-lg);
-      padding: 6px 8px;
-      margin-bottom: 8px;
+      padding: 10px 14px;
+      box-sizing: border-box;
+      gap: 6px;
+      box-shadow: var(--shadow-sm);
     }
-    .planner-macro-pill {
-      display: flex;
-      flex-direction: column;
+    .planner-macro-item {
+      display: inline-flex;
       align-items: center;
-      text-align: center;
-      min-width: 0;
-    }
-    .planner-macro-pill .p-lbl {
-      font-size: 10px;
+      justify-content: center;
+      gap: 5px;
+      font-size: var(--text-sm);
       font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.3px;
-      color: var(--color-text-muted);
-      overflow: hidden;
-      text-overflow: ellipsis;
-      white-space: nowrap;
-      width: 100%;
-    }
-    .planner-macro-pill .p-val {
-      font-size: 13px;
-      font-weight: 800;
       color: var(--color-text);
-      line-height: 1.2;
-      margin-top: 1px;
-      overflow: hidden;
-      text-overflow: ellipsis;
       white-space: nowrap;
-      width: 100%;
+      flex: 1;
+      text-align: center;
     }
-    .planner-macro-pill .p-val.good { color: #16a34a; }
-    .planner-macro-pill .p-val.warn { color: #f59e0b; }
-    .planner-macro-pill .p-val.bad { color: #ef4444; }
+    .planner-macro-item .p-icon {
+      font-size: 15px;
+      line-height: 1;
+      display: inline-block;
+    }
+    .planner-macro-item .p-val {
+      font-weight: 800;
+      font-size: var(--text-sm);
+      color: var(--color-text);
+    }
+    .planner-macro-item .p-val.good { color: var(--color-success); }
+    .planner-macro-item .p-val.warn { color: var(--color-warning); }
+    .planner-macro-item .p-val.bad { color: var(--color-danger); }
 
     .planner-action-btn {
       font-size: 11px !important;
@@ -890,14 +892,27 @@
       border-radius: var(--radius-md) !important;
     }
 
-    /* Planner Meals */
+    /* Planner Meals - Flattened & Full Width */
+    section[data-tab="planner"] > .panel {
+      padding: 12px;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    @media (max-width: 480px) {
+      section[data-tab="planner"] > .panel {
+        padding: 10px 8px;
+      }
+    }
     .day-card {
       background: transparent;
       border: none;
       padding: 0;
+      margin: 0;
       display: grid;
-      gap: 16px;
+      gap: 12px;
       box-shadow: none;
+      width: 100%;
+      box-sizing: border-box;
     }
     .day-card-header {
       display: none;
@@ -908,19 +923,29 @@
     .meal-slot-row {
       background: var(--color-surface);
       border: 1px solid var(--color-border);
-      border-radius: var(--radius-xl);
-      padding: 14px 16px;
+      border-radius: var(--radius-lg);
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      box-shadow: var(--shadow-sm);
+      gap: 8px;
+      width: 100%;
+      box-sizing: border-box;
+      box-shadow: none;
+    }
+    @media (max-width: 480px) {
+      .meal-slot-row {
+        padding: 10px 8px;
+        border-radius: var(--radius-md);
+      }
     }
     .slot-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      flex-wrap: wrap;
-      gap: 8px;
+      flex-wrap: nowrap;
+      gap: 6px;
+      width: 100%;
+      box-sizing: border-box;
     }
     .slot-badge {
       font-size: 13px;
@@ -928,31 +953,94 @@
       color: var(--color-primary);
       display: inline-flex;
       align-items: center;
-      gap: 6px;
+      gap: 4px;
+      white-space: nowrap;
+      flex-shrink: 1;
+      min-width: 0;
     }
     .slot-actions {
       display: inline-flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      gap: 8px;
+      gap: 4px;
+      flex-shrink: 0;
     }
-    .slot-control { display: flex; gap: 12px; align-items: center; width: 100%; }
-    .slot-thumb { width: 44px; height: 44px; border-radius: var(--radius-md); object-fit: cover; flex-shrink: 0; background: var(--color-surface-offset); border: 1px solid var(--color-border); }
-    .slot-control select { flex: 1; min-width: 0; }
+    .slot-actions .act-btn.small {
+      min-height: 36px;
+      height: 36px;
+      padding: 4px 8px;
+      font-size: 11.5px;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .slot-actions .batch-prep-pill {
+      min-height: 36px;
+      height: 36px;
+      padding: 4px 8px;
+      font-size: 11px;
+      white-space: nowrap;
+      box-sizing: border-box;
+    }
+    .slot-actions .x-btn {
+      width: 36px;
+      height: 36px;
+      min-width: 36px;
+      min-height: 36px;
+      box-sizing: border-box;
+      font-size: 16px;
+      padding: 0;
+    }
+    .slot-control {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .slot-thumb {
+      width: 42px;
+      height: 42px;
+      border-radius: var(--radius-md);
+      object-fit: cover;
+      flex-shrink: 0;
+      background: var(--color-surface-offset);
+      border: 1px solid var(--color-border);
+    }
+    .slot-control select {
+      flex: 1;
+      min-width: 0;
+      width: 100%;
+    }
     .slot-macros-bar {
       display: flex;
-      flex-wrap: wrap;
+      flex-wrap: nowrap;
       align-items: center;
-      gap: 6px 12px;
-      padding: 6px 10px;
-      background: var(--color-surface-2);
-      border-radius: var(--radius-md);
-      font-size: 11px;
+      justify-content: flex-start;
+      gap: 12px;
+      padding: 2px 0 0 0;
+      background: transparent !important;
+      border: none !important;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+      font-size: 12px;
       font-weight: 600;
       color: var(--color-text-muted);
-      border-left: 3px solid var(--color-primary);
+      width: 100%;
+      box-sizing: border-box;
+      overflow-x: auto;
+      scrollbar-width: none;
     }
-    .slot-macros-bar strong { color: var(--color-text); }
+    .slot-macros-bar::-webkit-scrollbar { display: none; }
+    .slot-macros-bar span {
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 3px;
+    }
+    .slot-macros-bar strong {
+      color: var(--color-text);
+      font-weight: 700;
+    }
     .slot-custom-badge {
       font-size: 10px;
       font-weight: 700;
@@ -964,12 +1052,10 @@
       display: inline-flex;
       align-items: center;
       gap: 3px;
+      white-space: nowrap;
     }
     .day-totals-box {
-      background: var(--color-surface-offset);
-      border-radius: var(--radius-lg);
-      padding: var(--space-3);
-      font-size: var(--text-sm);
+      display: none !important;
     }
 
     /* Custom Mobile Picker Sorting Toolbar */
@@ -1597,7 +1683,7 @@
       background: var(--color-surface-2);
       border: 1px solid var(--color-border);
       border-radius: var(--radius-md);
-      padding: 14px 16px;
+      padding: 16px;
       margin-top: 8px;
     }
     .more-filters summary {
@@ -2566,6 +2652,8 @@
       width: 100%;
       z-index: 95;
       background: var(--color-surface);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
       border-bottom: 1px solid var(--color-border);
       padding: 6px 12px;
       box-sizing: border-box;
@@ -3997,8 +4085,8 @@
     <!-- 2. WEEKLY PLANNER -->
     <section data-tab="planner" class="hidden stack">
       <div class="panel stack">
-        <!-- Macronutrient Summary at Top of Screen -->
-        <div class="kpis" id="customKpis" style="margin-bottom:var(--space-2)"></div>
+        <!-- Macronutrient Summary at Top of Screen (Single Line Full-Width Flexbox) -->
+        <div id="customKpis" class="planner-macro-summary-wrap"></div>
 
         <!-- 7-Day Macro Bar Chart Dashboard (Moved from Home to Weekly Planner) -->
         <div class="week-dashboard" id="plannerWeekDashboard" style="margin-bottom:var(--space-2)">
@@ -4690,7 +4778,7 @@
       <div class="panel stack">
         <div class="section-title">
           <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="settings_lang_card_title">Language / Limba</h2>
+            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_lang_card_title">Language / Limba</h3>
             <p class="muted small" data-i18n="settings_lang_card_desc">Choose your preferred language / Alege limba preferata:</p>
           </div>
         </div>
@@ -4708,7 +4796,7 @@
       <div class="panel stack">
         <div class="section-title">
           <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="settings_theme_card_title">Theme & Appearance / Aspect Vizual</h2>
+            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_theme_card_title">Theme & Appearance / Aspect Vizual</h3>
             <p class="muted small" data-i18n="settings_theme_card_desc">Choose Light or Dark mode / Alege modul luminos sau întunecat:</p>
           </div>
         </div>
@@ -4726,7 +4814,7 @@
       <div class="panel stack">
         <div class="section-title">
           <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="settings_notif_title">🔔 Fasting Notifications & Reminders</h2>
+            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_notif_title">🔔 Fasting Notifications & Reminders</h3>
             <p class="muted small" data-i18n="settings_notif_desc">Configure notifications for fasting start and goal completion.</p>
           </div>
         </div>
@@ -4750,7 +4838,7 @@
       <div class="panel stack">
         <div class="section-title">
           <div>
-            <h2 style="font-size:var(--text-lg)" data-i18n="settings_targets_title">Personal Targets</h2>
+            <h3 style="font-size:var(--text-base);margin:0" data-i18n="settings_targets_title">Personal Targets</h3>
             <p class="muted small" data-i18n="settings_targets_desc">Your target protein and daily calories.</p>
           </div>
         </div>
@@ -13113,6 +13201,11 @@ const CUP_DENSITY = {
     }
 
     function switchTab(tabName) {
+      try { closeCustomPicker(); } catch(e) {}
+      try { closeCustomizeMealModal(); } catch(e) {}
+      try { closeBatchPrepModal(); } catch(e) {}
+      ensureModalScrollUnlocked();
+
       if (currentTab) {
         tabScrollPositions[currentTab] = getScrollPos();
       }
@@ -13296,12 +13389,29 @@ const CUP_DENSITY = {
       modal.classList.remove('hidden');
     }
 
+    function ensureModalScrollUnlocked() {
+      const openModals = document.querySelectorAll(
+        '#customPickerModal:not(.hidden), #customizeMealModal.show:not(.hidden), #batchPrepModal.show:not(.hidden), #barcodeModal:not(.hidden), #pantrySuggestModal:not(.hidden), #shopItemModal:not(.hidden), #confirmModal.show:not(.hidden), #appUpdateModal.show, #appChangelogModal.show, #tutorialPromptModal:not(.hidden), #healthTableImportModal:not(.hidden), #recipePhotoImportModal:not(.hidden), #healthDayModal:not(.hidden), .confirm-modal-overlay.show:not(.hidden)'
+      );
+      let anyOpen = false;
+      openModals.forEach(el => {
+        if (el && !el.classList.contains('hidden') && (el.offsetWidth > 0 || el.offsetHeight > 0)) {
+          anyOpen = true;
+        }
+      });
+      if (!anyOpen) {
+        document.documentElement.classList.remove('modal-open');
+        document.body.classList.remove('modal-open');
+      }
+    }
+
     function closeCustomPicker() {
       const modal = document.getElementById('customPickerModal');
       if (modal) modal.classList.add('hidden');
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       activeSelectEl = null;
+      ensureModalScrollUnlocked();
     }
 
     let touchStartX = 0;
@@ -13409,6 +13519,7 @@ const CUP_DENSITY = {
         pantryModal.classList.add('hidden');
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
+        ensureModalScrollUnlocked();
         return true;
       }
       const barcodeModal = document.getElementById('barcodeModal');
@@ -13467,6 +13578,7 @@ const CUP_DENSITY = {
         confirmModal.classList.remove('show');
         document.documentElement.classList.remove('modal-open');
         document.body.classList.remove('modal-open');
+        ensureModalScrollUnlocked();
         return true;
       }
       if (currentTab !== 'home') {
@@ -13680,6 +13792,7 @@ const CUP_DENSITY = {
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       customizeMealState = { day: null, slot: null, workingRecipe: null };
+      ensureModalScrollUnlocked();
     }
 
     function renderCustomizeMealRows() {
@@ -13762,37 +13875,43 @@ const CUP_DENSITY = {
     }
 
     function saveCustomizeMealModal() {
-      if (!customizeMealState.day || !customizeMealState.slot || !customizeMealState.workingRecipe) return;
-      recalcCustomizeMealMacros();
-      const { day, slot, workingRecipe } = customizeMealState;
-      if (!dayOverrides[day]) dayOverrides[day] = {};
-      dayOverrides[day][slot] = workingRecipe;
+      try {
+        if (!customizeMealState.day || !customizeMealState.slot || !customizeMealState.workingRecipe) return;
+        recalcCustomizeMealMacros();
+        const { day, slot, workingRecipe } = customizeMealState;
+        if (!dayOverrides[day]) dayOverrides[day] = {};
+        dayOverrides[day][slot] = workingRecipe;
 
-      saveState();
-      buildCustom();
-      updateCustomTotals();
-      afterPlannerChange();
-      closeCustomizeMealModal();
+        saveState();
+        buildCustom();
+        updateCustomTotals();
+        afterPlannerChange();
 
-      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
-      showAppToast(isRo ? '✓ Modificările au fost salvate pentru această zi!' : '✓ Recipe customized for this day!');
+        const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+        showAppToast(isRo ? '✓ Modificările au fost salvate pentru această zi!' : '✓ Recipe customized for this day!');
+      } finally {
+        closeCustomizeMealModal();
+      }
     }
 
     function resetCustomizeMealModal() {
-      if (!customizeMealState.day || !customizeMealState.slot) return;
-      const { day, slot } = customizeMealState;
-      if (dayOverrides[day]) {
-        delete dayOverrides[day][slot];
-        if (Object.keys(dayOverrides[day]).length === 0) delete dayOverrides[day];
-      }
-      saveState();
-      buildCustom();
-      updateCustomTotals();
-      afterPlannerChange();
-      closeCustomizeMealModal();
+      try {
+        if (!customizeMealState.day || !customizeMealState.slot) return;
+        const { day, slot } = customizeMealState;
+        if (dayOverrides[day]) {
+          delete dayOverrides[day][slot];
+          if (Object.keys(dayOverrides[day]).length === 0) delete dayOverrides[day];
+        }
+        saveState();
+        buildCustom();
+        updateCustomTotals();
+        afterPlannerChange();
 
-      const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
-      showAppToast(isRo ? '↺ Rețeta a fost resetată la original.' : '↺ Reset to original recipe.');
+        const isRo = (typeof settings !== 'undefined' && settings?.lang === 'ro');
+        showAppToast(isRo ? '↺ Rețeta a fost resetată la original.' : '↺ Reset to original recipe.');
+      } finally {
+        closeCustomizeMealModal();
+      }
     }
 
     /* BATCH MEAL PREP & LEFTOVERS CONTROLLER */
@@ -13835,6 +13954,7 @@ const CUP_DENSITY = {
       document.documentElement.classList.remove('modal-open');
       document.body.classList.remove('modal-open');
       batchPrepState = { srcDay: null, srcSlot: null, recipeId: null };
+      ensureModalScrollUnlocked();
     }
 
     function applyBatchOption(opt) {
@@ -13966,10 +14086,18 @@ const CUP_DENSITY = {
           const t = totalForDay(custom[activeDay], activeDay);
           kpis.innerHTML = `
             <div class="planner-macro-bar">
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Calorii' : 'Calories'}</span><span class="p-val ${dayLevel('kcal', t.kcal)}">${fmt(t.kcal)}</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Proteine' : 'Protein'}</span><span class="p-val ${dayLevel('protein', t.protein)}">${fmt(t.protein)}g</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Carb Neți' : 'Net Carbs'}</span><span class="p-val ${dayLevel('netCarbs', t.netCarbs)}">${fmt(t.netCarbs)}g</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Grăsimi' : 'Fats'}</span><span class="p-val">${fmt(t.fat)}g</span></div>
+              <div class="planner-macro-item" title="${isRo ? 'Calorii' : 'Calories'}">
+                <span class="p-icon">🔥</span><span class="p-val ${dayLevel('kcal', t.kcal)}">${fmt(t.kcal)} kcal</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Proteine' : 'Protein'}">
+                <span class="p-icon">🥩</span><span class="p-val ${dayLevel('protein', t.protein)}">${fmt(t.protein)}g</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Grăsimi' : 'Fats'}">
+                <span class="p-icon">🥑</span><span class="p-val">${fmt(t.fat)}g</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Carbohidrați neți' : 'Net Carbs'}">
+                <span class="p-icon">🥗</span><span class="p-val ${dayLevel('netCarbs', t.netCarbs)}">${fmt(t.netCarbs)}g</span>
+              </div>
             </div>`;
         } else {
           // ALL DAYS SELECTED: display AVERAGE values across all days
@@ -13982,10 +14110,18 @@ const CUP_DENSITY = {
 
           kpis.innerHTML = `
             <div class="planner-macro-bar">
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Kcal' : 'Avg Kcal'}</span><span class="p-val ${dayLevel('kcal', avg.kcal)}">${fmt(avg.kcal)}</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Prot' : 'Avg Protein'}</span><span class="p-val ${dayLevel('protein', avg.protein)}">${fmt(avg.protein)}g</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie NC' : 'Avg Net Carbs'}</span><span class="p-val ${dayLevel('netCarbs', avg.netCarbs)}">${fmt(avg.netCarbs)}g</span></div>
-              <div class="planner-macro-pill"><span class="p-lbl">${isRo ? 'Medie Grăsimi' : 'Avg Fats'}</span><span class="p-val">${fmt(avg.fat)}g</span></div>
+              <div class="planner-macro-item" title="${isRo ? 'Medie Calorii' : 'Avg Calories'}">
+                <span class="p-icon">🔥</span><span class="p-val ${dayLevel('kcal', avg.kcal)}">${fmt(avg.kcal)} kcal</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Medie Proteine' : 'Avg Protein'}">
+                <span class="p-icon">🥩</span><span class="p-val ${dayLevel('protein', avg.protein)}">${fmt(avg.protein)}g</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Medie Grăsimi' : 'Avg Fats'}">
+                <span class="p-icon">🥑</span><span class="p-val">${fmt(avg.fat)}g</span>
+              </div>
+              <div class="planner-macro-item" title="${isRo ? 'Medie Carbohidrați neți' : 'Avg Net Carbs'}">
+                <span class="p-icon">🥗</span><span class="p-val ${dayLevel('netCarbs', avg.netCarbs)}">${fmt(avg.netCarbs)}g</span>
+              </div>
             </div>`;
         }
       }
@@ -19334,7 +19470,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.2.0';
+    const FALLBACK_APP_VERSION = '1.2.1';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -19506,6 +19642,28 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.2.1',
+        date: '21 Oct 2026',
+        items: {
+          ro: [
+            '✨ Planificator săptămânal complet aplatizat: rânduri de mese curate pe toată lățimea, fără chenare imbricate inutile',
+            '⚡ Butoanele de acțiune (Edit, View, Batch, X) aliniate pe o singură linie orizontală compactă',
+            '🥑 Afișare macros per masă pe un singur rând transparent direct sub rețetă',
+            '🔥 Bară superioară rezumat nutrițional redesenată într-un rând flexbox curat cu emoji-uri (🔥, 🥩, 🥑, 🥗)',
+            '🚫 Eliminat caseta redundantă de totaluri zilnice din partea de jos a planificatorului',
+            '🛡️ Sistem robust de deblocare a ecranului (anti-freeze) la închiderea ferestrelor modale și la clic pe fundal'
+          ],
+          en: [
+            '✨ Flattened weekly planner layout: clean full-width meal slots without redundant nested borders',
+            '⚡ Action buttons (Edit, View, Batch, X) neatly grouped on a single horizontal line',
+            '🥑 Single-line transparent macros display directly beneath each meal selector',
+            '🔥 Streamlined top macro summary bar with single-line flexbox layout and intuitive emojis',
+            '🚫 Removed redundant Day Total summary box from bottom of meal planner',
+            '🛡️ Bulletproof anti-freeze modal scroll restoration with auto-unlocking backdrop handler'
+          ]
+        }
+      },
       {
         version: '1.2.0',
         date: '20 Oct 2026',
@@ -21323,6 +21481,19 @@ const CUP_DENSITY = {
       });
       document.getElementById('tutorialPromptModal')?.addEventListener('click', (e) => {
         if (e.target.id === 'tutorialPromptModal') closeTutorialPrompt();
+      });
+
+      // Global backdrop click listener for confirm-modal-overlays
+      document.addEventListener('click', (e) => {
+        if (e.target && e.target.classList && e.target.classList.contains('confirm-modal-overlay')) {
+          if (e.target.id === 'customizeMealModal') {
+            closeCustomizeMealModal();
+          } else {
+            e.target.classList.add('hidden');
+            e.target.classList.remove('show');
+            ensureModalScrollUnlocked();
+          }
+        }
       });
 
       applyLanguage(settings.lang || 'en');
