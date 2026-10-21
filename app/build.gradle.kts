@@ -14,8 +14,8 @@ android {
         applicationId = "com.example.ketoplanner"
         minSdk = 26
         targetSdk = 36
-        versionCode = 25
-        versionName = "1.2.2"
+        versionCode = 26
+        versionName = "1.2.3"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
