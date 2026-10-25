@@ -4953,16 +4953,19 @@
           <button id="shopAddBtn" class="act-btn primary" type="button"><span data-i18n="shop_add_btn">+ Add</span></button>
         </div>
 
-        <!-- Action Bar (Horizontal scrollable pills) -->
-        <div class="shop-header-actions">
-          <button id="shopShareBtn" class="act-btn small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_whatsapp" style="display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-color:color-mix(in srgb, #25D366 35%, var(--color-border));background:color-mix(in srgb, #25D366 10%, var(--color-surface))"><img src="whatsapp.png" alt="WhatsApp" style="width:20px;height:20px;display:block;object-fit:contain"></button>
-          <button id="shopCopyListBtn" class="act-btn small" type="button"><span data-i18n="shop_copy_btn">📋 Copy</span></button>
-          <button id="shopClearAllBtn" class="panel small" type="button" style="padding:4px 8px;color:var(--color-danger);font-size:var(--text-xs)"><span data-i18n="shop_clear_all">Clear All</span></button>
-        </div>
-
-        <!-- To Buy Section -->
-        <div class="shop-section-title">
+        <!-- To Buy Section Header with Action Buttons on Right -->
+        <div class="shop-section-title" style="display:flex;align-items:center;justify-content:space-between">
           <span><span data-i18n="shop_to_buy">To Buy</span> (<span id="shopToBuyCount">0</span>)</span>
+          <div style="display:flex;gap:6px;align-items:center">
+            <button id="shopShareBtn" class="act-btn small" type="button" title="Send via WhatsApp or other apps" data-i18n-title="shop_whatsapp" style="display:inline-flex;align-items:center;justify-content:center;padding:4px 8px;border-color:color-mix(in srgb, #25D366 35%, var(--color-border));background:color-mix(in srgb, #25D366 10%, var(--color-surface))"><img src="whatsapp.png" alt="WhatsApp" style="width:18px;height:18px;display:block;object-fit:contain"></button>
+            <button id="shopCopyListBtn" class="act-btn small" type="button" title="Copy shopping list" data-i18n-title="shop_copy_btn" style="display:inline-flex;align-items:center;justify-content:center;padding:4px 8px">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" style="display:block">
+                <rect x="8" y="8" width="13" height="13" rx="3" ry="3"></rect>
+                <path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path>
+              </svg>
+            </button>
+            <button id="shopClearAllBtn" class="act-btn small" type="button" style="padding:4px 8px;color:var(--color-danger);font-size:11px"><span data-i18n="shop_clear_all">Clear All</span></button>
+          </div>
         </div>
         <div id="shopActiveList" class="shop-items-container"></div>
 
@@ -17877,32 +17880,137 @@ const CUP_DENSITY = {
     function getIngredientEmoji(name) {
       if (!name) return '🛒';
       const n = String(name).toLowerCase();
-      if (/egg|ou|oua|ouă/.test(n)) return '🥚';
-      if (/chicken|pui|curcan|turkey|poultry|pasare/.test(n)) return '🍗';
-      if (/beef|steak|vita|vită|carne de vita|sirloin|ribeye|tenderloin|chuck|brisket|flank|mince|tocata/.test(n)) return '🥩';
-      if (/bacon|ham|jamon|jamón|prosciutto|pancetta|sunca|șuncă|slanina|slănină/.test(n)) return '🥓';
-      if (/pork|porc|cotlet|ceafa|ceafă|costite|carnat|carnați|sausage/.test(n)) return '🥩';
-      if (/salmon|somon|tuna|ton|cod|mackerel|macrou|fish|peste|pește|sardine|anchovy|hamsie/.test(n)) return '🐟';
-      if (/shrimp|creveti|creveți|prawn|crab|lobster|calamar|squid|fructe de mare|seafood/.test(n)) return '🦐';
-      if (/butter|unt|ghee/.test(n)) return '🧈';
-      if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|cascaval|cașcaval|burduf|urda|halloumi|branza|brânză/.test(n)) return '🧀';
-      if (/milk|lapte|smantana|smântână|cream|frisca|frișcă|yogurt|iaurt|skyr|kefir|whey/.test(n)) return '🥛';
-      if (/avocado|guacamole/.test(n)) return '🥑';
-      if (/oil|ulei|olive oil|masline|măsline/.test(n)) return '🫒';
-      if (/peanut|almond|walnut|nuci|arahide|migdale|caju|cashew|pecan|seeds|seminte|semințe|chia|flax|in/.test(n)) return '🥜';
-      if (/berry|berries|strawberry|blueberry|raspberry|blackberry|capsuni|căpșuni|afine|zmeura|zmeură|mure/.test(n)) return '🫐';
-      if (/broccoli|cauliflower|conopida|conopidă|cabbage|varza|varză/.test(n)) return '🥦';
-      if (/spinach|spanac|lettuce|salata|salată|kale|rucola|arugula|greens|verdeata|verdeață/.test(n)) return '🥬';
-      if (/tomato|rosie|roșie|tomate/.test(n)) return '🍅';
-      if (/cucumber|castravete|castraveti|castraveți/.test(n)) return '🥒';
-      if (/pepper|ardei|chili|jalapeno|boia/.test(n)) return '🌶️';
-      if (/garlic|usturoi/.test(n)) return '🧄';
-      if (/onion|ceapa|ceapă|scallion|praz|leek/.test(n)) return '🧅';
-      if (/mushroom|ciuperci|champignon/.test(n)) return '🍄';
-      if (/lemon|lime|lamaie|lămâie/.test(n)) return '🍋';
-      if (/coffee|cafea/.test(n)) return '☕';
-      if (/tea|ceai/.test(n)) return '🍵';
-      if (/chocolate|cacao|cocoa/.test(n)) return '🍫';
+
+      // 1. Eggs (strictly bounded so 'shoulder' or 'sour' never matches 'ou'!)
+      if (/\b(egg|eggs|ou|oua|ouă|omlet[aă]|albu[șs]|g[aă]lbenu[șs])\b/i.test(n)) return '🥚';
+
+      // 2. Bacon & Cured Meats
+      if (/bacon|pancetta|guanciale|prosciutto|jam[oó]n|ham\b|[șs]unc[aă]|sl[aă]nin[aă]|kaiser|jambon|untur[aă]|lard/i.test(n)) return '🥓';
+
+      // 3. Sausages, Hot Dogs & Mici
+      if (/sausage|pepperoni|salami|chorizo|frankfurter|c[aâ]rna[tț]|salam|crenvur[șs]ti|\bmici\b|mititei/i.test(n)) return '🌭';
+
+      // 4. Pork (all cuts)
+      if (/pork|porc|cotlet|ceaf[aă]|costi[tț]e|pulp[aă]\s*de\s*porc|mu[șs]chi.*porc|mu[șs]chiule[tț]|jum[aă]ri|[șs]orici|pork\s*(shoulder|strips|loin|belly|ribs|tenderloin|mince|rinds|chop)/i.test(n)) return '🥩';
+
+      // 5. Beef & Veal
+      if (/beef|steak|ribeye|sirloin|tenderloin|chuck|brisket|flank|veal|m[aâ]nzat|vr[aă]bioar[aă]|antrecot|carne.*vit[aă]|\bvit[aă]\b/i.test(n)) return '🥩';
+
+      // 6. Poultry (Chicken, Turkey, Duck, Quail)
+      if (/chicken|pui|turkey|curcan|duck|ra[tț][aă]|poultry|coco[șs]|prepeli[tț][aă]/i.test(n)) return '🍗';
+
+      // 7. Lamb & Mutton
+      if (/\blamb\b|miel|berbecu[tț]|mutton|pastram[aă]/i.test(n)) return '🍖';
+
+      // 8. Fish
+      if (/salmon|somon|tuna|ton\b|cod\b|mackerel|macrou|trout|p[aă]str[aă]v|sardin|anchov|hamsi|hering|[șs]al[aă]u|dorad[aă]|pe[șs]te|fish/i.test(n)) return '🐟';
+
+      // 9. Seafood & Shellfish
+      if (/shrimp|prawn|crab|lobster|calamar|squid|octopus|caracati[tț][aă]|mussel|midii|[șs]coici|oyster|stridii|scallop|seafood|fructe.*mare/i.test(n)) return '🦐';
+
+      // 10. Cheese
+      if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|ca[șs]caval|burduf|urd[aă]|halloumi|br[aâ]nz[aă]|gorgonzola|gouda|brie|camembert|provolone/i.test(n)) return '🧀';
+
+      // 11. Butter & Ghee
+      if (/butter|\bunt\b|ghee/i.test(n)) return '🧈';
+
+      // 12. Creams & Sour Cream
+      if (/sour\s*cream|sm[aâ]nt[aâ]n[aă]|cr[eè]me\s*fra[iî]che/i.test(n)) return '🥣';
+      if (/cream|fri[șs]c[aă]|whipping/i.test(n)) return '🥛';
+
+      // 13. Milks & Yogurts
+      if (/milk|lapte|yogurt|iaurt|skyr|kefir|whey|protein\s*powder/i.test(n)) return '🥛';
+
+      // 14. Avocado & Guacamole
+      if (/avocado|guacamole/i.test(n)) return '🥑';
+
+      // 15. Olives & Olive Oil
+      if (/olive|m[aă]sline/i.test(n)) return '🫒';
+      if (/\boil\b|ulei/i.test(n)) return '🫒';
+
+      // 16. Spices: Paprika, Boia, Chili, Peppers
+      if (/paprika|boia|chili|jalapeno|cayenne|habanero|ardei\s*iute/i.test(n)) return '🌶️';
+      if (/bell\s*pepper|ardei(\s*gras|\s*capia)?/i.test(n)) return '🫑';
+
+      // 17. Herbs: Parsley, Dill, Basil, Thyme, Rosemary, Oregano, Mint, Chives, etc.
+      if (/parsley|p[aă]trunjel|dill|m[aă]rar|basil|busuioc|rosemary|rozmarin|thyme|cimbru|oregano|cilantro|coriander|coriandru|mint\b|ment[aă]|sage|salvie|tarragon|tarhon|chives|herbs|ierburi/i.test(n)) return '🌿';
+
+      // 18. Asparagus
+      if (/asparagus|sparanghel/i.test(n)) return '🌱';
+
+      // 19. Broccoli & Cauliflower
+      if (/broccoli|cauliflower|conopid[aă]/i.test(n)) return '🥦';
+
+      // 20. Cabbage & Sauerkraut
+      if (/cabbage|varz[aă]|sauerkraut/i.test(n)) return '🥬';
+
+      // 21. Salad Greens, Spinach, Lettuce, Kale, Arugula
+      if (/spinach|spanac|lettuce|salat[aă]|kale|rucola|arugula|greens|verdea[tț][aă]|chard|mangold/i.test(n)) return '🥬';
+
+      // 22. Tomatoes
+      if (/tomato|ro[șs]ie|ro[șs]ii|tomate|passata|bulion/i.test(n)) return '🍅';
+
+      // 23. Cucumber & Pickles & Zucchini
+      if (/cucumber|castravete|castrave[tț]i|pickle|mur[aă]tur[iî]|cornichon|gherkin/i.test(n)) return '🥒';
+      if (/zucchini|dovlecel|dovlecei|courgette/i.test(n)) return '🥒';
+
+      // 24. Eggplant
+      if (/eggplant|aubergine|v[aâ]n[aă]t[aă]|vinete/i.test(n)) return '🍆';
+
+      // 25. Garlic & Ginger
+      if (/garlic|usturoi/i.test(n)) return '🧄';
+      if (/ginger|ghimbir/i.test(n)) return '🫚';
+
+      // 26. Onions & Leeks
+      if (/onion|ceap[aă]|scallion|praz|leek|shallot|[șs]alot[aă]/i.test(n)) return '🧅';
+
+      // 27. Mushrooms
+      if (/mushroom|ciuperc|champignon|porcini|g[aă]lbiori/i.test(n)) return '🍄';
+
+      // 28. Green Beans & Edamame
+      if (/green\s*bean|fasole\s*verde|p[aă]st[aă]i|edamame/i.test(n)) return '🫛';
+
+      // 29. Carrots
+      if (/carrot|morcov/i.test(n)) return '🥕';
+
+      // 30. Celery
+      if (/celery|[tț]elin[aă]|apio/i.test(n)) return '🥬';
+
+      // 31. Lemon & Lime
+      if (/lemon|lime|lam[aâ]ie|limet[aă]/i.test(n)) return '🍋';
+
+      // 32. Berries
+      if (/strawberry|c[aă]p[șs]un/i.test(n)) return '🍓';
+      if (/berry|berries|blueberry|raspberry|blackberry|afine|zmeur[aă]|mure/i.test(n)) return '🫐';
+
+      // 33. Nuts & Seeds
+      if (/walnut|nuci|nuc[aă]|pecan/i.test(n)) return '🌰';
+      if (/almond|migdale|peanut|arahide|cashew|caju|hazelnut|alune|macadamia/i.test(n)) return '🥜';
+      if (/chia|flax|in\b|seed|semin[tț]e|pumpkin\s*seed/i.test(n)) return '🌰';
+      if (/coconut|cocos/i.test(n)) return '🥥';
+
+      // 34. Salt, Pepper, Seasonings
+      if (/salt\b|sare\b|sea\s*salt/i.test(n)) return '🧂';
+      if (/black\s*pepper|piper/i.test(n)) return '🧂';
+
+      // 35. Chocolate & Coffee & Tea
+      if (/chocolate|ciocolat[aă]|cacao|cocoa/i.test(n)) return '🍫';
+      if (/coffee|cafea|espresso/i.test(n)) return '☕';
+      if (/tea\b|ceai/i.test(n)) return '🍵';
+      if (/water\b|ap[aă]/i.test(n)) return '💧';
+      if (/broth|sup[aă]/i.test(n)) return '🥣';
+
+      // 36. Bakery & Pasta
+      if (/bread|p[aâ]ine|toast/i.test(n)) return '🍞';
+      if (/pasta|noodles|shirataki|konjac|spaghetti/i.test(n)) return '🍜';
+      if (/flour|f[aă]in[aă]/i.test(n)) return '🥣';
+
+      // 37. Sauces, Dressings, Vinegars
+      if (/mustard|mu[șs]tar/i.test(n)) return '🟡';
+      if (/mayo|mayonnaise|maionez[aă]/i.test(n)) return '🥫';
+      if (/vinegar|o[tț]et|balsamic/i.test(n)) return '🍾';
+      if (/soy\s*sauce|sauce|sos|dressing/i.test(n)) return '🥫';
+
       return '🛒';
     }
 
@@ -20245,7 +20353,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.2.8';
+    const FALLBACK_APP_VERSION = '1.2.9';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20417,6 +20525,22 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.2.9',
+        date: '25 Oct 2026',
+        items: {
+          ro: [
+            '📱 Butoanele WhatsApp, Copiază și Șterge Tot sunt acum grupate elegant pe același rând cu secțiunea „To Buy” în partea dreaptă, economisind spațiu vertical prețios',
+            '📋 Butonul de copiere folosește acum pictograma vectorizată dedicată de copiere în loc de text',
+            '🥩 Sistem complet revizuit de pictograme reprezentative pentru ingrediente: carne de porc (🥩), boia/paprika (🌶️), pătrunjel (🌿), sparanghel (🌱), smântână (🥣) și multe altele, eliminând suprapunerea eronată a oului sau coșului de cumpărături'
+          ],
+          en: [
+            '📱 WhatsApp, Copy, and Clear All buttons are now neatly aligned on the same row with "To Buy" on the right side, reclaiming vertical space',
+            '📋 Copy button now features the requested vector copy icon instead of text',
+            '🥩 Comprehensive and accurate ingredient emoji detection: pork cuts (🥩), paprika (🌶️), parsley (🌿), asparagus (🌱), sour cream (🥣), fixing incorrect egg or cart icons'
+          ]
+        }
+      },
       {
         version: '1.2.8',
         date: '25 Oct 2026',
