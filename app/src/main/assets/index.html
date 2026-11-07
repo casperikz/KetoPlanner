@@ -11116,6 +11116,11 @@ function getFormattedDayDate(dayIdx, isShort = false) {
 }
 
 const DEFAULT_N = {
+      "shallots": [72, 2.5, 0.1, 14], "shallot": [72, 2.5, 0.1, 14], "salote": [72, 2.5, 0.1, 14], "salota": [72, 2.5, 0.1, 14],
+      "lemongrass": [30, 1.2, 0.2, 4],
+      "kaffir lime leaves": [0, 0, 0, 0], "frunze de kaffir lime": [0, 0, 0, 0],
+      "shrimp paste": [100, 20, 1.5, 1.5], "pasta de creveti": [100, 20, 1.5, 1.5],
+      "red chilies": [40, 1.9, 0.4, 7], "bird's eye chilies": [40, 1.9, 0.4, 7], "ardei iute rosu": [40, 1.9, 0.4, 7], "ardei iuti rosii": [40, 1.9, 0.4, 7],
       "pomegranate seeds": [83, 1.7, 1.2, 14], "pomegranate": [83, 1.7, 1.2, 14], "seminte de rodie": [83, 1.7, 1.2, 14], "rodie": [83, 1.7, 1.2, 14],
       "pistachios": [562, 20, 45, 18], "pistachio": [562, 20, 45, 18], "fistic": [562, 20, 45, 18],
       "pine nuts": [673, 14, 68, 9], "pine nut": [673, 14, 68, 9], "muguri de pin": [673, 14, 68, 9],
@@ -17971,7 +17976,7 @@ const CUP_DENSITY = {
       if (/salmon|somon|tuna|ton\b|cod\b|mackerel|macrou|trout|p[aă]str[aă]v|sardin|anchov|hamsi|hering|[șs]al[aă]u|dorad[aă]|pe[șs]te|fish/i.test(n)) return '🐟';
 
       // 9. Seafood & Shellfish
-      if (/shrimp|prawn|crab|lobster|calamar|squid|octopus|caracati[tț][aă]|mussel|midii|[șs]coici|oyster|stridii|scallop|seafood|fructe.*mare/i.test(n)) return '🦐';
+      if (/shrimp|prawn|crab|lobster|calamar|squid|octopus|caracati[tț][aă]|mussel|midii|[șs]coici|oyster|stridii|scallop|seafood|fructe.*mare|shrimp\s*paste|creve[tț]i/i.test(n)) return '🦐';
 
       // 10. Cheese
       if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|ca[șs]caval|burduf|urd[aă]|halloumi|br[aâ]nz[aă]|gorgonzola|gouda|brie|camembert|provolone|pecorino|cotija/i.test(n)) return '🧀';
@@ -17998,7 +18003,7 @@ const CUP_DENSITY = {
       if (/bell\s*pepper|ardei(\s*gras|\s*capia)?/i.test(n)) return '🫑';
 
       // 17. Herbs: Parsley, Dill, Basil, Thyme, Rosemary, Oregano, Mint, Chives, etc.
-      if (/parsley|p[aă]trunjel|dill|m[aă]rar|basil|busuioc|rosemary|rozmarin|thyme|cimbru|oregano|cilantro|coriander|coriandru|mint\b|ment[aă]|sage|salvie|tarragon|tarhon|chives|herbs|ierburi/i.test(n)) return '🌿';
+      if (/parsley|p[aă]trunjel|dill|m[aă]rar|basil|busuioc|rosemary|rozmarin|thyme|cimbru|oregano|cilantro|coriander|coriandru|mint\b|ment[aă]|sage|salvie|tarragon|tarhon|chives|herbs|ierburi|lemongrass|kaffir/i.test(n)) return '🌿';
 
       // 18. Asparagus
       if (/asparagus|sparanghel/i.test(n)) return '🌱';
@@ -20419,7 +20424,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.3.0';
+    const FALLBACK_APP_VERSION = '1.3.1';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20595,6 +20600,24 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.3.1',
+        date: '07 Nov 2026',
+        items: {
+          ro: [
+            '⚖️ Reechilibrare macronutrienți rețete către un profil keto optim: creșterea grăsimilor sănătoase (~60-70% din calorii, grăsimi în grame ≥ proteine în grame) și ajustarea porțiilor de carne la 54 de mâncăruri gătite',
+            '🥩 Păstrarea profilului autentic bogat în proteine pentru fripturi și asados tradiționale (Picanha, Bife de Chorizo, Pljeskavica, Ribeye, etc.)',
+            '🇮🇩 Babi Panggang autentic cu Sambal Matah tradițional balinez (șalote proaspete, lemongrass, ardei iuți bird''s eye, frunze de kaffir lime, pastă de creveți terasi și ulei de cocos cald)',
+            '🌿 Detectare emoji îmbunătățită pentru ingrediente speciale (lemongrass, frunze de kaffir lime, pastă de creveți)'
+          ],
+          en: [
+            '⚖️ Rebalanced recipe macros towards higher healthy culinary fats (~60-70% fat calories, fat grams ≥ protein grams) across 54 stews, curries, and sauced dishes',
+            '🥩 Preserved authentic high-protein profiles for traditional steaks and asados (Picanha, Bife de Chorizo, Pljeskavica, Ribeye, etc.)',
+            '🇮🇩 Authentic Balinese Sambal Matah restored for Babi Panggang (fresh shallots, lemongrass, red bird''s eye chilies, kaffir lime leaves, terasi shrimp paste, and warm coconut oil)',
+            '🌿 Enhanced smart emoji detection for lemongrass, kaffir lime leaves, and shrimp paste'
+          ]
+        }
+      },
             {
         version: '1.3.0',
         date: '25 Oct 2026',
