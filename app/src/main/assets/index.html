@@ -1,4 +1,4 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
@@ -10472,6 +10472,31 @@ const RECIPES_RO_BASE = {
 const RECIPES_RO = Object.assign({}, RECIPES_RO_BASE, (typeof RECIPES_RO_DATA !== 'undefined' ? RECIPES_RO_DATA : {}));
 
 const EN_TO_RO_ING = {
+    "pomegranate seeds":  "seminte de rodie",
+    "pomegranate":  "rodie",
+    "pistachios":  "fistic",
+    "pistachio":  "fistic",
+    "pine nuts":  "muguri de pin",
+    "pine nut":  "muguri de pin",
+    "saffron":  "sofran",
+    "rosewater":  "apa de trandafiri",
+    "orange blossom water":  "apa de flori de portocal",
+    "sumac":  "sumac",
+    "watercress":  "nasturel (macris de balta)",
+    "jalapeno":  "ardei jalapeno",
+    "jalapenos":  "ardei jalapeno",
+    "chorizo":  "carnati chorizo",
+    "provolone":  "branza provolone",
+    "pecorino":  "branza pecorino",
+    "pancetta":  "pancetta",
+    "leek":  "praz",
+    "leeks":  "praz",
+    "blackberries":  "mure proaspete",
+    "blackberry":  "mure",
+    "cotija cheese":  "branza cotija",
+    "cotija":  "branza cotija",
+    "chanterelles":  "galbiori proaspeti",
+    "chanterelle":  "galbiori",
     "vanilla":  "esenta de vanilie",
     "chili flakes optional":  "fulgi de chili optional",
     "pork rinds":  "jumari crocante de porc",
@@ -10696,6 +10721,31 @@ const EN_TO_RO_ING = {
 };
 
 const RO_TO_EN_ING = {
+    "seminte de rodie": "pomegranate seeds",
+    "rodie": "pomegranate",
+    "fistic": "pistachios",
+    "muguri de pin": "pine nuts",
+    "sofran": "saffron",
+    "apa de trandafiri": "rosewater",
+    "apa de flori de portocal": "orange blossom water",
+    "sumac": "sumac",
+    "nasturel": "watercress",
+    "macris de balta": "watercress",
+    "ardei jalapeno": "jalapeno",
+    "chorizo": "chorizo",
+    "carnati chorizo": "chorizo",
+    "provolone": "provolone",
+    "branza provolone": "provolone",
+    "pecorino": "pecorino",
+    "branza pecorino": "pecorino",
+    "pancetta": "pancetta",
+    "praz": "leek",
+    "mure": "blackberries",
+    "mure proaspete": "blackberries",
+    "cotija": "cotija cheese",
+    "branza cotija": "cotija cheese",
+    "galbiori": "chanterelles",
+    "galbiori proaspeti": "chanterelles",
     "lapte": "milk",
     "lapte integral": "whole milk",
     "lapte de vaca": "milk",
@@ -11066,6 +11116,21 @@ function getFormattedDayDate(dayIdx, isShort = false) {
 }
 
 const DEFAULT_N = {
+      "pomegranate seeds": [83, 1.7, 1.2, 14], "pomegranate": [83, 1.7, 1.2, 14], "seminte de rodie": [83, 1.7, 1.2, 14], "rodie": [83, 1.7, 1.2, 14],
+      "pistachios": [562, 20, 45, 18], "pistachio": [562, 20, 45, 18], "fistic": [562, 20, 45, 18],
+      "pine nuts": [673, 14, 68, 9], "pine nut": [673, 14, 68, 9], "muguri de pin": [673, 14, 68, 9],
+      "saffron": [0, 0, 0, 0], "sofran": [0, 0, 0, 0], "rosewater": [0, 0, 0, 0], "apa de trandafiri": [0, 0, 0, 0],
+      "orange blossom water": [0, 0, 0, 0], "apa de flori de portocal": [0, 0, 0, 0], "sumac": [0, 0, 0, 0],
+      "watercress": [11, 2.3, 0.1, 0.8], "nasturel": [11, 2.3, 0.1, 0.8], "macris de balta": [11, 2.3, 0.1, 0.8],
+      "jalapeno": [29, 0.9, 0.4, 3.7], "jalapenos": [29, 0.9, 0.4, 3.7], "ardei jalapeno": [29, 0.9, 0.4, 3.7],
+      "chorizo": [455, 24, 38, 1.9], "carnati chorizo": [455, 24, 38, 1.9],
+      "provolone": [351, 25, 27, 2.1], "branza provolone": [351, 25, 27, 2.1],
+      "pecorino": [387, 26, 32, 1.5], "branza pecorino": [387, 26, 32, 1.5],
+      "pancetta": [450, 14, 44, 0],
+      "leek": [61, 1.5, 0.3, 12], "leeks": [61, 1.5, 0.3, 12], "praz": [61, 1.5, 0.3, 12],
+      "blackberries": [43, 1.4, 0.5, 5], "blackberry": [43, 1.4, 0.5, 5], "mure": [43, 1.4, 0.5, 5], "mure proaspete": [43, 1.4, 0.5, 5],
+      "cotija cheese": [366, 21, 30, 3], "cotija": [366, 21, 30, 3], "branza cotija": [366, 21, 30, 3],
+      "chanterelles": [32, 1.5, 0.5, 3], "chanterelle": [32, 1.5, 0.5, 3], "galbiori": [32, 1.5, 0.5, 3], "galbiori proaspeti": [32, 1.5, 0.5, 3],
       "chicken breast": [165, 31, 3.6, 0], "chicken": [175, 30, 5, 0], "chicken thigh": [209, 26, 11, 0], "chicken thigh (bone-in)": [221, 24, 13, 0], "ground chicken": [170, 22, 9, 0],
       "turkey mince": [150, 21, 7, 0], "beef mince": [250, 18, 20, 0], "ground beef 80/20": [254, 17, 20, 0], "ground beef 85/15": [215, 19, 15, 0],
       "beef strips": [217, 26, 12, 0], "beef": [250, 18, 20, 0], "steak": [220, 27, 12, 0], "ribeye steak": [291, 24, 21, 0], "beef ribeye steak": [291, 24, 21, 0], "beef ribeye thin slices": [291, 24, 21, 0],
@@ -17909,7 +17974,7 @@ const CUP_DENSITY = {
       if (/shrimp|prawn|crab|lobster|calamar|squid|octopus|caracati[tț][aă]|mussel|midii|[șs]coici|oyster|stridii|scallop|seafood|fructe.*mare/i.test(n)) return '🦐';
 
       // 10. Cheese
-      if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|ca[șs]caval|burduf|urd[aă]|halloumi|br[aâ]nz[aă]|gorgonzola|gouda|brie|camembert|provolone/i.test(n)) return '🧀';
+      if (/cheese|cheddar|mozzarella|parmesan|parmezan|feta|telemea|ricotta|mascarpone|ca[șs]caval|burduf|urd[aă]|halloumi|br[aâ]nz[aă]|gorgonzola|gouda|brie|camembert|provolone|pecorino|cotija/i.test(n)) return '🧀';
 
       // 11. Butter & Ghee
       if (/butter|\bunt\b|ghee/i.test(n)) return '🧈';
@@ -17929,7 +17994,7 @@ const CUP_DENSITY = {
       if (/\boil\b|ulei/i.test(n)) return '🫒';
 
       // 16. Spices: Paprika, Boia, Chili, Peppers
-      if (/paprika|boia|chili|jalapeno|cayenne|habanero|ardei\s*iute/i.test(n)) return '🌶️';
+      if (/paprika|boia|chili|jalapeno|cayenne|habanero|ardei\s*iute|saffron|[șs]ofran|sumac/i.test(n)) return '🌶️';
       if (/bell\s*pepper|ardei(\s*gras|\s*capia)?/i.test(n)) return '🫑';
 
       // 17. Herbs: Parsley, Dill, Basil, Thyme, Rosemary, Oregano, Mint, Chives, etc.
@@ -17945,7 +18010,7 @@ const CUP_DENSITY = {
       if (/cabbage|varz[aă]|sauerkraut/i.test(n)) return '🥬';
 
       // 21. Salad Greens, Spinach, Lettuce, Kale, Arugula
-      if (/spinach|spanac|lettuce|salat[aă]|kale|rucola|arugula|greens|verdea[tț][aă]|chard|mangold/i.test(n)) return '🥬';
+      if (/spinach|spanac|lettuce|salat[aă]|kale|rucola|arugula|greens|verdea[tț][aă]|chard|mangold|watercress|n[aă]sturel|m[aă]cri[șs]/i.test(n)) return '🥬';
 
       // 22. Tomatoes
       if (/tomato|ro[șs]ie|ro[șs]ii|tomate|passata|bulion/i.test(n)) return '🍅';
@@ -17981,11 +18046,11 @@ const CUP_DENSITY = {
 
       // 32. Berries
       if (/strawberry|c[aă]p[șs]un/i.test(n)) return '🍓';
-      if (/berry|berries|blueberry|raspberry|blackberry|afine|zmeur[aă]|mure/i.test(n)) return '🫐';
+      if (/berry|berries|blueberry|raspberry|blackberry|afine|zmeur[aă]|mure|pomegranate|rodie/i.test(n)) return '🫐';
 
       // 33. Nuts & Seeds
-      if (/walnut|nuci|nuc[aă]|pecan/i.test(n)) return '🌰';
-      if (/almond|migdale|peanut|arahide|cashew|caju|hazelnut|alune|macadamia/i.test(n)) return '🥜';
+      if (/walnut|nuci|nuc[aă]|pecan|pine\s*nut|muguri.*pin/i.test(n)) return '🌰';
+      if (/almond|migdale|peanut|arahide|cashew|caju|hazelnut|alune|macadamia|pistachio|fistic/i.test(n)) return '🥜';
       if (/chia|flax|in\b|seed|semin[tț]e|pumpkin\s*seed/i.test(n)) return '🌰';
       if (/coconut|cocos/i.test(n)) return '🥥';
 
@@ -17997,6 +18062,7 @@ const CUP_DENSITY = {
       if (/chocolate|ciocolat[aă]|cacao|cocoa/i.test(n)) return '🍫';
       if (/coffee|cafea|espresso/i.test(n)) return '☕';
       if (/tea\b|ceai/i.test(n)) return '🍵';
+      if (/rosewater|orange\s*blossom/i.test(n)) return '🌸';
       if (/water\b|ap[aă]/i.test(n)) return '💧';
       if (/broth|sup[aă]/i.test(n)) return '🥣';
 
@@ -20353,7 +20419,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.2.9';
+    const FALLBACK_APP_VERSION = '1.3.0';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20525,6 +20591,22 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+            {
+        version: '1.3.0',
+        date: '25 Oct 2026',
+        items: {
+          ro: [
+            '🍲 Rețete autentice restaurate cu ingrediente fidele denumirii: rodie, fistic, muguri de pin, șofran, apă de trandafiri, măcriș/năsturel, ardei jalapeno, praz, mure, brânză cotija, gălbiori, pancetta și chorizo',
+            '🥑 Buget flexibil de carbohidrați neți (până la 10–15g NC) la mesele internaționale complexe pentru a păstra savoarea și autenticitatea culturală intacte',
+            '📊 Bază de date nutrițională extinsă (DEFAULT_N) și dicționare bilingve complete pentru toate ingredientele nou integrate'
+          ],
+          en: [
+            '🍲 Authentic recipes restored with exact ingredients promised in titles: pomegranate, pistachios, pine nuts, saffron, rosewater, watercress, jalapeno, leeks, blackberries, cotija cheese, chanterelles, pancetta, and chorizo',
+            '🥑 Flexible net carbs allowance (up to 10–15g NC) for rich cultural recipes to preserve authentic flavor and quality',
+            '📊 Extended macronutrient database (DEFAULT_N) and full bilingual translation support for all newly integrated ingredients'
+          ]
+        }
+      },
       {
         version: '1.2.9',
         date: '25 Oct 2026',
