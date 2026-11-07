@@ -20447,6 +20447,8 @@ const CUP_DENSITY = {
     }
 
     async function checkForUpdates(manual = false) {
+      const isAndroidApp = !!(window.Android && typeof window.Android.downloadAndInstallApk === 'function');
+      if (!isAndroidApp && !manual) return;
       currentAppVersion = getLocalAppVersion();
       const verLabel = document.getElementById('currentAppVersionLabel');
       if (verLabel) verLabel.textContent = 'v' + currentAppVersion.replace(/^v/i, '');
@@ -20504,6 +20506,8 @@ const CUP_DENSITY = {
     }
 
     function showUpdateModal(tag, notes, apkUrl) {
+      const isAndroidApp = !!(window.Android && typeof window.Android.downloadAndInstallApk === 'function');
+      if (!isAndroidApp) return;
       pendingUpdateApkUrl = apkUrl;
       const modal = document.getElementById('appUpdateModal');
       const verEl = document.getElementById('updateModalVer');
