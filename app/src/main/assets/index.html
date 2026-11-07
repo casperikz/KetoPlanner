@@ -1308,7 +1308,46 @@
       gap: 6px;
       flex-shrink: 0;
     }
-    .stock-qty-stepper {
+        .stock-toggle-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid transparent;
+      user-select: none;
+      transition: all 0.15s ease;
+      touch-action: manipulation;
+      min-height: 28px;
+    }
+    .stock-toggle-btn.is-have {
+      background: rgba(16, 185, 129, 0.16);
+      color: #10b981;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+    .stock-toggle-btn.is-have .stock-toggle-dot {
+      background: #10b981;
+      box-shadow: 0 0 6px rgba(16, 185, 129, 0.6);
+    }
+    .stock-toggle-btn.is-need {
+      background: rgba(245, 158, 11, 0.16);
+      color: #f59e0b;
+      border-color: rgba(245, 158, 11, 0.4);
+    }
+    .stock-toggle-btn.is-need .stock-toggle-dot {
+      background: #f59e0b;
+      box-shadow: 0 0 6px rgba(245, 158, 11, 0.6);
+    }
+    .stock-toggle-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+.stock-qty-stepper {
       display: inline-flex;
       align-items: center;
       background: var(--color-surface);
@@ -15368,24 +15407,21 @@ const CUP_DENSITY = {
           ? ''
           : `<input type="checkbox" class="stock-need-cb" data-stock-need-idx="${realIdx}" ${item.selectedForShop !== false ? 'checked' : ''} aria-label="Select ${escapeHtml(item.name)} for shopping list" title="Check to add to shopping list">`;
 
+                const isRo = (typeof settings !== 'undefined' && settings && settings.lang === 'ro');
         return `
           <div class="stock-item-row ${item.have ? 'is-stocked' : 'is-missing'}">
             <div class="stock-item-left">
               ${checkboxHtml}
               <div class="stock-item-info" data-stock-toggle="${realIdx}">
-                <div style="display:flex;align-items:center;gap:6px;flex-wrap:wrap">
-                  <span class="stock-item-name">${escapeHtml(tIng(item.name))}</span>
-                  <span class="stock-badge ${item.have ? 'badge-have' : 'badge-need'}" data-badge-idx="${realIdx}" title="Tap to toggle stock status">${item.have ? t('stock_btn_in_stock') : t('stock_btn_need')}</span>
-                </div>
+                <span class="stock-item-name">${escapeHtml(tIng(item.name))}</span>
                 ${macroHtml}
               </div>
             </div>
             <div class="stock-item-actions">
-              <div class="stock-qty-stepper" title="Quantity on hand">
-                <button type="button" class="stock-qty-btn" data-stock-qty-minus="${realIdx}" aria-label="Decrease quantity">−</button>
-                <span class="stock-qty-val" data-stock-qty-display="${realIdx}">${qty}</span>
-                <button type="button" class="stock-qty-btn" data-stock-qty-plus="${realIdx}" aria-label="Increase quantity">+</button>
-              </div>
+              <button type="button" class="stock-toggle-btn ${item.have ? 'is-have' : 'is-need'}" data-stock-toggle-btn="${realIdx}" title="${isRo ? 'Apasă pentru a schimba starea' : 'Tap to toggle stock status'}">
+                <span class="stock-toggle-dot"></span>
+                <span class="stock-toggle-label">${item.have ? (isRo ? 'În stoc' : 'In Stock') : (isRo ? 'Necesar' : 'Need')}</span>
+              </button>
               <button class="x-btn" type="button" data-stock-del="${realIdx}" title="Delete">×</button>
             </div>
           </div>`;
@@ -15444,20 +15480,18 @@ const CUP_DENSITY = {
         });
       });
 
-      // Quantity Stepper minus button
-      wrap.querySelectorAll('[data-stock-qty-minus]').forEach(btn => {
+            // Stock Status Toggle Button (Need / In Stock)
+      wrap.querySelectorAll('[data-stock-toggle-btn]').forEach(btn => {
         btn.addEventListener('click', e => {
           e.stopPropagation();
-          const idx = parseInt(btn.dataset.stockQtyMinus, 10);
+          const idx = parseInt(btn.dataset.stockToggleBtn, 10);
           const currentItem = stock[currentStockTab][idx];
           if (!currentItem) return;
-          let currentQty = (typeof currentItem.qty === 'number' && !isNaN(currentItem.qty)) ? currentItem.qty : 1;
-          if (currentQty > 1) {
-            currentItem.qty = currentQty - 1;
-            currentItem.have = true;
+          currentItem.have = !currentItem.have;
+          if (currentItem.have) {
+            currentItem.selectedForShop = false;
           } else {
-            currentItem.qty = 0;
-            currentItem.have = false; // 0 items marks as needing restock
+            currentItem.selectedForShop = true;
           }
           saveState();
           renderStock();
@@ -19468,7 +19502,7 @@ const CUP_DENSITY = {
 
       // 1. Detect Recipe Title
       let title = '';
-      const skipHeaderRe = /^(?:ingredients?|ingrediente|the\s+cake|the\s+frosting|the\s+filling|the\s+crust|the\s+sauce|directions?|instructions?|mod\s+de\s+preparare|method|steps?|servings?|yield|makes|por[țt]ii|prep|cook|total\s+time|notes?|nutrition)\b/i;
+      const skipHeaderRe = /^(?:ingredients?|ingrediente|the\s+cake|the\s+frosting|the\s+filling|the\s+crust|the\s+sauce|directions?|instructions?|mod\s+de\s+preparare|method|steps?|servings?|yield|makes|por[țt]ii|prep|cook|total\s+time|notes?|nutrition|units?:|metric\s+us|good\s+food)\b/i;
       const skipPrefixRe = /^(?:[\d\.\)\/\-•*▪▫◦○●◽◾oO0©®°]|\[[ xX]?\])/;
 
       for (const l of rawLines) {
@@ -19508,10 +19542,10 @@ const CUP_DENSITY = {
           break; // Stop once instructions begin
         }
         if (sectionHeaderRe.test(trimmed) || (trimmed.endsWith(':') && !/\d/.test(trimmed))) {
-          continue; // Skip section headers like "The Cake:" or "The Frosting:"
+          continue; // Skip section headers
         }
 
-        // Split compound lines joined with & or and, e.g. "1 tsp baking powder & 1 tsp baking soda"
+        // Split compound lines joined with & or and
         const compoundMatch = trimmed.match(/^(.+?)\s+(?:&|\band\b|\+)\s+(\d.*)$/i);
         if (compoundMatch && /\b(tsp|tbsp|cup|g|ml|oz|clove|slice|piece)\b/i.test(compoundMatch[2])) {
           processedLines.push(compoundMatch[1].trim());
@@ -19521,7 +19555,7 @@ const CUP_DENSITY = {
         }
       }
 
-      // 4. Parse ingredients
+      // 4. Parse ingredients with intelligent OCR noise filtering
       photoParsedIngredients = [];
       const fractionMap = {
         '½': '1/2', '¼': '1/4', '¾': '3/4', '⅓': '1/3', '⅔': '2/3',
@@ -19530,16 +19564,48 @@ const CUP_DENSITY = {
       };
 
       processedLines.forEach((rawLine, idx) => {
-        let clean = rawLine
+        let clean = rawLine.trim();
+
+        // Strip OCR garbage lines
+        if (!clean || clean.length < 2) return;
+        if (/([a-zA-Z])\1{2,}/.test(clean)) return; // repeated chars like eee, RRR
+        if (/^(?:directions|instructions|method|prep|cook|steps|nutrition|keep\s+the\s+screen|good\s+food|cook\s+mode|units?:|metric\s+us)/i.test(clean)) return;
+
+        // Strip leading & trailing OCR symbols, brackets, lines
+        clean = clean
           .replace(/^\[[ xX\u2713]?\]\s*/, '')
           .replace(/^(?:[\d]+[\.\)\:\-]\s*)+/, '')
-          .replace(/^[•·\*\-\–\—\+▪▫◦○●◽◾\u2022\u25E6\u2023\u2219oO0©®°]\s+/, '')
+          .replace(/^[;:\.~|\-_=+~*^•◽◾▪▫○●◽◾\u2022\u25E6\u2023\u2219oO0©®°\s]+/, '')
+          .replace(/[;:\.~|\-_=+~*^•◽◾▪▫○●◽◾\u2022\u25E6\u2023\u2219oO0©®°\s]+$/, '')
           .trim();
 
-        if (!clean || clean.length < 2) return;
-        if (/^(directions|instructions|method|prep|cook|steps|nutrition)/i.test(clean)) return;
+        // Strip stray OCR single letters at start, e.g. "s  red peppers", "i 240g", "a 3-4"
+        clean = clean.replace(/^(?:[a-zA-Z]\s+)+/, '').trim();
 
-        // Normalize fractions
+        if (!clean || clean.length < 2) return;
+
+        // Skip standalone prep descriptor lines
+        if (/^(?:grated|chopped|sliced|minced|peeled|diced|divided|to\s+serve|to\s+taste|plus\s+an\s+extra|under\s+\d+%\s*fat|about\s+\d+g)\b/i.test(clean)) return;
+
+        // Skip lines with high symbol density
+        const symCount = (clean.match(/[=—_~|;^]/g) || []).length;
+        if (symCount >= 2 && (symCount / clean.length) > 0.15) return;
+
+        // Normalize fractions and OCR glitches
+        // Fix % misread for ½ (e.g. 1% tbsp -> 1 1/2 tbsp)
+        clean = clean.replace(/(\d+)\s*%\s*(tbsp|tsp|cup|g|ml|kg|oz|lb)/i, '$1 1/2 $2');
+        clean = clean.replace(/^%\s*/, '1/2 ');
+
+        // Fix glued numbers and units: e.g. 240g -> 240 g, 1tsp -> 1 tsp, 1chicken -> 1 chicken
+        clean = clean.replace(/^(\d+(?:\.\d+)?)\s*(tbsp|tsp|g|kg|ml|oz|lb)\b/i, '$1 $2');
+        clean = clean.replace(/^(\d+)([a-zA-Z]{3,})/i, '$1 $2');
+
+        // Fix ranges: e.g. 3-4 mushrooms -> 4 mushrooms
+        clean = clean.replace(/^(\d+)\s*-\s*(\d+)/, '$2');
+
+        // Fix handful
+        clean = clean.replace(/^(?:an\s+|a\s+)?handful\b/i, '1 handful');
+
         for (const [frac, rep] of Object.entries(fractionMap)) {
           if (clean.includes(frac)) clean = clean.split(frac).join(' ' + rep + ' ');
         }
@@ -19563,7 +19629,7 @@ const CUP_DENSITY = {
         let parsedUnit = 'g';
         let ingredientName = '';
 
-        const qtyUnitRe = /^(\d+(?:[\.,]\d+)?)\s*(cups?|tbsp|tablespoons?|tsp|teaspoons?|oz|ounces?|lbs?|pounds?|grams?|g|kg|ml|l|liters?|litres?|slices?|cans?|cloves?|eggs?|pieces?|rashers?|pinch|pinches|dash|v[aâ]rf|lingur[aă]|linguri[tț][aă]|pachete?|buca[tț]i)?\b\s*(?:of\s+)?(.+)$/i;
+        const qtyUnitRe = /^(\d+(?:[\.,]\d+)?)\s*(cups?|tbsp|tablespoons?|tsp|teaspoons?|oz|ounces?|lbs?|pounds?|grams?|g|kg|ml|l|liters?|litres?|slices?|cans?|cloves?|eggs?|pieces?|rashers?|pinch|pinches|dash|v[aâ]rf|lingur[aă]|linguri[tț][aă]|pachete?|buca[tț]i|handfuls?)?\b\s*(?:of\s+)?(.+)$/i;
         const match = clean.match(qtyUnitRe);
 
         if (match) {
@@ -19606,6 +19672,9 @@ const CUP_DENSITY = {
           } else if (/^(pinch|pinches|dash|v[aâ]rf)$/.test(rawUnit)) {
             parsedQty = 1;
             parsedUnit = 'g';
+          } else if (/^(handfuls?)$/.test(rawUnit)) {
+            parsedQty = Math.max(1, Math.round(numVal * 15));
+            parsedUnit = 'g';
           } else if (/^(grams?|g)$/.test(rawUnit)) {
             parsedQty = Math.max(1, Math.round(numVal));
             parsedUnit = 'g';
@@ -19619,6 +19688,12 @@ const CUP_DENSITY = {
             }
           }
         } else {
+          // If line has no quantity or unit, only keep if it matches a valid recognized food item
+          const checkMatched = matchBestIngredientName(clean);
+          if (!checkMatched) {
+            // Discard unverified OCR noise line
+            return;
+          }
           ingredientName = clean;
           parsedQty = 1;
           parsedUnit = 'count';
@@ -20679,7 +20754,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.3.2';
+    const FALLBACK_APP_VERSION = '1.3.3';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20855,6 +20930,24 @@ const CUP_DENSITY = {
 
     /* WHAT'S NEW / POST-UPDATE CHANGELOG ENGINE */
     const APP_CHANGELOG = [
+      {
+        version: '1.3.3',
+        date: '07 Nov 2026',
+        items: {
+          ro: [
+            '📦 Stock Manager simplificat: eliminat selectorul cantitativ (- / +) și înlocuit cu un toggle rapid și intuitiv [În stoc / Necesar] pentru fiecare ingredient',
+            '🫑 Rețetă nouă: Ardei Umpluți Mediteraneeni cu Orez de Conopidă, Carne Tocată și Feta (gr_m4) adaptată keto după rețeta Feasting at Home',
+            '🦃 Rețetă nouă: Ardei Umpluți cu Curcan, Ciuperci și Mozzarella Gratinată (it_m4)',
+            '📸 Parser foto inteligent îmbunătățit: filtrare automată a zgomotului OCR, liniilor de separare și descrierilor de preparare, repararea fracțiilor (1% -> 1 1/2) și unităților lipite'
+          ],
+          en: [
+            '📦 Streamlined Stock Manager: replaced quantity stepper with one-tap [In Stock / Need] toggle button per item',
+            '🫑 New Recipe: Mediterranean Stuffed Peppers with Cauliflower Rice and Feta (gr_m4), adapted keto from Feasting at Home',
+            '🦃 New Recipe: Turkey and Mozzarella Stuffed Peppers with Mushrooms and Oregano (it_m4)',
+            '📸 Resilient OCR photo recipe parser: automated noise/divider line filtering, prep phrase exclusion, fraction repair (1% -> 1 1/2), and glued unit fixes'
+          ]
+        }
+      },
       {
         version: '1.3.2',
         date: '07 Nov 2026',

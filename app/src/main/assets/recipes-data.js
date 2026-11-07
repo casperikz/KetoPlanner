@@ -3658,6 +3658,39 @@ const RECIPES_DATA = [
     ingredients: ["35 g almond flour", "25 g cocoa powder", "1 egg", "30 g butter", "50 ml cream 35%", "20 g erythritol", "2 g vanilla extract", "1 g sea salt"],
     method: "Melt butter and whisk with erythritol, egg, dark cocoa powder, almond flour, vanilla extract, and sea salt until smooth. Pour into a greased small cake tin and bake at 175°C for exactly 12 minutes (the center MUST remain soft, gooey, and fudgy). Chill slightly and serve with freshly whipped cream 35%."
   }
+  ,
+  {
+    id: "gr_m4",
+    name: "Mediterranean Stuffed Peppers with Cauliflower Rice and Feta",
+    cuisine: "Greek",
+    flag: "🇬🇷",
+    meal: "Lunch/Dinner",
+    portion: "1 serving",
+    kcal: 560,
+    protein: 36,
+    fat: 42,
+    netCarbs: 8,
+    batch: "4 servings, 4 days fridge",
+    freezer: "Freeze baked stuffed peppers without feta topping.",
+    ingredients: ["160 g bell pepper", "140 g ground beef", "100 g cauliflower rice", "30 g feta", "25 g olives", "50 g tomato", "20 ml olive oil", "30 g red onion", "4 g garlic", "2 g oregano", "2 g mint", "1 g sea salt", "1 g black pepper"],
+    method: "Slice bell peppers in half lengthwise, remove seeds, and pre-bake at 200°C for 15 minutes. In a skillet, heat extra virgin olive oil and sauté diced red onion and minced garlic until fragrant. Add ground beef and brown thoroughly, breaking into small crumbles. Stir in cauliflower rice, chopped Kalamata olives, diced ripe tomatoes, dried oregano, and chopped fresh mint, simmering for 3 minutes to marry the Mediterranean flavors. Generously fill each roasted pepper cavity with the savory cauliflower rice and meat mixture, crumble creamy feta cheese on top, and bake for 20 minutes until bubbling, tender, and lightly golden."
+  },
+  {
+    id: "it_m4",
+    name: "Turkey and Mozzarella Stuffed Peppers with Mushrooms and Oregano",
+    cuisine: "Italian",
+    flag: "🇮🇹",
+    meal: "Lunch/Dinner",
+    portion: "1 serving",
+    kcal: 540,
+    protein: 38,
+    fat: 40,
+    netCarbs: 7,
+    batch: "4 servings, 4 days fridge",
+    freezer: "Freeze baked stuffed peppers without cheese topping.",
+    ingredients: ["160 g bell pepper", "140 g turkey mince", "60 g mozzarella", "60 g mushrooms", "60 g tomato passata", "20 ml olive oil", "35 g onion", "3 g garlic", "2 g cumin", "2 g oregano", "1 g salt", "1 g black pepper"],
+    method: "Halve red bell peppers lengthwise and roast at 200°C for 15 minutes until tender. Brown lean turkey mince in extra virgin olive oil with diced onion, grated garlic, sliced mushrooms, and ground cumin. Stir in tomato passata and fresh oregano, simmering gently until reduced into a rich, thick sauce. Heap the filling into the pre-roasted peppers, top generously with grated mozzarella, and bake for 15 minutes until molten and golden brown."
+  }
 ];
 
 const RECIPES_RO_DATA = {};
