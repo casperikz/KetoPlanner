@@ -71,8 +71,8 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "2 days fridge",
     freezer: "Cook fresh for best silky texture.",
-    ingredients: ["3 eggs", "50 g pancetta", "30 g pecorino", "15 g butter", "2 g black pepper", "1 g sea salt"],
-    method: "Crisp the diced artisanal pancetta in a skillet until golden and fragrant. Whisk eggs with freshly grated pecorino romano and generous cracked black pepper. Pour into pan over low heat, gently stirring until soft curds form, then let base set. Serve warm."
+    ingredients: ["3 eggs", "50 g pancetta", "30 g pecorino cheese", "15 g butter", "2 g black pepper", "1 g sea salt"],
+    method: "Crisp the diced artisanal pancetta in a skillet until golden and fragrant. Whisk eggs with freshly grated pecorino cheese romano and generous cracked black pepper. Pour into pan over low heat, gently stirring until soft curds form, then let base set. Serve warm."
   },
   {
     id: "it_m1",
@@ -87,7 +87,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "70 g tomato passata", "40 g olives", "25 ml olive oil", "50 g mushrooms", "4 g garlic", "2 g rosemary", "2 g oregano", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "70 g tomato passata", "40 g olives", "25 ml olive oil", "50 g mushrooms", "4 g garlic", "2 g rosemary", "2 g oregano", "1 g salt"],
     method: "Brown chicken thighs in extra virgin olive oil. Add sliced mushrooms, garlic, and herbs. Pour in tomato passata and olives, simmering gently for 25 minutes until chicken is tender and sauce is rich, savory, and thick."
   },
   {
@@ -103,8 +103,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 4 days fridge",
     freezer: "Freezes very well in individual slices.",
-    ingredients: ["180 g zucchini", "140 g ground beef 80/20", "60 g tomato passata", "35 ml heavy cream", "30 g mozzarella", "20 g parmesan", "10 g butter", "3 g garlic", "2 g oregano"],
-    method: "Slice zucchini thin lengthwise, salt, and pat dry with paper towels to eliminate excess water. Brown beef mince with garlic, oregano, and passata. Whisk heavy cream with butter and parmesan for the keto bechamel. Layer zucchini, beef ragu, bechamel, and mozzarella, then bake at 190°C for 25 minutes until bubbling golden."
+    ingredients: ["180 g zucchini", "140 g ground beef", "60 g tomato passata", "35 ml cream 35%", "30 g mozzarella", "20 g parmesan", "10 g butter", "3 g garlic", "2 g oregano"],
+    method: "Slice zucchini thin lengthwise, salt, and pat dry with paper towels to eliminate excess water. Brown beef mince with garlic, oregano, and passata. Whisk cream 35% with butter and parmesan for the keto bechamel. Layer zucchini, beef ragu, bechamel, and mozzarella, then bake at 190°C for 25 minutes until bubbling golden."
   },
   {
     id: "it_m3",
@@ -119,8 +119,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g beef shank", "160 g cauliflower rice", "0.2 g saffron", "20 g butter", "15 ml olive oil", "4 g garlic", "5 g parsley", "1 lemon", "30 ml heavy cream", "15 g parmesan", "1 g salt"],
-    method: "Slow braise beef shank until fork tender. In a separate skillet, bloom saffron threads and saute cauliflower rice in butter and olive oil. Stir in heavy cream and parmesan until thick, golden, and creamy. Top braised beef with fresh gremolata (lemon zest, minced garlic, and fresh parsley)."
+    ingredients: ["200 g beef shank", "160 g cauliflower rice", "0.2 g saffron", "20 g butter", "15 ml olive oil", "4 g garlic", "5 g parsley", "1 lemon", "30 ml cream 35%", "15 g parmesan", "1 g salt"],
+    method: "Slow braise beef shank until fork tender. In a separate skillet, bloom saffron threads and saute cauliflower rice in butter and olive oil. Stir in cream 35% and parmesan until thick, golden, and creamy. Top braised beef with fresh gremolata (lemon zest, minced garlic, and fresh parsley)."
   },
   {
     id: "it_d1",
@@ -135,8 +135,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 jars, up to 5 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["120 ml heavy cream", "35 g raspberries", "5 g gelatin", "15 g erythritol", "2 g vanilla extract", "20 ml almond milk"],
-    method: "Bloom gelatin in cold almond milk. Gently heat heavy cream with erythritol and real vanilla extract (do not boil). Whisk in gelatin until completely dissolved. Pour into ramekins and chill 3 hours. Mash fresh raspberries with a little erythritol and spoon over top."
+    ingredients: ["120 ml cream 35%", "35 g raspberries", "5 g gelatin", "15 g erythritol", "2 g vanilla extract", "20 ml almond milk"],
+    method: "Bloom gelatin in cold almond milk. Gently heat cream 35% with erythritol and real vanilla extract (do not boil). Whisk in gelatin until completely dissolved. Pour into ramekins and chill 3 hours. Mash fresh raspberries with a little erythritol and spoon over top."
   },
 
   /* ============================================================
@@ -171,8 +171,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze marinated raw pork cubes.",
-    ingredients: ["150 g pork shoulder cubes", "80 g greek yogurt 10%", "50 g cucumber", "35 g feta", "30 g olives", "20 ml olive oil", "4 g garlic", "2 g oregano", "1 lemon"],
-    method: "Marinate pork shoulder cubes with olive oil, lemon juice, garlic, and dried oregano. Thread onto skewers and grill over high heat until charred and juicy. Grate cucumber, drain well, and fold into whole Greek yogurt 10% with minced garlic and olive oil. Plate with feta, Kalamata olives, and fresh lemon wedges."
+    ingredients: ["150 g pork shoulder", "80 g greek yogurt 10%", "50 g cucumber", "35 g feta", "30 g olives", "20 ml olive oil", "4 g garlic", "2 g oregano", "1 lemon"],
+    method: "Marinate pork shoulder with olive oil, lemon juice, garlic, and dried oregano. Thread onto skewers and grill over high heat until charred and juicy. Grate cucumber, drain well, and fold into whole Greek yogurt 10% with minced garlic and olive oil. Plate with feta, Kalamata olives, and fresh lemon wedges."
   },
   {
     id: "gr_m2",
@@ -255,7 +255,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "Cook fresh, 15 minutes",
     freezer: "Freeze marinated raw beef strips.",
-    ingredients: ["150 g beef flank steak strips", "150 g cauliflower rice", "50 g bell pepper", "40 g red onion", "40 g tomato", "25 ml olive oil", "15 g butter", "12 g soy sauce", "5 ml vinegar", "5 g cilantro"],
+    ingredients: ["150 g beef flank steak", "150 g cauliflower rice", "50 g bell pepper", "40 g red onion", "40 g tomato", "25 ml olive oil", "15 g butter", "12 g soy sauce", "5 ml vinegar", "5 g cilantro"],
     method: "Sear seasoned flank steak strips in smoking hot olive oil and butter for 2 minutes to lock in juices. Add thick-sliced red onions, bell peppers, and tomatoes; toss vigorously over high flame. Deglaze with tamari soy sauce and vinegar. Stir in fresh cilantro and serve sizzling over warm cauliflower rice."
   },
   {
@@ -271,8 +271,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well without egg garnish.",
-    ingredients: ["140 g chicken breast", "60 ml heavy cream", "20 g parmesan", "20 g walnuts", "15 g almond flour", "20 ml olive oil", "3 g garlic", "2 g turmeric", "1 g chili flakes", "1 egg"],
-    method: "Shred poached chicken breast. Blend walnuts, almond flour, heavy cream, parmesan, and olive oil into a thick silky paste. Saute garlic with turmeric and chili flakes in olive oil, then stir in the nut cream and chicken broth. Simmer shredded chicken in the velvety sauce until thickened. Garnish with a hard-boiled egg."
+    ingredients: ["140 g chicken breast", "60 ml cream 35%", "20 g parmesan", "20 g walnuts", "15 g almond flour", "20 ml olive oil", "3 g garlic", "2 g turmeric", "1 g chili flakes", "1 egg"],
+    method: "Shred poached chicken breast. Blend walnuts, almond flour, cream 35%, parmesan, and olive oil into a thick silky paste. Saute garlic with turmeric and chili flakes in olive oil, then stir in the nut cream and chicken broth. Simmer shredded chicken in the velvety sauce until thickened. Garnish with a hard-boiled egg."
   },
   {
     id: "pe_m3",
@@ -287,7 +287,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze raw marinated skewers.",
-    ingredients: ["190 g beef sirloin strips", "25 g mayonnaise", "30 g greek yogurt 10%", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "2 g cumin", "2 g paprika", "5 g cilantro"],
+    ingredients: ["190 g beef sirloin", "25 g mayonnaise", "30 g greek yogurt 10%", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "2 g cumin", "2 g paprika", "5 g cilantro"],
     method: "Marinate skewered beef chunks in red wine vinegar, garlic, cumin, paprika, and olive oil for at least 2 hours. Grill on high heat for 3 minutes per side until charred. Whisk mayonnaise and Greek yogurt 10% with minced cilantro and lime for the dipping sauce."
   },
   {
@@ -303,8 +303,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["100 ml heavy cream", "50 ml almond milk", "2 eggs", "20 g erythritol", "2 g vanilla extract", "15 g butter"],
-    method: "Brown butter with 10g erythritol in a small pan until golden caramel, and pour into ramekin base. Whisk whole eggs with heavy cream, almond milk, vanilla, and remaining erythritol. Strain into ramekin and bake in water bath at 160°C for 35 minutes until just set. Chill and invert onto plate."
+    ingredients: ["100 ml cream 35%", "50 ml almond milk", "2 eggs", "20 g erythritol", "2 g vanilla extract", "15 g butter"],
+    method: "Brown butter with 10g erythritol in a small pan until golden caramel, and pour into ramekin base. Whisk whole eggs with cream 35%, almond milk, vanilla, and remaining erythritol. Strain into ramekin and bake in water bath at 160°C for 35 minutes until just set. Chill and invert onto plate."
   },
 
   /* ============================================================
@@ -328,7 +328,7 @@ const RECIPES_DATA = [
   },
   {
     id: "pt_m1",
-    name: "Bacalhau com Natas Keto (Salt Cod Baked in Heavy Cream)",
+    name: "Bacalhau com Natas Keto (Salt Cod Baked in Cream)",
     cuisine: "Portuguese",
     flag: "🇵🇹",
     meal: "Lunch/Dinner",
@@ -339,8 +339,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes well before baking.",
-    ingredients: ["150 g cod", "160 g cauliflower florets", "80 ml heavy cream", "30 g onion", "25 g parmesan", "20 g butter", "15 ml olive oil", "3 g garlic", "1 g nutmeg"],
-    method: "Steam cauliflower florets and flake poached cod. Saute onions and garlic in butter and olive oil until soft and translucent. Fold in heavy cream and nutmeg, simmering until glossy. Combine cod, cauliflower, and cream sauce in a baking dish, top with grated parmesan, and bake at 200°C for 20 minutes until bubbling and golden."
+    ingredients: ["150 g cod", "160 g cauliflower florets", "80 ml cream 35%", "30 g onion", "25 g parmesan", "20 g butter", "15 ml olive oil", "3 g garlic", "1 g nutmeg"],
+    method: "Steam cauliflower florets and flake poached cod. Saute onions and garlic in butter and olive oil until soft and translucent. Fold in cream 35% and nutmeg, simmering until glossy. Combine cod, cauliflower, and cream sauce in a baking dish, top with grated parmesan, and bake at 200°C for 20 minutes until bubbling and golden."
   },
   {
     id: "pt_m2",
@@ -355,7 +355,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze marinated raw chicken.",
-    ingredients: ["160 g chicken thigh (bone-in)", "25 ml olive oil", "20 g butter", "50 g lettuce", "10 ml vinegar", "4 g garlic", "2 g chili flakes", "1 lemon", "2 g paprika"],
+    ingredients: ["160 g chicken thigh", "25 ml olive oil", "20 g butter", "50 g lettuce", "10 ml vinegar", "4 g garlic", "2 g chili flakes", "1 lemon", "2 g paprika"],
     method: "Blend olive oil, melted butter, garlic, piri-piri chilies, paprika, red wine vinegar, and lemon juice into an emulsion. Marinate chicken thighs and roast at 200°C for 35 minutes, basting often until skin is blistered and crisp. Serve with a fresh dressed green salad."
   },
   {
@@ -387,8 +387,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 tarts, 4 days fridge",
     freezer: "Freeze baked tarts and warm in air fryer.",
-    ingredients: ["40 g almond flour", "70 ml heavy cream", "2 eggs", "15 g butter", "15 g erythritol", "1 g cinnamon", "1 lemon zest", "2 g vanilla extract"],
-    method: "Press dough of almond flour and melted butter into silicone tart moulds and bake 8 mins at 180°C. Whisk egg yolks with heavy cream, erythritol, vanilla, and lemon peel. Pour into crusts and bake at 220°C for 15 minutes until top blisters with characteristic dark custard spots. Dust with cinnamon."
+    ingredients: ["40 g almond flour", "70 ml cream 35%", "2 eggs", "15 g butter", "15 g erythritol", "1 g cinnamon", "1 lemon zest", "2 g vanilla extract"],
+    method: "Press dough of almond flour and melted butter into silicone tart moulds and bake 8 mins at 180°C. Whisk egg yolks with cream 35%, erythritol, vanilla, and lemon peel. Pour into crusts and bake at 220°C for 15 minutes until top blisters with characteristic dark custard spots. Dust with cinnamon."
   },
 
   /* ============================================================
@@ -407,7 +407,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "2 days fridge",
     freezer: "Not suitable for freezing.",
-    ingredients: ["3 eggs", "140 g zucchini", "35 g onion", "25 ml olive oil", "1 g sea salt", "1 g pepper"],
+    ingredients: ["3 eggs", "140 g zucchini", "35 g onion", "25 ml olive oil", "1 g sea salt", "1 g black pepper"],
     method: "Slice zucchini and onion thin. Cook slowly in generous extra virgin olive oil over medium-low heat for 12 minutes until meltingly soft (mimicking potatoes). Drain excess oil into a bowl. Whisk eggs with salt, fold in warm zucchini-onion mixture, and return to pan. Cook until base is set, flip with a plate, and cook 2 minutes more."
   },
   {
@@ -439,7 +439,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "30 g jamon serrano", "80 g bell pepper", "70 g tomato passata", "25 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "30 g jamon serrano", "80 g bell pepper", "70 g tomato passata", "25 ml olive oil", "4 g garlic", "25 g onion", "2 g rosemary", "1 g salt"],
     method: "Brown chicken thighs in generous Spanish olive oil. Add strips of Jamon Serrano, diced red bell peppers, onions, and minced garlic, sautéing until fragrant. Stir in tomato passata and fresh rosemary, simmering covered for 25 minutes until chicken is meltingly tender."
   },
   {
@@ -455,7 +455,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["120 g ground beef 80/20", "60 g ground pork", "1 egg", "15 g almond flour", "0.2 g saffron", "15 ml olive oil", "50 g tomato passata", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
+    ingredients: ["120 g ground beef", "60 g ground pork", "1 egg", "15 g almond flour", "0.2 g saffron", "15 ml olive oil", "50 g tomato passata", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
     method: "Mix beef and pork mince with egg, almond flour, parsley, and garlic. Form meatballs and brown in olive oil. Saute finely diced onion in the pan, deglaze with tomato passata and saffron-infused bone broth. Simmer meatballs in the aromatic saffron sauce for 15 minutes."
   },
   {
@@ -471,8 +471,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["110 ml heavy cream", "40 ml almond milk", "2 eggs", "20 g erythritol", "1 lemon zest", "1 g cinnamon"],
-    method: "Infuse heavy cream and almond milk with lemon zest and cinnamon stick over low heat. Whisk egg yolks with 12g erythritol. Slowly temper warm cream into yolks, return to pot, and stir over low heat until thickened. Chill in ramekins for 3 hours. Dust top with 8g erythritol and torch with a kitchen blowtorch until caramelized crisp."
+    ingredients: ["110 ml cream 35%", "40 ml almond milk", "2 eggs", "20 g erythritol", "1 lemon zest", "1 g cinnamon"],
+    method: "Infuse cream 35% and almond milk with lemon zest and cinnamon stick over low heat. Whisk egg yolks with 12g erythritol. Slowly temper warm cream into yolks, return to pot, and stir over low heat until thickened. Chill in ramekins for 3 hours. Dust top with 8g erythritol and torch with a kitchen blowtorch until caramelized crisp."
   },
 
   /* ============================================================
@@ -492,7 +492,7 @@ const RECIPES_DATA = [
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
     ingredients: ["2 eggs", "110 g salmon", "10 g butter", "10 ml soy sauce", "5 ml sesame oil", "5 g spring onion", "1 g salt"],
-    method: "Season salmon fillet with coarse sea salt and pan-sear or broil skin-down until crisp and flaky. Whisk eggs with tamari soy sauce, a splash of water, and spring onion. Pour a thin layer into a buttered pan, roll, add another layer, and roll repeatedly into a layered Japanese omelette bar."
+    method: "Season salmon with coarse sea salt and pan-sear or broil skin-down until crisp and flaky. Whisk eggs with tamari soy sauce, a splash of water, and spring onion. Pour a thin layer into a buttered pan, roll, add another layer, and roll repeatedly into a layered Japanese omelette bar."
   },
   {
     id: "jp_m1",
@@ -507,7 +507,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze breaded raw cutlets.",
-    ingredients: ["140 g pork loin cutlet", "25 g keto panko", "1 egg", "100 g cabbage", "20 ml olive oil", "20 g mayonnaise", "10 ml sesame oil", "10 ml soy sauce", "1 g salt"],
+    ingredients: ["140 g pork loin", "25 g keto panko", "1 egg", "100 g cabbage", "20 ml olive oil", "20 g mayonnaise", "10 ml sesame oil", "10 ml soy sauce", "1 g salt"],
     method: "Pound pork cutlet to even thickness and season with salt. Dip in beaten egg, then press firmly into crushed pork panko. Pan-fry in hot oil until deeply golden and crunchy on both sides. Toss thinly shredded cabbage with whole-egg mayonnaise, sesame oil, and a dash of tamari soy sauce. Slice tonkatsu and serve immediately."
   },
   {
@@ -555,8 +555,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well as ice cream cake.",
-    ingredients: ["80 g mascarpone", "50 ml heavy cream", "5 g matcha powder", "15 g erythritol", "2 g vanilla extract", "15 g almond flour"],
-    method: "Whip heavy cream and mascarpone with erythritol, premium Japanese green tea matcha powder, and vanilla extract until thick and velvety peaks form. Spoon over a base of toasted almond flour in glass jars and chill for 2 hours."
+    ingredients: ["80 g mascarpone", "50 ml cream 35%", "5 g matcha powder", "15 g erythritol", "2 g vanilla extract", "15 g almond flour"],
+    method: "Whip cream 35% and mascarpone with erythritol, premium Japanese green tea matcha powder, and vanilla extract until thick and velvety peaks form. Spoon over a base of toasted almond flour in glass jars and chill for 2 hours."
   },
 
   /* ============================================================
@@ -607,7 +607,7 @@ const RECIPES_DATA = [
     netCarbs: 7,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g eggplant", "140 g ground beef 80/20", "60 g tomato passata", "20 ml olive oil", "30 g onion", "4 g garlic", "1 g cumin", "5 g parsley", "1 g salt"],
+    ingredients: ["150 g eggplant", "140 g ground beef", "60 g tomato passata", "20 ml olive oil", "30 g onion", "4 g garlic", "1 g cumin", "5 g parsley", "1 g salt"],
     method: "Slit eggplant down the center, brush generously with olive oil, and roast at 200°C for 25 minutes until tender. Saute beef mince with onion, garlic, tomato passata, cumin, and parsley. Stuff the center of the roasted eggplants with the hot spiced beef and bake for 15 minutes."
   },
   {
@@ -707,7 +707,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 12 minutes",
     freezer: "Freeze marinated raw beef strips.",
-    ingredients: ["150 g beef flank steak strips", "170 g broccoli", "25 ml sesame oil", "15 g butter", "15 ml soy sauce", "6 g garlic", "6 g ginger", "5 g spring onion", "1 g black pepper"],
+    ingredients: ["150 g beef flank steak", "170 g broccoli", "25 ml sesame oil", "15 g butter", "15 ml soy sauce", "6 g garlic", "6 g ginger", "5 g spring onion", "1 g black pepper"],
     method: "Slice flank steak thinly against the grain and marinate with tamari soy sauce and black pepper. Flash-sear beef in smoking hot sesame oil and butter for 90 seconds, then set aside. Steam broccoli florets until tender-crisp. In the same wok, sizzle garlic and ginger, return beef and broccoli, and toss vigorously with pan juices until glistening."
   },
   {
@@ -723,8 +723,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 tarts, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["35 g almond flour", "2 eggs", "60 ml heavy cream", "30 ml almond milk", "15 g butter", "15 g erythritol", "2 g vanilla extract"],
-    method: "Form tart base with almond flour and melted butter, bake 8 minutes at 180°C. Whisk egg yolks with heavy cream, almond milk, vanilla, and erythritol. Strain custard through a sieve into pre-baked crusts. Bake at 160°C for 18 minutes until custard is gently set like silk."
+    ingredients: ["35 g almond flour", "2 eggs", "60 ml cream 35%", "30 ml almond milk", "15 g butter", "15 g erythritol", "2 g vanilla extract"],
+    method: "Form tart base with almond flour and melted butter, bake 8 minutes at 180°C. Whisk egg yolks with cream 35%, almond milk, vanilla, and erythritol. Strain custard through a sieve into pre-baked crusts. Bake at 160°C for 18 minutes until custard is gently set like silk."
   },
 
   /* ============================================================
@@ -759,7 +759,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "50 g bacon", "70 g mushrooms", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "50 g bacon", "70 g mushrooms", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "1 g salt"],
     method: "Crisp artisanal bacon lardons in butter and olive oil; remove lardons. Sear chicken thighs in the rendered bacon fat until golden brown on all sides. Add mushrooms, onions, garlic, and thyme. Deglaze with rich chicken bone broth, return lardons and chicken, and simmer covered for 30 minutes until meat is meltingly tender and sauce is glossy."
   },
   {
@@ -775,7 +775,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["150 g beef chuck roast", "45 g bacon", "60 g mushrooms", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "2 g rosemary", "1 g salt"],
+    ingredients: ["150 g beef chuck", "45 g bacon", "60 g mushrooms", "20 g butter", "15 ml olive oil", "30 g onion", "4 g garlic", "2 g thyme", "2 g rosemary", "1 g salt"],
     method: "Render bacon in butter and olive oil until crispy; remove bacon. Brown beef chuck cubes deeply in the hot rendered fat. Sauté mushrooms, garlic, and diced onion. Deglaze pot with rich beef bone broth, return beef and bacon, add fresh thyme and rosemary, and simmer very low for 2 hours until beef is fork-tender and sauce is deeply savory."
   },
   {
@@ -807,8 +807,8 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["120 ml heavy cream", "2 eggs", "20 g erythritol", "2 g vanilla extract"],
-    method: "Heat heavy cream with split vanilla bean. Whisk egg yolks with 12g erythritol until pale. Temper cream into yolks, pour into shallow porcelain ramekins, and bake in a water bath at 150°C for 30 minutes. Chill completely. Sprinkle 8g erythritol across surface and torch until glassy and amber."
+    ingredients: ["120 ml cream 35%", "2 eggs", "20 g erythritol", "2 g vanilla extract"],
+    method: "Heat cream 35% with split vanilla bean. Whisk egg yolks with 12g erythritol until pale. Temper cream into yolks, pour into shallow porcelain ramekins, and bake in a water bath at 150°C for 30 minutes. Chill completely. Sprinkle 8g erythritol across surface and torch until glassy and amber."
   },
 
   /* ============================================================
@@ -859,7 +859,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze marinated raw chicken skewers.",
-    ingredients: ["160 g chicken thigh (bone-in)", "35 g peanut butter", "60 ml coconut milk", "15 ml soy sauce", "15 ml sesame oil", "4 g garlic", "4 g ginger", "1 lime"],
+    ingredients: ["160 g chicken thigh", "35 g peanut butter", "60 ml coconut milk", "15 ml soy sauce", "15 ml sesame oil", "4 g garlic", "4 g ginger", "1 lime"],
     method: "Thread chicken thigh pieces onto skewers and brush with sesame oil and soy sauce. Grill until charred and juicy. In a small pan, simmer peanut butter with rich coconut milk, minced garlic, ginger, and lime juice until thick, glossy, and fragrant. Drizzle warm peanut coconut sauce generously over the chicken satay skewers."
   },
   {
@@ -891,8 +891,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 jars, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["90 ml coconut milk", "50 ml heavy cream", "15 g coconut flakes", "half avocado", "15 g erythritol", "2 g vanilla extract"],
-    method: "Blend ripe avocado, coconut milk, heavy cream, erythritol, and vanilla extract until completely smooth and vibrant green. Spoon into dessert cups, chill for 1 hour, and top with toasted shredded coconut flakes."
+    ingredients: ["90 ml coconut milk", "50 ml cream 35%", "15 g coconut flakes", "half avocado", "15 g erythritol", "2 g vanilla extract"],
+    method: "Blend ripe avocado, coconut milk, cream 35%, erythritol, and vanilla extract until completely smooth and vibrant green. Spoon into dessert cups, chill for 1 hour, and top with toasted shredded coconut flakes."
   },
 
   /* ============================================================
@@ -943,7 +943,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "15 g cocoa powder", "30 g almond butter", "50 g tomato passata", "20 ml olive oil", "4 g garlic", "2 g cumin", "1 g cinnamon", "1 g chili flakes", "5 g sesame seeds"],
+    ingredients: ["160 g chicken thigh", "15 g cocoa powder", "30 g almond butter", "50 g tomato passata", "20 ml olive oil", "4 g garlic", "2 g cumin", "1 g cinnamon", "1 g chili flakes", "5 g sesame seeds"],
     method: "Brown chicken thighs in olive oil. In a saucepan, whisk 100% dark cocoa powder with smooth almond butter, tomato passata, garlic, cumin, Mexican cinnamon, and chili flakes in rich chicken broth until smooth and velvety. Pour mole sauce over chicken and simmer for 25 minutes until rich and thick. Sprinkle with toasted golden sesame seeds."
   },
   {
@@ -975,8 +975,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh or air fry from frozen",
     freezer: "Freeze piped raw dough.",
-    ingredients: ["35 g almond flour", "15 g coconut flour", "1 egg", "25 g butter", "20 g erythritol", "2 g cinnamon", "25 g dark chocolate", "30 ml heavy cream"],
-    method: "Cook melted butter with water in a pan, stir in almond flour and coconut flour until a smooth dough forms, then beat in egg. Pipe star-shaped churros into hot oil or air fryer and cook until golden crisp. Toss in cinnamon and erythritol. Melt 85% dark chocolate into warm heavy cream for dipping."
+    ingredients: ["35 g almond flour", "15 g coconut flour", "1 egg", "25 g butter", "20 g erythritol", "2 g cinnamon", "25 g dark chocolate", "30 ml cream 35%"],
+    method: "Cook melted butter with water in a pan, stir in almond flour and coconut flour until a smooth dough forms, then beat in egg. Pipe star-shaped churros into hot oil or air fryer and cook until golden crisp. Toss in cinnamon and erythritol. Melt 85% dark chocolate into warm cream 35% for dipping."
   },
 
   /* ============================================================
@@ -995,12 +995,12 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well baked.",
-    ingredients: ["3 eggs", "90 g cottage cheese", "50 g telemea", "40 g sour cream 30%", "15 g butter", "15 g almond flour", "1 g salt"],
-    method: "Whisk eggs with sour cream 30%, crumbled Serbian white cheese or telemea, cottage cheese, melted butter, and almond flour. Pour into a greased baking dish and bake at 180°C for 30 minutes until puffed like a golden souffle. Serve warm."
+    ingredients: ["3 eggs", "90 g cottage cheese", "50 g telemea", "40 g sour cream", "15 g butter", "15 g almond flour", "1 g salt"],
+    method: "Whisk eggs with sour cream, crumbled Serbian white cheese or telemea, cottage cheese, melted butter, and almond flour. Pour into a greased baking dish and bake at 180°C for 30 minutes until puffed like a golden souffle. Serve warm."
   },
   {
     id: "rs_m1",
-    name: "Pljeskavica Gurmanska with Melted Cașcaval and Smoked Bacon",
+    name: "Pljeskavica Gurmanska with Melted Cascaval and Smoked Bacon",
     cuisine: "Serbian",
     flag: "🇷🇸",
     meal: "Lunch/Dinner",
@@ -1011,8 +1011,8 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "4 patties, 4 days fridge",
     freezer: "Freeze raw shaped patties.",
-    ingredients: ["140 g ground beef 80/20", "60 g ground pork", "35 g cașcaval", "30 g bacon", "4 g garlic", "2 g paprika", "1 g chili flakes", "1 g salt"],
-    method: "Knead beef and pork mince with minced garlic, paprika, and salt. Fold in finely diced aged cașcaval or Serbian cheese and crispy bacon bits. Form into a large thin gourmet patty. Grill over high heat for 4 minutes per side until charred on the outside with molten cheese inside."
+    ingredients: ["140 g ground beef", "60 g ground pork", "35 g cascaval", "30 g bacon", "4 g garlic", "2 g paprika", "1 g chili flakes", "1 g salt"],
+    method: "Knead beef and pork mince with minced garlic, paprika, and salt. Fold in finely diced aged cascaval cheese and crispy bacon bits. Form into a large thin gourmet patty. Grill over high heat for 4 minutes per side until charred on the outside with molten cheese inside."
   },
   {
     id: "rs_m2",
@@ -1027,8 +1027,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped cevapi.",
-    ingredients: ["120 g ground beef 80/20", "50 g ground lamb", "50 g sour cream 30%", "35 g butter", "25 g red onion", "4 g garlic", "1 g salt", "1 g black pepper"],
-    method: "Knead beef and lamb mince with minced garlic, sea salt, and black pepper until tacky, then roll into small finger-sized sausages. Grill over high heat until browned and juicy. Blend rich sour cream 30% with soft butter and a pinch of salt to form homemade clotted kajmak cream. Serve hot cevapi crowned with melting kajmak and finely diced red onions."
+    ingredients: ["120 g ground beef", "50 g ground lamb", "50 g sour cream", "35 g butter", "25 g red onion", "4 g garlic", "1 g salt", "1 g black pepper"],
+    method: "Knead beef and lamb mince with minced garlic, sea salt, and black pepper until tacky, then roll into small finger-sized sausages. Grill over high heat until browned and juicy. Blend rich sour cream with soft butter and a pinch of salt to form homemade clotted kajmak cream. Serve hot cevapi crowned with melting kajmak and finely diced red onions."
   },
   {
     id: "rs_m3",
@@ -1043,8 +1043,8 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze rolled cutlets raw.",
-    ingredients: ["170 g pork loin cutlet", "35 g sour cream 30%", "20 g butter", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
-    method: "Pound pork schnitzel thin and season with salt. Spread cold homemade kajmak (butter and sour cream 30%) across the center. Roll tightly like a cylinder. Dip in beaten egg and roll in seasoned keto panko or pork rinds. Pan-fry in hot lard until crisp and golden. Serve with lemon slices."
+    ingredients: ["170 g pork loin", "35 g sour cream", "20 g butter", "1 egg", "25 g keto panko", "15 g lard", "1 g salt", "1 lemon"],
+    method: "Pound pork schnitzel thin and season with salt. Spread cold homemade kajmak (butter and sour cream) across the center. Roll tightly like a cylinder. Dip in beaten egg and roll in seasoned keto panko or pork rinds. Pan-fry in hot lard until crisp and golden. Serve with lemon slices."
   },
   {
     id: "rs_d1",
@@ -1059,8 +1059,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 squares, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["90 ml heavy cream", "50 ml almond milk", "2 eggs", "5 g gelatin", "20 g erythritol", "2 g vanilla extract", "20 g almond flour"],
-    method: "Bake a thin crust of almond flour and butter for the base. Bloom gelatin. Whisk egg yolks with warm heavy cream, almond milk, vanilla, and erythritol until thick. Stir in gelatin. Whip egg whites to stiff peaks and fold into the warm custard. Pour over crust and chill 4 hours until set into a pillowy custard slice."
+    ingredients: ["90 ml cream 35%", "50 ml almond milk", "2 eggs", "5 g gelatin", "20 g erythritol", "2 g vanilla extract", "20 g almond flour"],
+    method: "Bake a thin crust of almond flour and butter for the base. Bloom gelatin. Whisk egg yolks with warm cream 35%, almond milk, vanilla, and erythritol until thick. Stir in gelatin. Whip egg whites to stiff peaks and fold into the warm custard. Pour over crust and chill 4 hours until set into a pillowy custard slice."
   },
 
   /* ============================================================
@@ -1079,7 +1079,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "20 g ghee", "40 g onion", "40 g tomato", "4 g ginger", "3 g garlic", "2 g turmeric", "2 g cumin", "5 g cilantro", "1 g chili"],
+    ingredients: ["3 eggs", "20 g ghee", "40 g onion", "40 g tomato", "4 g ginger", "3 g garlic", "2 g turmeric", "2 g cumin", "5 g cilantro", "1 g chili flakes"],
     method: "Heat golden ghee in a skillet. Saute finely chopped onions, minced ginger, garlic, and green chilies until fragrant. Add tomatoes, turmeric, and cumin, cooking until oil separates. Pour in beaten eggs and scramble softly over medium heat. Garnish with fresh cilantro."
   },
   {
@@ -1095,8 +1095,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "70 ml heavy cream", "30 g butter", "70 g tomato passata", "40 g greek yogurt 10%", "5 g garlic", "5 g ginger", "2 g garam masala", "2 g cumin", "1 g salt"],
-    method: "Marinate chicken in Greek yogurt, ginger, garlic, garam masala, and cumin; sear in a hot skillet until charred. In a saucepan, simmer tomato passata with generous butter, garam masala, and heavy cream until velvety and thickened. Add seared chicken pieces and simmer gently for 10 minutes, finishing with a final swirl of melting butter."
+    ingredients: ["160 g chicken thigh", "70 ml cream 35%", "30 g butter", "70 g tomato passata", "40 g greek yogurt 10%", "5 g garlic", "5 g ginger", "2 g garam masala", "2 g cumin", "1 g salt"],
+    method: "Marinate chicken in Greek yogurt, ginger, garlic, garam masala, and cumin; sear in a hot skillet until charred. In a saucepan, simmer tomato passata with generous butter, garam masala, and cream 35% until velvety and thickened. Add seared chicken pieces and simmer gently for 10 minutes, finishing with a final swirl of melting butter."
   },
   {
     id: "in_m2",
@@ -1111,8 +1111,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["130 g cheese", "140 g spinach", "40 ml heavy cream", "20 g ghee", "30 g onion", "4 g garlic", "4 g ginger", "2 g cumin", "2 g garam masala"],
-    method: "Blanch spinach in boiling water for 1 minute, plunge into ice water, and puree smooth. Pan-fry cubed paneer or firm cheese in ghee until golden. Saute cumin seeds, onions, garlic, and ginger in the remaining ghee. Stir in spinach puree and heavy cream. Fold in warm paneer cubes and simmer 3 minutes."
+    ingredients: ["130 g cheese", "140 g spinach", "40 ml cream 35%", "20 g ghee", "30 g onion", "4 g garlic", "4 g ginger", "2 g cumin", "2 g garam masala"],
+    method: "Blanch spinach in boiling water for 1 minute, plunge into ice water, and puree smooth. Pan-fry cubed paneer or firm cheese in ghee until golden. Saute cumin seeds, onions, garlic, and ginger in the remaining ghee. Stir in spinach puree and cream 35%. Fold in warm paneer cubes and simmer 3 minutes."
   },
   {
     id: "in_m3",
@@ -1143,8 +1143,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 jars, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["120 g cauliflower rice", "80 ml coconut milk", "50 ml heavy cream", "15 g flaked almonds", "15 g erythritol", "2 g cardamom", "10 g butter"],
-    method: "Saute cauliflower rice in butter for 3 minutes to remove raw taste. Pour in rich coconut milk and heavy cream with ground green cardamom and erythritol. Simmer on low heat for 12 minutes until cauliflower is tender and pudding is thick and aromatic. Chill and garnish with toasted flaked almonds."
+    ingredients: ["120 g cauliflower rice", "80 ml coconut milk", "50 ml cream 35%", "15 g flaked almonds", "15 g erythritol", "2 g cardamom", "10 g butter"],
+    method: "Saute cauliflower rice in butter for 3 minutes to remove raw taste. Pour in rich coconut milk and cream 35% with ground green cardamom and erythritol. Simmer on low heat for 12 minutes until cauliflower is tender and pudding is thick and aromatic. Chill and garnish with toasted flaked almonds."
   },
 
   /* ============================================================
@@ -1163,7 +1163,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "45 g bacon", "35 g sausages", "15 g butter", "10 g spring onion", "1 g sea salt", "1 g pepper"],
+    ingredients: ["3 eggs", "45 g bacon", "35 g sausages", "15 g butter", "10 g spring onion", "1 g sea salt", "1 g black pepper"],
     method: "Fry diced smoked bacon and sliced Polish sausage in butter until sizzling and browned. Crack eggs directly into the pan and stir gently over low heat until soft curds form. Remove from heat while still glossy and fold in generous fresh scallions."
   },
   {
@@ -1180,7 +1180,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
     ingredients: ["100 g pork shoulder", "60 g sausage meat", "45 g bacon", "150 g sauerkraut", "25 g lard", "50 g mushrooms", "30 g onion", "2 g caraway", "1 g allspice", "1 g salt"],
-    method: "Crisp bacon lardons and pork shoulder cubes in hot lard until browned. Add Polish sausage slices, onions, and sliced mushrooms. Stir in rinsed sauerkraut, caraway seeds, allspice, and a splash of bone broth. Simmer covered on low heat for 1 hour until tender, deep, and savory."
+    method: "Crisp bacon lardons and pork shoulder in hot lard until browned. Add Polish sausage slices, onions, and sliced mushrooms. Stir in rinsed sauerkraut, caraway seeds, allspice, and a splash of bone broth. Simmer covered on low heat for 1 hour until tender, deep, and savory."
   },
   {
     id: "pl_m2",
@@ -1195,8 +1195,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze breaded raw cutlets.",
-    ingredients: ["140 g pork loin cutlet", "25 g keto panko", "1 egg", "140 g cabbage", "30 g butter", "20 g lard", "30 g onion", "1 g salt", "1 g black pepper"],
-    method: "Pound pork loin cutlet thin, season with salt and pepper, dip in beaten egg, and coat thoroughly with pork panko. Fry in foaming butter and lard until deeply golden on both sides. Sauté shredded white cabbage and onions in generous butter until tender and sweet. Serve crispy schnitzel alongside warm buttery cabbage."
+    ingredients: ["140 g pork loin", "25 g keto panko", "1 egg", "140 g cabbage", "30 g butter", "20 g lard", "30 g onion", "1 g salt", "1 g black pepper"],
+    method: "Pound pork loin thin, season with salt and pepper, dip in beaten egg, and coat thoroughly with pork panko. Fry in foaming butter and lard until deeply golden on both sides. Sauté shredded white cabbage and onions in generous butter until tender and sweet. Serve crispy schnitzel alongside warm buttery cabbage."
   },
   {
     id: "pl_m3",
@@ -1211,8 +1211,8 @@ const RECIPES_DATA = [
     netCarbs: 7,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["140 g pork mince", "100 g cabbage", "80 g cauliflower rice", "60 g tomato passata", "30 ml sour cream 30%", "30 g onion", "4 g garlic", "15 g butter", "1 g marjoram"],
-    method: "Blanch whole green cabbage leaves until pliable. Mix pork mince with grated cauliflower rice, sauteed onions, garlic, egg, marjoram, and salt. Roll meat tightly in cabbage leaves. Place in a baking dish, pour over tomato passata whisked with sour cream 30% and broth, and bake covered at 180°C for 50 minutes."
+    ingredients: ["140 g pork mince", "100 g cabbage", "80 g cauliflower rice", "60 g tomato passata", "30 ml sour cream", "30 g onion", "4 g garlic", "15 g butter", "1 g marjoram"],
+    method: "Blanch whole green cabbage leaves until pliable. Mix pork mince with grated cauliflower rice, sauteed onions, garlic, egg, marjoram, and salt. Roll meat tightly in cabbage leaves. Place in a baking dish, pour over tomato passata whisked with sour cream and broth, and bake covered at 180°C for 50 minutes."
   },
   {
     id: "pl_d1",
@@ -1284,7 +1284,7 @@ const RECIPES_DATA = [
   },
   {
     id: "vn_m3",
-    name: "Bo Luc Lac (Vietnamese Shaking Beef over Crisp Watercress)",
+    name: "Bo Luc Lac (Vietnamese Shaking Beef over Crisp Baby Spinach)",
     cuisine: "Vietnamese",
     flag: "🇻🇳",
     meal: "Lunch/Dinner",
@@ -1295,8 +1295,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 15 minutes",
     freezer: "Freeze marinated raw beef.",
-    ingredients: ["150 g steak", "60 g watercress", "25 g butter", "15 ml olive oil", "15 ml soy sauce", "10 ml fish sauce", "5 g garlic", "1 lime", "1 g black pepper"],
-    method: "Cut sirloin steak into cubes and marinate with garlic, tamari soy sauce, and black pepper. Heat a wok with butter and olive oil until smoking hot. Toss beef cubes vigorously for 2 minutes to sear exterior while keeping centers tender and pink. Serve hot over a bed of crisp, peppery watercress with a dipping sauce of lime juice, olive oil, and cracked black pepper."
+    ingredients: ["150 g steak", "60 g baby spinach", "25 g butter", "15 ml olive oil", "15 ml soy sauce", "10 ml fish sauce", "5 g garlic", "1 lime", "1 g black pepper"],
+    method: "Cut sirloin steak into cubes and marinate with garlic, tamari soy sauce, and black pepper. Heat a wok with butter and olive oil until smoking hot. Toss beef cubes vigorously for 2 minutes to sear exterior while keeping centers tender and pink. Serve hot over a bed of fresh crisp baby spinach with a dipping sauce of lime juice, olive oil, and cracked black pepper."
   },
   {
     id: "vn_d1",
@@ -1311,8 +1311,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 jars, 3 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["1 avocado", "80 ml coconut milk", "40 ml heavy cream", "15 g erythritol", "1 lime", "100 g ice"],
-    method: "Scoop ripe avocado flesh into a blender with rich coconut milk, heavy cream, fresh lime juice, erythritol, and crushed ice. Blend until silky, frosty, and thick. Serve chilled in a glass garnished with toasted coconut flakes."
+    ingredients: ["1 avocado", "80 ml coconut milk", "40 ml cream 35%", "15 g erythritol", "1 lime", "100 g ice"],
+    method: "Scoop ripe avocado flesh into a blender with rich coconut milk, cream 35%, fresh lime juice, erythritol, and crushed ice. Blend until silky, frosty, and thick. Serve chilled in a glass garnished with toasted coconut flakes."
   },
 
   /* ============================================================
@@ -1395,8 +1395,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "8 truffles, 7 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["80 ml heavy cream", "25 g butter", "20 g cocoa powder", "20 g erythritol", "15 g dark chocolate"],
-    method: "Simmer heavy cream, butter, unsweetened cocoa powder, and erythritol in a small non-stick pan over low heat for 10 minutes, stirring constantly until mixture thickens and pulls away from the pan bottom. Chill in fridge for 2 hours. Roll into balls with buttered hands and coat with grated 85% dark chocolate."
+    ingredients: ["80 ml cream 35%", "25 g butter", "20 g cocoa powder", "20 g erythritol", "15 g dark chocolate"],
+    method: "Simmer cream 35%, butter, unsweetened cocoa powder, and erythritol in a small non-stick pan over low heat for 10 minutes, stirring constantly until mixture thickens and pulls away from the pan bottom. Chill in fridge for 2 hours. Roll into balls with buttered hands and coat with grated 85% dark chocolate."
   },
 
   /* ============================================================
@@ -1415,8 +1415,8 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "40 g prosciutto di Parma", "35 g cheese", "20 ml olive oil", "15 g butter", "1 g black pepper"],
-    method: "Cut authentic prosciutto or dry-cured ham into strips and crisp gently in extra virgin olive oil. Add butter and beaten eggs. Cook over low heat, stirring gently until soft curds form. Shave aged Croatian hard cheese or pecorino over top and serve with freshly ground black pepper."
+    ingredients: ["3 eggs", "40 g prosciutto", "35 g cheese", "20 ml olive oil", "15 g butter", "1 g black pepper"],
+    method: "Cut authentic prosciutto or dry-cured ham into strips and crisp gently in extra virgin olive oil. Add butter and beaten eggs. Cook over low heat, stirring gently until soft curds form. Shave aged Croatian hard cheese or pecorino cheese over top and serve with freshly ground black pepper."
   },
   {
     id: "hr_m1",
@@ -1463,8 +1463,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze assembled raw schnitzel.",
-    ingredients: ["135 g pork loin cutlet", "35 g ham", "40 g cheese", "25 g keto panko", "1 egg", "25 g lard", "20 g butter", "1 g salt"],
-    method: "Butterfly pork loin cutlet and pound thin. Place smoked ham and a thick slice of cheese inside, folding cutlet over and securing edges. Dip in beaten egg and coat with crunchy pork panko. Fry in foaming butter and lard until crisp, deeply golden, and cheese is completely melted and molten inside."
+    ingredients: ["135 g pork loin", "35 g ham", "40 g cheese", "25 g keto panko", "1 egg", "25 g lard", "20 g butter", "1 g salt"],
+    method: "Butterfly pork loin and pound thin. Place smoked ham and a thick slice of cheese inside, folding cutlet over and securing edges. Dip in beaten egg and coat with crunchy pork panko. Fry in foaming butter and lard until crisp, deeply golden, and cheese is completely melted and molten inside."
   },
   {
     id: "hr_d1",
@@ -1479,8 +1479,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["100 ml heavy cream", "50 ml almond milk", "2 eggs", "20 g erythritol", "1 lemon zest", "2 g vanilla extract", "15 g butter"],
-    method: "Melt butter with 10g erythritol in a small pan until lightly caramelized, and divide between ramekins. Whisk egg yolks and whole egg with warm heavy cream, almond milk, lemon zest, and remaining erythritol. Strain into ramekins. Bake in water bath at 150°C for 35 minutes until gently set. Chill and invert onto plates."
+    ingredients: ["100 ml cream 35%", "50 ml almond milk", "2 eggs", "20 g erythritol", "1 lemon zest", "2 g vanilla extract", "15 g butter"],
+    method: "Melt butter with 10g erythritol in a small pan until lightly caramelized, and divide between ramekins. Whisk egg yolks and whole egg with warm cream 35%, almond milk, lemon zest, and remaining erythritol. Strain into ramekins. Bake in water bath at 150°C for 35 minutes until gently set. Chill and invert onto plates."
   },
 
   /* ============================================================
@@ -1547,7 +1547,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["190 g beef ribeye thin slices", "60 g radish", "15 ml sesame oil", "15 ml soy sauce", "10 g erythritol", "5 g garlic", "5 g ginger", "15 g spring onion", "1 g black pepper"],
+    ingredients: ["190 g beef ribeye steak", "60 g radish", "15 ml sesame oil", "15 ml soy sauce", "10 g erythritol", "5 g garlic", "5 g ginger", "15 g spring onion", "1 g black pepper"],
     method: "Brown beef short ribs or beef chuck in sesame oil. Add water, tamari soy sauce, erythritol, grated ginger, garlic, and black pepper. Simmer covered on low heat for 1.5 hours. Add peeled daikon radish cubes and simmer 30 minutes more until beef is falling off the bone and radish is translucent and savory."
   },
   {
@@ -1563,8 +1563,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "Make fresh in 5 minutes",
     freezer: "Freeze coconut milk blocks ahead.",
-    ingredients: ["90 ml coconut milk", "50 ml heavy cream", "5 g matcha powder", "15 g erythritol", "15 g flaked almonds", "2 g vanilla extract"],
-    method: "Freeze coconut milk into ice cubes, then shave finely in a blender to create fluffy shaved snow. Dissolve matcha and erythritol in a spoonful of warm water to make syrup, and drizzle over snow. Top with freshly whipped heavy cream and toasted sliced almonds."
+    ingredients: ["90 ml coconut milk", "50 ml cream 35%", "5 g matcha powder", "15 g erythritol", "15 g flaked almonds", "2 g vanilla extract"],
+    method: "Freeze coconut milk into ice cubes, then shave finely in a blender to create fluffy shaved snow. Dissolve matcha and erythritol in a spoonful of warm water to make syrup, and drizzle over snow. Top with freshly whipped cream 35% and toasted sliced almonds."
   },
 
   /* ============================================================
@@ -1615,7 +1615,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "5 g mint", "2 g cumin", "1 g salt"],
+    ingredients: ["130 g ground beef", "60 g ground lamb", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "5 g mint", "2 g cumin", "1 g salt"],
     method: "Finely mince onion and fresh parsley. Knead with beef and lamb mince, allspice, cumin, and salt until sticky. Shape onto skewers and grill over high heat for 3-4 minutes per side. Whisk Greek yogurt 10% with minced fresh mint, garlic, and olive oil for dipping."
   },
   {
@@ -1647,8 +1647,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 rolls, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["70 g mozzarella", "20 g almond flour", "50 ml heavy cream", "30 g mascarpone", "15 g erythritol", "2 g vanilla extract", "10 g walnuts"],
-    method: "Melt mozzarella with almond flour in a microwave or non-stick pot until pliable dough forms, and roll flat between parchment paper sheets. Whip heavy cream with mascarpone, erythritol, and vanilla into thick Lebanese ashta cream. Spread over mozzarella sheet, roll into a log, slice into rolls, and dust with crushed nuts."
+    ingredients: ["70 g mozzarella", "20 g almond flour", "50 ml cream 35%", "30 g mascarpone", "15 g erythritol", "2 g vanilla extract", "10 g walnuts"],
+    method: "Melt mozzarella with almond flour in a microwave or non-stick pot until pliable dough forms, and roll flat between parchment paper sheets. Whip cream 35% with mascarpone, erythritol, and vanilla into thick Lebanese ashta cream. Spread over mozzarella sheet, roll into a log, slice into rolls, and dust with crushed nuts."
   },
 
   /* ============================================================
@@ -1683,7 +1683,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "90 g tomato passata", "25 g butter", "20 ml olive oil", "40 g onion", "4 g garlic", "5 g cilantro", "5 g basil", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "90 g tomato passata", "25 g butter", "20 ml olive oil", "40 g onion", "4 g garlic", "5 g cilantro", "5 g basil", "1 g salt"],
     method: "Dry-sear chicken thighs in a heavy pot until skin browns and renders. Add butter, olive oil, and sliced onions, cooking until golden. Add tomato passata, minced garlic, and Georgian spices. Simmer covered for 25 minutes until chicken is tender. Finish with an abundance of freshly chopped cilantro, purple basil, and tarragon."
   },
   {
@@ -1699,7 +1699,7 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw meatballs.",
-    ingredients: ["110 g ground beef 80/20", "70 g ground pork", "1 egg", "15 g butter", "30 g onion", "4 g garlic", "10 g cilantro", "1 g cumin", "2 g black pepper", "1 g salt"],
+    ingredients: ["110 g ground beef", "70 g ground pork", "1 egg", "15 g butter", "30 g onion", "4 g garlic", "10 g cilantro", "1 g cumin", "2 g black pepper", "1 g salt"],
     method: "Knead beef and pork mince with finely grated onion, garlic, freshly ground cumin, copious black pepper, sea salt, and fresh cilantro while incorporating 50ml ice water for juiciness. Shape into plump meatballs and simmer gently in hot rich bone broth with butter for 15 minutes."
   },
   {
@@ -1715,8 +1715,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw marinated skewers.",
-    ingredients: ["190 g pork shoulder", "25 g pomegranate seeds", "35 g red onion", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "5 g parsley", "1 g black pepper", "1 g salt"],
-    method: "Cut pork neck or shoulder into large chunks and marinate with thinly sliced red onions, red wine vinegar, garlic, and black pepper. Thread onto skewers and grill over hot coals or cast iron grill until deeply charred and juicy. Scatter crisp ruby pomegranate seeds and fresh flat-leaf parsley over sizzling pork before serving."
+    ingredients: ["190 g pork shoulder", "25 g pomegranate", "35 g red onion", "15 ml olive oil", "10 ml vinegar", "4 g garlic", "5 g parsley", "1 g black pepper", "1 g salt"],
+    method: "Cut pork neck or shoulder into large chunks and marinate with thinly sliced red onions, red wine vinegar, garlic, and black pepper. Thread onto skewers and grill over hot coals or cast iron grill until deeply charred and juicy. Scatter crisp ruby pomegranate and fresh flat-leaf parsley over sizzling pork before serving."
   },
   {
     id: "ge_d1",
@@ -1731,8 +1731,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["70 ml heavy cream", "50 g blackberries", "20 g walnuts", "1 egg", "15 g erythritol", "5 g gelatin", "1 g cinnamon"],
-    method: "Toast walnuts and grind finely into a fragrant paste with warm heavy cream, egg yolk, and erythritol. Whisk bloomed gelatin into warm walnut cream and fold until silky. Set in glasses. Simmer fresh wild blackberries with a splash of water and erythritol into a rich dark coulis; spoon over set walnut mousse before serving."
+    ingredients: ["70 ml cream 35%", "50 g blackberries", "20 g walnuts", "1 egg", "15 g erythritol", "5 g gelatin", "1 g cinnamon"],
+    method: "Toast walnuts and grind finely into a fragrant paste with warm cream 35%, egg yolk, and erythritol. Whisk bloomed gelatin into warm walnut cream and fold until silky. Set in glasses. Simmer fresh wild blackberries with a splash of water and erythritol into a rich dark coulis; spoon over set walnut mousse before serving."
   },
 
   /* ============================================================
@@ -1772,7 +1772,7 @@ const RECIPES_DATA = [
   },
   {
     id: "hu_m2",
-    name: "Paprikaș de Pui with Sour Cream 30% and Buttered Cauliflower",
+    name: "Paprikaș de Pui with Sour Cream and Buttered Cauliflower",
     cuisine: "Hungarian",
     flag: "🇭🇺",
     meal: "Lunch/Dinner",
@@ -1783,8 +1783,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "80 g sour cream 30%", "25 g butter", "140 g cauliflower florets", "6 g paprika", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
-    method: "Brown chicken thighs in foaming butter with onions and sweet paprika. Add a splash of broth and simmer covered for 25 minutes until meat falls from the bone. Whisk heavy sour cream 30% into the pan juices until velvety and thick. Serve chicken draped in the rich paprika-sour cream sauce over tender buttered cauliflower."
+    ingredients: ["160 g chicken thigh", "80 g sour cream", "25 g butter", "140 g cauliflower florets", "6 g paprika", "30 g onion", "4 g garlic", "5 g parsley", "1 g salt"],
+    method: "Brown chicken thighs in foaming butter with onions and sweet paprika. Add a splash of broth and simmer covered for 25 minutes until meat falls from the bone. Whisk heavy sour cream into the pan juices until velvety and thick. Serve chicken draped in the rich paprika-sour cream sauce over tender buttered cauliflower."
   },
   {
     id: "hu_m3",
@@ -1799,8 +1799,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["140 g pork mince", "40 g bacon", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream 30%", "15 g lard", "4 g paprika", "1 g salt"],
-    method: "Mix pork mince with grated cauliflower rice, paprika, minced garlic, and salt. Wrap tightly in pickled sauerkraut leaves. In a large pot, layer shredded sauerkraut, smoked bacon slices, and cabbage rolls. Simmer gently in broth for 1.5 hours. Serve piping hot topped with cold sour cream 30%."
+    ingredients: ["140 g pork mince", "40 g bacon", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream", "15 g lard", "4 g paprika", "1 g salt"],
+    method: "Mix pork mince with grated cauliflower rice, paprika, minced garlic, and salt. Wrap tightly in pickled sauerkraut leaves. In a large pot, layer shredded sauerkraut, smoked bacon slices, and cabbage rolls. Simmer gently in broth for 1.5 hours. Serve piping hot topped with cold sour cream."
   },
   {
     id: "hu_d1",
@@ -1815,8 +1815,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["35 g almond flour", "1 egg", "15 g walnuts", "15 g butter", "20 g dark chocolate", "40 ml heavy cream", "15 g erythritol", "2 g vanilla extract"],
-    method: "Bake small almond flour sponge cubes with egg, butter, and erythritol. Toast and crush walnuts. Melt 85% dark chocolate into warm heavy cream. Layer sponge cubes, toasted walnuts, and rich dark chocolate sauce in a dessert cup, topped with freshly whipped cream."
+    ingredients: ["35 g almond flour", "1 egg", "15 g walnuts", "15 g butter", "20 g dark chocolate", "40 ml cream 35%", "15 g erythritol", "2 g vanilla extract"],
+    method: "Bake small almond flour sponge cubes with egg, butter, and erythritol. Toast and crush walnuts. Melt 85% dark chocolate into warm cream 35%. Layer sponge cubes, toasted walnuts, and rich dark chocolate sauce in a dessert cup, topped with freshly whipped cream."
   },
 
   /* ============================================================
@@ -1835,8 +1835,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
-    ingredients: ["2 eggs", "70 ml heavy cream", "100 ml almond milk", "40 g cheese", "15 g butter", "15 g spring onion", "10 g cilantro", "1 g salt"],
-    method: "Bring almond milk, heavy cream, butter, water, scallions, and sea salt to a gentle simmer. Gently crack in whole eggs and poach softly for 3-4 minutes so yolks stay liquid. Place cubes of fresh white cheese in a bowl, ladle soup and eggs over, and finish with generous fresh cilantro."
+    ingredients: ["2 eggs", "70 ml cream 35%", "100 ml almond milk", "40 g cheese", "15 g butter", "15 g spring onion", "10 g cilantro", "1 g salt"],
+    method: "Bring almond milk, cream 35%, butter, water, scallions, and sea salt to a gentle simmer. Gently crack in whole eggs and poach softly for 3-4 minutes so yolks stay liquid. Place cubes of fresh white cheese in a bowl, ladle soup and eggs over, and finish with generous fresh cilantro."
   },
   {
     id: "co_m1",
@@ -1867,8 +1867,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well without fresh avocado.",
-    ingredients: ["140 g chicken breast", "150 g cauliflower florets", "60 ml heavy cream", "1 avocado", "15 g capers", "5 g cilantro", "4 g garlic", "1 g salt"],
-    method: "Poach chicken breast in aromatic broth with garlic and cilantro, then shred into tender strips. Purée steamed cauliflower florets with heavy cream and butter to mimic traditional thickened Colombian potato broth. Combine shredded chicken with the rich cauliflower cream soup. Serve steaming hot garnished with salty capers and generous fresh avocado slices."
+    ingredients: ["140 g chicken breast", "150 g cauliflower florets", "60 ml cream 35%", "1 avocado", "15 g capers", "5 g cilantro", "4 g garlic", "1 g salt"],
+    method: "Poach chicken breast in aromatic broth with garlic and cilantro, then shred into tender strips. Purée steamed cauliflower florets with cream 35% and butter to mimic traditional thickened Colombian potato broth. Combine shredded chicken with the rich cauliflower cream soup. Serve steaming hot garnished with salty capers and generous fresh avocado slices."
   },
   {
     id: "co_m3",
@@ -1899,8 +1899,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["110 ml heavy cream", "50 ml almond milk", "2 eggs", "20 g erythritol", "1 g cinnamon", "2 g vanilla extract"],
-    method: "Simmer heavy cream and almond milk gently, repeatedly skimming the skin (natas) that forms on top and saving it in a dish. Whisk egg yolks with erythritol, cinnamon, and vanilla. Whisk remaining warm cream into yolks, layer with cream skins in a baking dish, and bake at 150°C for 25 minutes. Chill before serving."
+    ingredients: ["110 ml cream 35%", "50 ml almond milk", "2 eggs", "20 g erythritol", "1 g cinnamon", "2 g vanilla extract"],
+    method: "Simmer cream 35% and almond milk gently, repeatedly skimming the skin (natas) that forms on top and saving it in a dish. Whisk egg yolks with erythritol, cinnamon, and vanilla. Whisk remaining warm cream into yolks, layer with cream skins in a baking dish, and bake at 150°C for 25 minutes. Chill before serving."
   },
 
   /* ============================================================
@@ -1967,7 +1967,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["150 g chicken thigh (bone-in)", "100 ml coconut milk", "20 ml coconut oil", "15 g green curry paste", "60 g eggplant", "5 g basil", "10 ml fish sauce", "1 lime", "1 g sea salt"],
+    ingredients: ["150 g chicken thigh", "100 ml coconut milk", "20 ml coconut oil", "15 g green curry paste", "60 g eggplant", "5 g basil", "10 ml fish sauce", "1 lime", "1 g sea salt"],
     method: "Fry Thai green curry paste in coconut oil until fragrant and oils separate. Add sliced chicken thighs, searing until coated. Pour in rich thick coconut cream and fish sauce, adding cubed eggplant. Simmer gently for 15 minutes until chicken is tender and sauce is aromatic and glossy. Stir in fresh Thai basil leaves."
   },
   {
@@ -2051,7 +2051,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze marinated raw chicken.",
-    ingredients: ["160 g chicken thigh (bone-in)", "30 g butter", "20 ml olive oil", "15 ml vinegar", "5 g garlic", "5 g ginger", "2 g annatto", "1 lemon", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "30 g butter", "20 ml olive oil", "15 ml vinegar", "5 g garlic", "5 g ginger", "2 g annatto", "1 lemon", "1 g salt"],
     method: "Marinate chicken thighs in vinegar, calamansi/lemon juice, minced garlic, ginger, and salt. Warm butter and olive oil with annatto powder to create fragrant orange-tinted basting oil. Grill chicken over hot coals, basting continuously with the warm annatto garlic butter until deeply golden, caramelized, and succulent."
   },
   {
@@ -2067,8 +2067,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["100 ml heavy cream", "50 ml coconut milk", "3 eggs", "20 g erythritol", "15 g butter", "2 g vanilla extract", "1 lemon zest"],
-    method: "Caramelize butter with 10g erythritol in a small pan until amber and pour into ramekin bottoms. Whisk 3 egg yolks with heavy cream, coconut milk, remaining erythritol, vanilla, and a dash of lemon zest. Strain custard into ramekins. Steam over low heat for 25 minutes until gently set. Chill and unmold."
+    ingredients: ["100 ml cream 35%", "50 ml coconut milk", "3 eggs", "20 g erythritol", "15 g butter", "2 g vanilla extract", "1 lemon zest"],
+    method: "Caramelize butter with 10g erythritol in a small pan until amber and pour into ramekin bottoms. Whisk 3 egg yolks with cream 35%, coconut milk, remaining erythritol, vanilla, and a dash of lemon zest. Strain custard into ramekins. Steam over low heat for 25 minutes until gently set. Chill and unmold."
   },
 
   /* ============================================================
@@ -2103,7 +2103,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze breaded raw cutlets.",
-    ingredients: ["140 g pork loin cutlet", "25 g keto panko", "1 egg", "30 g butter", "20 ml olive oil", "80 g cucumber", "10 ml vinegar", "1 lemon", "1 g salt"],
+    ingredients: ["140 g pork loin", "25 g keto panko", "1 egg", "30 g butter", "20 ml olive oil", "80 g cucumber", "10 ml vinegar", "1 lemon", "1 g salt"],
     method: "Pound cutlet between parchment paper until 4mm thin. Season with salt, dip in beaten egg, and press into crushed pork panko. Pan-fry in generous foaming butter and olive oil until crisp, golden, and puffed. Serve with a chilled thinly sliced cucumber salad and a generous lemon wedge."
   },
   {
@@ -2135,7 +2135,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["150 g beef chuck roast", "140 g red cabbage", "25 g butter", "20 ml olive oil", "15 ml vinegar", "1 g allspice", "1 g cloves", "1 g cinnamon", "1 g salt"],
+    ingredients: ["150 g beef chuck", "140 g red cabbage", "25 g butter", "20 ml olive oil", "15 ml vinegar", "1 g allspice", "1 g cloves", "1 g cinnamon", "1 g salt"],
     method: "Marinate beef chuck in red wine vinegar with cloves, allspice, and cinnamon. Sear beef in butter and olive oil until deeply browned. Braise covered in the spiced vinegar marinade and beef bone broth for 2 hours until meltingly tender. Serve with warm braised red cabbage cooked in generous butter."
   },
   {
@@ -2151,8 +2151,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["35 g almond flour", "15 g cocoa powder", "1 egg", "60 ml heavy cream", "25 g berries", "15 g butter", "18 g erythritol", "15 g dark chocolate"],
-    method: "Bake small chocolate almond sponge with almond flour, cocoa powder, egg, butter, and erythritol. Whip heavy cream with erythritol and vanilla to stiff peaks. Simmer raspberries or sour cherries with erythritol until thick. Layer chocolate sponge cubes with sour fruit compote and whipped cream, topped with dark chocolate curls."
+    ingredients: ["35 g almond flour", "15 g cocoa powder", "1 egg", "60 ml cream 35%", "25 g berries", "15 g butter", "18 g erythritol", "15 g dark chocolate"],
+    method: "Bake small chocolate almond sponge with almond flour, cocoa powder, egg, butter, and erythritol. Whip cream 35% with erythritol and vanilla to stiff peaks. Simmer raspberries or sour cherries with erythritol until thick. Layer chocolate sponge cubes with sour fruit compote and whipped cream, topped with dark chocolate curls."
   },
 
   /* ============================================================
@@ -2171,8 +2171,8 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "50 g chorizo", "40 g provolone", "15 ml olive oil", "15 g butter", "1 g oregano", "1 g chili flakes", "1 g salt"],
-    method: "Grill sliced artisanal chorizo and thick slices of provolone cheese in a cast iron skillet until sizzling and bubbling. Crack eggs directly between the chorizo and melted provolone, cover with a lid for 3 minutes until whites set and yolks remain silky. Dust with dried oregano and chili flakes."
+    ingredients: ["3 eggs", "50 g chorizo", "40 g provolone cheese", "15 ml olive oil", "15 g butter", "1 g oregano", "1 g chili flakes", "1 g salt"],
+    method: "Grill sliced artisanal chorizo and thick slices of provolone cheese in a cast iron skillet until sizzling and bubbling. Crack eggs directly between the chorizo and melted provolone cheese, cover with a lid for 3 minutes until whites set and yolks remain silky. Dust with dried oregano and chili flakes."
   },
   {
     id: "ar_m1",
@@ -2219,8 +2219,8 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "Cook fresh, 10 minutes",
     freezer: "Freeze raw steaks.",
-    ingredients: ["200 g ribeye steak", "25 g butter", "4 g garlic", "5 g parsley", "15 ml olive oil", "2 g rosemary", "2 g sea salt", "1 g black pepper"],
-    method: "Bring thick sirloin or ribeye steak to room temperature, rub with olive oil and coarse sea salt. Sear in a smoking hot cast iron skillet for 3 minutes per side. Mash softened butter with minced garlic, chopped parsley, and rosemary. Top hot resting steak with a generous slice of compound butter and let it melt over the meat."
+    ingredients: ["200 g beef ribeye steak", "25 g butter", "4 g garlic", "5 g parsley", "15 ml olive oil", "2 g rosemary", "2 g sea salt", "1 g black pepper"],
+    method: "Bring thick sirloin or beef ribeye steak to room temperature, rub with olive oil and coarse sea salt. Sear in a smoking hot cast iron skillet for 3 minutes per side. Mash softened butter with minced garlic, chopped parsley, and rosemary. Top hot resting steak with a generous slice of compound butter and let it melt over the meat."
   },
   {
     id: "ar_d1",
@@ -2235,8 +2235,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 sandwich cookies, 5 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["40 g almond flour", "25 g butter", "60 ml heavy cream", "15 g coconut flakes", "18 g erythritol", "2 g vanilla extract"],
-    method: "Bake round shortbread cookies with almond flour, butter, and erythritol at 170°C for 10 minutes. Simmer heavy cream, butter, and erythritol slowly in a small pan until thick, golden keto dulce de leche caramel forms. Sandwich caramel between cookies and roll edges in unsweetened shredded coconut."
+    ingredients: ["40 g almond flour", "25 g butter", "60 ml cream 35%", "15 g coconut flakes", "18 g erythritol", "2 g vanilla extract"],
+    method: "Bake round shortbread cookies with almond flour, butter, and erythritol at 170°C for 10 minutes. Simmer cream 35%, butter, and erythritol slowly in a small pan until thick, golden keto dulce de leche caramel forms. Sandwich caramel between cookies and roll edges in unsweetened shredded coconut."
   },
 
   /* ============================================================
@@ -2244,7 +2244,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "ru_b1",
-    name: "Syrniki Rusești Keto from Curd Cheese with Sour Cream 30%",
+    name: "Syrniki Rusești Keto from Curd Cheese with Sour Cream",
     cuisine: "Russian",
     flag: "🇷🇺",
     meal: "Breakfast",
@@ -2255,12 +2255,12 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped patties.",
-    ingredients: ["150 g cottage cheese", "1 egg", "25 g almond flour", "40 g sour cream 30%", "20 g butter", "15 g erythritol", "2 g vanilla extract", "25 g berries"],
-    method: "Press cottage cheese dry through a sieve. Mix with egg yolk, almond flour, erythritol, and vanilla into a thick dough. Form into round plump syrniki patties and fry in butter over medium-low heat until golden on both sides. Serve hot with generous cold sour cream 30% and fresh berries."
+    ingredients: ["150 g cottage cheese", "1 egg", "25 g almond flour", "40 g sour cream", "20 g butter", "15 g erythritol", "2 g vanilla extract", "25 g berries"],
+    method: "Press cottage cheese dry through a sieve. Mix with egg yolk, almond flour, erythritol, and vanilla into a thick dough. Form into round plump syrniki patties and fry in butter over medium-low heat until golden on both sides. Serve hot with generous cold sour cream and fresh berries."
   },
   {
     id: "ru_m1",
-    name: "Beef Stroganoff with Sauteed Mushrooms and Sour Cream 30%",
+    name: "Beef Stroganoff with Sauteed Mushrooms and Sour Cream",
     cuisine: "Russian",
     flag: "🇷🇺",
     meal: "Lunch/Dinner",
@@ -2271,8 +2271,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["150 g beef sirloin strips", "80 g sour cream 30%", "25 g butter", "15 ml olive oil", "60 g mushrooms", "30 g onion", "10 g mustard", "4 g garlic", "5 g dill", "1 g salt"],
-    method: "Quickly sear tender beef strips in foaming butter and olive oil on high heat, then remove. Sauté sliced mushrooms and onions in the pan drippings until caramelized. Reduce heat, stir in Dijon mustard, beef bone broth, and heavy sour cream 30%. Return beef to the velvety sauce, warming through without boiling, and garnish with fresh dill."
+    ingredients: ["150 g beef sirloin", "80 g sour cream", "25 g butter", "15 ml olive oil", "60 g mushrooms", "30 g onion", "10 g mustard", "4 g garlic", "5 g dill", "1 g salt"],
+    method: "Quickly sear tender beef strips in foaming butter and olive oil on high heat, then remove. Sauté sliced mushrooms and onions in the pan drippings until caramelized. Reduce heat, stir in Dijon mustard, beef bone broth, and heavy sour cream. Return beef to the velvety sauce, warming through without boiling, and garnish with fresh dill."
   },
   {
     id: "ru_m2",
@@ -2303,8 +2303,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["170 g beef brisket", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "15 g butter", "30 g onion", "4 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
-    method: "Simmer beef chuck in water with bay leaf and black peppercorns until tender. Saute onions, garlic, and tomato passata in butter with red wine vinegar. Add shredded fresh green cabbage to the beef broth along with the sauteed tomato mixture. Simmer for 20 minutes until cabbage is soft. Serve piping hot with chopped fresh dill and a huge dollop of sour cream 30%."
+    ingredients: ["170 g beef brisket", "140 g cabbage", "50 g tomato passata", "60 g sour cream", "15 g butter", "30 g onion", "4 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
+    method: "Simmer beef chuck in water with bay leaf and black peppercorns until tender. Saute onions, garlic, and tomato passata in butter with red wine vinegar. Add shredded fresh green cabbage to the beef broth along with the sauteed tomato mixture. Simmer for 20 minutes until cabbage is soft. Serve piping hot with chopped fresh dill and a huge dollop of sour cream."
   },
   {
     id: "ru_d1",
@@ -2319,8 +2319,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 squares, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["70 ml heavy cream", "30 g butter", "2 eggs", "5 g gelatin", "20 g dark chocolate", "18 g erythritol", "2 g vanilla extract"],
-    method: "Bloom gelatin in 30ml water. Whip egg whites with erythritol to stiff glossy peaks. Whip softened butter with heavy cream and vanilla until fluffy. Gently fold dissolved warm gelatin into egg whites, then fold in cream-butter mixture. Pour into a small mould and chill for 2 hours. Glaze top with melted 85% dark chocolate and slice into squares."
+    ingredients: ["70 ml cream 35%", "30 g butter", "2 eggs", "5 g gelatin", "20 g dark chocolate", "18 g erythritol", "2 g vanilla extract"],
+    method: "Bloom gelatin in 30ml water. Whip egg whites with erythritol to stiff glossy peaks. Whip softened butter with cream 35% and vanilla until fluffy. Gently fold dissolved warm gelatin into egg whites, then fold in cream-butter mixture. Pour into a small mould and chill for 2 hours. Glaze top with melted 85% dark chocolate and slice into squares."
   },
 
   /* ============================================================
@@ -2355,7 +2355,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "80 ml coconut milk", "20 ml coconut oil", "30 g onion", "4 g garlic", "5 g ginger", "10 g lemongrass", "2 g chili flakes", "2 g turmeric", "1 lime"],
+    ingredients: ["160 g chicken thigh", "80 ml coconut milk", "20 ml coconut oil", "30 g onion", "4 g garlic", "5 g ginger", "10 g lemongrass", "2 g chili flakes", "2 g turmeric", "1 lime"],
     method: "Blend lemongrass, chilies, garlic, ginger, and turmeric into a spice paste. Fry paste in coconut oil until fragrant, then add thick coconut cream and lime juice, simmering until thick and glossy. Marinate chicken thighs, grill over hot coals, and baste continuously with the rich spiced coconut gravy."
   },
   {
@@ -2423,7 +2423,7 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
-    ingredients: ["2 eggs", "90 g ground beef 80/20", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g paprika", "5 g parsley"],
+    ingredients: ["2 eggs", "90 g ground beef", "70 g tomato passata", "20 ml olive oil", "40 g bell pepper", "4 g garlic", "2 g cumin", "2 g paprika", "5 g parsley"],
     method: "Roll beef mince with cumin, paprika, and salt into marble-sized kefta meatballs and sear in olive oil. Add diced bell peppers, garlic, and tomato passata, simmering 5 minutes until rich. Create wells and crack in whole eggs. Cover and simmer gently until whites are set and yolks are runny. Scatter with fresh parsley."
   },
   {
@@ -2455,7 +2455,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["200 g chicken thigh (bone-in)", "20 g flaked almonds", "0.2 g saffron", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "5 g ginger", "1 g cinnamon", "2 g turmeric", "5 g cilantro"],
+    ingredients: ["200 g chicken thigh", "20 g flaked almonds", "0.2 g saffron", "15 ml olive oil", "15 g butter", "30 g onion", "4 g garlic", "5 g ginger", "1 g cinnamon", "2 g turmeric", "5 g cilantro"],
     method: "Sear chicken thighs in olive oil and butter with onions, garlic, ginger, saffron threads, turmeric, and cinnamon. Simmer covered in aromatic saffron chicken broth for 30 minutes until meat is tender and falling off the bone. Dry-toast flaked almonds until golden. Plate chicken coated in fragrant saffron sauce, sprinkled with crunchy toasted almonds and fresh cilantro."
   },
   {
@@ -2471,12 +2471,12 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw marinated skewers.",
-    ingredients: ["190 g beef sirloin strips", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "2 g paprika", "5 g mint", "5 g parsley", "1 g salt"],
+    ingredients: ["190 g beef sirloin", "60 g greek yogurt 10%", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "2 g paprika", "5 g mint", "5 g parsley", "1 g salt"],
     method: "Cut beef into cubes and marinate with grated onion, minced garlic, cumin, paprika, olive oil, and fresh parsley for 3 hours. Thread onto skewers and grill over high heat for 3 minutes per side until nicely browned with juicy centers. Serve with cold Greek yogurt 10% mixed with fresh mint."
   },
   {
     id: "ma_d1",
-    name: "Keto Ghriba Almond Cookies with Orange Blossom and Cinnamon",
+    name: "Keto Ghriba Almond Cookies with Fresh Orange Zest and Cinnamon",
     cuisine: "Moroccan",
     flag: "ðŸ‡²ðŸ‡¦",
     meal: "Snack",
@@ -2487,8 +2487,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "12 cookies, 1 week airtight",
     freezer: "Freezes well.",
-    ingredients: ["50 g almond flour", "1 egg", "20 g butter", "18 g erythritol", "2 g cinnamon", "2 g orange zest", "5 ml orange blossom water", "3 g baking powder"],
-    method: "Knead almond flour with melted butter, egg yolk, erythritol, baking powder, warm cinnamon, fresh grated orange zest, and delicate orange blossom water until a soft, fragrant cookie dough forms. Roll into balls, flatten slightly onto parchment paper, and bake at 175Â°C for 12 minutes until cracked on top and lightly golden. Cool before serving."
+    ingredients: ["50 g almond flour", "1 egg", "20 g butter", "18 g erythritol", "2 g cinnamon", "2 g orange zest", "3 g baking powder"],
+    method: "Knead almond flour with melted butter, egg yolk, erythritol, baking powder, warm cinnamon, fresh grated orange zest until a soft, fragrant cookie dough forms. Roll into balls, flatten slightly onto parchment paper, and bake at 175Â°C for 12 minutes until cracked on top and lightly golden. Cool before serving."
   },
 
   /* ============================================================
@@ -2507,8 +2507,8 @@ const RECIPES_DATA = [
     netCarbs: 2,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "45 g smoked kaiser", "40 g telemea", "15 g unt 82%", "15 g spring onion", "3 g dill", "1 g black pepper"],
-    method: "Taie kaiserul afumat sau costița în feliuțe subțiri și rumenește-l în tigaie în unt 82% până devine crocant. Bate ouăle cu piper proaspăt măcinat și ceapă verde tocată. Toarnă peste kaiser la foc mic, presară telemea de oaie mărunțită și mărar proaspăt. Lasă omleta pufoasă și moale la interior."
+    ingredients: ["3 eggs", "45 g smoked kaiser", "40 g telemea", "15 g butter", "15 g spring onion", "3 g dill", "1 g black pepper"],
+    method: "Taie kaiserul afumat sau costița în feliuțe subțiri și rumenește-l în tigaie în butter până devine crocant. Bate ouăle cu piper proaspăt măcinat și ceapă verde tocată. Toarnă peste kaiser la foc mic, presară telemea de oaie mărunțită și mărar proaspăt. Lasă omleta pufoasă și moale la interior."
   },
   {
     id: "ro_b2",
@@ -2523,8 +2523,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 12 minutes",
     freezer: "Not suitable.",
-    ingredients: ["2 eggs", "25 g lupin flour", "15 g almond flour", "40 g burduf cheese", "25 g unt 82%", "30 g sour cream 30%", "1 g salt"],
-    method: "Prepară mămăliga keto: fierbe 150ml apă cu sare, adaugă făina de lupin și făina de migdale amestecând energic cu telul timp de 3-4 minute la foc mic, apoi încorporează unt 82% și smântână 30% până devine densă și fină. Prăjește două ouă ochiuri în unt. Așază mămăliga keto caldă în farfurie, presară brânză de burduf frământată și așază ouăle ochiuri cu gălbenuș moale deasupra."
+    ingredients: ["2 eggs", "25 g lupin flour", "15 g almond flour", "40 g burduf cheese", "25 g butter", "30 g sour cream", "1 g salt"],
+    method: "Prepară mămăliga keto: fierbe 150ml apă cu sare, adaugă făina de lupin și făina de migdale amestecând energic cu telul timp de 3-4 minute la foc mic, apoi încorporează butter și smantana până devine densă și fină. Prăjește două ouă ochiuri în unt. Așază mămăliga keto caldă în farfurie, presară brânză de burduf frământată și așază ouăle ochiuri cu gălbenuș moale deasupra."
   },
   {
     id: "ro_b3",
@@ -2571,8 +2571,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "6 servings, 6 days fridge (tastes best reheated!)",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["130 g ground pork", "60 g ground beef 80/20", "40 g smoked kaiser", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream 30%", "20 g lard", "30 g onion", "2 g paprika", "2 g thyme", "1 g black pepper"],
-    method: "Amestecă carnea tocată de porc și vită cu conopidă dată pe răzătoare mărunt (înlocuitor perfect pentru orez), ceapă călită în untură, cimbru uscat, boia dulce și piper. Împăturește sarmalele în foi subțiri de varză murată desărată. Așază-le în oală de lut pe pat de varză tocată și bucăți de kaiser afumat. Fierbe la foc domol 2.5 ore. Servește cu smântână grasă 30% și mămăligă keto fierbinte din făină de lupin și unt."
+    ingredients: ["130 g ground pork", "60 g ground beef", "40 g smoked kaiser", "150 g sauerkraut", "60 g cauliflower rice", "50 g sour cream", "20 g lard", "30 g onion", "2 g paprika", "2 g thyme", "1 g black pepper"],
+    method: "Amestecă carnea tocată de porc și vită cu conopidă dată pe răzătoare mărunt (înlocuitor perfect pentru orez), ceapă călită în untură, cimbru uscat, boia dulce și piper. Împăturește sarmalele în foi subțiri de varză murată desărată. Așază-le în oală de lut pe pat de varză tocată și bucăți de kaiser afumat. Fierbe la foc domol 2.5 ore. Servește cu smantana și mămăligă keto fierbinte din făină de lupin și unt."
   },
   {
     id: "ro_m2",
@@ -2608,7 +2608,7 @@ const RECIPES_DATA = [
   },
   {
     id: "ro_m4",
-    name: "Ciorbă Rădăuțeană Tradițională cu Pui, Smântână 30% și Mujdei",
+    name: "Ciorbă Rădăuțeană Tradițională cu Pui, smantana și Mujdei",
     cuisine: "Romanian",
     flag: "🇷🇴",
     meal: "Lunch/Dinner",
@@ -2619,8 +2619,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes well without sour cream liaison.",
-    ingredients: ["140 g chicken breast", "90 g sour cream 30%", "2 eggs", "25 g unt 82%", "6 g garlic", "15 ml vinegar", "30 g celery", "1 g salt", "1 g black pepper"],
-    method: "Fierbe pieptul de pui în supă cu bucăți mari de țelină și ceapă, apoi scoate carnea și fâșiaz-o fideluță subțire. Bate gălbenușurile de ou cu smântâna grasă 30%, unt 82% topit și usturoi pisat mărunt. Temperează crema cu un polonic de supă fierbinte, apoi toarnă în oală amestecând continuu. Adaugă oțet după gust. Servește fierbinte cu ardei iute."
+    ingredients: ["140 g chicken breast", "90 g sour cream", "2 eggs", "25 g butter", "6 g garlic", "15 ml vinegar", "30 g celery", "1 g salt", "1 g black pepper"],
+    method: "Fierbe pieptul de pui în supă cu bucăți mari de țelină și ceapă, apoi scoate carnea și fâșiaz-o fideluță subțire. Bate gălbenușurile de ou cu smantana, butter topit și usturoi pisat mărunt. Temperează crema cu un polonic de supă fierbinte, apoi toarnă în oală amestecând continuu. Adaugă oțet după gust. Servește fierbinte cu ardei iute."
   },
   {
     id: "ro_m5",
@@ -2640,7 +2640,7 @@ const RECIPES_DATA = [
   },
   {
     id: "ro_m6",
-    name: "Ciulama de Pui cu Ciuperci de Pădure și Smântână Grasă 30%",
+    name: "Ciulama de Pui cu Ciuperci de Pădure și smantana",
     cuisine: "Romanian",
     flag: "🇷🇴",
     meal: "Lunch/Dinner",
@@ -2651,8 +2651,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["150 g chicken thigh", "90 g mushrooms", "80 g sour cream 30%", "25 g unt 82%", "4 g garlic", "5 g parsley", "1 g salt", "1 g black pepper"],
-    method: "Rumenește bucățelele de pulpă de pui în unt 82%. Scoate puiul și sotează ciupercile feliate cu usturoi până se evaporă lichidul. Redu focul la minim, adaugă smântâna 30% și puțină supă caldă, lăsând să fiarbă domol până sosul devine gros și catifelat. Încorporează puiul și presară pătrunjel proaspăt tocat."
+    ingredients: ["150 g chicken thigh", "90 g mushrooms", "80 g sour cream", "25 g butter", "4 g garlic", "5 g parsley", "1 g salt", "1 g black pepper"],
+    method: "Rumenește bucățelele de pulpă de pui în butter. Scoate puiul și sotează ciupercile feliate cu usturoi până se evaporă lichidul. Redu focul la minim, adaugă Smantana și puțină supă caldă, lăsând să fiarbă domol până sosul devine gros și catifelat. Încorporează puiul și presară pătrunjel proaspăt tocat."
   },
   {
     id: "ro_m7",
@@ -2667,8 +2667,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g chicken thigh (bone-in)", "80 g tomato passata", "25 g unt 82%", "15 ml olive oil", "6 g garlic", "30 g onion", "10 ml vinegar", "5 g parsley", "1 g salt"],
-    method: "Prăjește pulpele de pui în unt 82% și ulei de măsline până se rumenesc auriu. Adaugă usturoiul feliat și ceapa tocată fin. Stinge cu pasată de roșii, puțină apă și un strop de oțet. Înăbușă la foc mic 25 de minute până carnea devine fragedă și sosul scade catifelat. Presară pătrunjel proaspăt."
+    ingredients: ["160 g chicken thigh", "80 g tomato passata", "25 g butter", "15 ml olive oil", "6 g garlic", "30 g onion", "10 ml vinegar", "5 g parsley", "1 g salt"],
+    method: "Prăjește pulpele de pui în butter și ulei de măsline până se rumenesc auriu. Adaugă usturoiul feliat și ceapa tocată fin. Stinge cu pasată de roșii, puțină apă și un strop de oțet. Înăbușă la foc mic 25 de minute până carnea devine fragedă și sosul scade catifelat. Presară pătrunjel proaspăt."
   },
   {
     id: "ro_m8",
@@ -2683,12 +2683,12 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["150 g pork shoulder cubes", "30 g almond flour", "15 g lupin flour", "25 g unt 82%", "15 ml olive oil", "70 g tomato passata", "30 g onion", "4 g garlic", "4 g paprika", "1 g salt"],
-    method: "Rumenește cuburile de pulpă de porc în unt 82% și ulei. Adaugă ceapa și usturoiul, presară boia dulce din belșug și stinge cu pasată de roșii și supă de oase. Fierbe înăbușit 40 de minute. Prepară mămăliga keto din făină de migdale, făină de lupin și unt. Servește tocanița fierbinte peste mămăliguță."
+    ingredients: ["150 g pork shoulder", "30 g almond flour", "15 g lupin flour", "25 g butter", "15 ml olive oil", "70 g tomato passata", "30 g onion", "4 g garlic", "4 g paprika", "1 g salt"],
+    method: "Rumenește cuburile de pulpă de porc în butter și ulei. Adaugă ceapa și usturoiul, presară boia dulce din belșug și stinge cu pasată de roșii și supă de oase. Fierbe înăbușit 40 de minute. Prepară mămăliga keto din făină de migdale, făină de lupin și unt. Servește tocanița fierbinte peste mămăliguță."
   },
   {
     id: "ro_d1",
-    name: "Papanași Prăjiți Keto cu Dulceață de Fructe de Pădure și Smântână 30%",
+    name: "Papanași Prăjiți Keto cu Dulceață de Fructe de Pădure și smantana",
     cuisine: "Romanian",
     flag: "🇷🇴",
     meal: "Snack",
@@ -2699,8 +2699,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 3 days fridge",
     freezer: "Freeze shaped raw papanași.",
-    ingredients: ["100 g cottage cheese", "1 egg", "30 g almond flour", "10 g coconut flour", "50 g sour cream 30%", "30 g berries", "15 g unt 82%", "18 g erythritol", "1 lemon zest", "2 g vanilla extract"],
-    method: "Scurge bine brânza de vaci. Amestecă cu ou, făină de migdale, făină de cocos, eritritol, coajă rasă de lămâie și vanilie până obții un aluat modelabil. Formează cercurile de papanaș și biluțele aferente. Prăjește în unt și untură la foc mediu până devin aurii și fragede la interior. Servește fierbinți cu smântână grasă 30% din belșug și dulceață rapidă de fructe de pădure fără zahăr."
+    ingredients: ["100 g cottage cheese", "1 egg", "30 g almond flour", "10 g coconut flour", "50 g sour cream", "30 g berries", "15 g butter", "18 g erythritol", "1 lemon zest", "2 g vanilla extract"],
+    method: "Scurge bine brânza de vaci. Amestecă cu ou, făină de migdale, făină de cocos, eritritol, coajă rasă de lămâie și vanilie până obții un aluat modelabil. Formează cercurile de papanaș și biluțele aferente. Prăjește în unt și untură la foc mediu până devin aurii și fragede la interior. Servește fierbinți cu smantana din belșug și dulceață rapidă de fructe de pădure fără zahăr."
   },
   {
     id: "ro_d2",
@@ -2715,8 +2715,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "8 felii generoase, 6 zile la frigider",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["40 g almond flour", "25 g walnuts", "1 egg", "20 g unt 82%", "12 g cocoa powder", "20 g erythritol", "2 g vanilla extract", "1 orange zest", "3 g baking powder"],
-    method: "Prepară aluatul fraged din făină de migdale, unt 82%, ou, eritritol, praf de copt și coajă rasă de portocală. Pentru umplutura de cozonac: amestecă miezul de nucă măcinat mărunt cu pudră de cacao neagră, eritritol, albuș de ou bătut spumă și esență de rom. Întinde aluatul, distribuie compoziția densă de nucă, rulează și coace la 175°C timp de 30-35 de minute până cozonacul devine rumen și miroase divin în casă."
+    ingredients: ["40 g almond flour", "25 g walnuts", "1 egg", "20 g butter", "12 g cocoa powder", "20 g erythritol", "2 g vanilla extract", "1 orange zest", "3 g baking powder"],
+    method: "Prepară aluatul fraged din făină de migdale, butter, ou, eritritol, praf de copt și coajă rasă de portocală. Pentru umplutura de cozonac: amestecă miezul de nucă măcinat mărunt cu pudră de cacao neagră, eritritol, albuș de ou bătut spumă și esență de rom. Întinde aluatul, distribuie compoziția densă de nucă, rulează și coace la 175°C timp de 30-35 de minute până cozonacul devine rumen și miroase divin în casă."
   },
   {
     id: "ro_d3",
@@ -2731,8 +2731,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 felii, 5 zile la frigider",
     freezer: "Freezes well in slices.",
-    ingredients: ["120 g cottage cheese", "40 g sour cream 30%", "2 eggs", "20 g unt 82%", "20 g erythritol", "1 lemon zest", "2 g vanilla extract", "20 g berries"],
-    method: "Pasează brânza proaspătă de vaci cu smântână grasă 30%, gălbenușurile de ou, eritritol, coajă de lămâie și vanilie. Bate albușurile spumă tare și încorporează-le delicat împreună cu câteva fructe de pădure (afine sau zmeură). Toarnă într-o tavă unsă cu unt 82% și coace la 170°C timp de 35 de minute până se rumenește la suprafață. Se servește rece."
+    ingredients: ["120 g cottage cheese", "40 g sour cream", "2 eggs", "20 g butter", "20 g erythritol", "1 lemon zest", "2 g vanilla extract", "20 g berries"],
+    method: "Pasează brânza proaspătă de vaci cu smantana, gălbenușurile de ou, eritritol, coajă de lămâie și vanilie. Bate albușurile spumă tare și încorporează-le delicat împreună cu câteva fructe de pădure (afine sau zmeură). Toarnă într-o tavă unsă cu butter și coace la 170°C timp de 35 de minute până se rumenește la suprafață. Se servește rece."
   },
 
   /* ============================================================
@@ -2767,8 +2767,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g ground beef 80/20", "60 g chicken", "1 egg", "160 g cauliflower florets", "30 ml heavy cream", "25 g olives", "20 g butter", "30 g onion", "2 g cumin", "1 g salt"],
-    method: "Saute beef mince with onions, cumin, oregano, and salt to create traditional Chilean pino filling. Place in a baking dish with cooked shredded chicken, hard-boiled egg quarters, and black olives. Puree steamed cauliflower with butter and heavy cream into a rich thick mash. Spread over beef, dust with erythritol, and bake at 200°C for 25 minutes until golden brown."
+    ingredients: ["150 g ground beef", "60 g chicken breast", "1 egg", "160 g cauliflower florets", "30 ml cream 35%", "25 g olives", "20 g butter", "30 g onion", "2 g cumin", "1 g salt"],
+    method: "Saute beef mince with onions, cumin, oregano, and salt to create traditional Chilean pino filling. Place in a baking dish with cooked shredded chicken breast, hard-boiled egg quarters, and black olives. Puree steamed cauliflower with butter and cream 35% into a rich thick mash. Spread over beef, dust with erythritol, and bake at 200°C for 25 minutes until golden brown."
   },
   {
     id: "cl_m2",
@@ -2783,8 +2783,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 3 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["160 g cod", "70 g shrimp", "40 ml heavy cream", "60 g tomato passata", "20 ml olive oil", "30 g bell pepper", "30 g onion", "4 g garlic", "5 g cilantro", "1 lemon"],
-    method: "Saute bell peppers, onions, and garlic in olive oil. Stir in tomato passata and rich fish broth. Simmer white fish fillets and shrimp in the broth for 10 minutes. Swirl in heavy cream, remove from heat, and finish with fresh lemon juice and chopped cilantro."
+    ingredients: ["160 g cod", "70 g shrimp", "40 ml cream 35%", "60 g tomato passata", "20 ml olive oil", "30 g bell pepper", "30 g onion", "4 g garlic", "5 g cilantro", "1 lemon"],
+    method: "Saute bell peppers, onions, and garlic in olive oil. Stir in tomato passata and rich fish broth. Simmer white fish fillets and shrimp in the broth for 10 minutes. Swirl in cream 35%, remove from heat, and finish with fresh lemon juice and chopped cilantro."
   },
   {
     id: "cl_m3",
@@ -2815,8 +2815,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 squares, 5 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["35 g almond flour", "1 egg", "60 ml heavy cream", "40 ml coconut milk", "30 ml almond milk", "15 g butter", "20 g erythritol", "2 g vanilla extract", "1 g cinnamon"],
-    method: "Bake a light almond flour sponge with egg, butter, and erythritol at 175°C for 15 minutes. Poke holes all over with a skewer. Whisk heavy cream, coconut milk, and almond milk with vanilla and erythritol into the 'three milks' sauce. Pour slowly over warm cake until fully absorbed. Chill overnight and dust with cinnamon."
+    ingredients: ["35 g almond flour", "1 egg", "60 ml cream 35%", "40 ml coconut milk", "30 ml almond milk", "15 g butter", "20 g erythritol", "2 g vanilla extract", "1 g cinnamon"],
+    method: "Bake a light almond flour sponge with egg, butter, and erythritol at 175°C for 15 minutes. Poke holes all over with a skewer. Whisk cream 35%, coconut milk, and almond milk with vanilla and erythritol into the 'three milks' sauce. Pour slowly over warm cake until fully absorbed. Chill overnight and dust with cinnamon."
   },
 
   /* ============================================================
@@ -2851,8 +2851,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["140 g beef tenderloin", "90 ml heavy cream", "25 g butter", "50 g carrot", "50 g celery", "15 g cranberries", "15 ml vinegar", "1 g allspice", "1 g salt"],
-    method: "Sear beef tenderloin medallions in foaming butter until browned. Braise with diced celery, carrot, allspice, and a splash of vinegar. Purée the cooked vegetables with heavy cream and pan drippings into a luxurious, velvety Czech cream sauce. Return beef medallions to sauce and serve with tart cranberries."
+    ingredients: ["140 g beef tenderloin", "90 ml cream 35%", "25 g butter", "50 g carrot", "50 g celery", "15 g cranberries", "15 ml vinegar", "1 g allspice", "1 g salt"],
+    method: "Sear beef tenderloin medallions in foaming butter until browned. Braise with diced celery, carrot, allspice, and a splash of vinegar. Purée the cooked vegetables with cream 35% and pan drippings into a luxurious, velvety Czech cream sauce. Return beef medallions to sauce and serve with tart cranberries."
   },
   {
     id: "cz_m2",
@@ -2883,7 +2883,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef chuck roast", "20 g lard", "40 g onion", "4 g garlic", "6 g paprika", "2 g marjoram", "2 g cumin", "25 g red onion", "1 g salt"],
+    ingredients: ["180 g beef chuck", "20 g lard", "40 g onion", "4 g garlic", "6 g paprika", "2 g marjoram", "2 g cumin", "25 g red onion", "1 g salt"],
     method: "Slowly brown equal parts onions and beef chuck cubes in hot lard until onions melt into a deep mahogany color. Add sweet paprika, garlic, ground caraway, and marjoram. Pour in rich beef broth and simmer covered on low heat for 2 hours until the sauce is naturally thick and beef melts. Top with sliced raw red onions."
   },
   {
@@ -2899,8 +2899,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "8 slices, 6 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["40 g almond flour", "1 egg", "20 g butter", "10 g cocoa powder", "40 ml heavy cream", "18 g erythritol", "2 g vanilla extract", "1 lemon zest", "3 g baking powder"],
-    method: "Cream softened butter with erythritol and egg. Fold in almond flour, heavy cream, baking powder, vanilla, and lemon zest. Divide batter into two bowls; mix cocoa powder into one half. Layer light and dark batters into a mini Bundt mould, swirl with a skewer, and bake at 175°C for 25 minutes."
+    ingredients: ["40 g almond flour", "1 egg", "20 g butter", "10 g cocoa powder", "40 ml cream 35%", "18 g erythritol", "2 g vanilla extract", "1 lemon zest", "3 g baking powder"],
+    method: "Cream softened butter with erythritol and egg. Fold in almond flour, cream 35%, baking powder, vanilla, and lemon zest. Divide batter into two bowls; mix cocoa powder into one half. Layer light and dark batters into a mini Bundt mould, swirl with a skewer, and bake at 175°C for 25 minutes."
   },
 
   /* ============================================================
@@ -2919,8 +2919,8 @@ const RECIPES_DATA = [
     netCarbs: 1,
     batch: "Cook fresh, 8 minutes",
     freezer: "Not suitable.",
-    ingredients: ["3 eggs", "35 g biltong beef jerky", "40 g cheddar", "20 g butter", "15 ml heavy cream", "1 g black pepper"],
-    method: "Whisk eggs with a splash of heavy cream and freshly cracked black pepper. Melt butter in a skillet over low heat. Add eggs and fold gently until soft curds form. Fold in finely shaved cured beef biltong and sharp aged cheddar just before removing from heat so cheese melts into creamy ribbons."
+    ingredients: ["3 eggs", "35 g biltong beef jerky", "40 g cheddar", "20 g butter", "15 ml cream 35%", "1 g black pepper"],
+    method: "Whisk eggs with a splash of cream 35% and freshly cracked black pepper. Melt butter in a skillet over low heat. Add eggs and fold gently until soft curds form. Fold in finely shaved cured beef biltong and sharp aged cheddar just before removing from heat so cheese melts into creamy ribbons."
   },
   {
     id: "za_m1",
@@ -2935,8 +2935,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g ground beef 80/20", "1 egg", "60 ml heavy cream", "20 g almond flour", "15 g butter", "30 g onion", "4 g garlic", "6 g curry paste", "2 g turmeric", "1 g salt"],
-    method: "Saute onions, garlic, curry powder, and turmeric in butter. Add beef mince and brown. Stir in almond flour and a splash of vinegar. Transfer spiced beef to a baking dish and press flat with bay leaves on top. Whisk egg with heavy cream and salt, pour over beef, and bake at 180°C for 25 minutes until custard is puffed and golden."
+    ingredients: ["150 g ground beef", "1 egg", "60 ml cream 35%", "20 g almond flour", "15 g butter", "30 g onion", "4 g garlic", "6 g curry paste", "2 g turmeric", "1 g salt"],
+    method: "Saute onions, garlic, curry powder, and turmeric in butter. Add beef mince and brown. Stir in almond flour and a splash of vinegar. Transfer spiced beef to a baking dish and press flat with bay leaves on top. Whisk egg with cream 35% and salt, pour over beef, and bake at 180°C for 25 minutes until custard is puffed and golden."
   },
   {
     id: "za_m2",
@@ -2983,8 +2983,8 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 slices, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["35 g almond flour", "2 eggs", "70 ml heavy cream", "50 ml almond milk", "20 g butter", "18 g erythritol", "2 g vanilla extract", "2 g cinnamon"],
-    method: "Press almond flour and melted butter into a tart tin, bake 8 minutes at 180°C. Whisk egg yolks with heavy cream, almond milk, vanilla, and erythritol over low heat until thick. Fold in whipped egg whites. Pour into crust and bake at 160°C for 20 minutes until set. Dust surface heavily with ground cinnamon."
+    ingredients: ["35 g almond flour", "2 eggs", "70 ml cream 35%", "50 ml almond milk", "20 g butter", "18 g erythritol", "2 g vanilla extract", "2 g cinnamon"],
+    method: "Press almond flour and melted butter into a tart tin, bake 8 minutes at 180°C. Whisk egg yolks with cream 35%, almond milk, vanilla, and erythritol over low heat until thick. Fold in whipped egg whites. Pour into crust and bake at 160°C for 20 minutes until set. Dust surface heavily with ground cinnamon."
   },
 
   /* ============================================================
@@ -3019,8 +3019,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g pork shoulder", "50 g leek", "15 g lard", "50 g bell pepper", "50 g mushrooms", "50 g tomato passata", "4 g garlic", "2 g savory (chubritsa)", "2 g paprika", "1 g salt"],
-    method: "Sear pork shoulder cubes in hot lard until browned. Saute sliced fresh leeks, mushrooms, bell peppers, and garlic until sweet and fragrant. Stir in tomato passata, Bulgarian chubritsa (summer savory), paprika, and rich broth. Transfer to an earthenware pot, cover tightly, and bake at 170Â°C for 1.5 hours until deeply caramelized and fork-tender."
+    ingredients: ["180 g pork shoulder", "50 g leeks", "15 g lard", "50 g bell pepper", "50 g mushrooms", "50 g tomato passata", "4 g garlic", "2 g savory (chubritsa)", "2 g paprika", "1 g salt"],
+    method: "Sear pork shoulder in hot lard until browned. Saute sliced fresh leeks, mushrooms, bell peppers, and garlic until sweet and fragrant. Stir in tomato passata, Bulgarian chubritsa (summer savory), paprika, and rich broth. Transfer to an earthenware pot, cover tightly, and bake at 170Â°C for 1.5 hours until deeply caramelized and fork-tender."
   },
   {
     id: "bg_m2",
@@ -3035,7 +3035,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped patties.",
-    ingredients: ["110 g ground pork", "80 g ground beef 80/20", "60 g bell pepper", "40 g tomato passata", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "1 g black pepper", "1 g salt"],
+    ingredients: ["110 g ground pork", "80 g ground beef", "60 g bell pepper", "40 g tomato passata", "15 ml olive oil", "25 g onion", "4 g garlic", "2 g cumin", "1 g black pepper", "1 g salt"],
     method: "Knead pork and beef mince with finely grated onion, crushed cumin seeds, black pepper, and salt. Shape half into flat round kyufte and half into elongated kebapche. Grill over hot charcoal until juicy. Blend roasted red peppers with tomato passata, garlic, and olive oil for homemade lyutenitsa relish."
   },
   {
@@ -3103,7 +3103,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "30 g tahini", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "2 g allspice", "1 lemon", "1 g salt"],
+    ingredients: ["130 g ground beef", "60 g ground lamb", "30 g tahini", "15 ml olive oil", "25 g onion", "4 g garlic", "10 g parsley", "2 g allspice", "1 lemon", "1 g salt"],
     method: "Knead beef and lamb mince with finely grated onion, parsley, allspice, garlic, and sea salt until sticky. Form onto flat skewers and grill over high heat until charred and juicy. Whisk sesame tahini with minced garlic, lemon juice, salt, and cold water until pale and creamy for dipping."
   },
   {
@@ -3135,7 +3135,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze baked pockets.",
-    ingredients: ["140 g ground beef 80/20", "35 g almond flour", "1 egg", "40 g mozzarella", "20 g butter", "25 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "1 g salt"],
+    ingredients: ["140 g ground beef", "35 g almond flour", "1 egg", "40 g mozzarella", "20 g butter", "25 g onion", "4 g garlic", "2 g cumin", "2 g allspice", "1 g salt"],
     method: "Make dough by melting mozzarella with almond flour, egg, and baking powder, and rolling into two flat rounds. Season raw beef mince with grated onion, minced garlic, cumin, allspice, and chili. Spread meat between dough rounds, seal edges, brush with butter, and bake at 200°C for 20 minutes until crust is crispy and meat is sizzling."
   },
   {
@@ -3187,7 +3187,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["150 g chicken thigh (bone-in)", "1 egg", "30 g ghee", "15 ml olive oil", "50 g onion", "6 g garlic", "6 g ginger", "4 g berbere", "1 g salt"],
+    ingredients: ["150 g chicken thigh", "1 egg", "30 g ghee", "15 ml olive oil", "50 g onion", "6 g garlic", "6 g ginger", "4 g berbere", "1 g salt"],
     method: "Slowly caramelize onions dry, then add spiced ghee (niter kibbeh), olive oil, and fiery Ethiopian berbere spice blend. Add minced garlic, ginger, and chicken thighs, braising covered for 30 minutes until meat is tender and deeply infused. Add a peeled hard-boiled egg pierced with slits to absorb the rich spicy red sauce."
   },
   {
@@ -3203,7 +3203,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze raw marinated beef.",
-    ingredients: ["150 g beef sirloin strips", "30 g jalapeno", "30 g butter", "20 ml olive oil", "40 g onion", "4 g garlic", "6 g ginger", "2 g rosemary", "1 g sea salt"],
+    ingredients: ["150 g beef sirloin", "30 g jalapeno", "30 g butter", "20 ml olive oil", "40 g onion", "4 g garlic", "6 g ginger", "2 g rosemary", "1 g sea salt"],
     method: "Cut tender beef sirloin into cubes. Heat spiced butter and olive oil in a heavy cast iron skillet until smoking hot. Add beef cubes and sear quickly on high heat. Add sliced onions, minced garlic, ginger, fresh rosemary sprigs, and sliced green jalapeno rings. Saute vigorously for 3 minutes until blistered and fragrant, serving sizzling hot."
   },
   {
@@ -3271,7 +3271,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 slices, 4 days fridge",
     freezer: "Freezes well in slices.",
-    ingredients: ["140 g ground beef 80/20", "3 eggs", "50 g cheese", "20 g butter", "20 g parsley", "30 g onion", "4 g garlic", "2 g turmeric", "2 g cumin", "1 g salt"],
+    ingredients: ["140 g ground beef", "3 eggs", "50 g cheese", "20 g butter", "20 g parsley", "30 g onion", "4 g garlic", "2 g turmeric", "2 g cumin", "1 g salt"],
     method: "Saute beef mince with onions, garlic, turmeric, and cumin in butter until cooked through. Chop a large bunch of fresh parsley. Whisk eggs with grated cheese, parsley, and warm seasoned beef. Pour into a greased baking dish and bake at 180°C for 25 minutes until puffed and set like a savory cake."
   },
   {
@@ -3355,7 +3355,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze raw shaped skewers.",
-    ingredients: ["130 g ground beef 80/20", "60 g ground lamb", "130 g cauliflower rice", "20 g butter", "25 g onion", "4 g garlic", "2 g sumac", "1 g black pepper", "1 g sea salt"],
+    ingredients: ["130 g ground beef", "60 g ground lamb", "130 g cauliflower rice", "20 g butter", "25 g onion", "4 g garlic", "2 g sumac", "1 g black pepper", "1 g sea salt"],
     method: "Finely grate onion and squeeze out all excess juice. Knead beef and lamb mince with onion, black pepper, and salt for 10 minutes until elastic. Skewer onto wide metal skewers and grill over hot charcoal or high broil until charred and succulent. Serve over steamed buttered cauliflower rice, heavily dusted with tart sumac."
   },
   {
@@ -3371,7 +3371,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["180 g beef chuck roast", "25 g ghee", "40 g spinach", "20 g parsley", "15 g cilantro", "10 g fenugreek", "30 g onion", "4 g garlic", "1 lemon", "1 g salt"],
+    ingredients: ["180 g beef chuck", "25 g ghee", "40 g spinach", "20 g parsley", "15 g cilantro", "10 g fenugreek", "30 g onion", "4 g garlic", "1 lemon", "1 g salt"],
     method: "Finely chop parsley, cilantro, spinach, and fenugreek. Saute in ghee over medium-low heat for 15 minutes until dark green and intensely fragrant. Sear beef chuck cubes with onions, garlic, and turmeric. Combine beef, sauteed herbs, bone broth, and dried lime or lemon juice. Simmer covered on low heat for 2.5 hours until beef is tender and oil floats to top."
   },
   {
@@ -3387,8 +3387,8 @@ const RECIPES_DATA = [
     netCarbs: 8,
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["200 g chicken thigh (bone-in)", "40 g walnuts", "25 g pomegranate seeds", "20 g butter", "15 ml olive oil", "30 g onion", "15 ml vinegar", "10 g erythritol", "2 g cinnamon", "1 g salt"],
-    method: "Finely grind walnuts and dry-toast in a pot until fragrant. Add cold water and simmer gently for 45 minutes until walnuts release their rich natural oils and turn a deep dark brown. Brown chicken thighs in butter with onions and cinnamon. Add chicken, ruby pomegranate seeds, and reduction to the walnut sauce. Simmer 30 minutes until glossy, thick, tangy, and deeply savory."
+    ingredients: ["200 g chicken thigh", "40 g walnuts", "25 g pomegranate", "20 g butter", "15 ml olive oil", "30 g onion", "15 ml vinegar", "10 g erythritol", "2 g cinnamon", "1 g salt"],
+    method: "Finely grind walnuts and dry-toast in a pot until fragrant. Add cold water and simmer gently for 45 minutes until walnuts release their rich natural oils and turn a deep dark brown. Brown chicken thighs in butter with onions and cinnamon. Add chicken, ruby pomegranate, and reduction to the walnut sauce. Simmer 30 minutes until glossy, thick, tangy, and deeply savory."
   },
   {
     id: "ir_d1",
@@ -3403,8 +3403,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, keeps 1 month frozen",
     freezer: "Keep in freezer.",
-    ingredients: ["100 ml heavy cream", "50 ml almond milk", "2 eggs", "20 g erythritol", "15 g pistachios", "0.2 g saffron", "5 ml rosewater", "2 g vanilla extract"],
-    method: "Bloom saffron threads in warm water with a dash of fragrant rosewater. Whisk egg yolks with erythritol, heavy cream, almond milk, and golden saffron water over low heat until thickened into custard. Chill, then churn in ice cream maker or freeze in container, stirring every 30 minutes. Fold in generous crunchy toasted pistachio pieces."
+    ingredients: ["100 ml cream 35%", "50 ml almond milk", "2 eggs", "20 g erythritol", "15 g pistachios", "0.2 g saffron", "5 ml rosewater", "2 g vanilla extract"],
+    method: "Bloom saffron threads in warm water with a dash of fragrant rosewater. Whisk egg yolks with erythritol, cream 35%, almond milk, and golden saffron water over low heat until thickened into custard. Chill, then churn in ice cream maker or freeze in container, stirring every 30 minutes. Fold in generous crunchy toasted pistachio pieces."
   },
 
   /* ============================================================
@@ -3412,7 +3412,7 @@ const RECIPES_DATA = [
      ============================================================ */
   {
     id: "ua_b1",
-    name: "Deruny Keto de Dovlecei with Smoked Salmon and Sour Cream 30%",
+    name: "Deruny Keto de Dovlecei with Smoked Salmon and Sour Cream",
     cuisine: "Ukrainian",
     flag: "🇺🇦",
     meal: "Breakfast",
@@ -3423,8 +3423,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "Cook fresh, 10 minutes",
     freezer: "Not suitable.",
-    ingredients: ["1 egg", "60 g smoked salmon", "140 g zucchini", "40 g sour cream 30%", "20 g unt 82%", "20 g almond flour", "3 g dill", "1 g salt"],
-    method: "Grate zucchini, salt generously, let sit 5 minutes, and squeeze out all moisture in a kitchen towel. Mix with egg, almond flour, chopped dill, and pepper into deruny batter. Fry spoonfuls in hot foaming butter until crisp and golden on both sides. Serve hot with silky smoked salmon and cold sour cream 30%."
+    ingredients: ["1 egg", "60 g smoked salmon", "140 g zucchini", "40 g sour cream", "20 g butter", "20 g almond flour", "3 g dill", "1 g salt"],
+    method: "Grate zucchini, salt generously, let sit 5 minutes, and squeeze out all moisture in a kitchen towel. Mix with egg, almond flour, chopped dill, and pepper into deruny batter. Fry spoonfuls in hot foaming butter until crisp and golden on both sides. Serve hot with silky smoked salmon and cold sour cream."
   },
   {
     id: "ua_m1",
@@ -3439,8 +3439,8 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "6 servings, 5 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["180 g beef chuck roast", "140 g cabbage", "50 g tomato passata", "60 g sour cream 30%", "20 g lard", "30 g onion", "6 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
-    method: "Simmer beef chuck in water with black peppercorns and bay leaf until tender. Saute onions, garlic, and tomato passata in pork lard with vinegar. Shred fresh green cabbage and add to the simmering beef broth with the sauteed tomato mixture. Simmer for 20 minutes. Serve with fresh dill and a massive dollop of sour cream 30%."
+    ingredients: ["180 g beef chuck", "140 g cabbage", "50 g tomato passata", "60 g sour cream", "20 g lard", "30 g onion", "6 g garlic", "10 ml vinegar", "5 g dill", "1 g salt"],
+    method: "Simmer beef chuck in water with black peppercorns and bay leaf until tender. Saute onions, garlic, and tomato passata in pork lard with vinegar. Shred fresh green cabbage and add to the simmering beef broth with the sauteed tomato mixture. Simmer for 20 minutes. Serve with fresh dill and a massive dollop of sour cream."
   },
   {
     id: "ua_m2",
@@ -3455,7 +3455,7 @@ const RECIPES_DATA = [
     netCarbs: 3,
     batch: "4 servings, 4 days fridge",
     freezer: "Freeze breaded raw cutlets.",
-    ingredients: ["150 g chicken breast", "35 g unt 82%", "1 egg", "25 g keto panko", "20 g butter", "4 g garlic", "5 g dill", "5 g parsley", "1 g salt"],
+    ingredients: ["150 g chicken breast", "35 g butter", "1 egg", "25 g keto panko", "20 g butter", "4 g garlic", "5 g dill", "5 g parsley", "1 g salt"],
     method: "Flatten chicken breast thin. Place a frozen log of compound butter (butter 82% whipped with minced garlic, fresh dill, and sea salt) in the center. Roll tightly, sealing edges completely. Dip in beaten egg and coat with keto pork panko. Fry in foaming butter and bake 12 minutes until golden; cut open to reveal a stream of fragrant garlic herb butter."
   },
   {
@@ -3471,12 +3471,12 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["170 g pork loin cutlet", "80 g mushrooms", "50 g sour cream 30%", "20 g unt 82%", "30 g onion", "4 g garlic", "5 g dill", "1 g black pepper", "1 g salt"],
-    method: "Pound pork schnitzel thin and season with salt and pepper. Saute finely chopped mushrooms and onions in butter until tender, mix with fresh dill. Spread mushroom filling across pork cutlets, roll into tight rolls (kruchenyky), and secure with toothpicks. Sear in butter, pour in sour cream 30% and broth, and simmer covered for 25 minutes."
+    ingredients: ["170 g pork loin", "80 g mushrooms", "50 g sour cream", "20 g butter", "30 g onion", "4 g garlic", "5 g dill", "1 g black pepper", "1 g salt"],
+    method: "Pound pork schnitzel thin and season with salt and pepper. Saute finely chopped mushrooms and onions in butter until tender, mix with fresh dill. Spread mushroom filling across pork cutlets, roll into tight rolls (kruchenyky), and secure with toothpicks. Sear in butter, pour in sour cream and broth, and simmer covered for 25 minutes."
   },
   {
     id: "ua_d1",
-    name: "Keto Medovik (Layered Honey-Spice Almond Cake with Sour Cream 30%)",
+    name: "Keto Medovik (Layered Honey-Spice Almond Cake with Sour Cream)",
     cuisine: "Ukrainian",
     flag: "🇺🇦",
     meal: "Snack",
@@ -3487,8 +3487,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 slices, 5 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["40 g almond flour", "1 egg", "20 g unt 82%", "60 g sour cream 30%", "20 g erythritol", "2 g cinnamon", "2 g vanilla extract", "3 g baking powder"],
-    method: "Bake thin almond flour sponge sheets with butter, egg, cinnamon, and erythritol at 175°C for 10 minutes. Whip cold sour cream 30% with erythritol and vanilla extract until thick and fluffy. Layer cake sheets with copious amounts of sweet sour cream frosting. Chill in fridge for 6 hours so cake absorbs the cream into a melt-in-the-mouth texture."
+    ingredients: ["40 g almond flour", "1 egg", "20 g butter", "60 g sour cream", "20 g erythritol", "2 g cinnamon", "2 g vanilla extract", "3 g baking powder"],
+    method: "Bake thin almond flour sponge sheets with butter, egg, cinnamon, and erythritol at 175°C for 10 minutes. Whip cold sour cream with erythritol and vanilla extract until thick and fluffy. Layer cake sheets with copious amounts of sweet sour cream frosting. Chill in fridge for 6 hours so cake absorbs the cream into a melt-in-the-mouth texture."
   },
 
   /* ============================================================
@@ -3539,7 +3539,7 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 servings, 3 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["160 g chicken thigh (bone-in)", "110 g greek yogurt 10%", "1 egg", "25 g unt 82%", "15 ml olive oil", "4 g garlic", "5 g mint", "2 g coriander", "1 g salt"],
+    ingredients: ["160 g chicken thigh", "110 g greek yogurt 10%", "1 egg", "25 g butter", "15 ml olive oil", "4 g garlic", "5 g mint", "2 g coriander", "1 g salt"],
     method: "Sear chicken thighs in butter and olive oil until golden; simmer in broth until tender. In a separate saucepan, whisk Greek yogurt 10% with egg yolk and warm broth over low heat continuously until thickened into a silky, velvety warm sauce. Add cooked chicken, fried garlic, and dried mint, simmering gently for 5 minutes."
   },
   {
@@ -3555,7 +3555,7 @@ const RECIPES_DATA = [
     netCarbs: 6,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes very well.",
-    ingredients: ["160 g zucchini", "140 g ground lamb", "60 g cauliflower rice", "60 g tomato passata", "20 g unt 82%", "15 g pine nuts", "4 g garlic", "2 g allspice", "5 g mint", "1 g salt"],
+    ingredients: ["160 g zucchini", "140 g ground lamb", "60 g cauliflower rice", "60 g tomato passata", "20 g butter", "15 g pine nuts", "4 g garlic", "2 g allspice", "5 g mint", "1 g salt"],
     method: "Hollow out zucchini or cut lengthwise into boats. Saute minced lamb with grated cauliflower rice, allspice, garlic, and golden toasted pine nuts in butter. Stuff into zucchini boats. Place in a pot with tomato passata, rich broth, dried mint, and crushed garlic. Simmer covered for 30 minutes until zucchini is meltingly tender."
   },
   {
@@ -3571,8 +3571,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "4 ramekins, 4 days fridge",
     freezer: "Do not freeze.",
-    ingredients: ["90 ml heavy cream", "60 ml almond milk", "5 g gelatin", "15 g erythritol", "15 g pistachios", "5 ml rosewater", "2 g vanilla extract"],
-    method: "Bloom gelatin in 20ml cold almond milk. Gently heat heavy cream, remaining almond milk, erythritol, vanilla, and fragrant rosewater until warm. Whisk in gelatin until completely dissolved. Pour into dessert bowls and chill for 3 hours until set into a delicate, wobbly Middle Eastern milk pudding. Top generously with vibrant crushed toasted pistachios."
+    ingredients: ["90 ml cream 35%", "60 ml almond milk", "5 g gelatin", "15 g erythritol", "15 g pistachios", "5 ml rosewater", "2 g vanilla extract"],
+    method: "Bloom gelatin in 20ml cold almond milk. Gently heat cream 35%, remaining almond milk, erythritol, vanilla, and fragrant rosewater until warm. Whisk in gelatin until completely dissolved. Pour into dessert bowls and chill for 3 hours until set into a delicate, wobbly Middle Eastern milk pudding. Top generously with vibrant crushed toasted pistachios."
   },
 
   /* ============================================================
@@ -3607,8 +3607,8 @@ const RECIPES_DATA = [
     netCarbs: 5,
     batch: "4 servings, 4 days fridge",
     freezer: "Freezes exceptionally well.",
-    ingredients: ["100 g ground beef 80/20", "60 g ground pork", "1 egg", "70 ml heavy cream", "30 g butter", "25 g onion", "15 g cranberries", "1 g allspice", "1 g nutmeg", "1 g salt"],
-    method: "Mix beef and pork mince with egg, grated onion, allspice, nutmeg, and salt. Form into small round meatballs and brown in foaming butter. Remove meatballs, deglaze pan with beef bone broth, add heavy cream and pan drippings, simmering until thick and glossy. Return meatballs to gravy and serve with unsweetened tart cranberries."
+    ingredients: ["100 g ground beef", "60 g ground pork", "1 egg", "70 ml cream 35%", "30 g butter", "25 g onion", "15 g cranberries", "1 g allspice", "1 g nutmeg", "1 g salt"],
+    method: "Mix beef and pork mince with egg, grated onion, allspice, nutmeg, and salt. Form into small round meatballs and brown in foaming butter. Remove meatballs, deglaze pan with beef bone broth, add cream 35% and pan drippings, simmering until thick and glossy. Return meatballs to gravy and serve with unsweetened tart cranberries."
   },
   {
     id: "se_m2",
@@ -3624,7 +3624,7 @@ const RECIPES_DATA = [
     batch: "4 servings, 5 days fridge",
     freezer: "Freezes well sliced.",
     ingredients: ["180 g salmon", "20 ml olive oil", "15 g mustard", "10 g erythritol", "10 ml vinegar", "5 g dill", "1 lemon", "2 g sea salt", "1 g black pepper"],
-    method: "Cure salmon fillet with coarse sea salt, cracked black pepper, erythritol, and fresh dill for 24-48 hours. Slice paper-thin. Whisk Dijon mustard with olive oil, white wine vinegar, finely chopped dill, and erythritol into traditional Swedish Hovmastarsas sauce. Serve salmon slices draped with the mustard-dill sauce."
+    method: "Cure salmon with coarse sea salt, cracked black pepper, erythritol, and fresh dill for 24-48 hours. Slice paper-thin. Whisk Dijon mustard with olive oil, white wine vinegar, finely chopped dill, and erythritol into traditional Swedish Hovmastarsas sauce. Serve salmon slices draped with the mustard-dill sauce."
   },
   {
     id: "se_m3",
@@ -3639,8 +3639,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "3 servings, 3 days fridge",
     freezer: "Freeze cooked pork in sauce.",
-    ingredients: ["140 g pork tenderloin", "80 g chanterelles", "80 ml heavy cream", "30 g butter", "30 g onion", "4 g garlic", "3 g thyme", "5 g parsley", "1 g salt"],
-    method: "Cut pork tenderloin into medallions and sear in foaming butter until golden on both sides. Remove meat, add fresh wild chanterelles and finely chopped onion with thyme to the pan fat. Pour in heavy cream and pan juices, simmering until reduced to a luxurious velvety golden sauce. Return medallions to sauce and garnish with fresh parsley."
+    ingredients: ["140 g pork tenderloin", "80 g chanterelles", "80 ml cream 35%", "30 g butter", "30 g onion", "4 g garlic", "3 g thyme", "5 g parsley", "1 g salt"],
+    method: "Cut pork tenderloin into medallions and sear in foaming butter until golden on both sides. Remove meat, add fresh wild chanterelles and finely chopped onion with thyme to the pan fat. Pour in cream 35% and pan juices, simmering until reduced to a luxurious velvety golden sauce. Return medallions to sauce and garnish with fresh parsley."
   },
   {
     id: "se_d1",
@@ -3655,8 +3655,8 @@ const RECIPES_DATA = [
     netCarbs: 4,
     batch: "6 slices, 5 days fridge",
     freezer: "Freezes well.",
-    ingredients: ["35 g almond flour", "25 g cocoa powder", "1 egg", "30 g butter", "50 ml heavy cream", "20 g erythritol", "2 g vanilla extract", "1 g sea salt"],
-    method: "Melt butter and whisk with erythritol, egg, dark cocoa powder, almond flour, vanilla extract, and sea salt until smooth. Pour into a greased small cake tin and bake at 175°C for exactly 12 minutes (the center MUST remain soft, gooey, and fudgy). Chill slightly and serve with freshly whipped heavy cream."
+    ingredients: ["35 g almond flour", "25 g cocoa powder", "1 egg", "30 g butter", "50 ml cream 35%", "20 g erythritol", "2 g vanilla extract", "1 g sea salt"],
+    method: "Melt butter and whisk with erythritol, egg, dark cocoa powder, almond flour, vanilla extract, and sea salt until smooth. Pour into a greased small cake tin and bake at 175°C for exactly 12 minutes (the center MUST remain soft, gooey, and fudgy). Chill slightly and serve with freshly whipped cream 35%."
   }
 ];
 
