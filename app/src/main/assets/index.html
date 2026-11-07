@@ -1998,6 +1998,18 @@
       display: flex;
       align-items: center;
     }
+    .shop-item-qty-tag {
+      display: inline-flex;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--color-primary);
+      background: var(--color-primary-highlight);
+      padding: 2px 7px;
+      border-radius: var(--radius-sm);
+      margin-left: auto;
+      flex-shrink: 0;
+    }
     .shop-item-qty-input {
       width: 95px;
       min-width: 75px;
@@ -7333,6 +7345,8 @@ const I18N = {
     aisle_produce: "🥬 Fresh Produce",
     aisle_meat: "🥩 Meat & Seafood",
     aisle_dairy: "🧀 Dairy & Eggs",
+    aisle_nuts_seeds: "🥜 Nuts & Seeds",
+    aisle_frozen: "❄️ Frozen Foods",
     aisle_pantry: "🥫 Pantry & Baking",
     aisle_oils: "🧂 Oils, Sauces & Spices",
     aisle_supplements: "💊 Supplements & Snacks",
@@ -7909,6 +7923,8 @@ const I18N = {
     aisle_produce: "🥬 Legume si Fructe Proaspete",
     aisle_meat: "🥩 Carne si Peste",
     aisle_dairy: "🧀 Lactate si Oua",
+    aisle_nuts_seeds: "🥜 Nuci & Semințe",
+    aisle_frozen: "❄️ Alimente Congelate",
     aisle_pantry: "🥫 Camara si Ingrediente",
     aisle_oils: "🧂 Uleiuri, Sosuri si Condimente",
     aisle_supplements: "💊 Suplimente si Gustari",
@@ -10595,6 +10611,14 @@ const EN_TO_RO_ING = {
     "leeks":  "praz",
     "blackberries":  "mure proaspete",
     "blackberry":  "mure",
+    "halloumi cheese": "brânză halloumi",
+    "halloumi": "brânză halloumi",
+    "cashews": "caju",
+    "cashew": "caju",
+    "mixed nuts": "nuci mixte",
+    "edamame": "edamame",
+    "edamame soybeans": "boabe de soia edamame",
+    "dishwasher salt": "sare pentru mașină de spălat vase",
     "cotija cheese":  "branza cotija",
     "cotija":  "branza cotija",
     "chanterelles":  "galbiori proaspeti",
@@ -10902,6 +10926,16 @@ const RO_TO_EN_ING = {
     "praz": "leek",
     "mure": "blackberries",
     "mure proaspete": "blackberries",
+    "halloumi": "halloumi cheese",
+    "branza halloumi": "halloumi cheese",
+    "brânză halloumi": "halloumi cheese",
+    "caju": "cashews",
+    "nuci mixte": "mixed nuts",
+    "edamame": "edamame",
+    "boabe de soia edamame": "edamame soybeans",
+    "sare pentru masina de spalat vase": "dishwasher salt",
+    "sare pt masina de spalat vase": "dishwasher salt",
+    "sare pt vase": "dishwasher salt",
     "cotija": "cotija cheese",
     "branza cotija": "cotija cheese",
     "galbiori": "chanterelles",
@@ -11349,6 +11383,8 @@ const DEFAULT_N = {
       "parmesan": [392, 36, 26, 3],
       "pecorino cheese": [387, 26, 32, 1.5],
       "provolone cheese": [351, 25, 27, 2.1],
+      "halloumi cheese": [321, 21, 25, 2],
+      "halloumi": [321, 21, 25, 2],
       "cotija cheese": [366, 21, 30, 3],
       "cascaval": [330, 25, 26, 1],
       "feta": [265, 14, 21, 4],
@@ -11379,6 +11415,8 @@ const DEFAULT_N = {
       "almond milk": [15, 0.5, 1.2, 0.3],
 
       // Nuts & Seeds
+      "cashews": [553, 18, 44, 27],
+      "mixed nuts": [607, 20, 54, 16],
       "walnuts": [654, 15, 65, 7],
       "almonds": [579, 21, 50, 10],
       "pecans": [691, 9, 72, 4],
@@ -11419,6 +11457,8 @@ const DEFAULT_N = {
       "asparagus": [20, 2.2, 0.1, 2],
       "spinach": [23, 3, 0.4, 1.4],
       "baby spinach": [23, 3, 0.4, 1.4],
+      "edamame": [121, 11, 5, 5],
+      "edamame soybeans": [121, 11, 5, 5],
       "mushrooms": [22, 3, 0.3, 2],
       "chanterelles": [32, 1.5, 0.5, 3],
       "zucchini": [17, 1.2, 0.3, 2],
@@ -17903,21 +17943,33 @@ const CUP_DENSITY = {
     const AISLE_DEFINITIONS = [
       { key: 'produce', title: '🥬 Fresh Produce', match: ['spinach', 'mushroom', 'broccoli', 'cauliflower', 'cabbage', 'asparagus', 'green bean', 'bell pepper', 'zucchini', 'cucumber', 'tomato', 'lettuce', 'romaine', 'onion', 'carrot', 'bok choy', 'eggplant', 'olive', 'pickle', 'celery', 'avocado', 'berr', 'blueberr', 'raspberr', 'strawberr', 'lemon', 'lime', 'ginger', 'garlic'] },
       { key: 'meat', title: '🥩 Meat & Seafood', match: ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'jamon', 'serrano', 'prosciutto', 'shank', 'ribeye', 'brisket', 'flank', 'tenderloin', 'sirloin', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds'] },
-      { key: 'dairy', title: '🧀 Dairy & Eggs', match: ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk'] },
-      { key: 'pantry', title: '🥫 Pantry & Baking', match: ['almond', 'coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'chia', 'flax', 'seeds', 'vanilla', 'walnut', 'pecan', 'macadamia', 'peanut', 'bread', 'granola', 'flour'] },
+      { key: 'dairy', title: '🧀 Dairy & Eggs', match: ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk', 'halloumi', 'pecorino', 'provolone', 'cotija', 'burduf', 'cascaval'] },
+      { key: 'nuts_seeds', title: '🥜 Nuts & Seeds', match: ['cashew', 'cashews', 'caju', 'mixed nuts', 'nuci mixte', 'almond', 'walnut', 'pecan', 'macadamia', 'pistachio', 'hazelnut', 'pine nut', 'chia', 'flax', 'hemp', 'pumpkin seed', 'sunflower seed', 'sesame', 'seed', 'nuci', 'seminte'] },
+      { key: 'frozen', title: '❄️ Frozen Foods', match: ['edamame', 'soybean', 'soybeans', 'frozen', 'congelat', 'congelate', 'ice cream', 'inghetata'] },
+      { key: 'pantry', title: '🥫 Pantry & Baking', match: ['coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'vanilla', 'bread', 'granola', 'flour'] },
       { key: 'oils', title: '🧂 Oils, Sauces & Spices', match: ['oil', 'mayonnaise', 'soy sauce', 'fish sauce', 'mustard', 'dressing', 'ranch', 'buffalo', 'tzatziki', 'horseradish', 'balsamic', 'vinegar', 'curry', 'sauce', 'passata', 'salt', 'pepper', 'paprika', 'cumin', 'chili', 'turmeric', 'coriander', 'oregano', 'thyme', 'rosemary', 'sage', 'basil', 'parsley', 'dill', 'mint', 'cilantro', 'chives', 'cinnamon', 'zest', 'herbs', 'spice'] },
       { key: 'supplements', title: '💊 Supplements & Snacks', match: ['whey', 'protein bar', 'protein'] }
     ];
 
     function getAisle(name) {
       const n = String(name || '').toLowerCase();
-      if (/peanut|almond butter|coconut butter/.test(n)) return { key: 'pantry', title: '🥫 Pantry & Baking' };
-      if (/almond milk|coconut milk/.test(n)) return { key: 'pantry', title: '🥫 Pantry & Baking' };
-      if (/\boil\b/.test(n)) return { key: 'oils', title: '🧂 Oils, Sauces & Spices' };
+      // Household & non-food cleaning supplies MUST go to General / Other, NEVER match spices (e.g. Dishwasher salt)
+      if (/(dishwasher|detergent|cleaning|laundry|soap|sapun|sp[aă]lat\s*vase|sare\s*(pentru|pt)?\s*(ma[șs]in[aă]|vase)|balsam|clor|pastile\s*vase)/i.test(n)) {
+        return { key: 'other', title: (typeof t === 'function' ? t('aisle_other') : '📦 General / Other') };
+      }
+      if (/peanut|almond butter|coconut butter|unt de arahide|unt de migdale/.test(n)) {
+        return AISLE_DEFINITIONS.find(a => a.key === 'nuts_seeds') || { key: 'nuts_seeds', title: '🥜 Nuts & Seeds' };
+      }
+      if (/almond milk|coconut milk|lapte de migdale|lapte de cocos/.test(n)) {
+        return AISLE_DEFINITIONS.find(a => a.key === 'pantry') || { key: 'pantry', title: '🥫 Pantry & Baking' };
+      }
+      if (/\boil\b|\bulei\b/.test(n)) {
+        return AISLE_DEFINITIONS.find(a => a.key === 'oils') || { key: 'oils', title: '🧂 Oils, Sauces & Spices' };
+      }
       for (const aisle of AISLE_DEFINITIONS) {
         if (aisle.match.some(k => n.includes(k))) return aisle;
       }
-      return { key: 'other', title: '📦 General / Other' };
+      return { key: 'other', title: (typeof t === 'function' ? t('aisle_other') : '📦 General / Other') };
     }
 
     function renderShoppingPage() {
@@ -17959,7 +18011,7 @@ const CUP_DENSITY = {
         const storeNote = stores[canon(item.name)] || stores[item.name.toLowerCase()];
         const subParts = [];
         if (item.notes) subParts.push(item.notes);
-        if (storeNote) subParts.push(`📍 ${storeNote}`);
+        if (storeNote) subParts.push(`🏪 ${storeNote}`);
         const subHtml = subParts.length ? `<span class="shop-item-sub">${escapeHtml(subParts.join(' • '))}</span>` : '';
         const itemRecs = getItemRecipes(item);
         let recipeHintHtml = '';
@@ -17967,6 +18019,7 @@ const CUP_DENSITY = {
           const recNames = itemRecs.map(r => r.name).join(', ');
           recipeHintHtml = `<span class="shop-recipe-hint-badge" title="Recipe: ${escapeHtml(recNames)}">📖</span>`;
         }
+        const qtyBadgeHtml = (item.qty && String(item.qty).trim()) ? `<span class="shop-item-qty-tag">${escapeHtml(String(item.qty).trim())}</span>` : '';
 
         return `
           <div class="swipe-item" data-shop-id="${item.id}">
@@ -17978,11 +18031,11 @@ const CUP_DENSITY = {
               <div class="shop-item-clickable" data-open-modal-id="${item.id}">
                 <div class="shop-item-name-row">
                   <span class="shop-item-name">${escapeHtml(tIng(item.name))}</span>
+                  ${qtyBadgeHtml}
                   ${recipeHintHtml}
                 </div>
                 ${subHtml}
               </div>
-              <input type="text" class="shop-item-qty-input" data-qty-id="${item.id}" value="${escapeHtml(item.qty || '')}" placeholder="Qty..." autocomplete="off">
             </div>
           </div>`;
       }
@@ -20754,7 +20807,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.3.3';
+    const FALLBACK_APP_VERSION = '1.3.4';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 
@@ -20975,13 +21028,13 @@ const CUP_DENSITY = {
           ro: [
             '⚖️ Reechilibrare macronutrienți rețete către un profil keto optim: creșterea grăsimilor sănătoase (~60-70% din calorii, grăsimi în grame ≥ proteine în grame) și ajustarea porțiilor de carne la 54 de mâncăruri gătite',
             '🥩 Păstrarea profilului autentic bogat în proteine pentru fripturi și asados tradiționale (Picanha, Bife de Chorizo, Pljeskavica, Ribeye, etc.)',
-            '🇮🇩 Babi Panggang autentic cu Sambal Matah tradițional balinez (șalote proaspete, lemongrass, ardei iuți bird''s eye, frunze de kaffir lime, pastă de creveți terasi și ulei de cocos cald)',
+            '🇮🇩 Babi Panggang autentic cu Sambal Matah tradițional balinez (șalote proaspete, lemongrass, ardei iuți bird\'s eye, frunze de kaffir lime, pastă de creveți terasi și ulei de cocos cald)',
             '🌿 Detectare emoji îmbunătățită pentru ingrediente speciale (lemongrass, frunze de kaffir lime, pastă de creveți)'
           ],
           en: [
             '⚖️ Rebalanced recipe macros towards higher healthy culinary fats (~60-70% fat calories, fat grams ≥ protein grams) across 54 stews, curries, and sauced dishes',
             '🥩 Preserved authentic high-protein profiles for traditional steaks and asados (Picanha, Bife de Chorizo, Pljeskavica, Ribeye, etc.)',
-            '🇮🇩 Authentic Balinese Sambal Matah restored for Babi Panggang (fresh shallots, lemongrass, red bird''s eye chilies, kaffir lime leaves, terasi shrimp paste, and warm coconut oil)',
+            '🇮🇩 Authentic Balinese Sambal Matah restored for Babi Panggang (fresh shallots, lemongrass, red bird\'s eye chilies, kaffir lime leaves, terasi shrimp paste, and warm coconut oil)',
             '🌿 Enhanced smart emoji detection for lemongrass, kaffir lime leaves, and shrimp paste'
           ]
         }
