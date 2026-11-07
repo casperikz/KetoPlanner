@@ -11438,6 +11438,7 @@ const DEFAULT_N = {
       "coconut flour": [400, 18, 14, 20],
       "lupin flour": [320, 40, 9, 12],
       "psyllium husk": [190, 1.5, 0.5, 5],
+      "guar gum": [0, 0, 0, 0],
       "xanthan gum": [0, 0, 0, 0],
       "baking powder": [0, 0, 0, 0],
       "baking soda": [0, 0, 0, 0],
@@ -11630,7 +11631,7 @@ const CUP_DENSITY = {
       ['Meat & seafood', ['chicken', 'beef', 'pork', 'turkey', 'lamb', 'steak', 'mince', 'bacon', 'ham', 'jamon', 'serrano', 'prosciutto', 'shank', 'ribeye', 'brisket', 'flank', 'tenderloin', 'sirloin', 'sausage', 'salami', 'pepperoni', 'salmon', 'mackerel', 'cod', 'shrimp', 'tuna', 'duck', 'jerky', 'rinds']],
       ['Dairy & eggs', ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk']],
       ['Fruits & vegetables', ['spinach', 'mushroom', 'broccoli', 'cauliflower', 'cabbage', 'asparagus', 'green bean', 'bell pepper', 'zucchini', 'cucumber', 'tomato', 'lettuce', 'romaine', 'onion', 'carrot', 'bok choy', 'eggplant', 'olive', 'pickle', 'celery', 'avocado', 'berr', 'blueberr', 'raspberr', 'strawberr', 'lemon', 'lime', 'ginger', 'garlic']],
-      ['Pantry & baking', ['almond', 'coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'chia', 'flax', 'seeds', 'vanilla', 'walnut', 'pecan', 'macadamia', 'peanut', 'bread', 'granola', 'flour']],
+      ['Pantry & baking', ['almond', 'coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'chia', 'flax', 'seeds', 'vanilla', 'walnut', 'pecan', 'macadamia', 'peanut', 'bread', 'granola', 'flour', 'guar', 'xanthan']],
       ['Condiments & sauces', ['oil', 'mayonnaise', 'soy sauce', 'fish sauce', 'mustard', 'dressing', 'ranch', 'buffalo', 'tzatziki', 'horseradish', 'balsamic', 'vinegar', 'curry', 'sauce', 'passata', 'salt', 'pepper', 'paprika', 'cumin', 'chili', 'turmeric', 'coriander', 'oregano', 'thyme', 'rosemary', 'sage', 'basil', 'parsley', 'dill', 'mint', 'cilantro', 'chives', 'cinnamon', 'zest', 'herbs', 'spice']],
       ['Supplements', ['whey', 'protein bar', 'protein']]
     ];
@@ -17946,7 +17947,7 @@ const CUP_DENSITY = {
       { key: 'dairy', title: '🧀 Dairy & Eggs', match: ['egg', 'cheese', 'cheddar', 'mozzarella', 'parmesan', 'feta', 'telemea', 'ricotta', 'goat', 'swiss', 'blue cheese', 'cream', 'cottage', 'skyr', 'yogurt', 'yoghurt', 'butter', 'milk', 'halloumi', 'pecorino', 'provolone', 'cotija', 'burduf', 'cascaval'] },
       { key: 'nuts_seeds', title: '🥜 Nuts & Seeds', match: ['cashew', 'cashews', 'caju', 'mixed nuts', 'nuci mixte', 'almond', 'walnut', 'pecan', 'macadamia', 'pistachio', 'hazelnut', 'pine nut', 'chia', 'flax', 'hemp', 'pumpkin seed', 'sunflower seed', 'sesame', 'seed', 'nuci', 'seminte'] },
       { key: 'frozen', title: '❄️ Frozen Foods', match: ['edamame', 'soybean', 'soybeans', 'frozen', 'congelat', 'congelate', 'ice cream', 'inghetata'] },
-      { key: 'pantry', title: '🥫 Pantry & Baking', match: ['coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'vanilla', 'bread', 'granola', 'flour'] },
+      { key: 'pantry', title: '🥫 Pantry & Baking', match: ['coconut', 'baking powder', 'sweetener', 'cocoa', 'chocolate', 'vanilla', 'bread', 'granola', 'flour', 'guar', 'xanthan'] },
       { key: 'oils', title: '🧂 Oils, Sauces & Spices', match: ['oil', 'mayonnaise', 'soy sauce', 'fish sauce', 'mustard', 'dressing', 'ranch', 'buffalo', 'tzatziki', 'horseradish', 'balsamic', 'vinegar', 'curry', 'sauce', 'passata', 'salt', 'pepper', 'paprika', 'cumin', 'chili', 'turmeric', 'coriander', 'oregano', 'thyme', 'rosemary', 'sage', 'basil', 'parsley', 'dill', 'mint', 'cilantro', 'chives', 'cinnamon', 'zest', 'herbs', 'spice'] },
       { key: 'supplements', title: '💊 Supplements & Snacks', match: ['whey', 'protein bar', 'protein'] }
     ];
@@ -18416,7 +18417,7 @@ const CUP_DENSITY = {
       // 36. Bakery & Pasta
       if (/bread|p[aâ]ine|toast/i.test(n)) return '🍞';
       if (/pasta|noodles|shirataki|konjac|spaghetti/i.test(n)) return '🍜';
-      if (/flour|f[aă]in[aă]/i.test(n)) return '🥣';
+      if (/flour|f[aă]in[aă]|guar|xanthan/i.test(n)) return '🥣';
 
       // 37. Sauces, Dressings, Vinegars
       if (/mustard|mu[șs]tar/i.test(n)) return '🟡';
@@ -20807,7 +20808,7 @@ const CUP_DENSITY = {
 
     /* IN-APP AUTO-UPDATER SYSTEM (GITHUB RELEASES) */
     const GITHUB_REPO = 'casperikz/KetoPlanner';
-    const FALLBACK_APP_VERSION = '1.3.4';
+    const FALLBACK_APP_VERSION = '1.3.5';
     let currentAppVersion = FALLBACK_APP_VERSION;
     let pendingUpdateApkUrl = null;
 

@@ -711,6 +711,22 @@ const RECIPES_DATA = [
     method: "Slice flank steak thinly against the grain and marinate with tamari soy sauce and black pepper. Flash-sear beef in smoking hot sesame oil and butter for 90 seconds, then set aside. Steam broccoli florets until tender-crisp. In the same wok, sizzle garlic and ginger, return beef and broccoli, and toss vigorously with pan juices until glistening."
   },
   {
+    id: "cn_m4",
+    name: "Chinese Steamed Cabbage Rolls with Savory Shiitake Gravy",
+    cuisine: "Chinese",
+    flag: "🇨🇳",
+    meal: "Lunch/Dinner",
+    portion: "1 serving",
+    kcal: 560,
+    protein: 34,
+    fat: 47,
+    netCarbs: 6,
+    batch: "4 servings, 4 days fridge",
+    freezer: "Freeze steamed rolls without sauce; reheat and finish with fresh gravy.",
+    ingredients: ["160 g pork mince", "140 g cabbage", "40 g mushrooms", "15 ml sesame oil", "15 ml soy sauce", "20 g spring onion", "5 g garlic", "5 g ginger", "1 g guar gum", "1 g black pepper"],
+    method: "Blanch cabbage leaves in salted boiling water for 2-3 minutes until pliable; trim thick ribs. Vigorously mix pork mince with finely chopped shiitake mushrooms, grated ginger, garlic, sliced spring onion, half the soy sauce, sesame oil, and black pepper until tacky. Roll filling tightly inside cabbage leaves. Steam rolls seam-side down for 12-14 minutes until tender and juicy. Simmer the rich steaming liquid in a small saucepan with remaining soy sauce and sesame oil, then whisk in guar gum to create a silky, glossy keto gravy without sugar or starch. Pour warm gravy over cabbage rolls."
+  },
+  {
     id: "cn_d1",
     name: "Keto Dan Tat (Chinese Baked Egg Custard Tart)",
     cuisine: "Chinese",
